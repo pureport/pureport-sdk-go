@@ -395,8 +395,6 @@
                 }
             },
             "required": [
-                "ipv4PrefixCount",
-                "ipv6PrefixCount",
                 "name",
                 "provider",
                 "service"
@@ -1476,7 +1474,6 @@
         "PublicPeeringBlock": {
             "properties": {
                 "cidrBlock": {
-                    "readOnly": true,
                     "type": "string"
                 },
                 "createdAt": {
@@ -1491,7 +1488,6 @@
                 "id": {
                     "maxLength": 64,
                     "minLength": 1,
-                    "readOnly": true,
                     "type": "string"
                 },
                 "updatedAt": {
@@ -1879,9 +1875,10 @@
             ]
         }
     },
-    "host": "dev1-api.pureportdev.com",
+    "host": "localhost:8080",
     "info": {
         "description": "Pureport API",
+        "title": "Purport Control Plane",
         "version": "1.0.0"
     },
     "paths": {
@@ -1958,7 +1955,7 @@
         "/accounts/{accountId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_5",
+                "operationId": "delete_2",
                 "parameters": [
                     {
                         "in": "path",
@@ -1982,7 +1979,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_6",
+                "operationId": "get_3",
                 "parameters": [
                     {
                         "in": "path",
@@ -2017,7 +2014,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_5",
+                "operationId": "update_2",
                 "parameters": [
                     {
                         "in": "body",
@@ -2136,7 +2133,7 @@
         "/accounts/{accountId}/apikeys/{key}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_3",
+                "operationId": "delete_4",
                 "parameters": [
                     {
                         "in": "path",
@@ -2166,7 +2163,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_4",
+                "operationId": "get_5",
                 "parameters": [
                     {
                         "in": "path",
@@ -2207,7 +2204,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_3",
+                "operationId": "update_4",
                 "parameters": [
                     {
                         "in": "body",
@@ -2600,7 +2597,7 @@
         "/accounts/{accountId}/invites/{inviteId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_4",
+                "operationId": "delete_7",
                 "parameters": [
                     {
                         "in": "path",
@@ -2630,7 +2627,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_5",
+                "operationId": "get_9",
                 "parameters": [
                     {
                         "in": "path",
@@ -2671,7 +2668,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_4",
+                "operationId": "update_7",
                 "parameters": [
                     {
                         "in": "query",
@@ -2802,7 +2799,7 @@
         "/accounts/{accountId}/members/{userId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_6",
+                "operationId": "delete_3",
                 "parameters": [
                     {
                         "in": "path",
@@ -2832,7 +2829,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_7",
+                "operationId": "get_4",
                 "parameters": [
                     {
                         "in": "path",
@@ -2873,7 +2870,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_6",
+                "operationId": "update_3",
                 "parameters": [
                     {
                         "in": "body",
@@ -3118,7 +3115,7 @@
         "/accounts/{accountId}/roles/{roleId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_1",
+                "operationId": "delete_5",
                 "parameters": [
                     {
                         "in": "path",
@@ -3148,7 +3145,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_1",
+                "operationId": "get_6",
                 "parameters": [
                     {
                         "in": "path",
@@ -3189,7 +3186,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_1",
+                "operationId": "update_5",
                 "parameters": [
                     {
                         "in": "body",
@@ -3271,7 +3268,7 @@
         "/cloudRegions/{cloudRegionId}": {
             "get": {
                 "description": "",
-                "operationId": "get_18",
+                "operationId": "get_10",
                 "parameters": [
                     {
                         "in": "path",
@@ -3338,7 +3335,7 @@
         "/cloudServices/{cloudServiceId}": {
             "get": {
                 "description": "",
-                "operationId": "get_13",
+                "operationId": "get",
                 "parameters": [
                     {
                         "in": "path",
@@ -3372,7 +3369,7 @@
         "/connections/{connectionId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_11",
+                "operationId": "delete_9",
                 "parameters": [
                     {
                         "in": "path",
@@ -3404,7 +3401,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_14",
+                "operationId": "get_11",
                 "parameters": [
                     {
                         "in": "path",
@@ -3439,7 +3436,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_11",
+                "operationId": "update_9",
                 "parameters": [
                     {
                         "in": "body",
@@ -3548,7 +3545,7 @@
         "/locations/{locationId}": {
             "get": {
                 "description": "",
-                "operationId": "get_8",
+                "operationId": "get_12",
                 "parameters": [
                     {
                         "in": "path",
@@ -3614,7 +3611,7 @@
         "/networks/{networkId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_13",
+                "operationId": "delete_11",
                 "parameters": [
                     {
                         "in": "path",
@@ -3638,7 +3635,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_17",
+                "operationId": "get_13",
                 "parameters": [
                     {
                         "in": "path",
@@ -3673,7 +3670,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_13",
+                "operationId": "update_11",
                 "parameters": [
                     {
                         "in": "body",
@@ -3877,7 +3874,7 @@
         "/supportedConnections/{supportedConnectionId}": {
             "get": {
                 "description": "",
-                "operationId": "get",
+                "operationId": "get_17",
                 "parameters": [
                     {
                         "in": "path",
@@ -3911,7 +3908,7 @@
         "/users/{userId}": {
             "get": {
                 "description": "",
-                "operationId": "get_11",
+                "operationId": "get_2",
                 "parameters": [
                     {
                         "in": "path",
@@ -3943,7 +3940,7 @@
             },
             "put": {
                 "description": "",
-                "operationId": "update_10",
+                "operationId": "update_1",
                 "parameters": [
                     {
                         "in": "body",
@@ -3985,7 +3982,7 @@
         }
     },
     "schemes": [
-        "https"
+        "http"
     ],
     "swagger": "2.0",
     "tags": [
@@ -3993,28 +3990,13 @@
             "name": "options"
         },
         {
-            "name": "supported connections"
-        },
-        {
-            "name": "account roles"
-        },
-        {
-            "name": "connections"
+            "name": "cloud services"
         },
         {
             "name": "apikeys"
         },
         {
-            "name": "account invitations"
-        },
-        {
-            "name": "networks"
-        },
-        {
-            "name": "billing"
-        },
-        {
-            "name": "account consent"
+            "name": "users"
         },
         {
             "name": "accounts"
@@ -4023,16 +4005,31 @@
             "name": "account members"
         },
         {
-            "name": "locations"
+            "name": "billing"
         },
         {
-            "name": "users"
+            "name": "account consent"
         },
         {
-            "name": "cloud services"
+            "name": "account roles"
+        },
+        {
+            "name": "connections"
+        },
+        {
+            "name": "account invitations"
+        },
+        {
+            "name": "networks"
         },
         {
             "name": "cloud regions"
+        },
+        {
+            "name": "locations"
+        },
+        {
+            "name": "supported connections"
         }
     ]
 }
