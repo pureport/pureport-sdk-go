@@ -1,7 +1,8 @@
 LINTIGNOREDEPS='vendor/.+\.go'
+LINTIGNORESWAGGER='pureport/swagger/.+\.go'
 
 # Public SDK Core packages
-SDK_CORE_PKGS=./pureprot/...
+SDK_CORE_PKGS=./pureport/...
 SDK_COMPA_PKGS=${SDK_CORE_PKGS}
 
 # SDK additional packages
@@ -49,11 +50,11 @@ ci-test-generate-validate:
 verify: lint vet
 
 lint:
-	@echo "go link SDK and vendor packages"
+	@echo "go lint SDK and vendor packages"
 	@lint=`golint ./...`; \
-	dolint=`echo "$$lint" | grep -E -v -e ${LINTIGNOREDEPS}`; \
+	dolint=`echo "$$lint" | grep -E -v -e ${LINTIGNOREDEPS} -e ${LINTIGNORESWAGGER}`; \
 	echo "$$dolint"; \
-	if [ "$$dolint" != ""]; then exit 1; fi
+	if [ "$$dolint" != "" ]; then exit 1; fi
 
 vet:
 	go vet --all ${SDK_ALL_PKGS}
