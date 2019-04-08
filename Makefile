@@ -45,6 +45,18 @@ ci-test-generate-validate:
 	if [ "$$gitstatus" != "" ] && [ "$$gitstatus" != "skipping validation" ]; then echo "$$gitstatus"; exit 1; fi
 
 # --------------------------------------------------
+#  Sandbox Testing
+# --------------------------------------------------
+sandbox-tests: sandbox-test-go112
+
+sandbox-build-go112:
+	docker build -f ./pureporttesting/sandbox/Dockerfile.test.go1.12 -t "pureport-sdk-go-1.12" .
+sandbox-go112: sandbox-build-go112
+	docker run -i -t pureport-sdk-go-1.12 bash
+sandbox-test-go112: sandbox-build-go112
+	docker run -t pureport-sdk-go-1.12
+
+# --------------------------------------------------
 #  Linting/Verify
 # --------------------------------------------------
 verify: lint vet
