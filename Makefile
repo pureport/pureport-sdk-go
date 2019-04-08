@@ -15,7 +15,7 @@ all: generate unit
 # --------------------------------------------------
 #  Code Generation
 # --------------------------------------------------
-generate: cleanup-models get-swagger
+generate: cleanup-models gen-swagger
 
 gen-swagger:
 	@echo "Generating Client for swagger definition"
