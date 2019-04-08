@@ -12,6 +12,7 @@ package swagger
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -36,9 +37,12 @@ ConnectionsApiService Add new connection
 
 */
 
-type AddConnectionOpts struct {
-	Body optional.Interface
-}
+/**
+ * Duplicate
+ */
+//type AddConnectionOpts struct {
+//	Body optional.Interface
+//}
 
 func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId string, localVarOptionals *AddConnectionOpts) (*http.Response, error) {
 	var (

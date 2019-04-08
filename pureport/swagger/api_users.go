@@ -12,6 +12,7 @@ package swagger
 import (
 	"context"
 	"fmt"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -125,7 +126,7 @@ UsersApiService Update user
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param userId
  * @param optional nil or *Update1Opts - Optional Parameters:
-     * @param "Body" (optional.Interface of User) -
+ * @param "Body" (optional.Interface of User) -
 
 @return User
 */
