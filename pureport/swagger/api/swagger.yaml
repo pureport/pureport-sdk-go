@@ -3,8 +3,8 @@ swagger: "2.0"
 info:
   description: "Pureport API"
   version: "1.0.0"
-  title: "Purport Control Plane"
-host: "localhost:8080"
+  title: "Pureport Control Plane"
+host: "api.pureport.com"
 basePath: "/"
 tags:
 - name: "options"

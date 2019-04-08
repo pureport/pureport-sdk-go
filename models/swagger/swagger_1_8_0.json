@@ -1875,10 +1875,10 @@
             ]
         }
     },
-    "host": "localhost:8080",
+    "host": "api.pureport.com",
     "info": {
         "description": "Pureport API",
-        "title": "Purport Control Plane",
+        "title": "Pureport Control Plane",
         "version": "1.0.0"
     },
     "paths": {
