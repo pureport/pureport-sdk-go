@@ -11,7 +11,7 @@ SDK_TESTING_PKGS=./testing/...
 SDK_MODELS_PKGS=./models/...
 SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_TESTING_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS}
 
-all: generate unit
+all: verify unit
 
 # --------------------------------------------------
 #  Code Generation
