@@ -32,7 +32,7 @@ var (
 
 	// ErrorFileConfigurationFileNotFound is return when the specified configuration file
 	// can't be found.
-	ErrorFileConfigurationFileNotFound = errors.New("No available configuration file found")
+	ErrorFileConfigurationFileNotFound = errors.New("No available credentials file found")
 
 	// ErrorFileHomeDirectoryNotFound is returned when the users home directory can't be found.
 	ErrorFileHomeDirectoryNotFound = errors.New("No available home directory found for current user")
