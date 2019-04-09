@@ -29,7 +29,6 @@ type Value struct {
 // will be managed by the Credentials object.
 type Provider interface {
 	Retrieve() (Value, error)
-
 	IsExpired() bool
 }
 
@@ -63,6 +62,11 @@ func (e *Expiry) IsExpired() bool {
 		currentTime = time.Now
 	}
 	return e.expiration.Before(currentTime())
+}
+
+// ExpiresAt returns the expiration time
+func (e *Expiry) ExpiresAt() time.Time {
+	return e.expiration
 }
 
 // The Credentials object provides threadsafe access to credentials
@@ -110,6 +114,14 @@ func (c *Credentials) Get() (Value, error) {
 	}
 
 	return c.credentials, nil
+}
+
+// Expire force refresh of the credentials even if they haven't expired
+func (c *Credentials) Expire() {
+	c.m.Lock()
+	defer c.m.Unlock()
+
+	c.forceRefresh = true
 }
 
 // IsExpired whether the current credentials are expired
