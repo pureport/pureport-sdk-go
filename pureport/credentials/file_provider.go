@@ -9,8 +9,18 @@ import (
 	"gopkg.in/ini.v1"
 )
 
-// FileProviderName the name of this provider
-const FileProviderName = "FileProvider"
+const (
+	// FileProviderName the name of this provider
+	FileProviderName = "FileProvider"
+
+	// CredConfigFileEnvStr - environment variable for the path to the file
+	// containing credentials information.
+	CredConfigFileEnvStr = "PUREPORT_CREDENTIALS_FILE"
+
+	// CredConfigProfileEnvStr - environment variable for the credentials
+	// profile to use.
+	CredConfigProfileEnvStr = "PUREPORT_PROFILE"
+)
 
 var (
 
@@ -79,7 +89,7 @@ func (p *FileProvider) IsExpired() bool {
 // or use the default.
 func (p *FileProvider) profile() string {
 	if p.Profile == "" {
-		p.Profile = os.Getenv("PUREPORT_PROFILE")
+		p.Profile = os.Getenv(CredConfigProfileEnvStr)
 	}
 
 	if p.Profile == "" {
@@ -93,7 +103,7 @@ func (p *FileProvider) filename() (string, error) {
 		return p.Filename, nil
 	}
 
-	if p.Filename = os.Getenv("PUREPORT_CREDENTIALS_FILE"); len(p.Filename) != 0 {
+	if p.Filename = os.Getenv(CredConfigFileEnvStr); len(p.Filename) != 0 {
 		return p.Filename, nil
 	}
 

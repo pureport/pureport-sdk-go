@@ -5,8 +5,16 @@ import (
 	"os"
 )
 
-// EnvironmentProviderName is the name of this provider
-const EnvironmentProviderName = "EnvironmentProvider"
+const (
+	// EnvironmentProviderName is the name of this provider
+	EnvironmentProviderName = "EnvironmentProvider"
+
+	// CredAPIKeyEnvStr - environment variable for the Pureport API Key
+	CredAPIKeyEnvStr = "PUREPORT_API_KEY"
+
+	// CredAPISecretEnvStr - environment variable for the Pureport API Secret
+	CredAPISecretEnvStr = "PUREPORT_API_SECRET"
+)
 
 var (
 	// ErrorEnvironmentAPIKeyNotFound for the when the APIKey isn't found in the environment
@@ -32,12 +40,12 @@ func NewEnvironmentCredentials() *Credentials {
 func (e *EnvironmentProvider) Retrieve() (Value, error) {
 	e.retrieved = false
 
-	key := os.Getenv("PUREPORT_API_KEY")
+	key := os.Getenv(CredAPIKeyEnvStr)
 	if key == "" {
 		return Value{ProviderName: EnvironmentProviderName}, ErrorEnvironmentAPIKeyNotFound
 	}
 
-	secret := os.Getenv("PUREPORT_API_SECRET")
+	secret := os.Getenv(CredAPISecretEnvStr)
 	if secret == "" {
 		return Value{ProviderName: EnvironmentProviderName}, ErrorEnvironmentAPISecretNotFound
 	}
