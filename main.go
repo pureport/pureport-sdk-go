@@ -3,6 +3,7 @@ package main
 
 import (
 	"github.com/op/go-logging"
+	"github.com/pureport-sdk-go/pureport"
 	"github.com/pureport-sdk-go/pureport/credentials"
 	ppLog "github.com/pureport-sdk-go/pureport/logging"
 )
@@ -21,10 +22,11 @@ func main() {
 			Profile:  "",
 		},
 	}
-
 	cred := credentials.NewChainCredentials(providers)
 
-	value, err := cred.Get()
+	config := pureport.NewConfiguration().WithCredentials(cred)
+
+	value, err := config.Credentials.Get()
 	if err != nil {
 		log.Errorf("Error retrieving credentials: %s", err)
 	}
