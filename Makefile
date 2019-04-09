@@ -37,7 +37,7 @@ cleanup-models:
 # --------------------------------------------------
 unit: verify
 	@echo "go test SDK packages"
-	GO_EXTLINK_ENABLED=0 CGO_ENABLED=0 go test --ldflags '-extldflags "-static"' ${SDK_ALL_PKGS}
+	GO_EXTLINK_ENABLED=0 CGO_ENABLED=0 go test -v --ldflags '-extldflags "-static"' ${SDK_ALL_PKGS}
 
 unit-with-race-cover: verify
 	@echo "go test SDK and vendor packages"
