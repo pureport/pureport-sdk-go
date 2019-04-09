@@ -11,7 +11,13 @@ SDK_TESTING_PKGS=./testing/...
 SDK_MODELS_PKGS=./models/...
 SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_TESTING_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS}
 
-all: verify unit
+all: verify build
+
+# --------------------------------------------------
+#  Build
+# --------------------------------------------------
+build: unit
+	GO_EXTLINK_ENABLED=0 CGO_ENABLED=0 go build -x --ldflags '-extldflags "-static"' -o pp-cli .
 
 # --------------------------------------------------
 #  Code Generation
@@ -30,6 +36,8 @@ cleanup-models:
 #  Unit/CI Testing
 # --------------------------------------------------
 unit: verify
+	@echo "go test SDK packages"
+	GO_EXTLINK_ENABLED=0 CGO_ENABLED=0 go test --ldflags '-extldflags "-static"' ${SDK_ALL_PKGS}
 
 unit-with-race-cover: verify
 	@echo "go test SDK and vendor packages"
@@ -93,4 +101,4 @@ get-deps-verify:
 # --------------------------------------------------
 bench:
 	@echo "go bench SDK packages"
-	go test -count=1 -run NONE -bench . -benchmen -tags 'bench '${SDK_ALL_PKGS}
+	go test -count=1 -run NONE -bench . -benchmen -tags 'bench' ${SDK_ALL_PKGS}
