@@ -2,11 +2,17 @@
 package main
 
 import (
+	"github.com/op/go-logging"
 	"github.com/pureport-sdk-go/pureport/credentials"
-	"log"
+	ppLog "github.com/pureport-sdk-go/pureport/logging"
 )
 
+var log = logging.MustGetLogger("main_logger")
+
 func main() {
+
+	logConfig := ppLog.NewLogConfig()
+	ppLog.SetupLogger(logConfig)
 
 	providers := []credentials.Provider{
 		&credentials.EnvironmentProvider{},
@@ -20,9 +26,8 @@ func main() {
 
 	value, err := cred.Get()
 	if err != nil {
-		log.Fatalf("Error retrieving credentials: %s", err)
+		log.Errorf("Error retrieving credentials: %s", err)
 	}
 
-	log.Printf("Credentials: %+v", value)
-
+	log.Infof("Credentials: %+v", value)
 }
