@@ -32,21 +32,14 @@ const (
 	LogDisableColorStr string = "PUREPORT_LOG_NOCOLOR"
 )
 
-const (
-	defaultLogLocation   = "stdout"
-	defaultLogMaxSize    = 10 // in MB
-	defaultLogMaxBackups = 2
-	defaultLogMaxAge     = 1 // in days
-)
-
 // NewLogConfig generate a new default logging configuration
 func NewLogConfig() *LogConfig {
 	return &LogConfig{
 		Level:       "info",
-		Location:    defaultLogLocation,
-		MaxSize:     defaultLogMaxSize,
-		MaxBackups:  defaultLogMaxBackups,
-		MaxAge:      defaultLogMaxAge,
+		Location:    "stdout",
+		MaxSize:     10, // in MB
+		MaxBackups:  2,
+		MaxAge:      1, // in days
 		EnableColor: true,
 	}
 }
