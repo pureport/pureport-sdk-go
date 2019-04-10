@@ -57,7 +57,7 @@ func (s *Session) SomeRequest() {
 
 	value, err := s.Credentials.Get()
 	if err != nil {
-		log.Fatalf("Retrieving access credentials failed")
+		log.Fatalf("Retrieving access credentials failed: %s", err)
 	}
 
 	ctx := context.WithValue(context.Background(), swagger.ContextAccessToken, value.SessionToken)

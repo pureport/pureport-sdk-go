@@ -3,9 +3,9 @@ package main
 
 import (
 	"github.com/op/go-logging"
-	"github.com/pureport-sdk-go/pureport"
-	ppLog "github.com/pureport-sdk-go/pureport/logging"
-	"github.com/pureport-sdk-go/pureport/session"
+	"github.com/pureport/pureport-sdk-go/pureport"
+	ppLog "github.com/pureport/pureport-sdk-go/pureport/logging"
+	"github.com/pureport/pureport-sdk-go/pureport/session"
 )
 
 var log = logging.MustGetLogger("main_logger")

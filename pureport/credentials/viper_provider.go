@@ -53,14 +53,18 @@ func NewViperCredentials(profile string) *Credentials {
 func (p *ViperProvider) Retrieve() (Value, error) {
 	p.retrieved = false
 
+	if err := vip.ReadInConfig(); err != nil {
+		return Value{ProviderName: ViperProviderName}, fmt.Errorf("Error reading in configuration file: %s", err)
+	}
+
 	// Check environment first
-	key := viper.GetString(configAPIKeyStr)
-	secret := viper.GetString(configAPISecretStr)
+	key := vip.GetString(configAPIKeyStr)
+	secret := vip.GetString(configAPISecretStr)
 
 	// Read from configuration file
 	if key == "" || secret == "" {
-		key = viper.GetString(fmt.Sprintf("profiles.%s.%s", p.Profile, configAPIKeyStr))
-		secret = viper.GetString(fmt.Sprintf("profiles.%s.%s", p.Profile, configAPISecretStr))
+		key = vip.GetString(fmt.Sprintf("profiles.%s.%s", p.Profile, configAPIKeyStr))
+		secret = vip.GetString(fmt.Sprintf("profiles.%s.%s", p.Profile, configAPISecretStr))
 	}
 
 	if key == "" || secret == "" {
