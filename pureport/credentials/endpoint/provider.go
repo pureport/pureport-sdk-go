@@ -79,7 +79,7 @@ func (p *Provider) Retrieve() (credentials.Value, error) {
 	buf := bytes.NewBuffer(jsonValue)
 
 	// Create the HTTP Request
-	resp, err := p.Client.Post(fmt.Sprintf("%s", p.EndPoint), "application/json", buf)
+	resp, err := p.Client.Post(fmt.Sprintf("%s/login", p.EndPoint), "application/json", buf)
 	if err != nil {
 		return credentials.Value{ProviderName: providerName}, fmt.Errorf("Error creating credentials login request")
 	}
