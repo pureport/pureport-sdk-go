@@ -17,7 +17,7 @@ const providerName = "EndpointCredentialsProvider"
 // Provider for endpoint based credential requests
 type Provider struct {
 	credentials.Expiry
-	credentials.Provider
+	*credentials.Credentials
 
 	// https://golang.org/pkg/net/http/
 	Client *http.Client
@@ -31,20 +31,29 @@ type Provider struct {
 	ExpiryWindow time.Duration
 }
 
-func newEndpointProvider(cfg pureport.Configuration, endpoint string, provider credentials.Provider) credentials.Provider {
+type loginResponse struct {
+	AccessToken string `json:"access_token"`
+	TokenType   string `json:"token_type"`
+	ExpiresIn   int    `json:"expires_in"`
+	Status      int    `json:"status"`
+	Code        string `json:"code"`
+	Message     string `json:"message"`
+}
+
+func newEndpointProvider(cfg pureport.Configuration, endpoint string, cred *credentials.Credentials) credentials.Provider {
 	return &Provider{
 		Client: &http.Client{
 			Timeout: cfg.Timeout,
 		},
-		EndPoint: endpoint,
-		Provider: provider,
+		EndPoint:    endpoint,
+		Credentials: cred,
 	}
 }
 
 // NewEndPointCredentials creates a new credentials for requesting and updating
 // credentials from a remote endpoint.
-func NewEndPointCredentials(cfg pureport.Configuration, endpoint string, provider credentials.Provider) *credentials.Credentials {
-	return credentials.NewCredentials(newEndpointProvider(cfg, endpoint, provider))
+func NewEndPointCredentials(cfg pureport.Configuration, endpoint string, cred *credentials.Credentials) *credentials.Credentials {
+	return credentials.NewCredentials(newEndpointProvider(cfg, endpoint, cred))
 }
 
 // IsExpired - see Provider.IsExpired()
@@ -55,7 +64,7 @@ func (p *Provider) IsExpired() bool {
 // Retrieve - see Provider.Retrieve()
 func (p *Provider) Retrieve() (credentials.Value, error) {
 
-	local, err := p.Provider.Retrieve()
+	local, err := p.Credentials.Get()
 	if err != nil {
 		return credentials.Value{ProviderName: providerName}, err
 	}
@@ -70,7 +79,7 @@ func (p *Provider) Retrieve() (credentials.Value, error) {
 	buf := bytes.NewBuffer(jsonValue)
 
 	// Create the HTTP Request
-	resp, err := p.Client.Post(fmt.Sprintf("%s/login", p.EndPoint), "application/json", buf)
+	resp, err := p.Client.Post(fmt.Sprintf("%s", p.EndPoint), "application/json", buf)
 	if err != nil {
 		return credentials.Value{ProviderName: providerName}, fmt.Errorf("Error creating credentials login request")
 	}
@@ -81,13 +90,24 @@ func (p *Provider) Retrieve() (credentials.Value, error) {
 		return credentials.Value{ProviderName: providerName}, fmt.Errorf("Error reading credential request body")
 	}
 
-	var data map[string]string
+	var data loginResponse
 	if err = json.Unmarshal(body, &data); err != nil {
 		return credentials.Value{ProviderName: providerName}, fmt.Errorf("Error reading credential response")
 	}
 
+	// Check to make sure an error wasn't returned
+	if data.Status != 0 {
+		return credentials.Value{ProviderName: providerName}, fmt.Errorf(
+			"(%v) %v, %v: %v",
+			data.Status,
+			data.Code,
+			data.Message,
+			p.EndPoint,
+		)
+	}
+
 	// Initialize the Expiry
-	expiresIn, err := time.ParseDuration(fmt.Sprintf("%ss", data["expires_in"]))
+	expiresIn, err := time.ParseDuration(fmt.Sprintf("%vs", data.ExpiresIn))
 	if err != nil {
 		return credentials.Value{ProviderName: providerName}, fmt.Errorf("Error converting expiry time")
 	}
@@ -97,6 +117,6 @@ func (p *Provider) Retrieve() (credentials.Value, error) {
 	return credentials.Value{
 		APIKey:       local.APIKey,
 		Secret:       local.Secret,
-		SessionToken: data["access_token"],
+		SessionToken: data.AccessToken,
 	}, nil
 }

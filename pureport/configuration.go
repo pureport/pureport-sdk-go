@@ -18,6 +18,9 @@ type Configuration struct {
 
 	// Timeout used for any HTTP Requests made
 	Timeout time.Duration
+
+	// The endpoint to request Authentication Tokens
+	EndPoint string
 }
 
 // NewConfiguration creates a new configuration to application
@@ -36,5 +39,11 @@ func (c *Configuration) WithCredentials(credentials *credentials.Credentials) *C
 
 // WithConfigFile load configuration data from the specified file
 func (c *Configuration) WithConfigFile(filename string) *Configuration {
+	return c
+}
+
+// WithEndPoint - add the Authorization endpoint to the configuration
+func (c *Configuration) WithEndPoint(endpoint string) *Configuration {
+	c.EndPoint = endpoint
 	return c
 }

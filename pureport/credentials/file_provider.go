@@ -20,6 +20,12 @@ const (
 	// CredConfigProfileEnvStr - environment variable for the credentials
 	// profile to use.
 	CredConfigProfileEnvStr = "PUREPORT_PROFILE"
+
+	// CredConfigAPIKeyStr - INI key for the API Key Value
+	CredConfigAPIKeyStr = "api_key"
+
+	// CredConfigAPISecretStr - INI key for the API Secret Value
+	CredConfigAPISecretStr = "api_secret"
 )
 
 var (
@@ -132,12 +138,12 @@ func loadProfile(filename string, profile string) (Value, error) {
 		return Value{ProviderName: FileProviderName}, fmt.Errorf("Failed to find specified profile: %s", profile)
 	}
 
-	key, err := sec.GetKey("api_key")
+	key, err := sec.GetKey(CredConfigAPIKeyStr)
 	if err != nil {
 		return Value{ProviderName: FileProviderName}, ErrorFileAPIKeyNotFound
 	}
 
-	secret, err := sec.GetKey("api_secret")
+	secret, err := sec.GetKey(CredConfigAPISecretStr)
 	if err != nil {
 		return Value{ProviderName: FileProviderName}, ErrorFileAPISecretNotFound
 	}
