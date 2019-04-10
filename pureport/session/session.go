@@ -5,10 +5,10 @@ import (
 	"os"
 
 	"github.com/op/go-logging"
-	"github.com/pureport-sdk-go/pureport"
-	"github.com/pureport-sdk-go/pureport/credentials"
-	"github.com/pureport-sdk-go/pureport/credentials/endpoint"
-	"github.com/pureport-sdk-go/pureport/swagger"
+	"github.com/pureport/pureport-sdk-go/pureport"
+	"github.com/pureport/pureport-sdk-go/pureport/credentials"
+	"github.com/pureport/pureport-sdk-go/pureport/credentials/endpoint"
+	"github.com/pureport/pureport-sdk-go/pureport/swagger"
 )
 
 var log = logging.MustGetLogger("main_logger")
@@ -37,14 +37,7 @@ func createClient(cfg *pureport.Configuration) *swagger.APIClient {
 
 func createCredentials(cfg *pureport.Configuration) *credentials.Credentials {
 
-	providers := []credentials.Provider{
-		&credentials.EnvironmentProvider{},
-		&credentials.FileProvider{
-			Filename: "",
-			Profile:  "",
-		},
-	}
-	cred := credentials.NewChainCredentials(providers)
+	cred := credentials.NewViperCredentials("")
 
 	return endpoint.NewEndPointCredentials(*cfg, cfg.EndPoint, cred)
 }

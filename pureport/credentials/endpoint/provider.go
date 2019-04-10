@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/pureport-sdk-go/pureport"
-	"github.com/pureport-sdk-go/pureport/credentials"
+	"github.com/pureport/pureport-sdk-go/pureport"
+	"github.com/pureport/pureport-sdk-go/pureport/credentials"
 )
 
 const providerName = "EndpointCredentialsProvider"
