@@ -19,6 +19,19 @@ func main() {
 	ppLog.SetupLogger(logCfg)
 
 	s := session.NewSession(cfg)
+	ctx := s.GetSessionContext()
+	sp, r, err := s.Client.SupportedConnectionsApi.GetSupportedConnections(ctx)
 
-	s.SomeRequest()
+	if err != nil {
+		log.Info(r)
+		log.Fatalf("Error while querying SupportedConnections.")
+	}
+
+	if r.StatusCode != 200 {
+		log.Error(r)
+		log.Error(sp)
+	} else {
+		log.Info(r)
+		log.Info(sp)
+	}
 }

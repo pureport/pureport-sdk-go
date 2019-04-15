@@ -18,7 +18,7 @@ type Session struct {
 	*credentials.Credentials
 	*pureport.Configuration
 
-	client *swagger.APIClient
+	Client *swagger.APIClient
 }
 
 func createClient(cfg *pureport.Configuration) *swagger.APIClient {
@@ -48,32 +48,18 @@ func NewSession(cfg *pureport.Configuration) *Session {
 	return &Session{
 		Credentials:   createCredentials(cfg),
 		Configuration: cfg,
-		client:        createClient(cfg),
+		Client:        createClient(cfg),
 	}
 }
 
-// SomeRequest - Stub request function
-func (s *Session) SomeRequest() {
+// GetSessionContext gathers the context information need to
+// for communicating with the Pureport API
+func (s *Session) GetSessionContext() context.Context {
 
 	value, err := s.Credentials.Get()
 	if err != nil {
 		log.Fatalf("Retrieving access credentials failed: %s", err)
 	}
 
-	ctx := context.WithValue(context.Background(), swagger.ContextAccessToken, value.SessionToken)
-
-	sp, r, err := s.client.SupportedConnectionsApi.GetSupportedConnections(ctx)
-
-	if err != nil {
-		log.Info(r)
-		log.Fatalf("Error while querying SupportedConnections.")
-	}
-
-	if r.StatusCode != 200 {
-		log.Error(r)
-		log.Error(sp)
-	} else {
-		log.Info(r)
-		log.Info(sp)
-	}
+	return context.WithValue(context.Background(), swagger.ContextAccessToken, value.SessionToken)
 }
