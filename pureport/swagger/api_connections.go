@@ -310,13 +310,13 @@ ConnectionsApiService Get connection details
 
 @return Connection
 */
-func (a *ConnectionsApiService) Get11(ctx context.Context, connectionId string) (Connection, *http.Response, error) {
+func (a *ConnectionsApiService) Get11(ctx context.Context, connectionId string) (interface{}, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue Connection
+		localVarReturnValue interface{}
 	)
 
 	// create path and map variables
@@ -361,6 +361,33 @@ func (a *ConnectionsApiService) Get11(ctx context.Context, connectionId string) 
 	}
 
 	if localVarHttpResponse.StatusCode < 300 {
+
+		// ##################################################
+		// Pureport HACKAGE!!!
+		// ##################################################
+		// Decode as a Base Connection first to get the type
+		var base Connection
+		err = a.client.decode(&base, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err == nil {
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+		// Check the Connection type and decode as sub type
+		switch base.Type_ {
+		case "AWS_DIRECT_CONNECT":
+			localVarReturnValue = AwsDirectConnectConnection{}
+		case "AZURE_EXPRESS_ROUTE":
+			localVarReturnValue = AzureExpressRouteConnection{}
+		case "GOOGLE_CLOUD_INTERCONNECT":
+			localVarReturnValue = GoogleCloudInterconnectConnection{}
+		case "SITE_IPSEC_VPN":
+			localVarReturnValue = SiteIpSecVpnConnection{}
+		default:
+			localVarReturnValue = DummyConnection{}
+		}
+		// ##################################################
+		// End Pureport HACKAGE!!!
+		// ##################################################
+
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 		if err == nil {
