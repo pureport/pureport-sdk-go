@@ -80,11 +80,30 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
 
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(Connection)
-		if !localVarOptionalBodyok {
-			return nil, reportError("body should be Connection")
+		// ##################################################
+		// Pureport HACKAGE!!!
+		// ##################################################
+		// Decode as a Base Connection first to get the type
+		switch body := localVarOptionals.Body.Value().(type) {
+		case AwsDirectConnectConnection:
+			localVarPostBody = body
+
+		case AzureExpressRouteConnection:
+			localVarPostBody = body
+
+		case GoogleCloudInterconnectConnection:
+			localVarPostBody = body
+
+		case DummyConnection:
+			localVarPostBody = body
+
+		case SiteIpSecVpnConnection:
+			localVarPostBody = body
+
+		default:
+			return nil, reportError("body should be valid Connection")
 		}
-		localVarPostBody = &localVarOptionalBody
+		// ##################################################
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
