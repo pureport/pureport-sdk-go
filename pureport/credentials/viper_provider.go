@@ -9,8 +9,9 @@ const (
 	// ViperProviderName is the name of this provider
 	ViperProviderName = "ViperProvider"
 
-	configAPIKeyStr    = "api_key"
-	configAPISecretStr = "api_secret"
+	configAPIKeyStr     = "api_key"
+	configAPISecretStr  = "api_secret"
+	configAPIProfileStr = "profile"
 )
 
 var (
@@ -33,7 +34,10 @@ func init() {
 	vip.SetConfigName("credentials")
 	vip.AddConfigPath("$HOME/.pureport")
 	vip.AddConfigPath(".")
-	vip.SetEnvPrefix("PUREPORT")
+	vip.SetEnvPrefix("pureport")
+	vip.BindEnv(configAPIKeyStr)
+	vip.BindEnv(configAPISecretStr)
+	vip.BindEnv(configAPIProfileStr)
 }
 
 // NewViperCredentials creates a new credentials provider using Viper
@@ -41,6 +45,10 @@ func NewViperCredentials(profile string) *Credentials {
 
 	if profile == "" {
 		profile = "default"
+	}
+
+	if p := vip.GetString(configAPIProfileStr); p != "" {
+		profile = p
 	}
 
 	return NewCredentials(&ViperProvider{
