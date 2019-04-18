@@ -47,8 +47,11 @@ func NewConfiguration() *Configuration {
 		panic(fmt.Errorf("Error reading configuration file: %s", err))
 	}
 
+	endpoint := vip.GetString(endpointEnvStr)
+
+	// Trim any trailing slashes in the endpoint if they exist
 	return &Configuration{
 		Timeout:  (time.Minute * 2),
-		EndPoint: vip.GetString(endpointEnvStr),
+		EndPoint: strings.TrimRight(endpoint, "/"),
 	}
 }
