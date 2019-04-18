@@ -12,8 +12,7 @@ var log = logging.MustGetLogger("main_logger")
 
 func main() {
 
-	cfg := pureport.NewConfiguration("")
-	cfg = cfg.WithEndPoint("https://dev1-api.pureportdev.com")
+	cfg := pureport.NewConfiguration()
 
 	logCfg := ppLog.NewLogConfig()
 	ppLog.SetupLogger(logCfg)
