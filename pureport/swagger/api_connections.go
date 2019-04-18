@@ -44,7 +44,7 @@ ConnectionsApiService Add new connection
 //	Body optional.Interface
 //}
 
-func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId string, localVarOptionals *AddConnectionOpts) (*http.Response, error) {
+func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId string, localVarOptionals *AddConnectionOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -101,24 +101,36 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 			localVarPostBody = body
 
 		default:
-			return nil, reportError("body should be valid Connection")
+			return "", nil, reportError("body should be valid Connection")
 		}
 		// ##################################################
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return "", nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
+		return "", localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarHttpResponse, err
+		return "", localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+
+		// If we succeed, return the data, otherwise pass on to decode error.
+		var v Connection
+		err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+		if err != nil {
+			return "", localVarHttpResponse, err
+		}
+
+		return v.Id, localVarHttpResponse, nil
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -127,10 +139,10 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 			error: localVarHttpResponse.Status,
 		}
 
-		return localVarHttpResponse, newErr
+		return "", localVarHttpResponse, newErr
 	}
 
-	return localVarHttpResponse, nil
+	return "", localVarHttpResponse, nil
 }
 
 /*
