@@ -1,5 +1,5 @@
 /*
- * Purport Control Plane
+ * Pureport Control Plane
  *
  * Pureport API
  *
@@ -37,7 +37,7 @@ var (
 	xmlCheck  = regexp.MustCompile("(?i:[application|text]/xml)")
 )
 
-// APIClient manages communication with the Purport Control Plane API v1.0.0
+// APIClient manages communication with the Pureport Control Plane API v1.0.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
