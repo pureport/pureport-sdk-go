@@ -9,11 +9,15 @@
 
 package swagger
 
+import (
+	"time"
+)
+
 type PublicPeeringPoolStats struct {
-	Time           int64 `json:"time,omitempty"`
-	TotalAllocated int32 `json:"totalAllocated,omitempty"`
-	TotalBlocks    int32 `json:"totalBlocks,omitempty"`
-	TotalDeleted   int32 `json:"totalDeleted,omitempty"`
-	TotalFree      int32 `json:"totalFree,omitempty"`
-	TotalSubnets   int32 `json:"totalSubnets,omitempty"`
+	Time           time.Time `json:"time,omitempty"`
+	TotalAllocated int32     `json:"totalAllocated,omitempty"`
+	TotalBlocks    int32     `json:"totalBlocks,omitempty"`
+	TotalDeleted   int32     `json:"totalDeleted,omitempty"`
+	TotalFree      int32     `json:"totalFree,omitempty"`
+	TotalSubnets   int32     `json:"totalSubnets,omitempty"`
 }

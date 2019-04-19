@@ -9,13 +9,19 @@
 
 package swagger
 
+import (
+	"time"
+)
+
 type CloudService struct {
-	CloudRegion     *Link  `json:"cloudRegion,omitempty"`
-	Href            string `json:"href,omitempty"`
-	Id              string `json:"id,omitempty"`
-	Ipv4PrefixCount int32  `json:"ipv4PrefixCount,omitempty"`
-	Ipv6PrefixCount int32  `json:"ipv6PrefixCount,omitempty"`
-	Name            string `json:"name"`
-	Provider        string `json:"provider"`
-	Service         string `json:"service"`
+	CloudRegion     *Link     `json:"cloudRegion,omitempty"`
+	Deactivated     bool      `json:"deactivated"`
+	DeactivatedAt   time.Time `json:"deactivatedAt,omitempty"`
+	Href            string    `json:"href,omitempty"`
+	Id              string    `json:"id,omitempty"`
+	Ipv4PrefixCount int32     `json:"ipv4PrefixCount,omitempty"`
+	Ipv6PrefixCount int32     `json:"ipv6PrefixCount,omitempty"`
+	Name            string    `json:"name"`
+	Provider        string    `json:"provider"`
+	Service         string    `json:"service"`
 }

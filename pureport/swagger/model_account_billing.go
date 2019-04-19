@@ -10,10 +10,11 @@
 package swagger
 
 type AccountBilling struct {
-	Account        *Link  `json:"account,omitempty"`
-	Email          string `json:"email"`
-	Href           string `json:"href,omitempty"`
-	StripeExpiry   string `json:"stripeExpiry"`
-	StripeLastFour string `json:"stripeLastFour"`
-	StripeToken    string `json:"stripeToken"`
+	Account        *Link            `json:"account,omitempty"`
+	Address        *PhysicalAddress `json:"address"`
+	Email          string           `json:"email"`
+	Href           string           `json:"href,omitempty"`
+	StripeExpiry   string           `json:"stripeExpiry"`
+	StripeLastFour string           `json:"stripeLastFour"`
+	StripeToken    string           `json:"stripeToken"`
 }

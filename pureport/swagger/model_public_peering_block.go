@@ -9,10 +9,14 @@
 
 package swagger
 
+import (
+	"time"
+)
+
 type PublicPeeringBlock struct {
-	CidrBlock string `json:"cidrBlock"`
-	CreatedAt int64  `json:"createdAt,omitempty"`
-	Href      string `json:"href,omitempty"`
-	Id        string `json:"id,omitempty"`
-	UpdatedAt int64  `json:"updatedAt,omitempty"`
+	CidrBlock string    `json:"cidrBlock"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	Href      string    `json:"href,omitempty"`
+	Id        string    `json:"id,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 }

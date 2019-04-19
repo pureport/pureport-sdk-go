@@ -9,13 +9,17 @@
 
 package swagger
 
+import (
+	"time"
+)
+
 type AccountInvite struct {
-	Account   *Link  `json:"account"`
-	Email     string `json:"email"`
-	Expired   bool   `json:"expired,omitempty"`
-	Href      string `json:"href,omitempty"`
-	Id        string `json:"id,omitempty"`
-	InvitedAt int64  `json:"invitedAt,omitempty"`
-	InvitedBy *Link  `json:"invitedBy,omitempty"`
-	Roles     []Link `json:"roles"`
+	Account   *Link     `json:"account"`
+	Email     string    `json:"email"`
+	Expired   bool      `json:"expired,omitempty"`
+	Href      string    `json:"href,omitempty"`
+	Id        string    `json:"id,omitempty"`
+	InvitedAt time.Time `json:"invitedAt,omitempty"`
+	InvitedBy *Link     `json:"invitedBy,omitempty"`
+	Roles     []Link    `json:"roles"`
 }

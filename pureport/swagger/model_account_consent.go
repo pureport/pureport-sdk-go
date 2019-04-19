@@ -9,8 +9,12 @@
 
 package swagger
 
+import (
+	"time"
+)
+
 type AccountConsent struct {
-	ConsentAt int64  `json:"consentAt,omitempty"`
-	Href      string `json:"href,omitempty"`
-	UserId    string `json:"userId,omitempty"`
+	ConsentAt time.Time `json:"consentAt,omitempty"`
+	Href      string    `json:"href,omitempty"`
+	UserId    string    `json:"userId,omitempty"`
 }

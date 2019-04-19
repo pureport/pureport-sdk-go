@@ -9,10 +9,14 @@
 
 package swagger
 
+import (
+	"time"
+)
+
 type ProviderVlan struct {
-	Allocated         bool  `json:"allocated,omitempty"`
-	LastAllocatedAt   int64 `json:"lastAllocatedAt,omitempty"`
-	LastDeallocatedAt int64 `json:"lastDeallocatedAt,omitempty"`
-	Speed             int32 `json:"speed,omitempty"`
-	Vlan              int32 `json:"vlan,omitempty"`
+	Allocated         bool      `json:"allocated,omitempty"`
+	LastAllocatedAt   time.Time `json:"lastAllocatedAt,omitempty"`
+	LastDeallocatedAt time.Time `json:"lastDeallocatedAt,omitempty"`
+	Speed             int32     `json:"speed,omitempty"`
+	Vlan              int32     `json:"vlan,omitempty"`
 }

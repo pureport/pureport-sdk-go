@@ -9,14 +9,18 @@
 
 package swagger
 
+import (
+	"time"
+)
+
 type AzureExpressRouteConnection struct {
-	ActiveAt         int64                 `json:"activeAt,omitempty"`
+	ActiveAt         time.Time             `json:"activeAt,omitempty"`
 	BillingPlan      *BillingPlan          `json:"billingPlan,omitempty"`
-	BillingTerm      string                `json:"billingTerm,omitempty"`
-	CreatedAt        int64                 `json:"createdAt,omitempty"`
+	BillingTerm      string                `json:"billingTerm"`
+	CreatedAt        time.Time             `json:"createdAt,omitempty"`
 	CustomerASN      int64                 `json:"customerASN,omitempty"`
 	CustomerNetworks []CustomerNetwork     `json:"customerNetworks,omitempty"`
-	DeletedAt        int64                 `json:"deletedAt,omitempty"`
+	DeletedAt        time.Time             `json:"deletedAt,omitempty"`
 	Description      string                `json:"description,omitempty"`
 	ErrorCode        string                `json:"errorCode,omitempty"`
 	ErrorMessage     string                `json:"errorMessage,omitempty"`

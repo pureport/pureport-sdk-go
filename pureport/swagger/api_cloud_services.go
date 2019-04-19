@@ -33,7 +33,7 @@ CloudServicesApiService Get cloud service details
 
 @return CloudService
 */
-func (a *CloudServicesApiService) Get(ctx context.Context, cloudServiceId string) (CloudService, *http.Response, error) {
+func (a *CloudServicesApiService) Get1(ctx context.Context, cloudServiceId string) (CloudService, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
