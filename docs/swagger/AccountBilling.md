@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Account** | [***Link**](Link.md) |  | [optional] [default to null]
+**Address** | [***PhysicalAddress**](PhysicalAddress.md) |  | [default to null]
 **Email** | **string** |  | [default to null]
 **Href** | **string** |  | [optional] [default to null]
 **StripeExpiry** | **string** |  | [default to null]

@@ -17,7 +17,7 @@ import "./swagger"
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *http://https://api.pureport.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -58,7 +58,7 @@ Class | Method | HTTP request | Description
 *BillingApi* | [**UpdatePaymentInformation**](docs/BillingApi.md#updatepaymentinformation) | **Put** /accounts/{accountId}/billing | Update payment method
 *CloudRegionsApi* | [**Get10**](docs/CloudRegionsApi.md#get10) | **Get** /cloudRegions/{cloudRegionId} | Get cloud region details
 *CloudRegionsApi* | [**GetCloudRegions**](docs/CloudRegionsApi.md#getcloudregions) | **Get** /cloudRegions | List cloud regions
-*CloudServicesApi* | [**Get**](docs/CloudServicesApi.md#get) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
+*CloudServicesApi* | [**Get1**](docs/CloudServicesApi.md#get1) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
 *CloudServicesApi* | [**GetCloudServices**](docs/CloudServicesApi.md#getcloudservices) | **Get** /cloudServices | List cloud services
 *ConnectionsApi* | [**AddConnection**](docs/ConnectionsApi.md#addconnection) | **Post** /networks/{networkId}/connections | Add new connection
 *ConnectionsApi* | [**Delete9**](docs/ConnectionsApi.md#delete9) | **Delete** /connections/{connectionId} | Delete connection
@@ -114,6 +114,7 @@ Class | Method | HTTP request | Description
  - [NetworkInvoice](docs/NetworkInvoice.md)
  - [Option](docs/Option.md)
  - [PeeringConfiguration](docs/PeeringConfiguration.md)
+ - [PhysicalAddress](docs/PhysicalAddress.md)
  - [Pod](docs/Pod.md)
  - [ProviderLink](docs/ProviderLink.md)
  - [ProviderVlan](docs/ProviderVlan.md)

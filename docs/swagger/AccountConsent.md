@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ConsentAt** | **int64** |  | [optional] [default to null]
+**ConsentAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Href** | **string** |  | [optional] [default to null]
 **UserId** | **string** |  | [optional] [default to null]
 

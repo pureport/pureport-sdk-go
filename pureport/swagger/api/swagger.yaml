@@ -9,8 +9,8 @@ basePath: "/"
 tags:
 - name: "options"
 - name: "cloud services"
-- name: "apikeys"
 - name: "users"
+- name: "apikeys"
 - name: "accounts"
 - name: "account members"
 - name: "billing"
@@ -953,7 +953,7 @@ paths:
       - "cloud services"
       summary: "Get cloud service details"
       description: ""
-      operationId: "get"
+      operationId: "get_1"
       produces:
       - "application/json"
       parameters:
@@ -1387,6 +1387,7 @@ definitions:
   AccountBilling:
     type: "object"
     required:
+    - "address"
     - "email"
     - "stripeExpiry"
     - "stripeLastFour"
@@ -1394,6 +1395,8 @@ definitions:
     properties:
       account:
         $ref: "#/definitions/Link"
+      address:
+        $ref: "#/definitions/PhysicalAddress"
       email:
         type: "string"
       href:
@@ -1409,6 +1412,16 @@ definitions:
         minLength: 1
         maxLength: 64
     example:
+      address:
+        country: "country"
+        city: "city"
+        street: "street"
+        postalCode: "postalCode"
+        placeId: "placeId"
+        geoCoordinates:
+          latitude: 0.80082819046101150206595775671303272247314453125
+          longitude: 6.02745618307040320615897144307382404804229736328125
+        state: "state"
       stripeToken: "stripeToken"
       href: "href"
       stripeExpiry: "stripeExpiry"
@@ -1422,14 +1435,14 @@ definitions:
     type: "object"
     properties:
       consentAt:
-        type: "integer"
-        format: "int64"
+        type: "string"
+        format: "date-time"
       href:
         type: "string"
       userId:
         type: "string"
     example:
-      consentAt: 0
+      consentAt: "2000-01-23T04:56:07.000+00:00"
       href: "href"
       userId: "userId"
   AccountInvite:
@@ -1452,8 +1465,8 @@ definitions:
         minLength: 1
         maxLength: 64
       invitedAt:
-        type: "integer"
-        format: "int64"
+        type: "string"
+        format: "date-time"
       invitedBy:
         $ref: "#/definitions/Link"
       roles:
@@ -1480,7 +1493,7 @@ definitions:
         id: "id"
         title: "title"
       email: "email"
-      invitedAt: 0
+      invitedAt: "2000-01-23T04:56:07.000+00:00"
   AccountMember:
     type: "object"
     required:
@@ -1902,8 +1915,8 @@ definitions:
       customerIP: "customerIP"
       pureportIP: "pureportIP"
       state: "UP"
-      pureportASN: 7
-      customerASN: 2
+      pureportASN: 5
+      customerASN: 1
   BillingPlan:
     type: "object"
     properties:
@@ -1924,7 +1937,7 @@ definitions:
         enum:
         - "HOURLY"
     example:
-      amount: 6
+      amount: 0
       term: "HOURLY"
       id: "id"
       billingInterval: "DAY"
@@ -1960,12 +1973,20 @@ definitions:
   CloudService:
     type: "object"
     required:
+    - "deactivated"
     - "name"
     - "provider"
     - "service"
     properties:
       cloudRegion:
         $ref: "#/definitions/Link"
+      deactivated:
+        type: "boolean"
+        readOnly: true
+      deactivatedAt:
+        type: "string"
+        format: "date-time"
+        readOnly: true
       href:
         type: "string"
       id:
@@ -2002,11 +2023,14 @@ definitions:
         id: "id"
         title: "title"
       name: "name"
+      deactivatedAt: "2000-01-23T04:56:07.000+00:00"
       href: "href"
       id: "id"
+      deactivated: true
   Connection:
     type: "object"
     required:
+    - "billingTerm"
     - "location"
     - "name"
     - "speed"
@@ -2014,8 +2038,8 @@ definitions:
     discriminator: "type"
     properties:
       activeAt:
-        type: "integer"
-        format: "int64"
+        type: "string"
+        format: "date-time"
         readOnly: true
       billingPlan:
         readOnly: true
@@ -2025,8 +2049,8 @@ definitions:
         enum:
         - "HOURLY"
       createdAt:
-        type: "integer"
-        format: "int64"
+        type: "string"
+        format: "date-time"
         readOnly: true
       customerASN:
         type: "integer"
@@ -2038,8 +2062,8 @@ definitions:
         items:
           $ref: "#/definitions/CustomerNetwork"
       deletedAt:
-        type: "integer"
-        format: "int64"
+        type: "string"
+        format: "date-time"
         readOnly: true
       description:
         type: "string"
@@ -2111,6 +2135,8 @@ definitions:
         - "GATEWAY_UPDATING_ERROR"
         - "GATEWAY_DELETING_ERROR"
         - "AWS_CONNECTION_DELETE_ERROR"
+        - "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR"
+        - "ECX_CONNECTION_DELETE_ERROR"
         - "GOOGLE_OPERATION_TIMEOUT"
         - "NOT_IMPLEMENTED"
         - "SERVICE_UNAVAILABLE"
@@ -5210,8 +5236,8 @@ definitions:
           customerIP: "customerIP"
           pureportIP: "pureportIP"
           state: "UP"
-          pureportASN: 7
-          customerASN: 2
+          pureportASN: 5
+          customerASN: 1
         errorMessage: "errorMessage"
         name: "name"
         description: "description"
@@ -5220,15 +5246,15 @@ definitions:
         state: "WAITING_TO_PROVISION"
         type: "STANDARD"
         remoteId: "remoteId"
-      speed: 9
+      speed: 5
       highAvailability: true
       network:
         href: "href"
         id: "id"
         title: "title"
-      createdAt: 1
-      activeAt: 0
-      deletedAt: 5
+      createdAt: "2000-01-23T04:56:07.000+00:00"
+      activeAt: "2000-01-23T04:56:07.000+00:00"
+      deletedAt: "2000-01-23T04:56:07.000+00:00"
       secondaryGateway:
         linkState: "UP"
         availabilityDomain: "PRIMARY"
@@ -5238,8 +5264,8 @@ definitions:
           customerIP: "customerIP"
           pureportIP: "pureportIP"
           state: "UP"
-          pureportASN: 7
-          customerASN: 2
+          pureportASN: 5
+          customerASN: 1
         errorMessage: "errorMessage"
         name: "name"
         description: "description"
@@ -5250,7 +5276,7 @@ definitions:
         remoteId: "remoteId"
       name: "name"
       billingPlan:
-        amount: 6
+        amount: 0
         term: "HOURLY"
         id: "id"
         billingInterval: "DAY"
@@ -5261,7 +5287,7 @@ definitions:
       href: "href"
       id: "id"
       state: "INITIALIZING"
-      customerASN: 5
+      customerASN: 6
   CustomerNetwork:
     type: "object"
     required:
@@ -5364,6 +5390,8 @@ definitions:
         - "GATEWAY_UPDATING_ERROR"
         - "GATEWAY_DELETING_ERROR"
         - "AWS_CONNECTION_DELETE_ERROR"
+        - "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR"
+        - "ECX_CONNECTION_DELETE_ERROR"
         - "GOOGLE_OPERATION_TIMEOUT"
         - "NOT_IMPLEMENTED"
         - "SERVICE_UNAVAILABLE"
@@ -5417,8 +5445,8 @@ definitions:
         customerIP: "customerIP"
         pureportIP: "pureportIP"
         state: "UP"
-        pureportASN: 7
-        customerASN: 2
+        pureportASN: 5
+        customerASN: 1
       errorMessage: "errorMessage"
       name: "name"
       description: "description"
@@ -5728,12 +5756,12 @@ definitions:
           href: "href"
           id: "id"
           title: "title"
-        speed: 1
+        speed: 0
       - location:
           href: "href"
           id: "id"
           title: "title"
-        speed: 1
+        speed: 0
   LocationLinkConnection:
     type: "object"
     properties:
@@ -5756,7 +5784,7 @@ definitions:
         href: "href"
         id: "id"
         title: "title"
-      speed: 1
+      speed: 0
   LoginRequest:
     type: "object"
     required:
@@ -8887,6 +8915,33 @@ definitions:
         enum:
         - "PUBLIC"
         - "PRIVATE"
+  PhysicalAddress:
+    type: "object"
+    properties:
+      city:
+        type: "string"
+      country:
+        type: "string"
+      geoCoordinates:
+        $ref: "#/definitions/GeoCoordinates"
+      placeId:
+        type: "string"
+      postalCode:
+        type: "string"
+      state:
+        type: "string"
+      street:
+        type: "string"
+    example:
+      country: "country"
+      city: "city"
+      street: "street"
+      postalCode: "postalCode"
+      placeId: "placeId"
+      geoCoordinates:
+        latitude: 0.80082819046101150206595775671303272247314453125
+        longitude: 6.02745618307040320615897144307382404804229736328125
+      state: "state"
   Pod:
     type: "object"
     required:
@@ -8969,11 +9024,11 @@ definitions:
       allocated:
         type: "boolean"
       lastAllocatedAt:
-        type: "integer"
-        format: "int64"
+        type: "string"
+        format: "date-time"
       lastDeallocatedAt:
-        type: "integer"
-        format: "int64"
+        type: "string"
+        format: "date-time"
       speed:
         type: "integer"
         format: "int32"
@@ -8988,8 +9043,8 @@ definitions:
       cidrBlock:
         type: "string"
       createdAt:
-        type: "integer"
-        format: "int64"
+        type: "string"
+        format: "date-time"
         readOnly: true
       href:
         type: "string"
@@ -8999,15 +9054,15 @@ definitions:
         minLength: 1
         maxLength: 64
       updatedAt:
-        type: "integer"
-        format: "int64"
+        type: "string"
+        format: "date-time"
         readOnly: true
   PublicPeeringPoolStats:
     type: "object"
     properties:
       time:
-        type: "integer"
-        format: "int64"
+        type: "string"
+        format: "date-time"
         readOnly: true
       totalAllocated:
         type: "integer"
@@ -9126,6 +9181,8 @@ definitions:
           enum:
           - "V1"
           - "V2"
+        physicalAddress:
+          $ref: "#/definitions/PhysicalAddress"
         primaryCustomerRouterIP:
           type: "string"
         primaryKey:
@@ -9214,11 +9271,11 @@ definitions:
         - "DUMMY"
     example:
       billingPlans:
-      - amount: 6
+      - amount: 0
         term: "HOURLY"
         id: "id"
         billingInterval: "DAY"
-      - amount: 6
+      - amount: 0
         term: "HOURLY"
         id: "id"
         billingInterval: "DAY"

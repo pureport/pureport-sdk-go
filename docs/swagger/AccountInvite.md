@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Expired** | **bool** |  | [optional] [default to null]
 **Href** | **string** |  | [optional] [default to null]
 **Id** | **string** |  | [optional] [default to null]
-**InvitedAt** | **int64** |  | [optional] [default to null]
+**InvitedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **InvitedBy** | [***Link**](Link.md) |  | [optional] [default to null]
 **Roles** | [**[]Link**](Link.md) |  | [default to null]
 

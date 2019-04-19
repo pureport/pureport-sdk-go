@@ -4,6 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CloudRegion** | [***Link**](Link.md) |  | [optional] [default to null]
+**Deactivated** | **bool** |  | [default to null]
+**DeactivatedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **Href** | **string** |  | [optional] [default to null]
 **Id** | **string** |  | [optional] [default to null]
 **Ipv4PrefixCount** | **int32** |  | [optional] [default to null]

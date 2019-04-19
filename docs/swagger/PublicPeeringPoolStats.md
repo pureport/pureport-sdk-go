@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Time** | **int64** |  | [optional] [default to null]
+**Time** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **TotalAllocated** | **int32** |  | [optional] [default to null]
 **TotalBlocks** | **int32** |  | [optional] [default to null]
 **TotalDeleted** | **int32** |  | [optional] [default to null]

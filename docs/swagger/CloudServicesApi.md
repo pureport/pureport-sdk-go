@@ -1,15 +1,15 @@
 # \CloudServicesApi
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *http://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Get**](CloudServicesApi.md#Get) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
+[**Get1**](CloudServicesApi.md#Get1) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
 [**GetCloudServices**](CloudServicesApi.md#GetCloudServices) | **Get** /cloudServices | List cloud services
 
 
-# **Get**
-> CloudService Get(ctx, cloudServiceId)
+# **Get1**
+> CloudService Get1(ctx, cloudServiceId)
 Get cloud service details
 
 
