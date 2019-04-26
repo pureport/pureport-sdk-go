@@ -27,6 +27,10 @@ generate: cleanup-models gen-swagger
 gen-swagger:
 	@echo "Generating Client for swagger definition"
 	go generate ./models/swagger
+	rm docs/swagger/*
+	mv pureport/swagger/README.md docs/swagger/
+	mv pureport/swagger/docs/* docs/swagger/
+	rmdir pureport/swagger/docs
 
 cleanup-models:
 	@echo "Cleaning up stale model versions"

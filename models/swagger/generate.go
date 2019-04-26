@@ -3,7 +3,3 @@ package swagger
 
 //go:generate docker run --rm -v $PWD:/data swaggerapi/swagger-codegen-cli generate -i /data/models/swagger/kato_swagger.json -l go -o /data/pureport/swagger
 //go:generate gofmt -s -w ../../pureport/swagger
-//go:generate pwd
-//go:generate cp -r ../../pureport/swagger/docs/* ../../docs/swagger/
-//go:generate mv ../../pureport/swagger/README.md ../../docs/README.md
-//go:generate rm -rf ../../pureport/swagger/docs
