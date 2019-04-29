@@ -63,6 +63,14 @@
                 "parent": {
                     "$ref": "#/definitions/Link",
                     "originalRef": "Link"
+                },
+                "supportedConnectionGroups": {
+                    "items": {
+                        "$ref": "#/definitions/Link",
+                        "originalRef": "Link"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
                 }
             },
             "required": [
@@ -504,6 +512,7 @@
                         "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
                         "NO_SUPPORTED_CONNECTION_FOR_CONNECTION",
                         "UNSUPPORTED_RESOURCE_LIMIT",
+                        "MODIFICATION_NOT_ALLOWED",
                         "AWS_CONNECTION_SPEED_IMMUTABLE",
                         "INVALID_VLAN",
                         "INVALID_VLAN_RANGE",
@@ -729,6 +738,7 @@
                         "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
                         "NO_SUPPORTED_CONNECTION_FOR_CONNECTION",
                         "UNSUPPORTED_RESOURCE_LIMIT",
+                        "MODIFICATION_NOT_ALLOWED",
                         "AWS_CONNECTION_SPEED_IMMUTABLE",
                         "INVALID_VLAN",
                         "INVALID_VLAN_RANGE",
@@ -1773,6 +1783,14 @@
                 "billingProductId": {
                     "type": "string"
                 },
+                "groups": {
+                    "items": {
+                        "$ref": "#/definitions/Link",
+                        "originalRef": "Link"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                },
                 "highAvailability": {
                     "type": "boolean"
                 },
@@ -1834,6 +1852,25 @@
                 "peeringType",
                 "speed",
                 "type"
+            ],
+            "type": "object"
+        },
+        "SupportedConnectionGroup": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
             ],
             "type": "object"
         },
@@ -2006,7 +2043,7 @@
         "/accounts/{accountId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_2",
+                "operationId": "deleteAccount",
                 "parameters": [
                     {
                         "in": "path",
@@ -2030,7 +2067,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_3",
+                "operationId": "getAccount",
                 "parameters": [
                     {
                         "in": "path",
@@ -2065,7 +2102,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_2",
+                "operationId": "updateAccount",
                 "parameters": [
                     {
                         "in": "body",
@@ -2184,7 +2221,7 @@
         "/accounts/{accountId}/apikeys/{key}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_4",
+                "operationId": "deleteApiKey",
                 "parameters": [
                     {
                         "in": "path",
@@ -2214,7 +2251,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_5",
+                "operationId": "getApiKey",
                 "parameters": [
                     {
                         "in": "path",
@@ -2255,7 +2292,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_4",
+                "operationId": "updateApiKey",
                 "parameters": [
                     {
                         "in": "body",
@@ -2648,7 +2685,7 @@
         "/accounts/{accountId}/invites/{inviteId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_7",
+                "operationId": "deleteAccountInvite",
                 "parameters": [
                     {
                         "in": "path",
@@ -2678,7 +2715,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_9",
+                "operationId": "getAccountInvite",
                 "parameters": [
                     {
                         "in": "path",
@@ -2719,7 +2756,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_7",
+                "operationId": "updateAccountInvite",
                 "parameters": [
                     {
                         "in": "query",
@@ -2850,7 +2887,7 @@
         "/accounts/{accountId}/members/{userId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_3",
+                "operationId": "deleteAccountMember",
                 "parameters": [
                     {
                         "in": "path",
@@ -2880,7 +2917,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_4",
+                "operationId": "getAccountMember",
                 "parameters": [
                     {
                         "in": "path",
@@ -2921,7 +2958,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_3",
+                "operationId": "updateAccountMember",
                 "parameters": [
                     {
                         "in": "body",
@@ -3166,7 +3203,7 @@
         "/accounts/{accountId}/roles/{roleId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_5",
+                "operationId": "deleteRole",
                 "parameters": [
                     {
                         "in": "path",
@@ -3196,7 +3233,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_6",
+                "operationId": "getRole",
                 "parameters": [
                     {
                         "in": "path",
@@ -3237,7 +3274,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_5",
+                "operationId": "updateRole",
                 "parameters": [
                     {
                         "in": "body",
@@ -3283,6 +3320,46 @@
                 ]
             }
         },
+        "/accounts/{accountId}/supportedConnections": {
+            "get": {
+                "description": "",
+                "operationId": "getSupportedConnections",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/SupportedConnection",
+                                "originalRef": "SupportedConnection"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SupportedConnection",
+                                "originalRef": "SupportedConnection"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List supported connections",
+                "tags": [
+                    "supported connections"
+                ]
+            }
+        },
         "/cloudRegions": {
             "get": {
                 "description": "",
@@ -3319,7 +3396,7 @@
         "/cloudRegions/{cloudRegionId}": {
             "get": {
                 "description": "",
-                "operationId": "get_10",
+                "operationId": "getCloudRegion",
                 "parameters": [
                     {
                         "in": "path",
@@ -3386,7 +3463,7 @@
         "/cloudServices/{cloudServiceId}": {
             "get": {
                 "description": "",
-                "operationId": "get_1",
+                "operationId": "getCloudService",
                 "parameters": [
                     {
                         "in": "path",
@@ -3420,7 +3497,7 @@
         "/connections/{connectionId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_9",
+                "operationId": "deleteConnection",
                 "parameters": [
                     {
                         "in": "path",
@@ -3452,7 +3529,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_11",
+                "operationId": "getConnection",
                 "parameters": [
                     {
                         "in": "path",
@@ -3487,7 +3564,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_9",
+                "operationId": "updateConnection",
                 "parameters": [
                     {
                         "in": "body",
@@ -3596,7 +3673,7 @@
         "/locations/{locationId}": {
             "get": {
                 "description": "",
-                "operationId": "get_12",
+                "operationId": "getLocation",
                 "parameters": [
                     {
                         "in": "path",
@@ -3662,7 +3739,7 @@
         "/networks/{networkId}": {
             "delete": {
                 "description": "",
-                "operationId": "delete_11",
+                "operationId": "deleteNetwork",
                 "parameters": [
                     {
                         "in": "path",
@@ -3686,7 +3763,7 @@
             },
             "get": {
                 "description": "",
-                "operationId": "get_13",
+                "operationId": "getNetwork",
                 "parameters": [
                     {
                         "in": "path",
@@ -3721,7 +3798,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "update_11",
+                "operationId": "updateNetwork",
                 "parameters": [
                     {
                         "in": "body",
@@ -3889,43 +3966,10 @@
                 ]
             }
         },
-        "/supportedConnections": {
-            "get": {
-                "description": "",
-                "operationId": "getSupportedConnections",
-                "parameters": [],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "responseSchema": {
-                            "items": {
-                                "$ref": "#/definitions/SupportedConnection",
-                                "originalRef": "SupportedConnection"
-                            },
-                            "type": "array"
-                        },
-                        "schema": {
-                            "items": {
-                                "$ref": "#/definitions/SupportedConnection",
-                                "originalRef": "SupportedConnection"
-                            },
-                            "type": "array"
-                        }
-                    }
-                },
-                "summary": "List supported connections",
-                "tags": [
-                    "supported connections"
-                ]
-            }
-        },
         "/supportedConnections/{supportedConnectionId}": {
             "get": {
                 "description": "",
-                "operationId": "get_17",
+                "operationId": "getSupportedConnection",
                 "parameters": [
                     {
                         "in": "path",
@@ -3959,7 +4003,7 @@
         "/users/{userId}": {
             "get": {
                 "description": "",
-                "operationId": "get_2",
+                "operationId": "getUser",
                 "parameters": [
                     {
                         "in": "path",
@@ -3991,7 +4035,7 @@
             },
             "put": {
                 "description": "",
-                "operationId": "update_1",
+                "operationId": "updateUser",
                 "parameters": [
                     {
                         "in": "body",
@@ -4038,22 +4082,19 @@
     "swagger": "2.0",
     "tags": [
         {
-            "name": "options"
-        },
-        {
             "name": "cloud services"
         },
         {
-            "name": "users"
-        },
-        {
-            "name": "apikeys"
+            "name": "options"
         },
         {
             "name": "accounts"
         },
         {
             "name": "account members"
+        },
+        {
+            "name": "apikeys"
         },
         {
             "name": "billing"
@@ -4074,13 +4115,16 @@
             "name": "networks"
         },
         {
+            "name": "supported connections"
+        },
+        {
             "name": "cloud regions"
         },
         {
             "name": "locations"
         },
         {
-            "name": "supported connections"
+            "name": "users"
         }
     ]
 }

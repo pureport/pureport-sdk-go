@@ -4,12 +4,12 @@ All URIs are relative to *http://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Get1**](CloudServicesApi.md#Get1) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
+[**GetCloudService**](CloudServicesApi.md#GetCloudService) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
 [**GetCloudServices**](CloudServicesApi.md#GetCloudServices) | **Get** /cloudServices | List cloud services
 
 
-# **Get1**
-> CloudService Get1(ctx, cloudServiceId)
+# **GetCloudService**
+> CloudService GetCloudService(ctx, cloudServiceId)
 Get cloud service details
 
 

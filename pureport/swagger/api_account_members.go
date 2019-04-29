@@ -120,7 +120,7 @@ AccountMembersApiService Delete account member
 
 
 */
-func (a *AccountMembersApiService) Delete3(ctx context.Context, userId string, accountId string) (*http.Response, error) {
+func (a *AccountMembersApiService) DeleteAccountMember(ctx context.Context, userId string, accountId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -285,7 +285,7 @@ AccountMembersApiService Get account member
 
 @return AccountMember
 */
-func (a *AccountMembersApiService) Get4(ctx context.Context, userId string, accountId string) (AccountMember, *http.Response, error) {
+func (a *AccountMembersApiService) GetAccountMember(ctx context.Context, userId string, accountId string) (AccountMember, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -378,17 +378,17 @@ AccountMembersApiService Update account member
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param userId
  * @param accountId
- * @param optional nil or *Update3Opts - Optional Parameters:
+ * @param optional nil or *UpdateAccountMemberOpts - Optional Parameters:
      * @param "Body" (optional.Interface of AccountMember) -
 
 @return AccountMember
 */
 
-type Update3Opts struct {
+type UpdateAccountMemberOpts struct {
 	Body optional.Interface
 }
 
-func (a *AccountMembersApiService) Update3(ctx context.Context, userId string, accountId string, localVarOptionals *Update3Opts) (AccountMember, *http.Response, error) {
+func (a *AccountMembersApiService) UpdateAccountMember(ctx context.Context, userId string, accountId string, localVarOptionals *UpdateAccountMemberOpts) (AccountMember, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}

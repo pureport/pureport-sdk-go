@@ -5,11 +5,11 @@ All URIs are relative to *http://api.pureport.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AcceptAllInvites**](AccountInvitationsApi.md#AcceptAllInvites) | **Post** /invites | Accept all invites for the current user
-[**Delete7**](AccountInvitationsApi.md#Delete7) | **Delete** /accounts/{accountId}/invites/{inviteId} | Delete account invite
+[**DeleteAccountInvite**](AccountInvitationsApi.md#DeleteAccountInvite) | **Delete** /accounts/{accountId}/invites/{inviteId} | Delete account invite
 [**FindAccountInvites**](AccountInvitationsApi.md#FindAccountInvites) | **Get** /accounts/{accountId}/invites | List account invites
-[**Get9**](AccountInvitationsApi.md#Get9) | **Get** /accounts/{accountId}/invites/{inviteId} | Get account invite
+[**GetAccountInvite**](AccountInvitationsApi.md#GetAccountInvite) | **Get** /accounts/{accountId}/invites/{inviteId} | Get account invite
 [**InviteAccount**](AccountInvitationsApi.md#InviteAccount) | **Post** /accounts/{accountId}/invites | Invite account member
-[**Update7**](AccountInvitationsApi.md#Update7) | **Put** /accounts/{accountId}/invites/{inviteId} | Update account invite
+[**UpdateAccountInvite**](AccountInvitationsApi.md#UpdateAccountInvite) | **Put** /accounts/{accountId}/invites/{inviteId} | Update account invite
 
 
 # **AcceptAllInvites**
@@ -36,8 +36,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Delete7**
-> Delete7(ctx, inviteId, accountId)
+# **DeleteAccountInvite**
+> DeleteAccountInvite(ctx, inviteId, accountId)
 Delete account invite
 
 
@@ -93,8 +93,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Get9**
-> AccountInvite Get9(ctx, inviteId, accountId)
+# **GetAccountInvite**
+> AccountInvite GetAccountInvite(ctx, inviteId, accountId)
 Get account invite
 
 
@@ -159,8 +159,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Update7**
-> AccountInvite Update7(ctx, inviteId, accountId, optional)
+# **UpdateAccountInvite**
+> AccountInvite UpdateAccountInvite(ctx, inviteId, accountId, optional)
 Update account invite
 
 
@@ -172,10 +172,10 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **inviteId** | **string**|  | 
   **accountId** | **string**|  | 
- **optional** | ***Update7Opts** | optional parameters | nil if no parameters
+ **optional** | ***UpdateAccountInviteOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a Update7Opts struct
+Optional parameters are passed through a pointer to a UpdateAccountInviteOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------

@@ -125,7 +125,7 @@ LocationsApiService Get location details
 
 @return Location
 */
-func (a *LocationsApiService) Get12(ctx context.Context, locationId string) (Location, *http.Response, error) {
+func (a *LocationsApiService) GetLocation(ctx context.Context, locationId string) (Location, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}

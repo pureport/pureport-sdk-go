@@ -6,6 +6,7 @@ import (
 	"github.com/pureport/pureport-sdk-go/pureport"
 	ppLog "github.com/pureport/pureport-sdk-go/pureport/logging"
 	"github.com/pureport/pureport-sdk-go/pureport/session"
+	"github.com/pureport/pureport-sdk-go/pureport/swagger"
 )
 
 var log = logging.MustGetLogger("main_logger")
@@ -19,7 +20,9 @@ func main() {
 
 	s := session.NewSession(cfg)
 	ctx := s.GetSessionContext()
-	sp, r, err := s.Client.SupportedConnectionsApi.GetSupportedConnections(ctx)
+
+	opts := &swagger.FindAllAccountsOpts{}
+	sp, r, err := s.Client.AccountsApi.FindAllAccounts(ctx, opts)
 
 	if err != nil {
 		log.Info(r)

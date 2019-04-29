@@ -17,69 +17,69 @@ import "./swagger"
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://https://api.pureport.com*
+All URIs are relative to *http://api.pureport.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountConsentApi* | [**Consent**](docs/AccountConsentApi.md#consent) | **Post** /accounts/{accountId}/consent | Consent to Master Service Agreement and Acceptable Use Policy for this account
 *AccountConsentApi* | [**HasConsent**](docs/AccountConsentApi.md#hasconsent) | **Get** /accounts/{accountId}/consent | Account consent to Master Service Agreement and Acceptable Use Policy
 *AccountInvitationsApi* | [**AcceptAllInvites**](docs/AccountInvitationsApi.md#acceptallinvites) | **Post** /invites | Accept all invites for the current user
-*AccountInvitationsApi* | [**Delete7**](docs/AccountInvitationsApi.md#delete7) | **Delete** /accounts/{accountId}/invites/{inviteId} | Delete account invite
+*AccountInvitationsApi* | [**DeleteAccountInvite**](docs/AccountInvitationsApi.md#deleteaccountinvite) | **Delete** /accounts/{accountId}/invites/{inviteId} | Delete account invite
 *AccountInvitationsApi* | [**FindAccountInvites**](docs/AccountInvitationsApi.md#findaccountinvites) | **Get** /accounts/{accountId}/invites | List account invites
-*AccountInvitationsApi* | [**Get9**](docs/AccountInvitationsApi.md#get9) | **Get** /accounts/{accountId}/invites/{inviteId} | Get account invite
+*AccountInvitationsApi* | [**GetAccountInvite**](docs/AccountInvitationsApi.md#getaccountinvite) | **Get** /accounts/{accountId}/invites/{inviteId} | Get account invite
 *AccountInvitationsApi* | [**InviteAccount**](docs/AccountInvitationsApi.md#inviteaccount) | **Post** /accounts/{accountId}/invites | Invite account member
-*AccountInvitationsApi* | [**Update7**](docs/AccountInvitationsApi.md#update7) | **Put** /accounts/{accountId}/invites/{inviteId} | Update account invite
+*AccountInvitationsApi* | [**UpdateAccountInvite**](docs/AccountInvitationsApi.md#updateaccountinvite) | **Put** /accounts/{accountId}/invites/{inviteId} | Update account invite
 *AccountMembersApi* | [**AddAccountMember**](docs/AccountMembersApi.md#addaccountmember) | **Post** /accounts/{accountId}/members | Add account member
-*AccountMembersApi* | [**Delete3**](docs/AccountMembersApi.md#delete3) | **Delete** /accounts/{accountId}/members/{userId} | Delete account member
+*AccountMembersApi* | [**DeleteAccountMember**](docs/AccountMembersApi.md#deleteaccountmember) | **Delete** /accounts/{accountId}/members/{userId} | Delete account member
 *AccountMembersApi* | [**FindAccountMembers**](docs/AccountMembersApi.md#findaccountmembers) | **Get** /accounts/{accountId}/members | List account members
-*AccountMembersApi* | [**Get4**](docs/AccountMembersApi.md#get4) | **Get** /accounts/{accountId}/members/{userId} | Get account member
-*AccountMembersApi* | [**Update3**](docs/AccountMembersApi.md#update3) | **Put** /accounts/{accountId}/members/{userId} | Update account member
+*AccountMembersApi* | [**GetAccountMember**](docs/AccountMembersApi.md#getaccountmember) | **Get** /accounts/{accountId}/members/{userId} | Get account member
+*AccountMembersApi* | [**UpdateAccountMember**](docs/AccountMembersApi.md#updateaccountmember) | **Put** /accounts/{accountId}/members/{userId} | Update account member
 *AccountRolesApi* | [**CreateRole**](docs/AccountRolesApi.md#createrole) | **Post** /accounts/{accountId}/roles | Add account role
-*AccountRolesApi* | [**Delete5**](docs/AccountRolesApi.md#delete5) | **Delete** /accounts/{accountId}/roles/{roleId} | Delete role
+*AccountRolesApi* | [**DeleteRole**](docs/AccountRolesApi.md#deleterole) | **Delete** /accounts/{accountId}/roles/{roleId} | Delete role
 *AccountRolesApi* | [**FindAllRoles**](docs/AccountRolesApi.md#findallroles) | **Get** /accounts/{accountId}/roles | List account roles
-*AccountRolesApi* | [**Get6**](docs/AccountRolesApi.md#get6) | **Get** /accounts/{accountId}/roles/{roleId} | Get role details
-*AccountRolesApi* | [**Update5**](docs/AccountRolesApi.md#update5) | **Put** /accounts/{accountId}/roles/{roleId} | Update role
+*AccountRolesApi* | [**GetRole**](docs/AccountRolesApi.md#getrole) | **Get** /accounts/{accountId}/roles/{roleId} | Get role details
+*AccountRolesApi* | [**UpdateRole**](docs/AccountRolesApi.md#updaterole) | **Put** /accounts/{accountId}/roles/{roleId} | Update role
 *AccountsApi* | [**CreateAccount**](docs/AccountsApi.md#createaccount) | **Post** /accounts | Add new account
-*AccountsApi* | [**Delete2**](docs/AccountsApi.md#delete2) | **Delete** /accounts/{accountId} | Delete account
+*AccountsApi* | [**DeleteAccount**](docs/AccountsApi.md#deleteaccount) | **Delete** /accounts/{accountId} | Delete account
 *AccountsApi* | [**FindAllAccounts**](docs/AccountsApi.md#findallaccounts) | **Get** /accounts | List accounts
-*AccountsApi* | [**Get3**](docs/AccountsApi.md#get3) | **Get** /accounts/{accountId} | Get account details
+*AccountsApi* | [**GetAccount**](docs/AccountsApi.md#getaccount) | **Get** /accounts/{accountId} | Get account details
 *AccountsApi* | [**GetAccountPermissions**](docs/AccountsApi.md#getaccountpermissions) | **Get** /accounts/{accountId}/permissions | Get permissions for account
-*AccountsApi* | [**Update2**](docs/AccountsApi.md#update2) | **Put** /accounts/{accountId} | Update account
+*AccountsApi* | [**UpdateAccount**](docs/AccountsApi.md#updateaccount) | **Put** /accounts/{accountId} | Update account
 *ApikeysApi* | [**CreateApiKey**](docs/ApikeysApi.md#createapikey) | **Post** /accounts/{accountId}/apikeys | Create a new API key
-*ApikeysApi* | [**Delete4**](docs/ApikeysApi.md#delete4) | **Delete** /accounts/{accountId}/apikeys/{key} | Delete API Key
+*ApikeysApi* | [**DeleteApiKey**](docs/ApikeysApi.md#deleteapikey) | **Delete** /accounts/{accountId}/apikeys/{key} | Delete API Key
 *ApikeysApi* | [**FindApiKeys**](docs/ApikeysApi.md#findapikeys) | **Get** /accounts/{accountId}/apikeys | List API keys for an account
-*ApikeysApi* | [**Get5**](docs/ApikeysApi.md#get5) | **Get** /accounts/{accountId}/apikeys/{key} | Get API Key details
+*ApikeysApi* | [**GetApiKey**](docs/ApikeysApi.md#getapikey) | **Get** /accounts/{accountId}/apikeys/{key} | Get API Key details
 *ApikeysApi* | [**Login**](docs/ApikeysApi.md#login) | **Post** /login | Login with an API Key
-*ApikeysApi* | [**Update4**](docs/ApikeysApi.md#update4) | **Put** /accounts/{accountId}/apikeys/{key} | Update API Key
+*ApikeysApi* | [**UpdateApiKey**](docs/ApikeysApi.md#updateapikey) | **Put** /accounts/{accountId}/apikeys/{key} | Update API Key
 *BillingApi* | [**AddPaymentInformation**](docs/BillingApi.md#addpaymentinformation) | **Post** /accounts/{accountId}/billing | Add payment method
 *BillingApi* | [**DeletePaymentInformation**](docs/BillingApi.md#deletepaymentinformation) | **Delete** /accounts/{accountId}/billing | Delete payment method
 *BillingApi* | [**FindBillingForAccount**](docs/BillingApi.md#findbillingforaccount) | **Get** /accounts/{accountId}/billing | Payment method for account
 *BillingApi* | [**IsBillingConfiguredForAccount**](docs/BillingApi.md#isbillingconfiguredforaccount) | **Get** /accounts/{accountId}/billing/configured | Payment method configured for account
 *BillingApi* | [**UpdatePaymentInformation**](docs/BillingApi.md#updatepaymentinformation) | **Put** /accounts/{accountId}/billing | Update payment method
-*CloudRegionsApi* | [**Get10**](docs/CloudRegionsApi.md#get10) | **Get** /cloudRegions/{cloudRegionId} | Get cloud region details
+*CloudRegionsApi* | [**GetCloudRegion**](docs/CloudRegionsApi.md#getcloudregion) | **Get** /cloudRegions/{cloudRegionId} | Get cloud region details
 *CloudRegionsApi* | [**GetCloudRegions**](docs/CloudRegionsApi.md#getcloudregions) | **Get** /cloudRegions | List cloud regions
-*CloudServicesApi* | [**Get1**](docs/CloudServicesApi.md#get1) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
+*CloudServicesApi* | [**GetCloudService**](docs/CloudServicesApi.md#getcloudservice) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
 *CloudServicesApi* | [**GetCloudServices**](docs/CloudServicesApi.md#getcloudservices) | **Get** /cloudServices | List cloud services
 *ConnectionsApi* | [**AddConnection**](docs/ConnectionsApi.md#addconnection) | **Post** /networks/{networkId}/connections | Add new connection
-*ConnectionsApi* | [**Delete9**](docs/ConnectionsApi.md#delete9) | **Delete** /connections/{connectionId} | Delete connection
+*ConnectionsApi* | [**DeleteConnection**](docs/ConnectionsApi.md#deleteconnection) | **Delete** /connections/{connectionId} | Delete connection
 *ConnectionsApi* | [**FindConnections**](docs/ConnectionsApi.md#findconnections) | **Get** /accounts/{accountId}/connections | List connections across all networks for the account
-*ConnectionsApi* | [**Get11**](docs/ConnectionsApi.md#get11) | **Get** /connections/{connectionId} | Get connection details
+*ConnectionsApi* | [**GetConnection**](docs/ConnectionsApi.md#getconnection) | **Get** /connections/{connectionId} | Get connection details
 *ConnectionsApi* | [**GetConnections**](docs/ConnectionsApi.md#getconnections) | **Get** /networks/{networkId}/connections | List network connections
-*ConnectionsApi* | [**Update9**](docs/ConnectionsApi.md#update9) | **Put** /connections/{connectionId} | Update connection
+*ConnectionsApi* | [**UpdateConnection**](docs/ConnectionsApi.md#updateconnection) | **Put** /connections/{connectionId} | Update connection
 *LocationsApi* | [**FindLocations**](docs/LocationsApi.md#findlocations) | **Get** /locations | List locations
-*LocationsApi* | [**Get12**](docs/LocationsApi.md#get12) | **Get** /locations/{locationId} | Get location details
+*LocationsApi* | [**GetLocation**](docs/LocationsApi.md#getlocation) | **Get** /locations/{locationId} | Get location details
 *NetworksApi* | [**AddConnection**](docs/NetworksApi.md#addconnection) | **Post** /networks/{networkId}/connections | Add new connection
 *NetworksApi* | [**AddNetwork**](docs/NetworksApi.md#addnetwork) | **Post** /accounts/{accountId}/networks | Add new network
-*NetworksApi* | [**Delete11**](docs/NetworksApi.md#delete11) | **Delete** /networks/{networkId} | Delete network
+*NetworksApi* | [**DeleteNetwork**](docs/NetworksApi.md#deletenetwork) | **Delete** /networks/{networkId} | Delete network
 *NetworksApi* | [**FindNetworks**](docs/NetworksApi.md#findnetworks) | **Get** /accounts/{accountId}/networks | List networks
-*NetworksApi* | [**Get13**](docs/NetworksApi.md#get13) | **Get** /networks/{networkId} | Get network details
 *NetworksApi* | [**GetConnections**](docs/NetworksApi.md#getconnections) | **Get** /networks/{networkId}/connections | List network connections
-*NetworksApi* | [**Update11**](docs/NetworksApi.md#update11) | **Put** /networks/{networkId} | Update network
+*NetworksApi* | [**GetNetwork**](docs/NetworksApi.md#getnetwork) | **Get** /networks/{networkId} | Get network details
+*NetworksApi* | [**UpdateNetwork**](docs/NetworksApi.md#updatenetwork) | **Put** /networks/{networkId} | Update network
 *OptionsApi* | [**GetOptions**](docs/OptionsApi.md#getoptions) | **Get** /options | Get available options
-*SupportedConnectionsApi* | [**Get17**](docs/SupportedConnectionsApi.md#get17) | **Get** /supportedConnections/{supportedConnectionId} | Get supported connection details
-*SupportedConnectionsApi* | [**GetSupportedConnections**](docs/SupportedConnectionsApi.md#getsupportedconnections) | **Get** /supportedConnections | List supported connections
-*UsersApi* | [**Get2**](docs/UsersApi.md#get2) | **Get** /users/{userId} | Get user details
-*UsersApi* | [**Update1**](docs/UsersApi.md#update1) | **Put** /users/{userId} | Update user
+*SupportedConnectionsApi* | [**GetSupportedConnection**](docs/SupportedConnectionsApi.md#getsupportedconnection) | **Get** /supportedConnections/{supportedConnectionId} | Get supported connection details
+*SupportedConnectionsApi* | [**GetSupportedConnections**](docs/SupportedConnectionsApi.md#getsupportedconnections) | **Get** /accounts/{accountId}/supportedConnections | List supported connections
+*UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Get user details
+*UsersApi* | [**UpdateUser**](docs/UsersApi.md#updateuser) | **Put** /users/{userId} | Update user
 
 
 ## Documentation For Models
@@ -123,6 +123,7 @@ Class | Method | HTTP request | Description
  - [ResourceLimit](docs/ResourceLimit.md)
  - [Role](docs/Role.md)
  - [SupportedConnection](docs/SupportedConnection.md)
+ - [SupportedConnectionGroup](docs/SupportedConnectionGroup.md)
  - [TrafficSelectorMapping](docs/TrafficSelectorMapping.md)
  - [User](docs/User.md)
  - [VpnAuthConfig](docs/VpnAuthConfig.md)

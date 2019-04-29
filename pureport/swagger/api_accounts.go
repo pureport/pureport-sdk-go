@@ -117,7 +117,7 @@ AccountsApiService Delete account
 
 
 */
-func (a *AccountsApiService) Delete2(ctx context.Context, accountId string) (*http.Response, error) {
+func (a *AccountsApiService) DeleteAccount(ctx context.Context, accountId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -288,7 +288,7 @@ AccountsApiService Get account details
 
 @return Account
 */
-func (a *AccountsApiService) Get3(ctx context.Context, accountId string) (Account, *http.Response, error) {
+func (a *AccountsApiService) GetAccount(ctx context.Context, accountId string) (Account, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -473,17 +473,17 @@ AccountsApiService Update account
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accountId
- * @param optional nil or *Update2Opts - Optional Parameters:
+ * @param optional nil or *UpdateAccountOpts - Optional Parameters:
      * @param "Body" (optional.Interface of Account) -
 
 @return Account
 */
 
-type Update2Opts struct {
+type UpdateAccountOpts struct {
 	Body optional.Interface
 }
 
-func (a *AccountsApiService) Update2(ctx context.Context, accountId string, localVarOptionals *Update2Opts) (Account, *http.Response, error) {
+func (a *AccountsApiService) UpdateAccount(ctx context.Context, accountId string, localVarOptionals *UpdateAccountOpts) (Account, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}

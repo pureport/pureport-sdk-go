@@ -10,9 +10,10 @@
 package swagger
 
 type Account struct {
-	Description string `json:"description,omitempty"`
-	Href        string `json:"href,omitempty"`
-	Id          string `json:"id,omitempty"`
-	Name        string `json:"name"`
-	Parent      *Link  `json:"parent,omitempty"`
+	Description               string `json:"description,omitempty"`
+	Href                      string `json:"href,omitempty"`
+	Id                        string `json:"id,omitempty"`
+	Name                      string `json:"name"`
+	Parent                    *Link  `json:"parent,omitempty"`
+	SupportedConnectionGroups []Link `json:"supportedConnectionGroups,omitempty"`
 }

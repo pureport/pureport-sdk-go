@@ -4,12 +4,12 @@ All URIs are relative to *http://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Get17**](SupportedConnectionsApi.md#Get17) | **Get** /supportedConnections/{supportedConnectionId} | Get supported connection details
-[**GetSupportedConnections**](SupportedConnectionsApi.md#GetSupportedConnections) | **Get** /supportedConnections | List supported connections
+[**GetSupportedConnection**](SupportedConnectionsApi.md#GetSupportedConnection) | **Get** /supportedConnections/{supportedConnectionId} | Get supported connection details
+[**GetSupportedConnections**](SupportedConnectionsApi.md#GetSupportedConnections) | **Get** /accounts/{accountId}/supportedConnections | List supported connections
 
 
-# **Get17**
-> SupportedConnection Get17(ctx, supportedConnectionId)
+# **GetSupportedConnection**
+> SupportedConnection GetSupportedConnection(ctx, supportedConnectionId)
 Get supported connection details
 
 
@@ -37,13 +37,17 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetSupportedConnections**
-> []SupportedConnection GetSupportedConnections(ctx, )
+> []SupportedConnection GetSupportedConnections(ctx, accountId)
 List supported connections
 
 
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **accountId** | **string**|  | 
 
 ### Return type
 

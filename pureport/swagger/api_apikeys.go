@@ -120,7 +120,7 @@ ApikeysApiService Delete API Key
 
 
 */
-func (a *ApikeysApiService) Delete4(ctx context.Context, key string, accountId string) (*http.Response, error) {
+func (a *ApikeysApiService) DeleteApiKey(ctx context.Context, key string, accountId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -285,7 +285,7 @@ ApikeysApiService Get API Key details
 
 @return ApiKey
 */
-func (a *ApikeysApiService) Get5(ctx context.Context, key string, accountId string) (ApiKey, *http.Response, error) {
+func (a *ApikeysApiService) GetApiKey(ctx context.Context, key string, accountId string) (ApiKey, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -461,17 +461,17 @@ ApikeysApiService Update API Key
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param key
  * @param accountId
- * @param optional nil or *Update4Opts - Optional Parameters:
+ * @param optional nil or *UpdateApiKeyOpts - Optional Parameters:
      * @param "Body" (optional.Interface of ApiKey) -
 
 @return ApiKey
 */
 
-type Update4Opts struct {
+type UpdateApiKeyOpts struct {
 	Body optional.Interface
 }
 
-func (a *ApikeysApiService) Update4(ctx context.Context, key string, accountId string, localVarOptionals *Update4Opts) (ApiKey, *http.Response, error) {
+func (a *ApikeysApiService) UpdateApiKey(ctx context.Context, key string, accountId string, localVarOptionals *UpdateApiKeyOpts) (ApiKey, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}

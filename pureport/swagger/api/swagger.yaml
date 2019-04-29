@@ -7,21 +7,21 @@ info:
 host: "api.pureport.com"
 basePath: "/"
 tags:
-- name: "options"
 - name: "cloud services"
-- name: "users"
-- name: "apikeys"
+- name: "options"
 - name: "accounts"
 - name: "account members"
+- name: "apikeys"
 - name: "billing"
 - name: "account consent"
 - name: "account roles"
 - name: "connections"
 - name: "account invitations"
 - name: "networks"
+- name: "supported connections"
 - name: "cloud regions"
 - name: "locations"
-- name: "supported connections"
+- name: "users"
 schemes:
 - "http"
 paths:
@@ -74,7 +74,7 @@ paths:
       - "accounts"
       summary: "Get account details"
       description: ""
-      operationId: "get_3"
+      operationId: "getAccount"
       produces:
       - "application/json"
       parameters:
@@ -93,7 +93,7 @@ paths:
       - "accounts"
       summary: "Update account"
       description: ""
-      operationId: "update_2"
+      operationId: "updateAccount"
       consumes:
       - "application/json"
       produces:
@@ -120,7 +120,7 @@ paths:
       - "accounts"
       summary: "Delete account"
       description: ""
-      operationId: "delete_2"
+      operationId: "deleteAccount"
       produces:
       - "application/json"
       parameters:
@@ -185,7 +185,7 @@ paths:
       - "apikeys"
       summary: "Get API Key details"
       description: ""
-      operationId: "get_5"
+      operationId: "getApiKey"
       produces:
       - "application/json"
       parameters:
@@ -209,7 +209,7 @@ paths:
       - "apikeys"
       summary: "Update API Key"
       description: ""
-      operationId: "update_4"
+      operationId: "updateApiKey"
       consumes:
       - "application/json"
       produces:
@@ -241,7 +241,7 @@ paths:
       - "apikeys"
       summary: "Delete API Key"
       description: ""
-      operationId: "delete_4"
+      operationId: "deleteApiKey"
       produces:
       - "application/json"
       parameters:
@@ -489,7 +489,7 @@ paths:
       - "account invitations"
       summary: "Get account invite"
       description: ""
-      operationId: "get_9"
+      operationId: "getAccountInvite"
       produces:
       - "application/json"
       parameters:
@@ -513,7 +513,7 @@ paths:
       - "account invitations"
       summary: "Update account invite"
       description: ""
-      operationId: "update_7"
+      operationId: "updateAccountInvite"
       consumes:
       - "application/json"
       produces:
@@ -551,7 +551,7 @@ paths:
       - "account invitations"
       summary: "Delete account invite"
       description: ""
-      operationId: "delete_7"
+      operationId: "deleteAccountInvite"
       produces:
       - "application/json"
       parameters:
@@ -621,7 +621,7 @@ paths:
       - "account members"
       summary: "Get account member"
       description: ""
-      operationId: "get_4"
+      operationId: "getAccountMember"
       produces:
       - "application/json"
       parameters:
@@ -645,7 +645,7 @@ paths:
       - "account members"
       summary: "Update account member"
       description: ""
-      operationId: "update_3"
+      operationId: "updateAccountMember"
       consumes:
       - "application/json"
       produces:
@@ -677,7 +677,7 @@ paths:
       - "account members"
       summary: "Delete account member"
       description: ""
-      operationId: "delete_3"
+      operationId: "deleteAccountMember"
       produces:
       - "application/json"
       parameters:
@@ -820,7 +820,7 @@ paths:
       - "account roles"
       summary: "Get role details"
       description: ""
-      operationId: "get_6"
+      operationId: "getRole"
       produces:
       - "application/json"
       parameters:
@@ -844,7 +844,7 @@ paths:
       - "account roles"
       summary: "Update role"
       description: ""
-      operationId: "update_5"
+      operationId: "updateRole"
       consumes:
       - "application/json"
       produces:
@@ -876,7 +876,7 @@ paths:
       - "account roles"
       summary: "Delete role"
       description: ""
-      operationId: "delete_5"
+      operationId: "deleteRole"
       produces:
       - "application/json"
       parameters:
@@ -893,6 +893,28 @@ paths:
       responses:
         default:
           description: "successful operation"
+  /accounts/{accountId}/supportedConnections:
+    get:
+      tags:
+      - "supported connections"
+      summary: "List supported connections"
+      description: ""
+      operationId: "getSupportedConnections"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "AccountId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/SupportedConnection"
   /cloudRegions:
     get:
       tags:
@@ -916,7 +938,7 @@ paths:
       - "cloud regions"
       summary: "Get cloud region details"
       description: ""
-      operationId: "get_10"
+      operationId: "getCloudRegion"
       produces:
       - "application/json"
       parameters:
@@ -953,7 +975,7 @@ paths:
       - "cloud services"
       summary: "Get cloud service details"
       description: ""
-      operationId: "get_1"
+      operationId: "getCloudService"
       produces:
       - "application/json"
       parameters:
@@ -973,7 +995,7 @@ paths:
       - "connections"
       summary: "Get connection details"
       description: ""
-      operationId: "get_11"
+      operationId: "getConnection"
       produces:
       - "application/json"
       parameters:
@@ -992,7 +1014,7 @@ paths:
       - "connections"
       summary: "Update connection"
       description: ""
-      operationId: "update_9"
+      operationId: "updateConnection"
       consumes:
       - "application/json"
       produces:
@@ -1019,7 +1041,7 @@ paths:
       - "connections"
       summary: "Delete connection"
       description: ""
-      operationId: "delete_9"
+      operationId: "deleteConnection"
       produces:
       - "application/json"
       parameters:
@@ -1073,7 +1095,7 @@ paths:
       - "locations"
       summary: "Get location details"
       description: ""
-      operationId: "get_12"
+      operationId: "getLocation"
       produces:
       - "application/json"
       parameters:
@@ -1114,7 +1136,7 @@ paths:
       - "networks"
       summary: "Get network details"
       description: ""
-      operationId: "get_13"
+      operationId: "getNetwork"
       produces:
       - "application/json"
       parameters:
@@ -1133,7 +1155,7 @@ paths:
       - "networks"
       summary: "Update network"
       description: ""
-      operationId: "update_11"
+      operationId: "updateNetwork"
       consumes:
       - "application/json"
       produces:
@@ -1160,7 +1182,7 @@ paths:
       - "networks"
       summary: "Delete network"
       description: ""
-      operationId: "delete_11"
+      operationId: "deleteNetwork"
       produces:
       - "application/json"
       parameters:
@@ -1248,30 +1270,13 @@ paths:
               type: "array"
               items:
                 $ref: "#/definitions/Option"
-  /supportedConnections:
-    get:
-      tags:
-      - "supported connections"
-      summary: "List supported connections"
-      description: ""
-      operationId: "getSupportedConnections"
-      produces:
-      - "application/json"
-      parameters: []
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/SupportedConnection"
   /supportedConnections/{supportedConnectionId}:
     get:
       tags:
       - "supported connections"
       summary: "Get supported connection details"
       description: ""
-      operationId: "get_17"
+      operationId: "getSupportedConnection"
       produces:
       - "application/json"
       parameters:
@@ -1291,7 +1296,7 @@ paths:
       - "users"
       summary: "Get user details"
       description: ""
-      operationId: "get_2"
+      operationId: "getUser"
       produces:
       - "application/json"
       parameters:
@@ -1310,7 +1315,7 @@ paths:
       - "users"
       summary: "Update user"
       description: ""
-      operationId: "update_1"
+      operationId: "updateUser"
       produces:
       - "application/json"
       parameters:
@@ -1375,6 +1380,11 @@ definitions:
         maxLength: 64
       parent:
         $ref: "#/definitions/Link"
+      supportedConnectionGroups:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
     example:
       parent:
         href: "href"
@@ -1384,6 +1394,13 @@ definitions:
       description: "description"
       href: "href"
       id: "id"
+      supportedConnectionGroups:
+      - href: "href"
+        id: "id"
+        title: "title"
+      - href: "href"
+        id: "id"
+        title: "title"
   AccountBilling:
     type: "object"
     required:
@@ -2112,6 +2129,7 @@ definitions:
         - "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS"
         - "NO_SUPPORTED_CONNECTION_FOR_CONNECTION"
         - "UNSUPPORTED_RESOURCE_LIMIT"
+        - "MODIFICATION_NOT_ALLOWED"
         - "AWS_CONNECTION_SPEED_IMMUTABLE"
         - "INVALID_VLAN"
         - "INVALID_VLAN_RANGE"
@@ -5367,6 +5385,7 @@ definitions:
         - "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS"
         - "NO_SUPPORTED_CONNECTION_FOR_CONNECTION"
         - "UNSUPPORTED_RESOURCE_LIMIT"
+        - "MODIFICATION_NOT_ALLOWED"
         - "AWS_CONNECTION_SPEED_IMMUTABLE"
         - "INVALID_VLAN"
         - "INVALID_VLAN_RANGE"
@@ -9229,6 +9248,11 @@ definitions:
           $ref: "#/definitions/BillingPlan"
       billingProductId:
         type: "string"
+      groups:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Link"
       highAvailability:
         type: "boolean"
       href:
@@ -9280,6 +9304,13 @@ definitions:
         id: "id"
         billingInterval: "DAY"
       billingProductId: "billingProductId"
+      groups:
+      - href: "href"
+        id: "id"
+        title: "title"
+      - href: "href"
+        id: "id"
+        title: "title"
       location:
         href: "href"
         id: "id"
@@ -9297,6 +9328,19 @@ definitions:
       peeringType: "PUBLIC"
       speed: 0
       highAvailability: true
+  SupportedConnectionGroup:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      href:
+        type: "string"
+      id:
+        type: "string"
+        minLength: 1
+        maxLength: 64
+      name:
+        type: "string"
   TrafficSelectorMapping:
     type: "object"
     required:

@@ -6,11 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddConnection**](NetworksApi.md#AddConnection) | **Post** /networks/{networkId}/connections | Add new connection
 [**AddNetwork**](NetworksApi.md#AddNetwork) | **Post** /accounts/{accountId}/networks | Add new network
-[**Delete11**](NetworksApi.md#Delete11) | **Delete** /networks/{networkId} | Delete network
+[**DeleteNetwork**](NetworksApi.md#DeleteNetwork) | **Delete** /networks/{networkId} | Delete network
 [**FindNetworks**](NetworksApi.md#FindNetworks) | **Get** /accounts/{accountId}/networks | List networks
-[**Get13**](NetworksApi.md#Get13) | **Get** /networks/{networkId} | Get network details
 [**GetConnections**](NetworksApi.md#GetConnections) | **Get** /networks/{networkId}/connections | List network connections
-[**Update11**](NetworksApi.md#Update11) | **Put** /networks/{networkId} | Update network
+[**GetNetwork**](NetworksApi.md#GetNetwork) | **Get** /networks/{networkId} | Get network details
+[**UpdateNetwork**](NetworksApi.md#UpdateNetwork) | **Put** /networks/{networkId} | Update network
 
 
 # **AddConnection**
@@ -87,8 +87,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Delete11**
-> Delete11(ctx, networkId)
+# **DeleteNetwork**
+> DeleteNetwork(ctx, networkId)
 Delete network
 
 
@@ -143,34 +143,6 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Get13**
-> Network Get13(ctx, networkId)
-Get network details
-
-
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **networkId** | **string**|  | 
-
-### Return type
-
-[**Network**](Network.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **GetConnections**
 > []Connection GetConnections(ctx, networkId)
 List network connections
@@ -199,8 +171,36 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Update11**
-> Network Update11(ctx, networkId, optional)
+# **GetNetwork**
+> Network GetNetwork(ctx, networkId)
+Get network details
+
+
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **networkId** | **string**|  | 
+
+### Return type
+
+[**Network**](Network.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **UpdateNetwork**
+> Network UpdateNetwork(ctx, networkId, optional)
 Update network
 
 
@@ -211,10 +211,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **networkId** | **string**|  | 
- **optional** | ***Update11Opts** | optional parameters | nil if no parameters
+ **optional** | ***UpdateNetworkOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a Update11Opts struct
+Optional parameters are passed through a pointer to a UpdateNetworkOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------

@@ -33,7 +33,7 @@ SupportedConnectionsApiService Get supported connection details
 
 @return SupportedConnection
 */
-func (a *SupportedConnectionsApiService) Get17(ctx context.Context, supportedConnectionId string) (SupportedConnection, *http.Response, error) {
+func (a *SupportedConnectionsApiService) GetSupportedConnection(ctx context.Context, supportedConnectionId string) (SupportedConnection, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -123,10 +123,11 @@ func (a *SupportedConnectionsApiService) Get17(ctx context.Context, supportedCon
 SupportedConnectionsApiService List supported connections
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param accountId
 
 @return []SupportedConnection
 */
-func (a *SupportedConnectionsApiService) GetSupportedConnections(ctx context.Context) ([]SupportedConnection, *http.Response, error) {
+func (a *SupportedConnectionsApiService) GetSupportedConnections(ctx context.Context, accountId string) ([]SupportedConnection, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -136,7 +137,8 @@ func (a *SupportedConnectionsApiService) GetSupportedConnections(ctx context.Con
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/supportedConnections"
+	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/supportedConnections"
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", fmt.Sprintf("%v", accountId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

@@ -12,6 +12,7 @@ package swagger
 type SupportedConnection struct {
 	BillingPlans          []BillingPlan `json:"billingPlans,omitempty"`
 	BillingProductId      string        `json:"billingProductId"`
+	Groups                []Link        `json:"groups,omitempty"`
 	HighAvailability      bool          `json:"highAvailability,omitempty"`
 	Href                  string        `json:"href,omitempty"`
 	Id                    string        `json:"id,omitempty"`

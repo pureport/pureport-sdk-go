@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BillingPlans** | [**[]BillingPlan**](BillingPlan.md) |  | [optional] [default to null]
 **BillingProductId** | **string** |  | [default to null]
+**Groups** | [**[]Link**](Link.md) |  | [optional] [default to null]
 **HighAvailability** | **bool** |  | [optional] [default to null]
 **Href** | **string** |  | [optional] [default to null]
 **Id** | **string** |  | [optional] [default to null]

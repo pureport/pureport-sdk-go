@@ -34,7 +34,7 @@ UsersApiService Get user details
 
 @return User
 */
-func (a *UsersApiService) Get2(ctx context.Context, userId string) (User, *http.Response, error) {
+func (a *UsersApiService) GetUser(ctx context.Context, userId string) (User, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -125,17 +125,17 @@ UsersApiService Update user
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param userId
- * @param optional nil or *Update1Opts - Optional Parameters:
- * @param "Body" (optional.Interface of User) -
+ * @param optional nil or *UpdateUserOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of User) -
 
 @return User
 */
 
-type Update1Opts struct {
+type UpdateUserOpts struct {
 	Body optional.Interface
 }
 
-func (a *UsersApiService) Update1(ctx context.Context, userId string, localVarOptionals *Update1Opts) (User, *http.Response, error) {
+func (a *UsersApiService) UpdateUser(ctx context.Context, userId string, localVarOptionals *UpdateUserOpts) (User, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}

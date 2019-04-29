@@ -127,7 +127,7 @@ AccountInvitationsApiService Delete account invite
 
 
 */
-func (a *AccountInvitationsApiService) Delete7(ctx context.Context, inviteId string, accountId string) (*http.Response, error) {
+func (a *AccountInvitationsApiService) DeleteAccountInvite(ctx context.Context, inviteId string, accountId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -292,7 +292,7 @@ AccountInvitationsApiService Get account invite
 
 @return AccountInvite
 */
-func (a *AccountInvitationsApiService) Get9(ctx context.Context, inviteId string, accountId string) (AccountInvite, *http.Response, error) {
+func (a *AccountInvitationsApiService) GetAccountInvite(ctx context.Context, inviteId string, accountId string) (AccountInvite, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -470,19 +470,19 @@ AccountInvitationsApiService Update account invite
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param inviteId
  * @param accountId
- * @param optional nil or *Update7Opts - Optional Parameters:
+ * @param optional nil or *UpdateAccountInviteOpts - Optional Parameters:
      * @param "Reinvite" (optional.Bool) -
      * @param "Body" (optional.Interface of AccountInvite) -
 
 @return AccountInvite
 */
 
-type Update7Opts struct {
+type UpdateAccountInviteOpts struct {
 	Reinvite optional.Bool
 	Body     optional.Interface
 }
 
-func (a *AccountInvitationsApiService) Update7(ctx context.Context, inviteId string, accountId string, localVarOptionals *Update7Opts) (AccountInvite, *http.Response, error) {
+func (a *AccountInvitationsApiService) UpdateAccountInvite(ctx context.Context, inviteId string, accountId string, localVarOptionals *UpdateAccountInviteOpts) (AccountInvite, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}

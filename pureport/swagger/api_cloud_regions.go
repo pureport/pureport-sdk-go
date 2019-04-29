@@ -33,7 +33,7 @@ CloudRegionsApiService Get cloud region details
 
 @return CloudRegion
 */
-func (a *CloudRegionsApiService) Get10(ctx context.Context, cloudRegionId string) (CloudRegion, *http.Response, error) {
+func (a *CloudRegionsApiService) GetCloudRegion(ctx context.Context, cloudRegionId string) (CloudRegion, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}

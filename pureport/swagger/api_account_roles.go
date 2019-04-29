@@ -120,7 +120,7 @@ AccountRolesApiService Delete role
 
 
 */
-func (a *AccountRolesApiService) Delete5(ctx context.Context, roleId string, accountId string) (*http.Response, error) {
+func (a *AccountRolesApiService) DeleteRole(ctx context.Context, roleId string, accountId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -285,7 +285,7 @@ AccountRolesApiService Get role details
 
 @return Role
 */
-func (a *AccountRolesApiService) Get6(ctx context.Context, roleId string, accountId string) (Role, *http.Response, error) {
+func (a *AccountRolesApiService) GetRole(ctx context.Context, roleId string, accountId string) (Role, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -378,17 +378,17 @@ AccountRolesApiService Update role
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param roleId
  * @param accountId
- * @param optional nil or *Update5Opts - Optional Parameters:
+ * @param optional nil or *UpdateRoleOpts - Optional Parameters:
      * @param "Body" (optional.Interface of Role) -
 
 @return Role
 */
 
-type Update5Opts struct {
+type UpdateRoleOpts struct {
 	Body optional.Interface
 }
 
-func (a *AccountRolesApiService) Update5(ctx context.Context, roleId string, accountId string, localVarOptionals *Update5Opts) (Role, *http.Response, error) {
+func (a *AccountRolesApiService) UpdateRole(ctx context.Context, roleId string, accountId string, localVarOptionals *UpdateRoleOpts) (Role, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}

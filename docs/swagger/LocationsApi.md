@@ -5,7 +5,7 @@ All URIs are relative to *http://api.pureport.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**FindLocations**](LocationsApi.md#FindLocations) | **Get** /locations | List locations
-[**Get12**](LocationsApi.md#Get12) | **Get** /locations/{locationId} | Get location details
+[**GetLocation**](LocationsApi.md#GetLocation) | **Get** /locations/{locationId} | Get location details
 
 
 # **FindLocations**
@@ -32,8 +32,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Get12**
-> Location Get12(ctx, locationId)
+# **GetLocation**
+> Location GetLocation(ctx, locationId)
 Get location details
 
 

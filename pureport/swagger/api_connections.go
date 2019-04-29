@@ -40,11 +40,11 @@ ConnectionsApiService Add new connection
 /**
  * Duplicate
  */
-//type AddConnectionOpts struct {
-//	Body optional.Interface
-//}
+// type AddConnectionOpts struct {
+// 	Body optional.Interface
+// }
 
-func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId string, localVarOptionals *AddConnectionOpts) (string, *http.Response, error) {
+func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId string, localVarOptionals *AddConnectionOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -101,24 +101,24 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 			localVarPostBody = body
 
 		default:
-			return "", nil, reportError("body should be valid Connection")
+			return nil, reportError("body should be valid Connection")
 		}
 		// ##################################################
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return "", nil, err
+		return nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return "", localVarHttpResponse, err
+		return localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return "", localVarHttpResponse, err
+		return localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode < 300 {
@@ -127,10 +127,10 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 		var v Connection
 		err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 		if err != nil {
-			return "", localVarHttpResponse, err
+			return localVarHttpResponse, err
 		}
 
-		return v.Id, localVarHttpResponse, nil
+		return localVarHttpResponse, nil
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -139,10 +139,10 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 			error: localVarHttpResponse.Status,
 		}
 
-		return "", localVarHttpResponse, newErr
+		return localVarHttpResponse, newErr
 	}
 
-	return "", localVarHttpResponse, nil
+	return localVarHttpResponse, nil
 }
 
 /*
@@ -153,7 +153,7 @@ ConnectionsApiService Delete connection
 
 @return Connection
 */
-func (a *ConnectionsApiService) Delete9(ctx context.Context, connectionId string) (interface{}, *http.Response, error) {
+func (a *ConnectionsApiService) DeleteConnection(ctx context.Context, connectionId string) (interface{}, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Delete")
 		localVarPostBody    interface{}
@@ -324,7 +324,6 @@ func (a *ConnectionsApiService) FindConnections(ctx context.Context, accountId s
 	}
 
 	if localVarHttpResponse.StatusCode < 300 {
-
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 		if err == nil {
@@ -351,7 +350,7 @@ ConnectionsApiService Get connection details
 
 @return Connection
 */
-func (a *ConnectionsApiService) Get11(ctx context.Context, connectionId string) (interface{}, *http.Response, error) {
+func (a *ConnectionsApiService) GetConnection(ctx context.Context, connectionId string) (interface{}, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
@@ -534,22 +533,6 @@ func (a *ConnectionsApiService) GetConnections(ctx context.Context, networkId st
 			error: localVarHttpResponse.Status,
 		}
 
-		if localVarHttpResponse.StatusCode == 200 {
-			localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-			if err != nil {
-				return localVarReturnValue, localVarHttpResponse, err
-			}
-
-			var v []Connection
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
@@ -561,17 +544,17 @@ ConnectionsApiService Update connection
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param connectionId
- * @param optional nil or *Update9Opts - Optional Parameters:
+ * @param optional nil or *UpdateConnectionOpts - Optional Parameters:
      * @param "Body" (optional.Interface of Connection) -
 
 @return Connection
 */
 
-type Update9Opts struct {
+type UpdateConnectionOpts struct {
 	Body optional.Interface
 }
 
-func (a *ConnectionsApiService) Update9(ctx context.Context, connectionId string, localVarOptionals *Update9Opts) (interface{}, *http.Response, error) {
+func (a *ConnectionsApiService) UpdateConnection(ctx context.Context, connectionId string, localVarOptionals *UpdateConnectionOpts) (interface{}, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}

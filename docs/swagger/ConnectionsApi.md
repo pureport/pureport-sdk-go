@@ -5,11 +5,11 @@ All URIs are relative to *http://api.pureport.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddConnection**](ConnectionsApi.md#AddConnection) | **Post** /networks/{networkId}/connections | Add new connection
-[**Delete9**](ConnectionsApi.md#Delete9) | **Delete** /connections/{connectionId} | Delete connection
+[**DeleteConnection**](ConnectionsApi.md#DeleteConnection) | **Delete** /connections/{connectionId} | Delete connection
 [**FindConnections**](ConnectionsApi.md#FindConnections) | **Get** /accounts/{accountId}/connections | List connections across all networks for the account
-[**Get11**](ConnectionsApi.md#Get11) | **Get** /connections/{connectionId} | Get connection details
+[**GetConnection**](ConnectionsApi.md#GetConnection) | **Get** /connections/{connectionId} | Get connection details
 [**GetConnections**](ConnectionsApi.md#GetConnections) | **Get** /networks/{networkId}/connections | List network connections
-[**Update9**](ConnectionsApi.md#Update9) | **Put** /connections/{connectionId} | Update connection
+[**UpdateConnection**](ConnectionsApi.md#UpdateConnection) | **Put** /connections/{connectionId} | Update connection
 
 
 # **AddConnection**
@@ -49,8 +49,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Delete9**
-> Connection Delete9(ctx, connectionId)
+# **DeleteConnection**
+> Connection DeleteConnection(ctx, connectionId)
 Delete connection
 
 
@@ -105,8 +105,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Get11**
-> Connection Get11(ctx, connectionId)
+# **GetConnection**
+> Connection GetConnection(ctx, connectionId)
 Get connection details
 
 
@@ -161,8 +161,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **Update9**
-> Connection Update9(ctx, connectionId, optional)
+# **UpdateConnection**
+> Connection UpdateConnection(ctx, connectionId, optional)
 Update connection
 
 
@@ -173,10 +173,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **connectionId** | **string**|  | 
- **optional** | ***Update9Opts** | optional parameters | nil if no parameters
+ **optional** | ***UpdateConnectionOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a Update9Opts struct
+Optional parameters are passed through a pointer to a UpdateConnectionOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
