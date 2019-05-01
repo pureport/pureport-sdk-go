@@ -1,5 +1,6 @@
 LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNORESWAGGER='pureport/swagger/.+\.go'
+LINTIGNOREENCRYPTION='pureport/encryption/.+\.go'
 
 # Public SDK Core packages
 SDK_CORE_PKGS=./pureport/...
@@ -9,7 +10,8 @@ SDK_COMPA_PKGS=${SDK_CORE_PKGS}
 SDK_EXAMPLES_PKGS=./example/...
 SDK_TESTING_PKGS=./testing/...
 SDK_MODELS_PKGS=./models/...
-SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_TESTING_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS}
+SDK_CLIENT_PKGS=./pureport/...
+SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_TESTING_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS} ${SDK_CLIENT_PKGS}
 
 all: verify build
 
@@ -32,6 +34,10 @@ gen-swagger:
 	mv pureport/swagger/docs/* docs/swagger/
 	rmdir pureport/swagger/docs
 
+gen-strings:
+	@echo "Generating strings files for enums"
+	go generate ${SDK_CLIENT_PKGS}
+
 cleanup-models:
 	@echo "Cleaning up stale model versions"
 	git clean -xdf ./pureport/swagger
@@ -39,7 +45,7 @@ cleanup-models:
 # --------------------------------------------------
 #  Unit/CI Testing
 # --------------------------------------------------
-unit: verify
+unit: gen-strings verify
 	@echo "go test SDK packages"
 	GO_EXTLINK_ENABLED=0 CGO_ENABLED=0 go test -v --ldflags '-extldflags "-static"' ${SDK_ALL_PKGS}
 
@@ -76,7 +82,7 @@ verify: lint vet
 lint:
 	@echo "go lint SDK and vendor packages"
 	@lint=`golint ./...`; \
-	dolint=`echo "$$lint" | grep -E -v -e ${LINTIGNOREDEPS} -e ${LINTIGNORESWAGGER}`; \
+	dolint=`echo "$$lint" | grep -E -v -e ${LINTIGNOREDEPS} -e ${LINTIGNORESWAGGER} -e ${LINTIGNOREENCRYPTION}`; \
 	echo "$$dolint"; \
 	if [ "$$dolint" != "" ]; then exit 1; fi
 
