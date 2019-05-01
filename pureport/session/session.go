@@ -58,7 +58,7 @@ func (s *Session) GetSessionContext() context.Context {
 
 	value, err := s.Credentials.Get()
 	if err != nil {
-		log.Fatalf("Retrieving access credentials failed: %s", err)
+		log.Warning("Error reading credentials file: %s", err)
 	}
 
 	return context.WithValue(context.Background(), client.ContextAccessToken, value.SessionToken)
