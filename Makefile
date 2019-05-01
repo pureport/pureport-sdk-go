@@ -29,10 +29,10 @@ generate: cleanup-models gen-swagger
 gen-swagger:
 	@echo "Generating Client for swagger definition"
 	go generate ./models/swagger
-	rm docs/swagger/*
-	mv pureport/swagger/README.md docs/swagger/
-	mv pureport/swagger/docs/* docs/swagger/
-	rmdir pureport/swagger/docs
+	rm docs/client/*
+	mv pureport/client/README.md docs/client/
+	mv pureport/client/docs/* docs/client/
+	rmdir pureport/client/docs
 
 gen-strings:
 	@echo "Generating strings files for enums"
