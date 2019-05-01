@@ -45,7 +45,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 
 	if err := vip.ReadInConfig(); err != nil {
-		log.Warning("Error reading configuration file: %s", err)
+		log.Warningf("Error reading configuration file: %s", err)
 	}
 
 	endpoint := vip.GetString(endpointEnvStr)

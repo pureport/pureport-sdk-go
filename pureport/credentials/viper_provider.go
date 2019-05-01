@@ -2,6 +2,8 @@ package credentials
 
 import (
 	"fmt"
+
+	"github.com/op/go-logging"
 	"github.com/spf13/viper"
 )
 
@@ -16,6 +18,7 @@ const (
 
 var (
 	vip *viper.Viper
+	log = logging.MustGetLogger("main_logger")
 )
 
 // ViperProvider is a credentials provider using Viper as the configuration source.
@@ -62,7 +65,7 @@ func (p *ViperProvider) Retrieve() (Value, error) {
 	p.retrieved = false
 
 	if err := vip.ReadInConfig(); err != nil {
-		return Value{ProviderName: ViperProviderName}, fmt.Errorf("Error reading in configuration file: %s", err)
+		log.Warningf("Error reading in configuration file: %s", err)
 	}
 
 	// Check environment first
