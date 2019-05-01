@@ -1,5 +1,5 @@
 LINTIGNOREDEPS='vendor/.+\.go'
-LINTIGNORESWAGGER='pureport/swagger/.+\.go'
+LINTIGNORESWAGGER='pureport/client/.+\.go'
 LINTIGNOREENCRYPTION='pureport/encryption/.+\.go'
 
 # Public SDK Core packages

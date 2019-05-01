@@ -6,9 +6,9 @@ import (
 
 	"github.com/op/go-logging"
 	"github.com/pureport/pureport-sdk-go/pureport"
+	"github.com/pureport/pureport-sdk-go/pureport/client"
 	"github.com/pureport/pureport-sdk-go/pureport/credentials"
 	"github.com/pureport/pureport-sdk-go/pureport/credentials/endpoint"
-	"github.com/pureport/pureport-sdk-go/pureport/swagger"
 )
 
 var log = logging.MustGetLogger("main_logger")
@@ -18,11 +18,11 @@ type Session struct {
 	*credentials.Credentials
 	*pureport.Configuration
 
-	Client *swagger.APIClient
+	Client *client.APIClient
 }
 
-func createClient(cfg *pureport.Configuration) *swagger.APIClient {
-	c := swagger.NewConfiguration()
+func createClient(cfg *pureport.Configuration) *client.APIClient {
+	c := client.NewConfiguration()
 	c.BasePath = cfg.EndPoint
 	//c.AddDefaultHeader()
 
@@ -32,7 +32,7 @@ func createClient(cfg *pureport.Configuration) *swagger.APIClient {
 		c.Host = hostname
 	}
 
-	return swagger.NewAPIClient(c)
+	return client.NewAPIClient(c)
 }
 
 func createCredentials(cfg *pureport.Configuration) *credentials.Credentials {
@@ -61,5 +61,5 @@ func (s *Session) GetSessionContext() context.Context {
 		log.Fatalf("Retrieving access credentials failed: %s", err)
 	}
 
-	return context.WithValue(context.Background(), swagger.ContextAccessToken, value.SessionToken)
+	return context.WithValue(context.Background(), client.ContextAccessToken, value.SessionToken)
 }

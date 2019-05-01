@@ -4,9 +4,9 @@ package main
 import (
 	"github.com/op/go-logging"
 	"github.com/pureport/pureport-sdk-go/pureport"
+	"github.com/pureport/pureport-sdk-go/pureport/client"
 	ppLog "github.com/pureport/pureport-sdk-go/pureport/logging"
 	"github.com/pureport/pureport-sdk-go/pureport/session"
-	"github.com/pureport/pureport-sdk-go/pureport/swagger"
 )
 
 var log = logging.MustGetLogger("main_logger")
@@ -21,7 +21,7 @@ func main() {
 	s := session.NewSession(cfg)
 	ctx := s.GetSessionContext()
 
-	opts := &swagger.FindAllAccountsOpts{}
+	opts := &client.FindAllAccountsOpts{}
 	sp, r, err := s.Client.AccountsApi.FindAllAccounts(ctx, opts)
 
 	if err != nil {
