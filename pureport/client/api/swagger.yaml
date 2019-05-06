@@ -7,21 +7,21 @@ info:
 host: "api.pureport.com"
 basePath: "/"
 tags:
-- name: "cloud services"
-- name: "options"
+- name: "apikeys"
 - name: "accounts"
 - name: "account members"
-- name: "apikeys"
-- name: "billing"
-- name: "account consent"
 - name: "account roles"
 - name: "connections"
 - name: "account invitations"
 - name: "networks"
 - name: "supported connections"
+- name: "billing"
+- name: "account consent"
 - name: "cloud regions"
 - name: "locations"
 - name: "users"
+- name: "cloud services"
+- name: "options"
 schemes:
 - "http"
 paths:
@@ -1912,6 +1912,9 @@ definitions:
       peeringSubnet:
         type: "string"
         readOnly: true
+      publicNatIp:
+        type: "string"
+        readOnly: true
       pureportASN:
         type: "integer"
         format: "int64"
@@ -1931,6 +1934,7 @@ definitions:
       password: "password"
       customerIP: "customerIP"
       pureportIP: "pureportIP"
+      publicNatIp: "publicNatIp"
       state: "UP"
       pureportASN: 5
       customerASN: 1
@@ -2138,12 +2142,16 @@ definitions:
         - "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK"
         - "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS"
         - "PEERING_TYPE_CHANGE_NOT_ALLOWED"
+        - "INVALID_PEERING_STATE_FOR_OPERATION"
+        - "INVALID_PEERING_TYPE_FOR_OPERATION"
+        - "INVALID_PEERING_PNAT_CONFIGURATION"
         - "INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS"
         - "INVALID_NAT_CIDR_ALLOCATION"
         - "INVALID_NAT_OVERLAPPING_NAT_CIDRS"
         - "INVALID_STRIPE_CONFIGURATION"
         - "INTERNAL_SERVER_ERROR"
         - "JSON_GENERATION_ERROR"
+        - "NETWORK_PROVISIONING_ERROR"
         - "CONNECTION_PROVISIONING_ERROR"
         - "CONNECTION_UPDATE_SPEED_ERROR"
         - "CONNECTION_DELETING_ERROR"
@@ -5253,6 +5261,7 @@ definitions:
           password: "password"
           customerIP: "customerIP"
           pureportIP: "pureportIP"
+          publicNatIp: "publicNatIp"
           state: "UP"
           pureportASN: 5
           customerASN: 1
@@ -5281,6 +5290,7 @@ definitions:
           password: "password"
           customerIP: "customerIP"
           pureportIP: "pureportIP"
+          publicNatIp: "publicNatIp"
           state: "UP"
           pureportASN: 5
           customerASN: 1
@@ -5394,12 +5404,16 @@ definitions:
         - "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK"
         - "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS"
         - "PEERING_TYPE_CHANGE_NOT_ALLOWED"
+        - "INVALID_PEERING_STATE_FOR_OPERATION"
+        - "INVALID_PEERING_TYPE_FOR_OPERATION"
+        - "INVALID_PEERING_PNAT_CONFIGURATION"
         - "INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS"
         - "INVALID_NAT_CIDR_ALLOCATION"
         - "INVALID_NAT_OVERLAPPING_NAT_CIDRS"
         - "INVALID_STRIPE_CONFIGURATION"
         - "INTERNAL_SERVER_ERROR"
         - "JSON_GENERATION_ERROR"
+        - "NETWORK_PROVISIONING_ERROR"
         - "CONNECTION_PROVISIONING_ERROR"
         - "CONNECTION_UPDATE_SPEED_ERROR"
         - "CONNECTION_DELETING_ERROR"
@@ -5463,6 +5477,7 @@ definitions:
         password: "password"
         customerIP: "customerIP"
         pureportIP: "pureportIP"
+        publicNatIp: "publicNatIp"
         state: "UP"
         pureportASN: 5
         customerASN: 1
@@ -5727,7 +5742,6 @@ definitions:
     type: "object"
     required:
     - "href"
-    - "id"
     properties:
       href:
         type: "string"
@@ -8896,8 +8910,6 @@ definitions:
         type: "object"
         description: "The Stripe Invoice object (https://stripe.com/docs/api/invoices/object)"
         properties: {}
-      network:
-        $ref: "#/definitions/Link"
   Option:
     type: "object"
     properties:
@@ -9004,7 +9016,6 @@ definitions:
         type: "string"
         enum:
         - "AWS"
-        - "AZURE"
         - "GOOGLE_CLOUD"
         - "EQUINIX_CLOUD_EXCHANGE"
         - "PUREPORT"
@@ -9083,7 +9094,7 @@ definitions:
         type: "string"
         format: "date-time"
         readOnly: true
-      totalAllocated:
+      totalAllocatedIps:
         type: "integer"
         format: "int32"
         readOnly: true
@@ -9091,11 +9102,15 @@ definitions:
         type: "integer"
         format: "int32"
         readOnly: true
-      totalDeleted:
+      totalDeletedIps:
         type: "integer"
         format: "int32"
         readOnly: true
-      totalFree:
+      totalFreeIps:
+        type: "integer"
+        format: "int32"
+        readOnly: true
+      totalIps:
         type: "integer"
         format: "int32"
         readOnly: true

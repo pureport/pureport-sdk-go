@@ -11,6 +11,6 @@ package client
 
 type Link struct {
 	Href  string `json:"href"`
-	Id    string `json:"id"`
+	Id    string `json:"id,omitempty"`
 	Title string `json:"title,omitempty"`
 }

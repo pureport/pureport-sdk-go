@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **CustomerIP** | **string** |  | [optional] [default to null]
 **Password** | **string** |  | [optional] [default to null]
 **PeeringSubnet** | **string** |  | [optional] [default to null]
+**PublicNatIp** | **string** |  | [optional] [default to null]
 **PureportASN** | **int64** |  | [optional] [default to null]
 **PureportIP** | **string** |  | [optional] [default to null]
 **State** | **string** |  | [optional] [default to null]

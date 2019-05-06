@@ -14,6 +14,7 @@ type BgpConfig struct {
 	CustomerIP    string `json:"customerIP,omitempty"`
 	Password      string `json:"password,omitempty"`
 	PeeringSubnet string `json:"peeringSubnet,omitempty"`
+	PublicNatIp   string `json:"publicNatIp,omitempty"`
 	PureportASN   int64  `json:"pureportASN,omitempty"`
 	PureportIP    string `json:"pureportIP,omitempty"`
 	State         string `json:"state,omitempty"`
