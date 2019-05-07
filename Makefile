@@ -93,7 +93,7 @@ vet:
 # --------------------------------------------------
 #  Dependencies
 # --------------------------------------------------
-get-deps: get-deps-verify
+get-deps: get-deps-verify get-deps-tools
 
 get-deps-tests:
 	@echo "go get SDK testing dependencies"
@@ -106,6 +106,10 @@ get-deps-x-tests:
 get-deps-verify:
 	@echo "go get SDK verification utilities"
 	go get golang.org/x/lint/golint
+
+get-deps-tools:
+	@echo "go get SDK verification utilities"
+	go get golang.org/x/tools/cmd/stringer
 
 # --------------------------------------------------
 #  Benchmarks
