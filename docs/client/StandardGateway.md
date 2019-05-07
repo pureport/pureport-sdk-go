@@ -3,18 +3,18 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AvailabilityDomain** | **string** |  | [optional] [default to null]
-**BgpConfig** | [***BgpConfig**](BGPConfig.md) |  | [optional] [default to null]
-**Description** | **string** |  | [optional] [default to null]
-**ErrorCode** | **string** |  | [optional] [default to null]
-**ErrorMessage** | **string** |  | [optional] [default to null]
-**Id** | **string** |  | [optional] [default to null]
-**LinkState** | **string** |  | [optional] [default to null]
-**Name** | **string** |  | [optional] [default to null]
-**RemoteId** | **string** |  | [optional] [default to null]
-**State** | **string** |  | [optional] [default to null]
-**Type_** | **string** |  | [optional] [default to null]
-**Vlan** | **int32** |  | [optional] [default to null]
+**AvailabilityDomain** | **string** |  | [optional] 
+**BgpConfig** | [***BgpConfig**](BGPConfig.md) |  | [optional] 
+**Description** | **string** |  | [optional] 
+**ErrorCode** | **string** |  | [optional] 
+**ErrorMessage** | **string** |  | [optional] 
+**Id** | **string** |  | [optional] 
+**LinkState** | **string** |  | [optional] 
+**Name** | **string** |  | [optional] 
+**RemoteId** | **string** |  | [optional] 
+**State** | **string** |  | [optional] 
+**Type_** | **string** |  | [optional] 
+**Vlan** | **int32** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
