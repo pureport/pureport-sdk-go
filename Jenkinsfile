@@ -22,6 +22,11 @@ pipeline {
         PUREPORT_API_SECRET="JMzOfGAbLRcrNziGO"
     }
     stages {
+        stage('Download Build dependencies') {
+            steps {
+                sh "make get-deps"
+            }
+        }
         stage('Build') {
             steps {
                 sh "make"
