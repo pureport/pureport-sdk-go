@@ -33,6 +33,7 @@ gen-swagger:
 	mv pureport/client/README.md docs/client/
 	mv pureport/client/docs/* docs/client/
 	rmdir pureport/client/docs
+	find . -iname "*.md" -exec sed -i '' 's/\[default to null\]//g' {} +
 
 gen-strings:
 	@echo "Generating strings files for enums"
