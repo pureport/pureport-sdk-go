@@ -1,4 +1,4 @@
-# \UsersApi
+# pureport\client\UsersApi
 
 All URIs are relative to *http://api.pureport.com*
 
