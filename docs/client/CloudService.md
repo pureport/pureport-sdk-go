@@ -3,16 +3,16 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CloudRegion** | [***Link**](Link.md) |  | [optional] [default to null]
-**Deactivated** | **bool** |  | [default to null]
-**DeactivatedAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
-**Href** | **string** |  | [optional] [default to null]
-**Id** | **string** |  | [optional] [default to null]
-**Ipv4PrefixCount** | **int32** |  | [optional] [default to null]
-**Ipv6PrefixCount** | **int32** |  | [optional] [default to null]
-**Name** | **string** |  | [default to null]
-**Provider** | **string** |  | [default to null]
-**Service** | **string** |  | [default to null]
+**CloudRegion** | [***Link**](Link.md) |  | [optional] 
+**Deactivated** | **bool** |  | 
+**DeactivatedAt** | [**time.Time**](time.Time.md) |  | [optional] 
+**Href** | **string** |  | [optional] 
+**Id** | **string** |  | [optional] 
+**Ipv4PrefixCount** | **int32** |  | [optional] 
+**Ipv6PrefixCount** | **int32** |  | [optional] 
+**Name** | **string** |  | 
+**Provider** | **string** |  | 
+**Service** | **string** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

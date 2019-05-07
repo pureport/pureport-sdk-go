@@ -1,4 +1,4 @@
-# \AccountInvitationsApi
+# pureport\client\AccountInvitationsApi
 
 All URIs are relative to *http://api.pureport.com*
 

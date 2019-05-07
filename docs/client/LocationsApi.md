@@ -1,4 +1,4 @@
-# \LocationsApi
+# pureport\client\LocationsApi
 
 All URIs are relative to *http://api.pureport.com*
 

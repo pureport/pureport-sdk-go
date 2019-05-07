@@ -1,4 +1,4 @@
-# \ApikeysApi
+# pureport\client\ApikeysApi
 
 All URIs are relative to *http://api.pureport.com*
 

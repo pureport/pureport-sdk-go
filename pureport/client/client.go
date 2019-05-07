@@ -11,6 +11,7 @@ package client
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"encoding/xml"
 	"errors"
@@ -28,7 +29,6 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"context"
 	"golang.org/x/oauth2"
 )
 
