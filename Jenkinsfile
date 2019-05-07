@@ -20,8 +20,6 @@ pipeline {
         PUREPORT_API_KEY="mKBkM3l1ScUHW"
         PUREPORT_API_SECRET="JMzOfGAbLRcrNziGO"
     }
-    parameters {
-    }
     stages {
         stage('Build') {
             steps {
