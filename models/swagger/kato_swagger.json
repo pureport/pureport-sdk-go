@@ -1,0 +1,4141 @@
+{
+    "basePath": "/",
+    "definitions": {
+        "AWSDirectConnectConnection": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Connection",
+                    "originalRef": "Connection"
+                },
+                {
+                    "properties": {
+                        "awsAccountId": {
+                            "pattern": "^\\d{12}$",
+                            "type": "string"
+                        },
+                        "awsRegion": {
+                            "maxLength": 64,
+                            "minLength": 1,
+                            "type": "string"
+                        },
+                        "cloudServices": {
+                            "items": {
+                                "$ref": "#/definitions/Link",
+                                "originalRef": "Link"
+                            },
+                            "type": "array",
+                            "uniqueItems": true
+                        },
+                        "peering": {
+                            "$ref": "#/definitions/PeeringConfiguration",
+                            "originalRef": "PeeringConfiguration",
+                            "readOnly": true
+                        }
+                    },
+                    "required": [
+                        "awsAccountId",
+                        "awsRegion"
+                    ],
+                    "type": "object"
+                }
+            ]
+        },
+        "Account": {
+            "properties": {
+                "description": {
+                    "maxLength": 256,
+                    "minLength": 0,
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "name": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "parent": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "supportedConnectionGroups": {
+                    "items": {
+                        "$ref": "#/definitions/Link",
+                        "originalRef": "Link"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "type": "object"
+        },
+        "AccountBilling": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "address": {
+                    "$ref": "#/definitions/PhysicalAddress",
+                    "originalRef": "PhysicalAddress"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "stripeExpiry": {
+                    "pattern": "^\\d{2}\\/\\d{4}$",
+                    "type": "string"
+                },
+                "stripeLastFour": {
+                    "pattern": "^\\d{4}$",
+                    "type": "string"
+                },
+                "stripeToken": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "address",
+                "email",
+                "stripeExpiry",
+                "stripeLastFour",
+                "stripeToken"
+            ],
+            "type": "object"
+        },
+        "AccountConsent": {
+            "properties": {
+                "consentAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "AccountInvite": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "expired": {
+                    "type": "boolean"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "invitedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "invitedBy": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "roles": {
+                    "items": {
+                        "$ref": "#/definitions/Link",
+                        "originalRef": "Link"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "account",
+                "email",
+                "roles"
+            ],
+            "type": "object"
+        },
+        "AccountMember": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "roles": {
+                    "items": {
+                        "$ref": "#/definitions/Link",
+                        "originalRef": "Link"
+                    },
+                    "type": "array"
+                },
+                "user": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                }
+            },
+            "required": [
+                "account",
+                "roles",
+                "user"
+            ],
+            "type": "object"
+        },
+        "ApiKey": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "description": {
+                    "maxLength": 1024,
+                    "minLength": 0,
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "maxLength": 255,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "roles": {
+                    "items": {
+                        "$ref": "#/definitions/Link",
+                        "originalRef": "Link"
+                    },
+                    "maxItems": 100,
+                    "minItems": 1,
+                    "type": "array",
+                    "uniqueItems": true
+                },
+                "secret": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "AzureExpressRouteConnection": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Connection",
+                    "originalRef": "Connection"
+                },
+                {
+                    "properties": {
+                        "peering": {
+                            "$ref": "#/definitions/PeeringConfiguration",
+                            "originalRef": "PeeringConfiguration",
+                            "readOnly": true
+                        },
+                        "serviceKey": {
+                            "maxLength": 64,
+                            "minLength": 1,
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "serviceKey"
+                    ],
+                    "type": "object"
+                }
+            ]
+        },
+        "BGPConfig": {
+            "properties": {
+                "customerASN": {
+                    "format": "int64",
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "customerIP": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "password": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "peeringSubnet": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "publicNatIp": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "pureportASN": {
+                    "format": "int64",
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "pureportIP": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "state": {
+                    "enum": [
+                        "UP",
+                        "DOWN",
+                        "PENDING"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "BillingPlan": {
+            "properties": {
+                "amount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "billingInterval": {
+                    "enum": [
+                        "DAY",
+                        "WEEK",
+                        "MONTH",
+                        "YEAR"
+                    ],
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "term": {
+                    "enum": [
+                        "HOURLY"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CloudRegion": {
+            "properties": {
+                "displayName": {
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "provider": {
+                    "enum": [
+                        "AWS",
+                        "AZURE",
+                        "GOOGLE_CLOUD"
+                    ],
+                    "type": "string"
+                },
+                "providerAssignedId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "displayName",
+                "provider",
+                "providerAssignedId"
+            ],
+            "type": "object"
+        },
+        "CloudService": {
+            "properties": {
+                "cloudRegion": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "deactivated": {
+                    "readOnly": true,
+                    "type": "boolean"
+                },
+                "deactivatedAt": {
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "ipv4PrefixCount": {
+                    "format": "int32",
+                    "minimum": 0,
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "ipv6PrefixCount": {
+                    "format": "int32",
+                    "minimum": 0,
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "provider": {
+                    "enum": [
+                        "AWS",
+                        "AZURE",
+                        "GOOGLE_CLOUD"
+                    ],
+                    "type": "string"
+                },
+                "service": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "deactivated",
+                "name",
+                "provider",
+                "service"
+            ],
+            "type": "object"
+        },
+        "Connection": {
+            "discriminator": "type",
+            "properties": {
+                "activeAt": {
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "billingPlan": {
+                    "$ref": "#/definitions/BillingPlan",
+                    "originalRef": "BillingPlan",
+                    "readOnly": true
+                },
+                "billingTerm": {
+                    "enum": [
+                        "HOURLY"
+                    ],
+                    "type": "string"
+                },
+                "createdAt": {
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "customerASN": {
+                    "format": "int64",
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "customerNetworks": {
+                    "items": {
+                        "$ref": "#/definitions/CustomerNetwork",
+                        "originalRef": "CustomerNetwork"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                },
+                "deletedAt": {
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "description": {
+                    "maxLength": 1024,
+                    "minLength": 0,
+                    "type": "string"
+                },
+                "errorCode": {
+                    "enum": [
+                        "BAD_REQUEST",
+                        "RESOURCE_LIMITATION_EXCEEDED",
+                        "JSON_PROCESSING_ERROR",
+                        "UNAUTHORIZED",
+                        "ACCESS_TOKEN_GENERAL",
+                        "ACCESS_TOKEN_MISSING",
+                        "ACCESS_TOKEN_EXPIRED",
+                        "ACCESS_TOKEN_ALGORITHM_MISMATCH",
+                        "ACCESS_TOKEN_INVALID_SIGNATURE",
+                        "ACCESS_TOKEN_DECODE_ERROR",
+                        "API_KEY_NOT_FOUND",
+                        "PAYMENT_REQUIRED",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "METHOD_NOT_ALLOWED",
+                        "REQUEST_TIMEOUT",
+                        "CONFLICT",
+                        "AWS_CONNECTION_HAS_ACTIVE_VIFS",
+                        "EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE",
+                        "ADMIN_ACCESS_MUST_EXIST",
+                        "CONNECTION_UPDATE_STATE_CONFLICT",
+                        "CONNECTION_DELETE_STATE_CONFLICT",
+                        "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
+                        "CONSENT_REQUIRED",
+                        "ACCOUNT_ALREADY_CONSENTED",
+                        "ACCOUNT_MEMBER_ALREADY_EXISTS",
+                        "ACCOUNT_HAS_CHILD_ACCOUNTS",
+                        "REQUEST_ENTITY_TOO_LARGE",
+                        "REQUEST_URI_TOO_LONG",
+                        "UNSUPPORTED_MEDIA_TYPE",
+                        "UNPROCESSABLE_ENTITY",
+                        "VALIDATION_ERROR",
+                        "INVALID_LINK",
+                        "INVALID_EXPRESS_ROUTE_SERVICE_KEY",
+                        "INVALID_GOOGLE_PAIRING_KEY",
+                        "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH",
+                        "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
+                        "NO_SUPPORTED_CONNECTION_FOR_CONNECTION",
+                        "UNSUPPORTED_RESOURCE_LIMIT",
+                        "MODIFICATION_NOT_ALLOWED",
+                        "AWS_CONNECTION_SPEED_IMMUTABLE",
+                        "INVALID_VLAN",
+                        "INVALID_VLAN_RANGE",
+                        "INVALID_CUSTOMER_ASN",
+                        "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS",
+                        "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK",
+                        "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS",
+                        "PEERING_TYPE_CHANGE_NOT_ALLOWED",
+                        "INVALID_PEERING_STATE_FOR_OPERATION",
+                        "INVALID_PEERING_TYPE_FOR_OPERATION",
+                        "INVALID_PEERING_PNAT_CONFIGURATION",
+                        "INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS",
+                        "INVALID_NAT_CIDR_ALLOCATION",
+                        "INVALID_NAT_OVERLAPPING_NAT_CIDRS",
+                        "INVALID_STRIPE_CONFIGURATION",
+                        "INTERNAL_SERVER_ERROR",
+                        "JSON_GENERATION_ERROR",
+                        "NETWORK_PROVISIONING_ERROR",
+                        "CONNECTION_PROVISIONING_ERROR",
+                        "CONNECTION_UPDATE_SPEED_ERROR",
+                        "CONNECTION_DELETING_ERROR",
+                        "CONNECTION_UPDATING_ERROR",
+                        "GATEWAY_PROVISIONING_ERROR",
+                        "GATEWAY_UPDATE_SPEED_ERROR",
+                        "GATEWAY_UPDATING_ERROR",
+                        "GATEWAY_DELETING_ERROR",
+                        "AWS_CONNECTION_DELETE_ERROR",
+                        "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR",
+                        "ECX_CONNECTION_DELETE_ERROR",
+                        "GOOGLE_OPERATION_TIMEOUT",
+                        "NOT_IMPLEMENTED",
+                        "SERVICE_UNAVAILABLE",
+                        "EXPRESS_ROUTE_SERVICE_UNAVAILABLE",
+                        "INSUFFICIENT_CAPACITY",
+                        "NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "errorMessage": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "highAvailability": {
+                    "type": "boolean"
+                },
+                "href": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "location": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link",
+                    "readOnly": true
+                },
+                "name": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "nat": {
+                    "$ref": "#/definitions/NATConfig",
+                    "originalRef": "NATConfig",
+                    "readOnly": true
+                },
+                "network": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link",
+                    "readOnly": true
+                },
+                "primaryGateway": {
+                    "$ref": "#/definitions/Gateway",
+                    "originalRef": "Gateway",
+                    "readOnly": true
+                },
+                "secondaryGateway": {
+                    "$ref": "#/definitions/Gateway",
+                    "originalRef": "Gateway",
+                    "readOnly": true
+                },
+                "speed": {
+                    "enum": [
+                        50,
+                        100,
+                        200,
+                        300,
+                        400,
+                        500,
+                        1000,
+                        10000
+                    ],
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "state": {
+                    "enum": [
+                        "INITIALIZING",
+                        "WAITING_TO_PROVISION",
+                        "PROVISIONING",
+                        "FAILED_TO_PROVISION",
+                        "ACTIVE",
+                        "DOWN",
+                        "UPDATING",
+                        "FAILED_TO_UPDATE",
+                        "DELETING",
+                        "FAILED_TO_DELETE",
+                        "DELETED"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "AWS_DIRECT_CONNECT",
+                        "AZURE_EXPRESS_ROUTE",
+                        "GOOGLE_CLOUD_INTERCONNECT",
+                        "SITE_IPSEC_VPN",
+                        "DUMMY"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "billingTerm",
+                "location",
+                "name",
+                "speed",
+                "type"
+            ],
+            "type": "object"
+        },
+        "CustomerNetwork": {
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "address"
+            ],
+            "type": "object"
+        },
+        "DummyConnection": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Connection",
+                    "originalRef": "Connection"
+                },
+                {
+                    "properties": {
+                        "peering": {
+                            "$ref": "#/definitions/PeeringConfiguration",
+                            "originalRef": "PeeringConfiguration",
+                            "readOnly": true
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "Gateway": {
+            "discriminator": "type",
+            "properties": {
+                "availabilityDomain": {
+                    "enum": [
+                        "PRIMARY",
+                        "SECONDARY"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "bgpConfig": {
+                    "$ref": "#/definitions/BGPConfig",
+                    "originalRef": "BGPConfig",
+                    "readOnly": true
+                },
+                "description": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "errorCode": {
+                    "enum": [
+                        "BAD_REQUEST",
+                        "RESOURCE_LIMITATION_EXCEEDED",
+                        "JSON_PROCESSING_ERROR",
+                        "UNAUTHORIZED",
+                        "ACCESS_TOKEN_GENERAL",
+                        "ACCESS_TOKEN_MISSING",
+                        "ACCESS_TOKEN_EXPIRED",
+                        "ACCESS_TOKEN_ALGORITHM_MISMATCH",
+                        "ACCESS_TOKEN_INVALID_SIGNATURE",
+                        "ACCESS_TOKEN_DECODE_ERROR",
+                        "API_KEY_NOT_FOUND",
+                        "PAYMENT_REQUIRED",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "METHOD_NOT_ALLOWED",
+                        "REQUEST_TIMEOUT",
+                        "CONFLICT",
+                        "AWS_CONNECTION_HAS_ACTIVE_VIFS",
+                        "EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE",
+                        "ADMIN_ACCESS_MUST_EXIST",
+                        "CONNECTION_UPDATE_STATE_CONFLICT",
+                        "CONNECTION_DELETE_STATE_CONFLICT",
+                        "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
+                        "CONSENT_REQUIRED",
+                        "ACCOUNT_ALREADY_CONSENTED",
+                        "ACCOUNT_MEMBER_ALREADY_EXISTS",
+                        "ACCOUNT_HAS_CHILD_ACCOUNTS",
+                        "REQUEST_ENTITY_TOO_LARGE",
+                        "REQUEST_URI_TOO_LONG",
+                        "UNSUPPORTED_MEDIA_TYPE",
+                        "UNPROCESSABLE_ENTITY",
+                        "VALIDATION_ERROR",
+                        "INVALID_LINK",
+                        "INVALID_EXPRESS_ROUTE_SERVICE_KEY",
+                        "INVALID_GOOGLE_PAIRING_KEY",
+                        "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH",
+                        "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
+                        "NO_SUPPORTED_CONNECTION_FOR_CONNECTION",
+                        "UNSUPPORTED_RESOURCE_LIMIT",
+                        "MODIFICATION_NOT_ALLOWED",
+                        "AWS_CONNECTION_SPEED_IMMUTABLE",
+                        "INVALID_VLAN",
+                        "INVALID_VLAN_RANGE",
+                        "INVALID_CUSTOMER_ASN",
+                        "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS",
+                        "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK",
+                        "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS",
+                        "PEERING_TYPE_CHANGE_NOT_ALLOWED",
+                        "INVALID_PEERING_STATE_FOR_OPERATION",
+                        "INVALID_PEERING_TYPE_FOR_OPERATION",
+                        "INVALID_PEERING_PNAT_CONFIGURATION",
+                        "INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS",
+                        "INVALID_NAT_CIDR_ALLOCATION",
+                        "INVALID_NAT_OVERLAPPING_NAT_CIDRS",
+                        "INVALID_STRIPE_CONFIGURATION",
+                        "INTERNAL_SERVER_ERROR",
+                        "JSON_GENERATION_ERROR",
+                        "NETWORK_PROVISIONING_ERROR",
+                        "CONNECTION_PROVISIONING_ERROR",
+                        "CONNECTION_UPDATE_SPEED_ERROR",
+                        "CONNECTION_DELETING_ERROR",
+                        "CONNECTION_UPDATING_ERROR",
+                        "GATEWAY_PROVISIONING_ERROR",
+                        "GATEWAY_UPDATE_SPEED_ERROR",
+                        "GATEWAY_UPDATING_ERROR",
+                        "GATEWAY_DELETING_ERROR",
+                        "AWS_CONNECTION_DELETE_ERROR",
+                        "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR",
+                        "ECX_CONNECTION_DELETE_ERROR",
+                        "GOOGLE_OPERATION_TIMEOUT",
+                        "NOT_IMPLEMENTED",
+                        "SERVICE_UNAVAILABLE",
+                        "EXPRESS_ROUTE_SERVICE_UNAVAILABLE",
+                        "INSUFFICIENT_CAPACITY",
+                        "NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "errorMessage": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "linkState": {
+                    "enum": [
+                        "UP",
+                        "DOWN",
+                        "PENDING"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "remoteId": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "state": {
+                    "enum": [
+                        "WAITING_TO_PROVISION",
+                        "PROVISIONING",
+                        "FAILED_TO_PROVISION",
+                        "ACTIVE",
+                        "DOWN",
+                        "UPDATING",
+                        "FAILED_TO_UPDATE",
+                        "DELETING",
+                        "FAILED_TO_DELETE"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "STANDARD",
+                        "VPN"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "GeoCoordinates": {
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                },
+                "longitude": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "latitude",
+                "longitude"
+            ],
+            "type": "object"
+        },
+        "GoogleCloudInterconnectConnection": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Connection",
+                    "originalRef": "Connection"
+                },
+                {
+                    "properties": {
+                        "primaryPairingKey": {
+                            "maxLength": 64,
+                            "minLength": 1,
+                            "type": "string"
+                        },
+                        "secondaryPairingKey": {
+                            "maxLength": 64,
+                            "minLength": 1,
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "primaryPairingKey"
+                    ],
+                    "type": "object"
+                }
+            ]
+        },
+        "IKEV1Config": {
+            "properties": {
+                "esp": {
+                    "$ref": "#/definitions/IKEV1ESPConfig",
+                    "originalRef": "IKEV1ESPConfig"
+                },
+                "ike": {
+                    "$ref": "#/definitions/IKEV1IKEConfig",
+                    "originalRef": "IKEV1IKEConfig"
+                }
+            },
+            "required": [
+                "esp",
+                "ike"
+            ],
+            "type": "object"
+        },
+        "IKEV1ESPConfig": {
+            "properties": {
+                "dhGroup": {
+                    "enum": [
+                        "MODP_1024",
+                        "MODP_1536",
+                        "MODP_2048",
+                        "MODP_3072",
+                        "MODP_4096",
+                        "MODP_6144",
+                        "MODP_8192",
+                        "ECP_192",
+                        "ECP_224",
+                        "ECP_256",
+                        "ECP_384",
+                        "ECP_521"
+                    ],
+                    "type": "string"
+                },
+                "encryption": {
+                    "enum": [
+                        "NULL",
+                        "AES_128",
+                        "AES_192",
+                        "AES_256",
+                        "AES_128_CTR",
+                        "AES_192_CTR",
+                        "AES_256_CTR",
+                        "AES_128_GCM_64",
+                        "AES_192_GCM_64",
+                        "AES_256_GCM_64",
+                        "AES_128_GCM_96",
+                        "AES_192_GCM_96",
+                        "AES_256_GCM_96",
+                        "AES_128_GCM_128",
+                        "AES_192_GCM_128",
+                        "AES_256_GCM_128",
+                        "AES_128_GMAC",
+                        "AES_192_GMAC",
+                        "AES_256_GMAC"
+                    ],
+                    "type": "string"
+                },
+                "integrity": {
+                    "enum": [
+                        "MD5_HMAC",
+                        "SHA1_HMAC",
+                        "SHA256_HMAC",
+                        "SHA384_HMAC",
+                        "SHA512_HMAC",
+                        "AES_XCBC"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dhGroup",
+                "encryption"
+            ],
+            "type": "object"
+        },
+        "IKEV1IKEConfig": {
+            "properties": {
+                "dhGroup": {
+                    "enum": [
+                        "MODP_1024",
+                        "MODP_1536",
+                        "MODP_2048",
+                        "MODP_3072",
+                        "MODP_4096",
+                        "MODP_6144",
+                        "MODP_8192",
+                        "ECP_192",
+                        "ECP_224",
+                        "ECP_256",
+                        "ECP_384",
+                        "ECP_521"
+                    ],
+                    "type": "string"
+                },
+                "encryption": {
+                    "enum": [
+                        "AES_128",
+                        "AES_192",
+                        "AES_256"
+                    ],
+                    "type": "string"
+                },
+                "integrity": {
+                    "enum": [
+                        "MD5_HMAC",
+                        "SHA1_HMAC",
+                        "SHA256_HMAC",
+                        "SHA384_HMAC",
+                        "SHA512_HMAC"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dhGroup",
+                "encryption",
+                "integrity"
+            ],
+            "type": "object"
+        },
+        "IKEV2Config": {
+            "properties": {
+                "esp": {
+                    "$ref": "#/definitions/IKEV2ESPConfig",
+                    "originalRef": "IKEV2ESPConfig"
+                },
+                "ike": {
+                    "$ref": "#/definitions/IKEV2IKEConfig",
+                    "originalRef": "IKEV2IKEConfig"
+                }
+            },
+            "required": [
+                "esp",
+                "ike"
+            ],
+            "type": "object"
+        },
+        "IKEV2ESPConfig": {
+            "properties": {
+                "dhGroup": {
+                    "enum": [
+                        "MODP_1024",
+                        "MODP_1536",
+                        "MODP_2048",
+                        "MODP_3072",
+                        "MODP_4096",
+                        "MODP_6144",
+                        "MODP_8192",
+                        "ECP_192",
+                        "ECP_224",
+                        "ECP_256",
+                        "ECP_384",
+                        "ECP_521"
+                    ],
+                    "type": "string"
+                },
+                "encryption": {
+                    "enum": [
+                        "NULL",
+                        "AES_128",
+                        "AES_192",
+                        "AES_256",
+                        "AES_128_CTR",
+                        "AES_192_CTR",
+                        "AES_256_CTR",
+                        "AES_128_GCM_64",
+                        "AES_192_GCM_64",
+                        "AES_256_GCM_64",
+                        "AES_128_GCM_96",
+                        "AES_192_GCM_96",
+                        "AES_256_GCM_96",
+                        "AES_128_GCM_128",
+                        "AES_192_GCM_128",
+                        "AES_256_GCM_128",
+                        "AES_128_GMAC",
+                        "AES_192_GMAC",
+                        "AES_256_GMAC"
+                    ],
+                    "type": "string"
+                },
+                "integrity": {
+                    "enum": [
+                        "MD5_HMAC",
+                        "SHA1_HMAC",
+                        "SHA256_HMAC",
+                        "SHA384_HMAC",
+                        "SHA512_HMAC",
+                        "AES_XCBC"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dhGroup",
+                "encryption"
+            ],
+            "type": "object"
+        },
+        "IKEV2IKEConfig": {
+            "properties": {
+                "dhGroup": {
+                    "enum": [
+                        "MODP_1024",
+                        "MODP_1536",
+                        "MODP_2048",
+                        "MODP_3072",
+                        "MODP_4096",
+                        "MODP_6144",
+                        "MODP_8192",
+                        "ECP_192",
+                        "ECP_224",
+                        "ECP_256",
+                        "ECP_384",
+                        "ECP_521"
+                    ],
+                    "type": "string"
+                },
+                "encryption": {
+                    "enum": [
+                        "NULL",
+                        "AES_128",
+                        "AES_192",
+                        "AES_256",
+                        "AES_128_CTR",
+                        "AES_192_CTR",
+                        "AES_256_CTR",
+                        "AES_128_GCM_64",
+                        "AES_192_GCM_64",
+                        "AES_256_GCM_64",
+                        "AES_128_GCM_96",
+                        "AES_192_GCM_96",
+                        "AES_256_GCM_96",
+                        "AES_128_GCM_128",
+                        "AES_192_GCM_128",
+                        "AES_256_GCM_128",
+                        "AES_128_GMAC",
+                        "AES_192_GMAC",
+                        "AES_256_GMAC"
+                    ],
+                    "type": "string"
+                },
+                "integrity": {
+                    "enum": [
+                        "MD5_HMAC",
+                        "SHA1_HMAC",
+                        "SHA256_HMAC",
+                        "SHA384_HMAC",
+                        "SHA512_HMAC",
+                        "AES_XCBC"
+                    ],
+                    "type": "string"
+                },
+                "prf": {
+                    "enum": [
+                        "MD5",
+                        "SHA_1",
+                        "AES_XCBC",
+                        "SHA_256",
+                        "SHA_384",
+                        "SHA_512"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dhGroup",
+                "encryption"
+            ],
+            "type": "object"
+        },
+        "Link": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "href"
+            ],
+            "type": "object"
+        },
+        "Location": {
+            "properties": {
+                "geoCoordinates": {
+                    "$ref": "#/definitions/GeoCoordinates",
+                    "originalRef": "GeoCoordinates"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "locationLinks": {
+                    "items": {
+                        "$ref": "#/definitions/LocationLinkConnection",
+                        "originalRef": "LocationLinkConnection"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "geoCoordinates",
+                "name"
+            ],
+            "type": "object"
+        },
+        "LocationLinkConnection": {
+            "properties": {
+                "location": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "speed": {
+                    "enum": [
+                        50,
+                        100,
+                        200,
+                        300,
+                        400,
+                        500,
+                        1000,
+                        10000
+                    ],
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "LoginRequest": {
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "secret": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "key",
+                "secret"
+            ],
+            "type": "object"
+        },
+        "NATConfig": {
+            "properties": {
+                "blocks": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "mappings": {
+                    "items": {
+                        "$ref": "#/definitions/NATMapping",
+                        "originalRef": "NATMapping"
+                    },
+                    "maxItems": 1000,
+                    "minItems": 0,
+                    "type": "array"
+                },
+                "pnatCidr": {
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "NATMapping": {
+            "properties": {
+                "block": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "natCidr": {
+                    "type": "string"
+                },
+                "nativeCidr": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "nativeCidr"
+            ],
+            "type": "object"
+        },
+        "Network": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "description": {
+                    "maxLength": 1024,
+                    "minLength": 0,
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "name": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "NetworkInvoice": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "invoice": {
+                    "description": "The Stripe Invoice object (https://stripe.com/docs/api/invoices/object)",
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "Option": {
+            "properties": {
+                "aead": {
+                    "type": "boolean"
+                },
+                "default": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "unsafe": {
+                    "type": "boolean"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PSKAuthConfig": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/VPNAuthConfig",
+                    "originalRef": "VPNAuthConfig"
+                },
+                {
+                    "properties": {
+                        "key": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "PeeringConfiguration": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "PUBLIC",
+                        "PRIVATE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "type": "object"
+        },
+        "PhysicalAddress": {
+            "properties": {
+                "city": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "geoCoordinates": {
+                    "$ref": "#/definitions/GeoCoordinates",
+                    "originalRef": "GeoCoordinates"
+                },
+                "placeId": {
+                    "type": "string"
+                },
+                "postalCode": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "street": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Pod": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "location": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "status": {
+                    "enum": [
+                        "AVAILABLE",
+                        "UNAVAILABLE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "type": "object"
+        },
+        "ProviderLink": {
+            "properties": {
+                "availabilityDomain": {
+                    "enum": [
+                        "PRIMARY",
+                        "SECONDARY"
+                    ],
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "maxAvailableBandwidth": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "pod": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "provider": {
+                    "enum": [
+                        "AWS",
+                        "GOOGLE_CLOUD",
+                        "EQUINIX_CLOUD_EXCHANGE",
+                        "PUREPORT",
+                        "DUMMY_CLOUD"
+                    ],
+                    "type": "string"
+                },
+                "providerId": {
+                    "type": "string"
+                },
+                "providerRegion": {
+                    "type": "string"
+                },
+                "speed": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "status": {
+                    "enum": [
+                        "AVAILABLE",
+                        "UNAVAILABLE"
+                    ],
+                    "type": "string"
+                },
+                "supportedConnectionTypes": {
+                    "items": {
+                        "enum": [
+                            "AWS_DIRECT_CONNECT",
+                            "AZURE_EXPRESS_ROUTE",
+                            "GOOGLE_CLOUD_INTERCONNECT",
+                            "SITE_IPSEC_VPN",
+                            "DUMMY"
+                        ],
+                        "type": "string"
+                    },
+                    "maxItems": 2147483647,
+                    "minItems": 1,
+                    "type": "array",
+                    "uniqueItems": true
+                },
+                "vlans": {
+                    "pattern": "\\d{1,4}(-\\d{1,4})?(,\\d{1,4}(-\\d{1,4})?)*",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "type": "object"
+        },
+        "ProviderVlan": {
+            "properties": {
+                "allocated": {
+                    "type": "boolean"
+                },
+                "lastAllocatedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "lastDeallocatedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "speed": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "vlan": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "PublicPeeringBlock": {
+            "properties": {
+                "cidrBlock": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "href": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cidrBlock"
+            ],
+            "type": "object"
+        },
+        "PublicPeeringPoolStats": {
+            "properties": {
+                "time": {
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "totalAllocatedIps": {
+                    "format": "int32",
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "totalBlocks": {
+                    "format": "int32",
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "totalDeletedIps": {
+                    "format": "int32",
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "totalFreeIps": {
+                    "format": "int32",
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "totalIps": {
+                    "format": "int32",
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "totalSubnets": {
+                    "format": "int32",
+                    "readOnly": true,
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "ResourceLimit": {
+            "properties": {
+                "childResourceType": {
+                    "enum": [
+                        "MEMBER",
+                        "ROLE",
+                        "CONNECTION",
+                        "NETWORK",
+                        "ACCOUNT",
+                        "CLOUD_SERVICE_ROUTE"
+                    ],
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "limit": {
+                    "format": "int32",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "parentResourceId": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "parentResourceType": {
+                    "enum": [
+                        "MEMBER",
+                        "ROLE",
+                        "CONNECTION",
+                        "NETWORK",
+                        "ACCOUNT",
+                        "CLOUD_SERVICE_ROUTE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "childResourceType",
+                "limit"
+            ],
+            "type": "object"
+        },
+        "Role": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "description": {
+                    "maxLength": 256,
+                    "minLength": 0,
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "permissions": {
+                    "additionalProperties": {
+                        "additionalProperties": {
+                            "type": "boolean"
+                        },
+                        "type": "object"
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "account",
+                "name"
+            ],
+            "type": "object"
+        },
+        "SiteIPSecVPNConnection": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Connection",
+                    "originalRef": "Connection"
+                },
+                {
+                    "properties": {
+                        "authType": {
+                            "enum": [
+                                "PSK"
+                            ],
+                            "type": "string"
+                        },
+                        "enableBGPPassword": {
+                            "type": "boolean"
+                        },
+                        "ikeV1": {
+                            "$ref": "#/definitions/IKEV1Config",
+                            "originalRef": "IKEV1Config"
+                        },
+                        "ikeV2": {
+                            "$ref": "#/definitions/IKEV2Config",
+                            "originalRef": "IKEV2Config"
+                        },
+                        "ikeVersion": {
+                            "enum": [
+                                "V1",
+                                "V2"
+                            ],
+                            "type": "string"
+                        },
+                        "physicalAddress": {
+                            "$ref": "#/definitions/PhysicalAddress",
+                            "originalRef": "PhysicalAddress"
+                        },
+                        "primaryCustomerRouterIP": {
+                            "type": "string"
+                        },
+                        "primaryKey": {
+                            "type": "string"
+                        },
+                        "routingType": {
+                            "enum": [
+                                "POLICY_BASED",
+                                "ROUTE_BASED_STATIC",
+                                "ROUTE_BASED_BGP"
+                            ],
+                            "type": "string"
+                        },
+                        "secondaryCustomerRouterIP": {
+                            "type": "string"
+                        },
+                        "secondaryKey": {
+                            "type": "string"
+                        },
+                        "trafficSelectors": {
+                            "items": {
+                                "$ref": "#/definitions/TrafficSelectorMapping",
+                                "originalRef": "TrafficSelectorMapping"
+                            },
+                            "maxItems": 100,
+                            "minItems": 0,
+                            "type": "array",
+                            "uniqueItems": true
+                        }
+                    },
+                    "required": [
+                        "authType",
+                        "ikeVersion",
+                        "primaryCustomerRouterIP",
+                        "routingType"
+                    ],
+                    "type": "object"
+                }
+            ]
+        },
+        "StandardGateway": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Gateway",
+                    "originalRef": "Gateway"
+                },
+                {
+                    "properties": {
+                        "vlan": {
+                            "format": "int32",
+                            "readOnly": true,
+                            "type": "integer"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        },
+        "SupportedConnection": {
+            "properties": {
+                "billingPlans": {
+                    "items": {
+                        "$ref": "#/definitions/BillingPlan",
+                        "originalRef": "BillingPlan"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                },
+                "billingProductId": {
+                    "type": "string"
+                },
+                "groups": {
+                    "items": {
+                        "$ref": "#/definitions/Link",
+                        "originalRef": "Link"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                },
+                "highAvailability": {
+                    "type": "boolean"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "location": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "peeringType": {
+                    "enum": [
+                        "PUBLIC",
+                        "PRIVATE"
+                    ],
+                    "type": "string"
+                },
+                "reachableCloudRegions": {
+                    "items": {
+                        "$ref": "#/definitions/Link",
+                        "originalRef": "Link"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                },
+                "speed": {
+                    "enum": [
+                        50,
+                        100,
+                        200,
+                        300,
+                        400,
+                        500,
+                        1000,
+                        10000
+                    ],
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "type": {
+                    "enum": [
+                        "AWS_DIRECT_CONNECT",
+                        "AZURE_EXPRESS_ROUTE",
+                        "GOOGLE_CLOUD_INTERCONNECT",
+                        "SITE_IPSEC_VPN",
+                        "DUMMY"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "billingProductId",
+                "location",
+                "peeringType",
+                "speed",
+                "type"
+            ],
+            "type": "object"
+        },
+        "SupportedConnectionGroup": {
+            "properties": {
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "type": "object"
+        },
+        "TrafficSelectorMapping": {
+            "properties": {
+                "customerSide": {
+                    "type": "string"
+                },
+                "pureportSide": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "customerSide",
+                "pureportSide"
+            ],
+            "type": "object"
+        },
+        "User": {
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "lastName": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "username": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "VPNAuthConfig": {
+            "discriminator": "type",
+            "properties": {
+                "type": {
+                    "enum": [
+                        "PSK"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "VPNGateway": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Gateway",
+                    "originalRef": "Gateway"
+                },
+                {
+                    "properties": {
+                        "auth": {
+                            "$ref": "#/definitions/VPNAuthConfig",
+                            "originalRef": "VPNAuthConfig"
+                        },
+                        "customerGatewayIP": {
+                            "type": "string"
+                        },
+                        "customerVtiIP": {
+                            "type": "string"
+                        },
+                        "pureportGatewayIP": {
+                            "type": "string"
+                        },
+                        "pureportVtiIP": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            ]
+        }
+    },
+    "host": "api.pureport.com",
+    "info": {
+        "description": "Pureport API",
+        "title": "Pureport Control Plane",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/accounts": {
+            "get": {
+                "description": "",
+                "operationId": "findAllAccounts",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "name",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Account",
+                                "originalRef": "Account"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Account",
+                                "originalRef": "Account"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List accounts",
+                "tags": [
+                    "accounts"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "createAccount",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Account",
+                            "originalRef": "Account"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Add new account",
+                "tags": [
+                    "accounts"
+                ]
+            }
+        },
+        "/accounts/{accountId}": {
+            "delete": {
+                "description": "",
+                "operationId": "deleteAccount",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Delete account",
+                "tags": [
+                    "accounts"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "getAccount",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Account",
+                            "originalRef": "Account"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Account",
+                            "originalRef": "Account"
+                        }
+                    }
+                },
+                "summary": "Get account details",
+                "tags": [
+                    "accounts"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "updateAccount",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Account",
+                            "originalRef": "Account"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Account",
+                            "originalRef": "Account"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Account",
+                            "originalRef": "Account"
+                        }
+                    }
+                },
+                "summary": "Update account",
+                "tags": [
+                    "accounts"
+                ]
+            }
+        },
+        "/accounts/{accountId}/apikeys": {
+            "get": {
+                "description": "",
+                "operationId": "findApiKeys",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/ApiKey",
+                                "originalRef": "ApiKey"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/ApiKey",
+                                "originalRef": "ApiKey"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List API keys for an account",
+                "tags": [
+                    "apikeys"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "createApiKey",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ApiKey",
+                            "originalRef": "ApiKey"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Create a new API key",
+                "tags": [
+                    "apikeys"
+                ]
+            }
+        },
+        "/accounts/{accountId}/apikeys/{key}": {
+            "delete": {
+                "description": "",
+                "operationId": "deleteApiKey",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Delete API Key",
+                "tags": [
+                    "apikeys"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "getApiKey",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/ApiKey",
+                            "originalRef": "ApiKey"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/ApiKey",
+                            "originalRef": "ApiKey"
+                        }
+                    }
+                },
+                "summary": "Get API Key details",
+                "tags": [
+                    "apikeys"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "updateApiKey",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/ApiKey",
+                            "originalRef": "ApiKey"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/ApiKey",
+                            "originalRef": "ApiKey"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/ApiKey",
+                            "originalRef": "ApiKey"
+                        }
+                    }
+                },
+                "summary": "Update API Key",
+                "tags": [
+                    "apikeys"
+                ]
+            }
+        },
+        "/accounts/{accountId}/billing": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "deletePaymentInformation",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Delete payment method",
+                "tags": [
+                    "billing"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "findBillingForAccount",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Payment method for account",
+                "tags": [
+                    "billing"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "addPaymentInformation",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/AccountBilling",
+                            "originalRef": "AccountBilling"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Add payment method",
+                "tags": [
+                    "billing"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "updatePaymentInformation",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/AccountBilling",
+                            "originalRef": "AccountBilling"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Update payment method",
+                "tags": [
+                    "billing"
+                ]
+            }
+        },
+        "/accounts/{accountId}/billing/configured": {
+            "get": {
+                "description": "",
+                "operationId": "isBillingConfiguredForAccount",
+                "parameters": [
+                    {
+                        "default": false,
+                        "in": "query",
+                        "name": "ancestorOnly",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "type": "boolean"
+                        },
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "summary": "Payment method configured for account",
+                "tags": [
+                    "billing"
+                ]
+            }
+        },
+        "/accounts/{accountId}/connections": {
+            "get": {
+                "description": "",
+                "operationId": "findConnections",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Connection",
+                                "originalRef": "Connection"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Connection",
+                                "originalRef": "Connection"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List connections across all networks for the account",
+                "tags": [
+                    "connections"
+                ]
+            }
+        },
+        "/accounts/{accountId}/consent": {
+            "get": {
+                "description": "",
+                "operationId": "hasConsent",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountConsent",
+                            "originalRef": "AccountConsent"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountConsent",
+                            "originalRef": "AccountConsent"
+                        }
+                    },
+                    "404": {
+                        "description": "Account MSA and AUP have not been accepted"
+                    }
+                },
+                "summary": "Account consent to Master Service Agreement and Acceptable Use Policy",
+                "tags": [
+                    "account consent"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "consent",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Consent to Master Service Agreement and Acceptable Use Policy for this account",
+                "tags": [
+                    "account consent"
+                ]
+            }
+        },
+        "/accounts/{accountId}/invites": {
+            "get": {
+                "description": "",
+                "operationId": "findAccountInvites",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/AccountInvite",
+                                "originalRef": "AccountInvite"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/AccountInvite",
+                                "originalRef": "AccountInvite"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List account invites",
+                "tags": [
+                    "account invitations"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "inviteAccount",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/AccountInvite",
+                            "originalRef": "AccountInvite"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Invite account member",
+                "tags": [
+                    "account invitations"
+                ]
+            }
+        },
+        "/accounts/{accountId}/invites/{inviteId}": {
+            "delete": {
+                "description": "",
+                "operationId": "deleteAccountInvite",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "inviteId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Delete account invite",
+                "tags": [
+                    "account invitations"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "getAccountInvite",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "inviteId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountInvite",
+                            "originalRef": "AccountInvite"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountInvite",
+                            "originalRef": "AccountInvite"
+                        }
+                    }
+                },
+                "summary": "Get account invite",
+                "tags": [
+                    "account invitations"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "updateAccountInvite",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "reinvite",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/AccountInvite",
+                            "originalRef": "AccountInvite"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "inviteId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountInvite",
+                            "originalRef": "AccountInvite"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountInvite",
+                            "originalRef": "AccountInvite"
+                        }
+                    }
+                },
+                "summary": "Update account invite",
+                "tags": [
+                    "account invitations"
+                ]
+            }
+        },
+        "/accounts/{accountId}/members": {
+            "get": {
+                "description": "",
+                "operationId": "findAccountMembers",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/AccountMember",
+                                "originalRef": "AccountMember"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/AccountMember",
+                                "originalRef": "AccountMember"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List account members",
+                "tags": [
+                    "account members"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "addAccountMember",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/AccountMember",
+                            "originalRef": "AccountMember"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Add account member",
+                "tags": [
+                    "account members"
+                ]
+            }
+        },
+        "/accounts/{accountId}/members/{userId}": {
+            "delete": {
+                "description": "",
+                "operationId": "deleteAccountMember",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Delete account member",
+                "tags": [
+                    "account members"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "getAccountMember",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountMember",
+                            "originalRef": "AccountMember"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountMember",
+                            "originalRef": "AccountMember"
+                        }
+                    }
+                },
+                "summary": "Get account member",
+                "tags": [
+                    "account members"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "updateAccountMember",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/AccountMember",
+                            "originalRef": "AccountMember"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "userId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountMember",
+                            "originalRef": "AccountMember"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountMember",
+                            "originalRef": "AccountMember"
+                        }
+                    }
+                },
+                "summary": "Update account member",
+                "tags": [
+                    "account members"
+                ]
+            }
+        },
+        "/accounts/{accountId}/networks": {
+            "get": {
+                "description": "",
+                "operationId": "findNetworks",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Network",
+                                "originalRef": "Network"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Network",
+                                "originalRef": "Network"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List networks",
+                "tags": [
+                    "networks"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "addNetwork",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Network",
+                            "originalRef": "Network"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Add new network",
+                "tags": [
+                    "networks"
+                ]
+            }
+        },
+        "/accounts/{accountId}/permissions": {
+            "get": {
+                "description": "Returns the effective set of permissions that the current subject has for the given account\n            based on the roles they have been granted.",
+                "operationId": "getAccountPermissions",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "additionalProperties": {
+                                "additionalProperties": {
+                                    "type": "boolean"
+                                },
+                                "type": "object"
+                            },
+                            "type": "object"
+                        },
+                        "schema": {
+                            "additionalProperties": {
+                                "additionalProperties": {
+                                    "type": "boolean"
+                                },
+                                "type": "object"
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "summary": "Get permissions for account",
+                "tags": [
+                    "accounts"
+                ]
+            }
+        },
+        "/accounts/{accountId}/roles": {
+            "get": {
+                "description": "",
+                "operationId": "findAllRoles",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Role",
+                                "originalRef": "Role"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Role",
+                                "originalRef": "Role"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List account roles",
+                "tags": [
+                    "account roles"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "createRole",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Role",
+                            "originalRef": "Role"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Add account role",
+                "tags": [
+                    "account roles"
+                ]
+            }
+        },
+        "/accounts/{accountId}/roles/{roleId}": {
+            "delete": {
+                "description": "",
+                "operationId": "deleteRole",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "roleId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Delete role",
+                "tags": [
+                    "account roles"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "getRole",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "roleId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Role",
+                            "originalRef": "Role"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Role",
+                            "originalRef": "Role"
+                        }
+                    }
+                },
+                "summary": "Get role details",
+                "tags": [
+                    "account roles"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "updateRole",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Role",
+                            "originalRef": "Role"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "roleId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Role",
+                            "originalRef": "Role"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Role",
+                            "originalRef": "Role"
+                        }
+                    }
+                },
+                "summary": "Update role",
+                "tags": [
+                    "account roles"
+                ]
+            }
+        },
+        "/accounts/{accountId}/supportedConnections": {
+            "get": {
+                "description": "",
+                "operationId": "getSupportedConnections",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/SupportedConnection",
+                                "originalRef": "SupportedConnection"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SupportedConnection",
+                                "originalRef": "SupportedConnection"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List supported connections",
+                "tags": [
+                    "supported connections"
+                ]
+            }
+        },
+        "/cloudRegions": {
+            "get": {
+                "description": "",
+                "operationId": "getCloudRegions",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/CloudRegion",
+                                "originalRef": "CloudRegion"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CloudRegion",
+                                "originalRef": "CloudRegion"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List cloud regions",
+                "tags": [
+                    "cloud regions"
+                ]
+            }
+        },
+        "/cloudRegions/{cloudRegionId}": {
+            "get": {
+                "description": "",
+                "operationId": "getCloudRegion",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "cloudRegionId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/CloudRegion",
+                            "originalRef": "CloudRegion"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/CloudRegion",
+                            "originalRef": "CloudRegion"
+                        }
+                    }
+                },
+                "summary": "Get cloud region details",
+                "tags": [
+                    "cloud regions"
+                ]
+            }
+        },
+        "/cloudServices": {
+            "get": {
+                "description": "",
+                "operationId": "getCloudServices",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/CloudService",
+                                "originalRef": "CloudService"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/CloudService",
+                                "originalRef": "CloudService"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List cloud services",
+                "tags": [
+                    "cloud services"
+                ]
+            }
+        },
+        "/cloudServices/{cloudServiceId}": {
+            "get": {
+                "description": "",
+                "operationId": "getCloudService",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "cloudServiceId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/CloudService",
+                            "originalRef": "CloudService"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/CloudService",
+                            "originalRef": "CloudService"
+                        }
+                    }
+                },
+                "summary": "Get cloud service details",
+                "tags": [
+                    "cloud services"
+                ]
+            }
+        },
+        "/connections/{connectionId}": {
+            "delete": {
+                "description": "",
+                "operationId": "deleteConnection",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "connectionId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Connection",
+                            "originalRef": "Connection"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Connection",
+                            "originalRef": "Connection"
+                        }
+                    }
+                },
+                "summary": "Delete connection",
+                "tags": [
+                    "connections"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "getConnection",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "connectionId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Connection",
+                            "originalRef": "Connection"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Connection",
+                            "originalRef": "Connection"
+                        }
+                    }
+                },
+                "summary": "Get connection details",
+                "tags": [
+                    "connections"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "updateConnection",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Connection",
+                            "originalRef": "Connection"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "connectionId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Connection",
+                            "originalRef": "Connection"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Connection",
+                            "originalRef": "Connection"
+                        }
+                    }
+                },
+                "summary": "Update connection",
+                "tags": [
+                    "connections"
+                ]
+            }
+        },
+        "/invites": {
+            "post": {
+                "description": "",
+                "operationId": "acceptAllInvites",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/AccountInvite",
+                                "originalRef": "AccountInvite"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/AccountInvite",
+                                "originalRef": "AccountInvite"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "Accept all invites for the current user",
+                "tags": [
+                    "account invitations"
+                ]
+            }
+        },
+        "/locations": {
+            "get": {
+                "description": "",
+                "operationId": "findLocations",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Location",
+                                "originalRef": "Location"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Location",
+                                "originalRef": "Location"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List locations",
+                "tags": [
+                    "locations"
+                ]
+            }
+        },
+        "/locations/{locationId}": {
+            "get": {
+                "description": "",
+                "operationId": "getLocation",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "locationId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Location",
+                            "originalRef": "Location"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Location",
+                            "originalRef": "Location"
+                        }
+                    }
+                },
+                "summary": "Get location details",
+                "tags": [
+                    "locations"
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "login",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/LoginRequest",
+                            "originalRef": "LoginRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Login with an API Key",
+                "tags": [
+                    "apikeys"
+                ]
+            }
+        },
+        "/networks/{networkId}": {
+            "delete": {
+                "description": "",
+                "operationId": "deleteNetwork",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "networkId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Delete network",
+                "tags": [
+                    "networks"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "getNetwork",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "networkId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Network",
+                            "originalRef": "Network"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Network",
+                            "originalRef": "Network"
+                        }
+                    }
+                },
+                "summary": "Get network details",
+                "tags": [
+                    "networks"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "updateNetwork",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Network",
+                            "originalRef": "Network"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "networkId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Network",
+                            "originalRef": "Network"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Network",
+                            "originalRef": "Network"
+                        }
+                    }
+                },
+                "summary": "Update network",
+                "tags": [
+                    "networks"
+                ]
+            }
+        },
+        "/networks/{networkId}/connections": {
+            "get": {
+                "description": "",
+                "operationId": "getConnections",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "networkId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Connection",
+                                "originalRef": "Connection"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Connection",
+                                "originalRef": "Connection"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List network connections",
+                "tags": [
+                    "connections",
+                    "networks"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "addConnection",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Connection",
+                            "originalRef": "Connection"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "networkId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Add new connection",
+                "tags": [
+                    "connections",
+                    "networks"
+                ]
+            }
+        },
+        "/options": {
+            "get": {
+                "description": "",
+                "operationId": "getOptions",
+                "parameters": [
+                    {
+                        "collectionFormat": "multi",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "type",
+                        "required": false,
+                        "type": "array"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "additionalProperties": {
+                                "items": {
+                                    "$ref": "#/definitions/Option",
+                                    "originalRef": "Option"
+                                },
+                                "type": "array"
+                            },
+                            "type": "object"
+                        },
+                        "schema": {
+                            "additionalProperties": {
+                                "items": {
+                                    "$ref": "#/definitions/Option",
+                                    "originalRef": "Option"
+                                },
+                                "type": "array"
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "summary": "Get available options",
+                "tags": [
+                    "options"
+                ]
+            }
+        },
+        "/supportedConnections/{supportedConnectionId}": {
+            "get": {
+                "description": "",
+                "operationId": "getSupportedConnection",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "supportedConnectionId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/SupportedConnection",
+                            "originalRef": "SupportedConnection"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/SupportedConnection",
+                            "originalRef": "SupportedConnection"
+                        }
+                    }
+                },
+                "summary": "Get supported connection details",
+                "tags": [
+                    "supported connections"
+                ]
+            }
+        },
+        "/users/{userId}": {
+            "get": {
+                "description": "",
+                "operationId": "getUser",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/User",
+                            "originalRef": "User"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/User",
+                            "originalRef": "User"
+                        }
+                    }
+                },
+                "summary": "Get user details",
+                "tags": [
+                    "users"
+                ]
+            },
+            "put": {
+                "description": "",
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/User",
+                            "originalRef": "User"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "userId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/User",
+                            "originalRef": "User"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/User",
+                            "originalRef": "User"
+                        }
+                    }
+                },
+                "summary": "Update user",
+                "tags": [
+                    "users"
+                ]
+            }
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "tags": [
+        {
+            "name": "apikeys"
+        },
+        {
+            "name": "accounts"
+        },
+        {
+            "name": "account members"
+        },
+        {
+            "name": "account roles"
+        },
+        {
+            "name": "connections"
+        },
+        {
+            "name": "account invitations"
+        },
+        {
+            "name": "networks"
+        },
+        {
+            "name": "supported connections"
+        },
+        {
+            "name": "billing"
+        },
+        {
+            "name": "account consent"
+        },
+        {
+            "name": "cloud regions"
+        },
+        {
+            "name": "locations"
+        },
+        {
+            "name": "users"
+        },
+        {
+            "name": "cloud services"
+        },
+        {
+            "name": "options"
+        }
+    ]
+}
