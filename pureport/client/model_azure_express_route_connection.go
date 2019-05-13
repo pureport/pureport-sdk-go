@@ -31,8 +31,8 @@ type AzureExpressRouteConnection struct {
 	Name             string                `json:"name"`
 	Nat              *NatConfig            `json:"nat,omitempty"`
 	Network          *Link                 `json:"network,omitempty"`
-	PrimaryGateway   *Gateway              `json:"primaryGateway,omitempty"`
-	SecondaryGateway *Gateway              `json:"secondaryGateway,omitempty"`
+	PrimaryGateway   *StandardGateway      `json:"primaryGateway,omitempty"`
+	SecondaryGateway *StandardGateway      `json:"secondaryGateway,omitempty"`
 	Speed            int32                 `json:"speed"`
 	State            string                `json:"state,omitempty"`
 	Type_            string                `json:"type"`
