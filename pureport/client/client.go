@@ -195,13 +195,13 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	// Add tracing of HTTP Requests
 	// --------------------------------------------------
 	if dump, derr := httputil.DumpRequest(request, true); derr == nil {
-		log.Debug("Request:\n%q", dump)
+		log.Debugf("Request:\n%q", dump)
 	}
 
 	resp, err := c.cfg.HTTPClient.Do(request)
 
 	if dump, derr := httputil.DumpResponse(resp, true); derr == nil {
-		log.Debug("Response:\n%q", dump)
+		log.Debugf("Response:\n%q", dump)
 	}
 
 	// --------------------------------------------------
