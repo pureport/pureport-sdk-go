@@ -65,7 +65,7 @@ func (p *ViperProvider) Retrieve() (Value, error) {
 	p.retrieved = false
 
 	if err := vip.ReadInConfig(); err != nil {
-		log.Warningf("Error reading in configuration file: %s", err)
+		log.Infof("Configuration file not available: %s", err)
 	}
 
 	// Check environment first
