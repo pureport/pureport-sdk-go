@@ -200,8 +200,13 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 
 	resp, err := c.cfg.HTTPClient.Do(request)
 
-	if dump, derr := httputil.DumpResponse(resp, true); derr == nil {
-		log.Debugf("Response:\n%q", dump)
+	if err != nil {
+		log.Debugf("Error Response: %+v", err)
+
+	} else {
+		if dump, derr := httputil.DumpResponse(resp, true); derr == nil {
+			log.Debugf("Response:\n%q", dump)
+		}
 	}
 
 	// --------------------------------------------------
