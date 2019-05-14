@@ -38,6 +38,9 @@ type Configuration struct {
 
 	// The endpoint to request Authentication Tokens
 	EndPoint string
+
+	// UserAgent to use for the http client
+	UserAgent string
 }
 
 // NewConfiguration creates a new configuration to application
