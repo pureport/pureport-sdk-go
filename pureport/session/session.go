@@ -23,6 +23,7 @@ type Session struct {
 
 func createClient(cfg *pureport.Configuration) *client.APIClient {
 	c := client.NewConfiguration()
+	c.UserAgent = cfg.UserAgent
 	c.BasePath = cfg.EndPoint
 	//c.AddDefaultHeader()
 
