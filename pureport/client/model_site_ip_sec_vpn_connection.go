@@ -31,8 +31,8 @@ type SiteIpSecVpnConnection struct {
 	Name                      string                   `json:"name"`
 	Nat                       *NatConfig               `json:"nat,omitempty"`
 	Network                   *Link                    `json:"network,omitempty"`
-	PrimaryGateway            *Gateway                 `json:"primaryGateway,omitempty"`
-	SecondaryGateway          *Gateway                 `json:"secondaryGateway,omitempty"`
+	PrimaryGateway            *VpnGateway              `json:"primaryGateway,omitempty"`
+	SecondaryGateway          *VpnGateway              `json:"secondaryGateway,omitempty"`
 	Speed                     int32                    `json:"speed"`
 	State                     string                   `json:"state,omitempty"`
 	Type_                     string                   `json:"type"`
