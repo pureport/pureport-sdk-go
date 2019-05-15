@@ -83,27 +83,15 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 		// ##################################################
 		// Pureport HACKAGE!!!
 		// ##################################################
-		// Decode as a Base Connection first to get the type
-		switch body := localVarOptionals.Body.Value().(type) {
-		case AwsDirectConnectConnection:
-			localVarPostBody = body
-
-		case AzureExpressRouteConnection:
-			localVarPostBody = body
-
-		case GoogleCloudInterconnectConnection:
-			localVarPostBody = body
-
-		case DummyConnection:
-			localVarPostBody = body
-
-		case SiteIpSecVpnConnection:
-			localVarPostBody = body
-
-		default:
+		if body, err := ValidateConnection(localVarOptionals.Body.Value()); err != nil {
 			return nil, reportError("body should be valid Connection")
+		} else {
+			localVarPostBody = body
 		}
 		// ##################################################
+		// End Pureport HACKAGE!!!
+		// ##################################################
+
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
@@ -208,41 +196,7 @@ func (a *ConnectionsApiService) DeleteConnection(ctx context.Context, connection
 		// ##################################################
 		// Pureport HACKAGE!!!
 		// ##################################################
-		// Decode as a Base Connection first to get the type
-		var base Connection
-		err = a.client.decode(&base, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		if err != nil {
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-		// Check the Connection type and decode as sub type
-		switch base.Type_ {
-		case "AWS_DIRECT_CONNECT":
-
-			var c = AwsDirectConnectConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		case "AZURE_EXPRESS_ROUTE":
-			var c = AzureExpressRouteConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		case "GOOGLE_CLOUD_INTERCONNECT":
-			var c = GoogleCloudInterconnectConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		case "SITE_IPSEC_VPN":
-			var c = SiteIpSecVpnConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		default:
-			var c = DummyConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-		}
-
+		localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 		// ##################################################
 		// End Pureport HACKAGE!!!
 		// ##################################################
@@ -405,41 +359,7 @@ func (a *ConnectionsApiService) GetConnection(ctx context.Context, connectionId 
 		// ##################################################
 		// Pureport HACKAGE!!!
 		// ##################################################
-		// Decode as a Base Connection first to get the type
-		var base Connection
-		err = a.client.decode(&base, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		if err != nil {
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-
-		// Check the Connection type and decode as sub type
-		switch base.Type_ {
-		case "AWS_DIRECT_CONNECT":
-
-			var c = AwsDirectConnectConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		case "AZURE_EXPRESS_ROUTE":
-			var c = AzureExpressRouteConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		case "GOOGLE_CLOUD_INTERCONNECT":
-			var c = GoogleCloudInterconnectConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		case "SITE_IPSEC_VPN":
-			var c = SiteIpSecVpnConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		default:
-			var c = DummyConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-		}
+		localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 		// ##################################################
 		// End Pureport HACKAGE!!!
 		// ##################################################
@@ -594,27 +514,15 @@ func (a *ConnectionsApiService) UpdateConnection(ctx context.Context, connection
 		// ##################################################
 		// Pureport HACKAGE!!!
 		// ##################################################
-		// Decode as a Base Connection first to get the type
-		switch body := localVarOptionals.Body.Value().(type) {
-		case AwsDirectConnectConnection:
+		if body, err := ValidateConnection(localVarOptionals.Body.Value()); err != nil {
+			return nil, nil, reportError("body should be valid Connection")
+		} else {
 			localVarPostBody = body
-
-		case AzureExpressRouteConnection:
-			localVarPostBody = body
-
-		case GoogleCloudInterconnectConnection:
-			localVarPostBody = body
-
-		case DummyConnection:
-			localVarPostBody = body
-
-		case SiteIpSecVpnConnection:
-			localVarPostBody = body
-
-		default:
-			return localVarReturnValue, nil, reportError("body should be Connection")
 		}
 		// ##################################################
+		// End Pureport HACKAGE!!!
+		// ##################################################
+
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
@@ -637,41 +545,7 @@ func (a *ConnectionsApiService) UpdateConnection(ctx context.Context, connection
 		// ##################################################
 		// Pureport HACKAGE!!!
 		// ##################################################
-		// Decode as a Base Connection first to get the type
-		var base Connection
-		err = a.client.decode(&base, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		if err != nil {
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-		// Check the Connection type and decode as sub type
-		switch base.Type_ {
-		case "AWS_DIRECT_CONNECT":
-
-			var c = AwsDirectConnectConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		case "AZURE_EXPRESS_ROUTE":
-			var c = AzureExpressRouteConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		case "GOOGLE_CLOUD_INTERCONNECT":
-			var c = GoogleCloudInterconnectConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		case "SITE_IPSEC_VPN":
-			var c = SiteIpSecVpnConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-
-		default:
-			var c = DummyConnection{}
-			err = a.client.decode(&c, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			localVarReturnValue = c
-		}
-
+		localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 		// ##################################################
 		// End Pureport HACKAGE!!!
 		// ##################################################
