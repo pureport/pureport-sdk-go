@@ -81,7 +81,7 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
 
 		// ##################################################
-		// Pureport HACKAGE!!!
+		// Pureport (start)
 		// ##################################################
 		if body, err := ValidateConnection(localVarOptionals.Body.Value()); err != nil {
 			return nil, reportError("body should be valid Connection")
@@ -89,7 +89,7 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 			localVarPostBody = body
 		}
 		// ##################################################
-		// End Pureport HACKAGE!!!
+		// Pureport (end)
 		// ##################################################
 
 	}
@@ -194,11 +194,11 @@ func (a *ConnectionsApiService) DeleteConnection(ctx context.Context, connection
 	if localVarHttpResponse.StatusCode < 300 {
 
 		// ##################################################
-		// Pureport HACKAGE!!!
+		// Pureport (start)
 		// ##################################################
 		localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 		// ##################################################
-		// End Pureport HACKAGE!!!
+		// Pureport (end)
 		// ##################################################
 
 		// If we succeed, return the data, otherwise pass on to decode error.
@@ -357,11 +357,11 @@ func (a *ConnectionsApiService) GetConnection(ctx context.Context, connectionId 
 	if localVarHttpResponse.StatusCode < 300 {
 
 		// ##################################################
-		// Pureport HACKAGE!!!
+		// Pureport (start)
 		// ##################################################
 		localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 		// ##################################################
-		// End Pureport HACKAGE!!!
+		// Pureport (end)
 		// ##################################################
 
 		// If we succeed, return the data, otherwise pass on to decode error.
@@ -512,7 +512,7 @@ func (a *ConnectionsApiService) UpdateConnection(ctx context.Context, connection
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
 
 		// ##################################################
-		// Pureport HACKAGE!!!
+		// Pureport (start)
 		// ##################################################
 		if body, err := ValidateConnection(localVarOptionals.Body.Value()); err != nil {
 			return nil, nil, reportError("body should be valid Connection")
@@ -520,7 +520,7 @@ func (a *ConnectionsApiService) UpdateConnection(ctx context.Context, connection
 			localVarPostBody = body
 		}
 		// ##################################################
-		// End Pureport HACKAGE!!!
+		// Pureport (end)
 		// ##################################################
 
 	}
@@ -543,11 +543,11 @@ func (a *ConnectionsApiService) UpdateConnection(ctx context.Context, connection
 	if localVarHttpResponse.StatusCode < 300 {
 
 		// ##################################################
-		// Pureport HACKAGE!!!
+		// Pureport (start)
 		// ##################################################
 		localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 		// ##################################################
-		// End Pureport HACKAGE!!!
+		// Pureport (end)
 		// ##################################################
 
 		// If we succeed, return the data, otherwise pass on to decode error.
