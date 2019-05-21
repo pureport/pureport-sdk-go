@@ -41,6 +41,15 @@ type Configuration struct {
 
 	// UserAgent to use for the http client
 	UserAgent string
+
+	// Pureport API Key
+	APIKey string
+
+	// Pureport Secret Access Key
+	APISecret string
+
+	// Pureport Authentication Profile
+	AuthenticationProfile string
 }
 
 // NewConfiguration creates a new configuration to application

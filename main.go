@@ -25,7 +25,7 @@ func main() {
 	sp, r, err := s.Client.AccountsApi.FindAllAccounts(ctx, opts)
 
 	if err != nil {
-		log.Info(r)
+		log.Info(err)
 		log.Fatalf("Error while querying SupportedConnections.")
 	}
 

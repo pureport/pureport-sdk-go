@@ -8,9 +8,12 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/op/go-logging"
 	"github.com/pureport/pureport-sdk-go/pureport"
 	"github.com/pureport/pureport-sdk-go/pureport/credentials"
 )
+
+var log = logging.MustGetLogger("main_logger")
 
 const providerName = "EndpointCredentialsProvider"
 
@@ -81,12 +84,14 @@ func (p *Provider) Retrieve() (credentials.Value, error) {
 	// Create the HTTP Request
 	resp, err := p.Client.Post(fmt.Sprintf("%s/login", p.EndPoint), "application/json", buf)
 	if err != nil {
+		log.Errorf("HTTP Response: %s Error: %s", resp, err)
 		return credentials.Value{ProviderName: providerName}, fmt.Errorf("Error creating credentials login request")
 	}
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		log.Errorf("HTTP Body: %s, Error: %s", string(body), err)
 		return credentials.Value{ProviderName: providerName}, fmt.Errorf("Error reading credential request body")
 	}
 
