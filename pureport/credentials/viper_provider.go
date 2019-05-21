@@ -72,6 +72,10 @@ func (p *ViperProvider) Retrieve() (Value, error) {
 	key := vip.GetString(configAPIKeyStr)
 	secret := vip.GetString(configAPISecretStr)
 
+	if p.Profile == "" {
+		p.Profile = vip.GetString(configAPIProfileStr)
+	}
+
 	// Read from configuration file
 	if key == "" || secret == "" {
 		key = vip.GetString(fmt.Sprintf("profiles.%s.%s", p.Profile, configAPIKeyStr))
