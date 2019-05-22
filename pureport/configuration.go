@@ -62,9 +62,8 @@ func NewConfiguration() *Configuration {
 
 	endpoint := vip.GetString(endpointEnvStr)
 
-	// Trim any trailing slashes in the endpoint if they exist
 	return &Configuration{
 		Timeout:  (time.Minute * 2),
-		EndPoint: strings.TrimRight(endpoint, "/"),
+		EndPoint: endpoint,
 	}
 }

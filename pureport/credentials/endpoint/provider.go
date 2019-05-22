@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/op/go-logging"
@@ -44,11 +45,13 @@ type loginResponse struct {
 }
 
 func newEndpointProvider(cfg pureport.Configuration, endpoint string, cred *credentials.Credentials) credentials.Provider {
+
 	return &Provider{
 		Client: &http.Client{
 			Timeout: cfg.Timeout,
 		},
-		EndPoint:    endpoint,
+		// Trim any trailing slashes in the endpoint if they exist
+		EndPoint:    strings.TrimRight(endpoint, "/"),
 		Credentials: cred,
 	}
 }
@@ -81,7 +84,7 @@ func (p *Provider) Retrieve() (credentials.Value, error) {
 
 	buf := bytes.NewBuffer(jsonValue)
 
-	log.Debugf("Logging in to EndPoint: %s", p.EndPoint)
+	log.Debugf("Logging in to EndPoint: %s/login", p.EndPoint)
 
 	// Create the HTTP Request
 	resp, err := p.Client.Post(fmt.Sprintf("%s/login", p.EndPoint), "application/json", buf)
