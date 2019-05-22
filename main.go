@@ -16,6 +16,8 @@ func main() {
 	cfg := pureport.NewConfiguration()
 
 	logCfg := ppLog.NewLogConfig()
+	logCfg.Level = "debug"
+
 	ppLog.SetupLogger(logCfg)
 
 	s := session.NewSession(cfg)
