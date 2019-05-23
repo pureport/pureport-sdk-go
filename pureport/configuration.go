@@ -41,6 +41,15 @@ type Configuration struct {
 
 	// UserAgent to use for the http client
 	UserAgent string
+
+	// Pureport API Key
+	APIKey string
+
+	// Pureport Secret Access Key
+	APISecret string
+
+	// Pureport Authentication Profile
+	AuthenticationProfile string
 }
 
 // NewConfiguration creates a new configuration to application
@@ -53,9 +62,8 @@ func NewConfiguration() *Configuration {
 
 	endpoint := vip.GetString(endpointEnvStr)
 
-	// Trim any trailing slashes in the endpoint if they exist
 	return &Configuration{
 		Timeout:  (time.Minute * 2),
-		EndPoint: strings.TrimRight(endpoint, "/"),
+		EndPoint: endpoint,
 	}
 }

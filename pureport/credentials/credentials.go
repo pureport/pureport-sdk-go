@@ -87,6 +87,24 @@ func NewCredentials(provider Provider) *Credentials {
 	}
 }
 
+func (c *Credentials) printCredentials() {
+
+	printPwd := ""
+	runeCount := 0
+
+	for _, char := range c.credentials.Secret {
+		runeCount++
+
+		if runeCount < 5 {
+			printPwd += string(char)
+		} else {
+			printPwd += "*"
+		}
+	}
+
+	log.Debugf("Found Credentials: key=%s, secret=%s", c.credentials.APIKey, printPwd)
+}
+
 // Get the current value of the credentials
 func (c *Credentials) Get() (Value, error) {
 	c.m.RLock()
@@ -95,6 +113,8 @@ func (c *Credentials) Get() (Value, error) {
 	if !c.isExpired() {
 		credentials := c.credentials
 		c.m.RUnlock()
+
+		c.printCredentials()
 		return credentials, nil
 	}
 	c.m.RUnlock()
@@ -112,6 +132,8 @@ func (c *Credentials) Get() (Value, error) {
 		c.credentials = credentials
 		c.forceRefresh = false
 	}
+
+	c.printCredentials()
 
 	return c.credentials, nil
 }

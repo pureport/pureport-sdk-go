@@ -16,6 +16,8 @@ func main() {
 	cfg := pureport.NewConfiguration()
 
 	logCfg := ppLog.NewLogConfig()
+	logCfg.Level = "debug"
+
 	ppLog.SetupLogger(logCfg)
 
 	s := session.NewSession(cfg)
@@ -25,7 +27,7 @@ func main() {
 	sp, r, err := s.Client.AccountsApi.FindAllAccounts(ctx, opts)
 
 	if err != nil {
-		log.Info(r)
+		log.Info(err)
 		log.Fatalf("Error while querying SupportedConnections.")
 	}
 

@@ -38,7 +38,15 @@ func createClient(cfg *pureport.Configuration) *client.APIClient {
 
 func createCredentials(cfg *pureport.Configuration) *credentials.Credentials {
 
-	cred := credentials.NewViperCredentials("")
+	cred := credentials.NewChainCredentials([]credentials.Provider{
+		&credentials.StaticProvider{
+			APIKey:    cfg.APIKey,
+			APISecret: cfg.APISecret,
+		},
+		&credentials.ViperProvider{
+			Profile: cfg.AuthenticationProfile,
+		},
+	})
 
 	return endpoint.NewEndPointCredentials(*cfg, cfg.EndPoint, cred)
 }
