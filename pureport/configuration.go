@@ -27,7 +27,7 @@ func init() {
 	vip.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	vip.BindEnv(endpointEnvStr)
 
-	vip.SetDefault(endpointEnvStr, "http://api.pureport.com")
+	vip.SetDefault(endpointEnvStr, "https://api.pureport.com")
 }
 
 // Configuration - Application level configuration data
