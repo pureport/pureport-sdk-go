@@ -104,11 +104,12 @@ get-deps-x-tests:
 
 get-deps-verify:
 	@echo "go get SDK verification utilities"
-	go get golang.org/x/lint/golint
+	GO111MODULE=on go install github.com/client9/misspell/cmd/misspell
+	GO111MODULE=on go install github.com/golangci/golangci-lint/cmd/golangci-lint
 
 get-deps-tools:
 	@echo "go get SDK verification utilities"
-	go get golang.org/x/tools/cmd/stringer
+	GO111MODULE=on go get golang.org/x/tools/cmd/stringer
 
 # --------------------------------------------------
 #  Benchmarks
