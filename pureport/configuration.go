@@ -25,7 +25,7 @@ func init() {
 
 	vip.SetEnvPrefix("pureport")
 	vip.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
-	vip.BindEnv(endpointEnvStr)
+	_ = vip.BindEnv(endpointEnvStr)
 
 	vip.SetDefault(endpointEnvStr, "https://api.pureport.com")
 }
