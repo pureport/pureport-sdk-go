@@ -1,3 +1,5 @@
+PKG_NAME=pureport
+
 LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNORESWAGGER='pureport/client/.+\.go'
 LINTIGNOREENCRYPTION='pureport/encryption/.+\.go'
@@ -82,10 +84,7 @@ verify: lint vet
 
 lint:
 	@echo "go lint SDK and vendor packages"
-	@lint=`golint ./...`; \
-	dolint=`echo "$$lint" | grep -E -v -e ${LINTIGNOREDEPS} -e ${LINTIGNORESWAGGER} -e ${LINTIGNOREENCRYPTION}`; \
-	echo "$$dolint"; \
-	if [ "$$dolint" != "" ]; then exit 1; fi
+	@GOGC=30 golangci-lint run ./$(PKG_NAME)
 
 vet:
 	go vet --all ${SDK_ALL_PKGS}

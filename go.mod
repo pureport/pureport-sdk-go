@@ -3,8 +3,8 @@ module github.com/pureport/pureport-sdk-go
 go 1.12
 
 require (
-	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/antihax/optional v0.0.0-20180407024304-ca021399b1a6
+	github.com/golangci/golangci-lint v1.16.1-0.20190425135923-692dacb773b7 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/spf13/viper v1.3.2
