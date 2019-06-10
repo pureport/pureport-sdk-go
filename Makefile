@@ -1,3 +1,5 @@
+PKG_NAME=pureport
+
 LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNORESWAGGER='pureport/client/.+\.go'
 LINTIGNOREENCRYPTION='pureport/encryption/.+\.go'
@@ -82,10 +84,7 @@ verify: lint vet
 
 lint:
 	@echo "go lint SDK and vendor packages"
-	@lint=`golint ./...`; \
-	dolint=`echo "$$lint" | grep -E -v -e ${LINTIGNOREDEPS} -e ${LINTIGNORESWAGGER} -e ${LINTIGNOREENCRYPTION}`; \
-	echo "$$dolint"; \
-	if [ "$$dolint" != "" ]; then exit 1; fi
+	@GOGC=30 golangci-lint run ./$(PKG_NAME)
 
 vet:
 	go vet --all ${SDK_ALL_PKGS}
@@ -105,11 +104,12 @@ get-deps-x-tests:
 
 get-deps-verify:
 	@echo "go get SDK verification utilities"
-	go get golang.org/x/lint/golint
+	GO111MODULE=on go install github.com/client9/misspell/cmd/misspell
+	GO111MODULE=on go install github.com/golangci/golangci-lint/cmd/golangci-lint
 
 get-deps-tools:
 	@echo "go get SDK verification utilities"
-	go get golang.org/x/tools/cmd/stringer
+	GO111MODULE=on go get golang.org/x/tools/cmd/stringer
 
 # --------------------------------------------------
 #  Benchmarks
