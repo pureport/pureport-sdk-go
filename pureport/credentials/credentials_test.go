@@ -106,7 +106,7 @@ func (p *mockProvider) IsExpired() bool {
 
 func TestCredentialExpiry(t *testing.T) {
 	m := mockProvider{}
-	m.Expiry.SetExpiration(time.Now().Add(time.Second*5), 0)
+	m.Expiry.SetExpiration(time.Now().Add(5*time.Second), 0)
 
 	c := NewCredentials(&m)
 	_, _ = c.Get()
