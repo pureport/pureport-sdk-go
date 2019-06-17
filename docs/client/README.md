@@ -17,7 +17,7 @@ import "./client"
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.pureport.com*
+All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -78,12 +78,13 @@ Class | Method | HTTP request | Description
 *NetworksApi* | [**UpdateNetwork**](docs/NetworksApi.md#updatenetwork) | **Put** /networks/{networkId} | Update network
 *OptionsApi* | [**GetOptions**](docs/OptionsApi.md#getoptions) | **Get** /options | Get available options
 *PortsApi* | [**AddPort**](docs/PortsApi.md#addport) | **Post** /accounts/{accountId}/ports | Add new port
-*PortsApi* | [**DeleteNetwork1**](docs/PortsApi.md#deletenetwork1) | **Delete** /ports/{portId} | Delete port
+*PortsApi* | [**DeletePort**](docs/PortsApi.md#deleteport) | **Delete** /ports/{portId} | Delete port
 *PortsApi* | [**FindPorts**](docs/PortsApi.md#findports) | **Get** /accounts/{accountId}/ports | List ports
 *PortsApi* | [**GetPort**](docs/PortsApi.md#getport) | **Get** /ports/{portId} | Get port details
-*PortsApi* | [**UpdateNetwork1**](docs/PortsApi.md#updatenetwork1) | **Put** /ports/{portId} | Update port
+*PortsApi* | [**GetPortLOA**](docs/PortsApi.md#getportloa) | **Get** /ports/{portId}/loa | Get port letter of authorization
+*PortsApi* | [**UpdatePort**](docs/PortsApi.md#updateport) | **Put** /ports/{portId} | Update port
+*SupportedConnectionsApi* | [**GetAccountSupportedConnections**](docs/SupportedConnectionsApi.md#getaccountsupportedconnections) | **Get** /accounts/{accountId}/supportedConnections | List supported connections
 *SupportedConnectionsApi* | [**GetSupportedConnection**](docs/SupportedConnectionsApi.md#getsupportedconnection) | **Get** /supportedConnections/{supportedConnectionId} | Get supported connection details
-*SupportedConnectionsApi* | [**GetSupportedConnections1**](docs/SupportedConnectionsApi.md#getsupportedconnections1) | **Get** /accounts/{accountId}/supportedConnections | List supported connections
 *SupportedPortsApi* | [**GetSupportedPorts**](docs/SupportedPortsApi.md#getsupportedports) | **Get** /accounts/{accountId}/supportedPorts | List supported ports
 *UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Get user details
 *UsersApi* | [**UpdateUser**](docs/UsersApi.md#updateuser) | **Put** /users/{userId} | Update user

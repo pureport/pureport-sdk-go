@@ -4,30 +4,30 @@ info:
   description: "Pureport API"
   version: "1.0.0"
   title: "Pureport Control Plane"
-host: "api.pureport.com"
+host: "localhost:8080"
 basePath: "/"
 tags:
-- name: "options"
-- name: "cloud services"
+- name: "accounts"
+- name: "connections"
 - name: "account invitations"
 - name: "networks"
-- name: "connections"
 - name: "ports"
 - name: "supported connections"
-- name: "cloud regions"
-- name: "locations"
-- name: "auth"
-- name: "users"
-- name: "account roles"
-- name: "accounts"
+- name: "account members"
+- name: "apikeys"
 - name: "billing"
 - name: "account consent"
 - name: "supported ports"
-- name: "apikeys"
-- name: "account members"
+- name: "account roles"
+- name: "cloud regions"
 - name: "facilities"
+- name: "locations"
+- name: "auth"
+- name: "users"
+- name: "options"
+- name: "cloud services"
 schemes:
-- "https"
+- "http"
 paths:
   /accounts:
     get:
@@ -950,7 +950,7 @@ paths:
       - "supported connections"
       summary: "List supported connections"
       description: ""
-      operationId: "getSupportedConnections_1"
+      operationId: "getAccountSupportedConnections"
       produces:
       - "application/json"
       parameters:
@@ -1429,7 +1429,7 @@ paths:
       - "ports"
       summary: "Update port"
       description: ""
-      operationId: "updateNetwork_1"
+      operationId: "updatePort"
       consumes:
       - "application/json"
       produces:
@@ -1456,7 +1456,25 @@ paths:
       - "ports"
       summary: "Delete port"
       description: ""
-      operationId: "deleteNetwork_1"
+      operationId: "deletePort"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "portId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "PortId"
+      responses:
+        default:
+          description: "successful operation"
+  /ports/{portId}/loa:
+    get:
+      tags:
+      - "ports"
+      summary: "Get port letter of authorization"
+      description: ""
+      operationId: "getPortLOA"
       produces:
       - "application/json"
       parameters:
@@ -1583,6 +1601,10 @@ definitions:
         uniqueItems: true
         items:
           $ref: "#/definitions/Link"
+      tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
     example:
       parent:
         href: "href"
@@ -1599,6 +1621,8 @@ definitions:
       - href: "href"
         id: "id"
         title: "title"
+      tags:
+        key: "tags"
   AccountBilling:
     type: "object"
     required:
@@ -2381,6 +2405,9 @@ definitions:
         - "GATEWAY_UPDATE_SPEED_ERROR"
         - "GATEWAY_UPDATING_ERROR"
         - "GATEWAY_DELETING_ERROR"
+        - "PORT_PROVISIONING_ERROR"
+        - "PORT_UPDATING_ERROR"
+        - "PORT_DELETING_ERROR"
         - "AWS_CONNECTION_DELETE_ERROR"
         - "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR"
         - "ECX_CONNECTION_DELETE_ERROR"
@@ -2448,6 +2475,10 @@ definitions:
         - "DELETING"
         - "FAILED_TO_DELETE"
         - "DELETED"
+      tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
       type:
         type: "string"
         enum:
@@ -5500,6 +5531,8 @@ definitions:
         href: "href"
         id: "id"
         title: "title"
+      tags:
+        key: "tags"
       createdAt: "2000-01-23T04:56:07.000+00:00"
       activeAt: "2000-01-23T04:56:07.000+00:00"
       deletedAt: "2000-01-23T04:56:07.000+00:00"
@@ -5573,6 +5606,12 @@ definitions:
         type: "string"
         minLength: 1
         maxLength: 64
+      state:
+        type: "string"
+        enum:
+        - "ACTIVE"
+        - "UNAVAILABLE"
+        - "DELETED"
       vendor:
         type: "string"
     example:
@@ -5592,6 +5631,7 @@ definitions:
       name: "name"
       href: "href"
       id: "id"
+      state: "ACTIVE"
   Gateway:
     type: "object"
     discriminator: "type"
@@ -5681,6 +5721,9 @@ definitions:
         - "GATEWAY_UPDATE_SPEED_ERROR"
         - "GATEWAY_UPDATING_ERROR"
         - "GATEWAY_DELETING_ERROR"
+        - "PORT_PROVISIONING_ERROR"
+        - "PORT_UPDATING_ERROR"
+        - "PORT_DELETING_ERROR"
         - "AWS_CONNECTION_DELETE_ERROR"
         - "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR"
         - "ECX_CONNECTION_DELETE_ERROR"
@@ -9157,6 +9200,10 @@ definitions:
         type: "string"
         minLength: 1
         maxLength: 64
+      tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
     example:
       name: "name"
       description: "description"
@@ -9166,6 +9213,8 @@ definitions:
         href: "href"
         id: "id"
         title: "title"
+      tags:
+        key: "tags"
   Option:
     type: "object"
     properties:
@@ -9274,6 +9323,8 @@ definitions:
         - "TWO_YEAR"
       description:
         type: "string"
+        minLength: 0
+        maxLength: 1024
       facility:
         $ref: "#/definitions/Link"
       href:
@@ -9298,16 +9349,18 @@ definitions:
         - "LR4"
         - "ER4"
         - "ZR4"
+        - "CWDM4"
+        - "CDWM4"
+        - "ER4_LITE"
       name:
         type: "string"
+        minLength: 1
+        maxLength: 64
       provider:
         type: "string"
         enum:
         - "PUREPORT"
         - "PACKET_FABRIC"
-      providerAssignedId:
-        type: "string"
-        readOnly: true
       speed:
         type: "integer"
         format: "int32"
@@ -9322,12 +9375,18 @@ definitions:
         - "REQUESTED"
         - "ACTIVE"
         - "DELETED"
+      tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
     example:
       availabilityDomain: "PRIMARY"
       billingTerm: "HOURLY"
       description: "description"
       mediaType: "FX"
       speed: 0
+      tags:
+        key: "tags"
       provider: "PUREPORT"
       name: "name"
       href: "href"
@@ -9337,7 +9396,6 @@ definitions:
         href: "href"
         id: "id"
         title: "title"
-      providerAssignedId: "providerAssignedId"
       account:
         href: "href"
         id: "id"
@@ -9774,6 +9832,9 @@ definitions:
           - "LR4"
           - "ER4"
           - "ZR4"
+          - "CWDM4"
+          - "CDWM4"
+          - "ER4_LITE"
       provider:
         type: "string"
         readOnly: true

@@ -71,6 +71,12 @@
                     },
                     "type": "array",
                     "uniqueItems": true
+                },
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
                 }
             },
             "required": [
@@ -570,6 +576,9 @@
                         "GATEWAY_UPDATE_SPEED_ERROR",
                         "GATEWAY_UPDATING_ERROR",
                         "GATEWAY_DELETING_ERROR",
+                        "PORT_PROVISIONING_ERROR",
+                        "PORT_UPDATING_ERROR",
+                        "PORT_DELETING_ERROR",
                         "AWS_CONNECTION_DELETE_ERROR",
                         "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR",
                         "ECX_CONNECTION_DELETE_ERROR",
@@ -660,6 +669,12 @@
                     "readOnly": true,
                     "type": "string"
                 },
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                },
                 "type": {
                     "enum": [
                         "AWS_DIRECT_CONNECT",
@@ -717,6 +732,14 @@
                 "name": {
                     "maxLength": 64,
                     "minLength": 1,
+                    "type": "string"
+                },
+                "state": {
+                    "enum": [
+                        "ACTIVE",
+                        "UNAVAILABLE",
+                        "DELETED"
+                    ],
                     "type": "string"
                 },
                 "vendor": {
@@ -820,6 +843,9 @@
                         "GATEWAY_UPDATE_SPEED_ERROR",
                         "GATEWAY_UPDATING_ERROR",
                         "GATEWAY_DELETING_ERROR",
+                        "PORT_PROVISIONING_ERROR",
+                        "PORT_UPDATING_ERROR",
+                        "PORT_DELETING_ERROR",
                         "AWS_CONNECTION_DELETE_ERROR",
                         "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR",
                         "ECX_CONNECTION_DELETE_ERROR",
@@ -1365,6 +1391,12 @@
                     "maxLength": 64,
                     "minLength": 1,
                     "type": "string"
+                },
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
                 }
             },
             "type": "object"
@@ -1497,6 +1529,8 @@
                     "type": "string"
                 },
                 "description": {
+                    "maxLength": 1024,
+                    "minLength": 0,
                     "type": "string"
                 },
                 "facility": {
@@ -1525,11 +1559,16 @@
                         "SR4",
                         "LR4",
                         "ER4",
-                        "ZR4"
+                        "ZR4",
+                        "CWDM4",
+                        "CDWM4",
+                        "ER4_LITE"
                     ],
                     "type": "string"
                 },
                 "name": {
+                    "maxLength": 64,
+                    "minLength": 1,
                     "type": "string"
                 },
                 "provider": {
@@ -1537,10 +1576,6 @@
                         "PUREPORT",
                         "PACKET_FABRIC"
                     ],
-                    "type": "string"
-                },
-                "providerAssignedId": {
-                    "readOnly": true,
                     "type": "string"
                 },
                 "speed": {
@@ -1560,6 +1595,12 @@
                     ],
                     "readOnly": true,
                     "type": "string"
+                },
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
                 }
             },
             "required": [
@@ -2110,7 +2151,10 @@
                             "SR4",
                             "LR4",
                             "ER4",
-                            "ZR4"
+                            "ZR4",
+                            "CWDM4",
+                            "CDWM4",
+                            "ER4_LITE"
                         ],
                         "type": "string"
                     },
@@ -4560,6 +4604,32 @@
                 ]
             }
         },
+        "/ports/{portId}/loa": {
+            "get": {
+                "description": "",
+                "operationId": "getPortLOA",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "portId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Get port letter of authorization",
+                "tags": [
+                    "ports"
+                ]
+            }
+        },
         "/supportedConnections/{supportedConnectionId}": {
             "get": {
                 "description": "",
@@ -4671,15 +4741,15 @@
         }
     },
     "schemes": [
-        "https"
+        "http"
     ],
     "swagger": "2.0",
     "tags": [
         {
-            "name": "options"
+            "name": "accounts"
         },
         {
-            "name": "cloud services"
+            "name": "connections"
         },
         {
             "name": "account invitations"
@@ -4688,31 +4758,16 @@
             "name": "networks"
         },
         {
-            "name": "connections"
-        },
-        {
             "name": "ports"
         },
         {
             "name": "supported connections"
         },
         {
-            "name": "cloud regions"
+            "name": "account members"
         },
         {
-            "name": "locations"
-        },
-        {
-            "name": "auth"
-        },
-        {
-            "name": "users"
-        },
-        {
-            "name": "account roles"
-        },
-        {
-            "name": "accounts"
+            "name": "apikeys"
         },
         {
             "name": "billing"
@@ -4724,13 +4779,28 @@
             "name": "supported ports"
         },
         {
-            "name": "apikeys"
+            "name": "account roles"
         },
         {
-            "name": "account members"
+            "name": "cloud regions"
         },
         {
             "name": "facilities"
+        },
+        {
+            "name": "locations"
+        },
+        {
+            "name": "auth"
+        },
+        {
+            "name": "users"
+        },
+        {
+            "name": "options"
+        },
+        {
+            "name": "cloud services"
         }
     ]
 }

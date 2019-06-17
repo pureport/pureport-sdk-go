@@ -119,7 +119,7 @@ PortsApiService Delete port
 
 
 */
-func (a *PortsApiService) DeleteNetwork1(ctx context.Context, portId string) (*http.Response, error) {
+func (a *PortsApiService) DeletePort(ctx context.Context, portId string) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Delete")
 		localVarPostBody   interface{}
@@ -359,21 +359,90 @@ func (a *PortsApiService) GetPort(ctx context.Context, portId string) (Port, *ht
 }
 
 /*
+PortsApiService Get port letter of authorization
+
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param portId
+
+
+*/
+func (a *PortsApiService) GetPortLOA(ctx context.Context, portId string) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/ports/{portId}/loa"
+	localVarPath = strings.Replace(localVarPath, "{"+"portId"+"}", fmt.Sprintf("%v", portId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
 PortsApiService Update port
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param portId
- * @param optional nil or *UpdateNetwork1Opts - Optional Parameters:
+ * @param optional nil or *UpdatePortOpts - Optional Parameters:
      * @param "Body" (optional.Interface of Port) -
 
 @return Port
 */
 
-type UpdateNetwork1Opts struct {
+type UpdatePortOpts struct {
 	Body optional.Interface
 }
 
-func (a *PortsApiService) UpdateNetwork1(ctx context.Context, portId string, localVarOptionals *UpdateNetwork1Opts) (Port, *http.Response, error) {
+func (a *PortsApiService) UpdatePort(ctx context.Context, portId string, localVarOptionals *UpdatePortOpts) (Port, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}

@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 **MediaType** | **string** |  | 
 **Name** | **string** |  | 
 **Provider** | **string** |  | 
-**ProviderAssignedId** | **string** |  | [optional] 
 **Speed** | **int32** |  | 
 **State** | **string** |  | [optional] 
+**Tags** | **map[string]string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

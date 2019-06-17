@@ -15,5 +15,6 @@ type Facility struct {
 	Href    string                 `json:"href,omitempty"`
 	Id      string                 `json:"id,omitempty"`
 	Name    string                 `json:"name"`
+	State   string                 `json:"state,omitempty"`
 	Vendor  string                 `json:"vendor,omitempty"`
 }

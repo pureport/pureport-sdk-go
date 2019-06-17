@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **SecondaryGateway** | [***Gateway**](Gateway.md) |  | [optional] 
 **Speed** | **int32** |  | 
 **State** | **string** |  | [optional] 
+**Tags** | **map[string]string** |  | [optional] 
 **Type_** | **string** |  | 
 **Peering** | [***PeeringConfiguration**](PeeringConfiguration.md) |  | [optional] 
 **ServiceKey** | **string** |  | 

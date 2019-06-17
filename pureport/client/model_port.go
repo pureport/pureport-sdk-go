@@ -10,17 +10,17 @@
 package client
 
 type Port struct {
-	Account            *Link  `json:"account,omitempty"`
-	AvailabilityDomain string `json:"availabilityDomain"`
-	BillingTerm        string `json:"billingTerm"`
-	Description        string `json:"description,omitempty"`
-	Facility           *Link  `json:"facility"`
-	Href               string `json:"href,omitempty"`
-	Id                 string `json:"id,omitempty"`
-	MediaType          string `json:"mediaType"`
-	Name               string `json:"name"`
-	Provider           string `json:"provider"`
-	ProviderAssignedId string `json:"providerAssignedId,omitempty"`
-	Speed              int32  `json:"speed"`
-	State              string `json:"state,omitempty"`
+	Account            *Link             `json:"account,omitempty"`
+	AvailabilityDomain string            `json:"availabilityDomain"`
+	BillingTerm        string            `json:"billingTerm"`
+	Description        string            `json:"description,omitempty"`
+	Facility           *Link             `json:"facility"`
+	Href               string            `json:"href,omitempty"`
+	Id                 string            `json:"id,omitempty"`
+	MediaType          string            `json:"mediaType"`
+	Name               string            `json:"name"`
+	Provider           string            `json:"provider"`
+	Speed              int32             `json:"speed"`
+	State              string            `json:"state,omitempty"`
+	Tags               map[string]string `json:"tags,omitempty"`
 }
