@@ -1,16 +1,16 @@
-# pureport\client\UsersApi
+# pureport\client\AuthApi
 
 All URIs are relative to *https://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetUser**](UsersApi.md#GetUser) | **Get** /users/{userId} | Get user details
-[**UpdateUser**](UsersApi.md#UpdateUser) | **Put** /users/{userId} | Update user
+[**Login**](AuthApi.md#Login) | **Post** /login | Login with an API Key
+[**LoginWithRefreshToken**](AuthApi.md#LoginWithRefreshToken) | **Post** /login/refresh | Login with a refresh token
 
 
-# **GetUser**
-> User GetUser(ctx, userId)
-Get user details
+# **Login**
+> Login(ctx, optional)
+Login with an API Key
 
 
 
@@ -19,11 +19,18 @@ Get user details
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **userId** | **string**|  | 
+ **optional** | ***LoginOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a LoginOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**optional.Interface of LoginRequest**](LoginRequest.md)|  | 
 
 ### Return type
 
-[**User**](User.md)
+ (empty response body)
 
 ### Authorization
 
@@ -31,14 +38,14 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **UpdateUser**
-> User UpdateUser(ctx, userId, optional)
-Update user
+# **LoginWithRefreshToken**
+> LoginWithRefreshToken(ctx, optional)
+Login with a refresh token
 
 
 
@@ -47,20 +54,18 @@ Update user
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **userId** | **string**|  | 
- **optional** | ***UpdateUserOpts** | optional parameters | nil if no parameters
+ **optional** | ***LoginWithRefreshTokenOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a UpdateUserOpts struct
+Optional parameters are passed through a pointer to a LoginWithRefreshTokenOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **body** | [**optional.Interface of User**](User.md)|  | 
+ **body** | [**optional.Interface of LoginWithRefreshTokenRequest**](LoginWithRefreshTokenRequest.md)|  | 
 
 ### Return type
 
-[**User**](User.md)
+ (empty response body)
 
 ### Authorization
 
@@ -68,7 +73,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

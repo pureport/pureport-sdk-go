@@ -1,15 +1,15 @@
-# pureport\client\OptionsApi
+# pureport\client\SupportedPortsApi
 
 All URIs are relative to *https://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetOptions**](OptionsApi.md#GetOptions) | **Get** /options | Get available options
+[**GetSupportedPorts**](SupportedPortsApi.md#GetSupportedPorts) | **Get** /accounts/{accountId}/supportedPorts | List supported ports
 
 
-# **GetOptions**
-> map[string][]Option GetOptions(ctx, optional)
-Get available options
+# **GetSupportedPorts**
+> []SupportedPort GetSupportedPorts(ctx, facility, accountId)
+List supported ports
 
 
 
@@ -18,18 +18,12 @@ Get available options
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***GetOptionsOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a GetOptionsOpts struct
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **type_** | [**optional.Interface of []string**](string.md)|  | 
+  **facility** | **string**|  | 
+  **accountId** | **string**|  | 
 
 ### Return type
 
-[**map[string][]Option**](array.md)
+[**[]SupportedPort**](SupportedPort.md)
 
 ### Authorization
 

@@ -1,13 +1,14 @@
-# BillingPlan
+# Facility
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **int64** |  | [optional] 
-**BillingInterval** | **string** |  | [optional] 
+**Address** | [***PhysicalAddress**](PhysicalAddress.md) |  | 
+**AltIds** | [**map[string]interface{}**](interface{}.md) |  | [optional] 
+**Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
-**SetupAmount** | **int64** |  | [optional] 
-**Term** | **string** |  | [optional] 
+**Name** | **string** |  | 
+**Vendor** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

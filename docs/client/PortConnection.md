@@ -1,4 +1,4 @@
-# DummyConnection
+# PortConnection
 
 ## Properties
 Name | Type | Description | Notes
@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **BillingPlan** | [***BillingPlan**](BillingPlan.md) |  | [optional] 
 **BillingTerm** | **string** |  | 
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] 
-**CustomerASN** | **int64** |  | [optional] 
+**CustomerASN** | **int64** |  | 
 **CustomerNetworks** | [**[]CustomerNetwork**](CustomerNetwork.md) |  | [optional] 
 **DeletedAt** | [**time.Time**](time.Time.md) |  | [optional] 
 **Description** | **string** |  | [optional] 
@@ -25,7 +25,10 @@ Name | Type | Description | Notes
 **Speed** | **int32** |  | 
 **State** | **string** |  | [optional] 
 **Type_** | **string** |  | 
-**Peering** | [***PeeringConfiguration**](PeeringConfiguration.md) |  | [optional] 
+**PrimaryCustomerVlan** | **int32** |  | [optional] 
+**PrimaryPort** | [***Link**](Link.md) |  | 
+**SecondaryCustomerVlan** | **int32** |  | [optional] 
+**SecondaryPort** | [***Link**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

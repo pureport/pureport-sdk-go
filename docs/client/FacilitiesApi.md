@@ -1,29 +1,25 @@
-# pureport\client\SupportedConnectionsApi
+# pureport\client\FacilitiesApi
 
 All URIs are relative to *https://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetSupportedConnection**](SupportedConnectionsApi.md#GetSupportedConnection) | **Get** /supportedConnections/{supportedConnectionId} | Get supported connection details
-[**GetSupportedConnections1**](SupportedConnectionsApi.md#GetSupportedConnections1) | **Get** /accounts/{accountId}/supportedConnections | List supported connections
+[**FindFacilities**](FacilitiesApi.md#FindFacilities) | **Get** /facilities | List facilities
+[**GetFacility**](FacilitiesApi.md#GetFacility) | **Get** /facilities/{facilityId} | Get facility details
 
 
-# **GetSupportedConnection**
-> SupportedConnection GetSupportedConnection(ctx, supportedConnectionId)
-Get supported connection details
+# **FindFacilities**
+> []Facility FindFacilities(ctx, )
+List facilities
 
 
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **supportedConnectionId** | **string**|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**SupportedConnection**](SupportedConnection.md)
+[**[]Facility**](Facility.md)
 
 ### Authorization
 
@@ -36,9 +32,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetSupportedConnections1**
-> []SupportedConnection GetSupportedConnections1(ctx, accountId)
-List supported connections
+# **GetFacility**
+> Facility GetFacility(ctx, facilityId)
+Get facility details
 
 
 
@@ -47,11 +43,11 @@ List supported connections
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **accountId** | **string**|  | 
+  **facilityId** | **string**|  | 
 
 ### Return type
 
-[**[]SupportedConnection**](SupportedConnection.md)
+[**Facility**](Facility.md)
 
 ### Authorization
 

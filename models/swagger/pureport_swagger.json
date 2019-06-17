@@ -175,6 +175,19 @@
             ],
             "type": "object"
         },
+        "AccountInvoice": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "invoice": {
+                    "description": "The Stripe Invoice object (https://stripe.com/docs/api/invoices/object)",
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
         "AccountMember": {
             "properties": {
                 "account": {
@@ -319,6 +332,7 @@
                 },
                 "billingInterval": {
                     "enum": [
+                        "ONCE",
                         "DAY",
                         "WEEK",
                         "MONTH",
@@ -329,9 +343,16 @@
                 "id": {
                     "type": "string"
                 },
+                "setupAmount": {
+                    "format": "int64",
+                    "type": "integer"
+                },
                 "term": {
                     "enum": [
-                        "HOURLY"
+                        "HOURLY",
+                        "MONTHLY",
+                        "ONE_YEAR",
+                        "TWO_YEAR"
                     ],
                     "type": "string"
                 }
@@ -443,7 +464,10 @@
                 },
                 "billingTerm": {
                     "enum": [
-                        "HOURLY"
+                        "HOURLY",
+                        "MONTHLY",
+                        "ONE_YEAR",
+                        "TWO_YEAR"
                     ],
                     "type": "string"
                 },
@@ -500,6 +524,7 @@
                         "CONNECTION_UPDATE_STATE_CONFLICT",
                         "CONNECTION_DELETE_STATE_CONFLICT",
                         "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
+                        "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
                         "CONSENT_REQUIRED",
                         "ACCOUNT_ALREADY_CONSENTED",
                         "ACCOUNT_MEMBER_ALREADY_EXISTS",
@@ -515,11 +540,13 @@
                         "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH",
                         "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
                         "NO_SUPPORTED_CONNECTION_FOR_CONNECTION",
+                        "NO_SUPPORTED_PORT_FOR_PORT",
                         "UNSUPPORTED_RESOURCE_LIMIT",
                         "MODIFICATION_NOT_ALLOWED",
                         "AWS_CONNECTION_SPEED_IMMUTABLE",
                         "INVALID_VLAN",
                         "INVALID_VLAN_RANGE",
+                        "VLAN_IN_USE",
                         "INVALID_CUSTOMER_ASN",
                         "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS",
                         "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK",
@@ -639,7 +666,7 @@
                         "AZURE_EXPRESS_ROUTE",
                         "GOOGLE_CLOUD_INTERCONNECT",
                         "SITE_IPSEC_VPN",
-                        "DUMMY"
+                        "PORT"
                     ],
                     "type": "string"
                 }
@@ -667,23 +694,40 @@
             ],
             "type": "object"
         },
-        "DummyConnection": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Connection",
-                    "originalRef": "Connection"
+        "Facility": {
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/PhysicalAddress",
+                    "originalRef": "PhysicalAddress"
                 },
-                {
-                    "properties": {
-                        "peering": {
-                            "$ref": "#/definitions/PeeringConfiguration",
-                            "originalRef": "PeeringConfiguration",
-                            "readOnly": true
-                        }
+                "altIds": {
+                    "additionalProperties": {
+                        "type": "object"
                     },
                     "type": "object"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "name": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "vendor": {
+                    "type": "string"
                 }
-            ]
+            },
+            "required": [
+                "address",
+                "name"
+            ],
+            "type": "object"
         },
         "Gateway": {
             "discriminator": "type",
@@ -730,6 +774,7 @@
                         "CONNECTION_UPDATE_STATE_CONFLICT",
                         "CONNECTION_DELETE_STATE_CONFLICT",
                         "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
+                        "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
                         "CONSENT_REQUIRED",
                         "ACCOUNT_ALREADY_CONSENTED",
                         "ACCOUNT_MEMBER_ALREADY_EXISTS",
@@ -745,11 +790,13 @@
                         "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH",
                         "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
                         "NO_SUPPORTED_CONNECTION_FOR_CONNECTION",
+                        "NO_SUPPORTED_PORT_FOR_PORT",
                         "UNSUPPORTED_RESOURCE_LIMIT",
                         "MODIFICATION_NOT_ALLOWED",
                         "AWS_CONNECTION_SPEED_IMMUTABLE",
                         "INVALID_VLAN",
                         "INVALID_VLAN_RANGE",
+                        "VLAN_IN_USE",
                         "INVALID_CUSTOMER_ASN",
                         "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS",
                         "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK",
@@ -1115,10 +1162,7 @@
                         "AES_256_GCM_96",
                         "AES_128_GCM_128",
                         "AES_192_GCM_128",
-                        "AES_256_GCM_128",
-                        "AES_128_GMAC",
-                        "AES_192_GMAC",
-                        "AES_256_GMAC"
+                        "AES_256_GCM_128"
                     ],
                     "type": "string"
                 },
@@ -1241,6 +1285,17 @@
             ],
             "type": "object"
         },
+        "LoginWithRefreshTokenRequest": {
+            "properties": {
+                "refreshToken": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "refreshToken"
+            ],
+            "type": "object"
+        },
         "NATConfig": {
             "properties": {
                 "blocks": {
@@ -1310,19 +1365,6 @@
                     "maxLength": 64,
                     "minLength": 1,
                     "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "NetworkInvoice": {
-            "properties": {
-                "account": {
-                    "$ref": "#/definitions/Link",
-                    "originalRef": "Link"
-                },
-                "invoice": {
-                    "description": "The Stripe Invoice object (https://stripe.com/docs/api/invoices/object)",
-                    "type": "object"
                 }
             },
             "type": "object"
@@ -1432,6 +1474,147 @@
             ],
             "type": "object"
         },
+        "Port": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "availabilityDomain": {
+                    "enum": [
+                        "PRIMARY",
+                        "SECONDARY"
+                    ],
+                    "type": "string"
+                },
+                "billingTerm": {
+                    "enum": [
+                        "HOURLY",
+                        "MONTHLY",
+                        "ONE_YEAR",
+                        "TWO_YEAR"
+                    ],
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "facility": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "href": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "mediaType": {
+                    "enum": [
+                        "FX",
+                        "SX",
+                        "LX",
+                        "ZX",
+                        "SR",
+                        "LR",
+                        "ER",
+                        "ZR",
+                        "SR4",
+                        "LR4",
+                        "ER4",
+                        "ZR4"
+                    ],
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "provider": {
+                    "enum": [
+                        "PUREPORT",
+                        "PACKET_FABRIC"
+                    ],
+                    "type": "string"
+                },
+                "providerAssignedId": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "speed": {
+                    "enum": [
+                        1000,
+                        10000,
+                        40000
+                    ],
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "state": {
+                    "enum": [
+                        "REQUESTED",
+                        "ACTIVE",
+                        "DELETED"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "availabilityDomain",
+                "billingTerm",
+                "facility",
+                "mediaType",
+                "name",
+                "provider",
+                "speed"
+            ],
+            "type": "object"
+        },
+        "PortConnection": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Connection",
+                    "originalRef": "Connection"
+                },
+                {
+                    "properties": {
+                        "customerASN": {
+                            "format": "int64",
+                            "readOnly": true,
+                            "type": "integer"
+                        },
+                        "primaryCustomerVlan": {
+                            "format": "int32",
+                            "maximum": 4096,
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "primaryPort": {
+                            "$ref": "#/definitions/Link",
+                            "originalRef": "Link"
+                        },
+                        "secondaryCustomerVlan": {
+                            "format": "int32",
+                            "maximum": 4096,
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "secondaryPort": {
+                            "$ref": "#/definitions/Link",
+                            "originalRef": "Link"
+                        }
+                    },
+                    "required": [
+                        "customerASN",
+                        "primaryPort"
+                    ],
+                    "type": "object"
+                }
+            ]
+        },
         "ProviderLink": {
             "properties": {
                 "availabilityDomain": {
@@ -1463,7 +1646,7 @@
                         "GOOGLE_CLOUD",
                         "EQUINIX_CLOUD_EXCHANGE",
                         "PUREPORT",
-                        "DUMMY_CLOUD"
+                        "PACKET_FABRIC"
                     ],
                     "type": "string"
                 },
@@ -1491,7 +1674,7 @@
                             "AZURE_EXPRESS_ROUTE",
                             "GOOGLE_CLOUD_INTERCONNECT",
                             "SITE_IPSEC_VPN",
-                            "DUMMY"
+                            "PORT"
                         ],
                         "type": "string"
                     },
@@ -1726,6 +1909,7 @@
                             "type": "string"
                         },
                         "primaryKey": {
+                            "description": "IPsec pre-shared key override for the primary gateway",
                             "type": "string"
                         },
                         "routingType": {
@@ -1740,6 +1924,7 @@
                             "type": "string"
                         },
                         "secondaryKey": {
+                            "description": "IPsec pre-shared key override for the secondary gateway",
                             "type": "string"
                         },
                         "trafficSelectors": {
@@ -1852,7 +2037,7 @@
                         "AZURE_EXPRESS_ROUTE",
                         "GOOGLE_CLOUD_INTERCONNECT",
                         "SITE_IPSEC_VPN",
-                        "DUMMY"
+                        "PORT"
                     ],
                     "type": "string"
                 }
@@ -1885,6 +2070,73 @@
             ],
             "type": "object"
         },
+        "SupportedPort": {
+            "properties": {
+                "availabilityDomains": {
+                    "items": {
+                        "enum": [
+                            "PRIMARY",
+                            "SECONDARY"
+                        ],
+                        "type": "string"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                },
+                "billingPlans": {
+                    "items": {
+                        "$ref": "#/definitions/BillingPlan",
+                        "originalRef": "BillingPlan"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                },
+                "facility": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link",
+                    "readOnly": true
+                },
+                "mediaTypes": {
+                    "items": {
+                        "enum": [
+                            "FX",
+                            "SX",
+                            "LX",
+                            "ZX",
+                            "SR",
+                            "LR",
+                            "ER",
+                            "ZR",
+                            "SR4",
+                            "LR4",
+                            "ER4",
+                            "ZR4"
+                        ],
+                        "type": "string"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                },
+                "provider": {
+                    "enum": [
+                        "PUREPORT",
+                        "PACKET_FABRIC"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "speed": {
+                    "enum": [
+                        "GBPS_1",
+                        "GBPS_10",
+                        "GBPS_40"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "TrafficSelectorMapping": {
             "properties": {
                 "customerSide": {
@@ -1902,6 +2154,11 @@
         },
         "User": {
             "properties": {
+                "company": {
+                    "maxLength": 128,
+                    "minLength": 0,
+                    "type": "string"
+                },
                 "email": {
                     "type": "string"
                 },
@@ -1921,6 +2178,11 @@
                 "lastName": {
                     "maxLength": 128,
                     "minLength": 1,
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "maxLength": 32,
+                    "minLength": 0,
                     "type": "string"
                 },
                 "username": {
@@ -3135,6 +3397,82 @@
                 ]
             }
         },
+        "/accounts/{accountId}/ports": {
+            "get": {
+                "description": "",
+                "operationId": "findPorts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Port",
+                                "originalRef": "Port"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Port",
+                                "originalRef": "Port"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List ports",
+                "tags": [
+                    "ports"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "addPort",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Port",
+                            "originalRef": "Port"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Add new port",
+                "tags": [
+                    "ports"
+                ]
+            }
+        },
         "/accounts/{accountId}/roles": {
             "get": {
                 "description": "",
@@ -3334,7 +3672,7 @@
         "/accounts/{accountId}/supportedConnections": {
             "get": {
                 "description": "",
-                "operationId": "getSupportedConnections",
+                "operationId": "getSupportedConnections_1",
                 "parameters": [
                     {
                         "in": "path",
@@ -3368,6 +3706,52 @@
                 "summary": "List supported connections",
                 "tags": [
                     "supported connections"
+                ]
+            }
+        },
+        "/accounts/{accountId}/supportedPorts": {
+            "get": {
+                "description": "",
+                "operationId": "getSupportedPorts",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "facility",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/SupportedPort",
+                                "originalRef": "SupportedPort"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/SupportedPort",
+                                "originalRef": "SupportedPort"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List supported ports",
+                "tags": [
+                    "supported ports"
                 ]
             }
         },
@@ -3615,6 +3999,73 @@
                 ]
             }
         },
+        "/facilities": {
+            "get": {
+                "description": "",
+                "operationId": "findFacilities",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Facility",
+                                "originalRef": "Facility"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Facility",
+                                "originalRef": "Facility"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "List facilities",
+                "tags": [
+                    "facilities"
+                ]
+            }
+        },
+        "/facilities/{facilityId}": {
+            "get": {
+                "description": "",
+                "operationId": "getFacility",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "facilityId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Facility",
+                            "originalRef": "Facility"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Facility",
+                            "originalRef": "Facility"
+                        }
+                    }
+                },
+                "summary": "Get facility details",
+                "tags": [
+                    "facilities"
+                ]
+            }
+        },
         "/invites": {
             "post": {
                 "description": "",
@@ -3743,7 +4194,39 @@
                 },
                 "summary": "Login with an API Key",
                 "tags": [
-                    "apikeys"
+                    "auth"
+                ]
+            }
+        },
+        "/login/refresh": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "loginWithRefreshToken",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/LoginWithRefreshTokenRequest",
+                            "originalRef": "LoginWithRefreshTokenRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Login with a refresh token",
+                "tags": [
+                    "auth"
                 ]
             }
         },
@@ -3885,8 +4368,7 @@
                 },
                 "summary": "List network connections",
                 "tags": [
-                    "connections",
-                    "networks"
+                    "connections"
                 ]
             },
             "post": {
@@ -3922,8 +4404,7 @@
                 },
                 "summary": "Add new connection",
                 "tags": [
-                    "connections",
-                    "networks"
+                    "connections"
                 ]
             }
         },
@@ -3974,6 +4455,108 @@
                 "summary": "Get available options",
                 "tags": [
                     "options"
+                ]
+            }
+        },
+        "/ports/{portId}": {
+            "delete": {
+                "description": "",
+                "operationId": "deleteNetwork_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "portId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "Delete port",
+                "tags": [
+                    "ports"
+                ]
+            },
+            "get": {
+                "description": "",
+                "operationId": "getPort",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "portId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Port",
+                            "originalRef": "Port"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Port",
+                            "originalRef": "Port"
+                        }
+                    }
+                },
+                "summary": "Get port details",
+                "tags": [
+                    "ports"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "updateNetwork_1",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Port",
+                            "originalRef": "Port"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "portId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Port",
+                            "originalRef": "Port"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Port",
+                            "originalRef": "Port"
+                        }
+                    }
+                },
+                "summary": "Update port",
+                "tags": [
+                    "ports"
                 ]
             }
         },
@@ -4088,24 +4671,15 @@
         }
     },
     "schemes": [
-        "http"
+        "https"
     ],
     "swagger": "2.0",
     "tags": [
         {
-            "name": "apikeys"
+            "name": "options"
         },
         {
-            "name": "accounts"
-        },
-        {
-            "name": "account members"
-        },
-        {
-            "name": "account roles"
-        },
-        {
-            "name": "connections"
+            "name": "cloud services"
         },
         {
             "name": "account invitations"
@@ -4114,13 +4688,13 @@
             "name": "networks"
         },
         {
+            "name": "connections"
+        },
+        {
+            "name": "ports"
+        },
+        {
             "name": "supported connections"
-        },
-        {
-            "name": "billing"
-        },
-        {
-            "name": "account consent"
         },
         {
             "name": "cloud regions"
@@ -4129,13 +4703,34 @@
             "name": "locations"
         },
         {
+            "name": "auth"
+        },
+        {
             "name": "users"
         },
         {
-            "name": "cloud services"
+            "name": "account roles"
         },
         {
-            "name": "options"
+            "name": "accounts"
+        },
+        {
+            "name": "billing"
+        },
+        {
+            "name": "account consent"
+        },
+        {
+            "name": "supported ports"
+        },
+        {
+            "name": "apikeys"
+        },
+        {
+            "name": "account members"
+        },
+        {
+            "name": "facilities"
         }
     ]
 }

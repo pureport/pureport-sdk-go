@@ -21,7 +21,7 @@ type VpnGateway struct {
 	RemoteId           string         `json:"remoteId,omitempty"`
 	State              string         `json:"state,omitempty"`
 	Type_              string         `json:"type,omitempty"`
-	Auth               *PskAuthConfig `json:"auth,omitempty"`
+	Auth               *VpnAuthConfig `json:"auth,omitempty"`
 	CustomerGatewayIP  string         `json:"customerGatewayIP,omitempty"`
 	CustomerVtiIP      string         `json:"customerVtiIP,omitempty"`
 	PureportGatewayIP  string         `json:"pureportGatewayIP,omitempty"`

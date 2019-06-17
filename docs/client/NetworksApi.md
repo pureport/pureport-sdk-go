@@ -1,54 +1,15 @@
 # pureport\client\NetworksApi
 
-All URIs are relative to *http://api.pureport.com*
+All URIs are relative to *https://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddConnection**](NetworksApi.md#AddConnection) | **Post** /networks/{networkId}/connections | Add new connection
 [**AddNetwork**](NetworksApi.md#AddNetwork) | **Post** /accounts/{accountId}/networks | Add new network
 [**DeleteNetwork**](NetworksApi.md#DeleteNetwork) | **Delete** /networks/{networkId} | Delete network
 [**FindNetworks**](NetworksApi.md#FindNetworks) | **Get** /accounts/{accountId}/networks | List networks
-[**GetConnections**](NetworksApi.md#GetConnections) | **Get** /networks/{networkId}/connections | List network connections
 [**GetNetwork**](NetworksApi.md#GetNetwork) | **Get** /networks/{networkId} | Get network details
 [**UpdateNetwork**](NetworksApi.md#UpdateNetwork) | **Put** /networks/{networkId} | Update network
 
-
-# **AddConnection**
-> AddConnection(ctx, networkId, optional)
-Add new connection
-
-
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **networkId** | **string**|  | 
- **optional** | ***AddConnectionOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a AddConnectionOpts struct
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **body** | [**optional.Interface of Connection**](Connection.md)|  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **AddNetwork**
 > AddNetwork(ctx, accountId, optional)
@@ -131,34 +92,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]Network**](Network.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **GetConnections**
-> []Connection GetConnections(ctx, networkId)
-List network connections
-
-
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **networkId** | **string**|  | 
-
-### Return type
-
-[**[]Connection**](Connection.md)
 
 ### Authorization
 
