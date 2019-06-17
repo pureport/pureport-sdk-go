@@ -17,7 +17,7 @@ import "./client"
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://api.pureport.com*
+All URIs are relative to *https://api.pureport.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

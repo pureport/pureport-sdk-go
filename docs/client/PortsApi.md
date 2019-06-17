@@ -1,6 +1,6 @@
 # pureport\client\PortsApi
 
-All URIs are relative to *http://api.pureport.com*
+All URIs are relative to *https://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

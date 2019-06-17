@@ -27,7 +27,7 @@ tags:
 - name: "options"
 - name: "cloud services"
 schemes:
-- "http"
+- "https"
 paths:
   /accounts:
     get:

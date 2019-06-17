@@ -4741,7 +4741,7 @@
         }
     },
     "schemes": [
-        "http"
+        "https"
     ],
     "swagger": "2.0",
     "tags": [
