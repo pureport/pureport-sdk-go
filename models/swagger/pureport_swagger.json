@@ -3672,7 +3672,7 @@
         "/accounts/{accountId}/supportedConnections": {
             "get": {
                 "description": "",
-                "operationId": "getSupportedConnections_1",
+                "operationId": "getAccountSupportedConnections",
                 "parameters": [
                     {
                         "in": "path",
@@ -4461,7 +4461,7 @@
         "/ports/{portId}": {
             "delete": {
                 "description": "",
-                "operationId": "deleteNetwork_1",
+                "operationId": "deletePort",
                 "parameters": [
                     {
                         "in": "path",
@@ -4520,7 +4520,7 @@
                     "application/json"
                 ],
                 "description": "",
-                "operationId": "updateNetwork_1",
+                "operationId": "updatePort",
                 "parameters": [
                     {
                         "in": "body",
