@@ -17,7 +17,7 @@ import "./client"
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *http://api.pureport.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
