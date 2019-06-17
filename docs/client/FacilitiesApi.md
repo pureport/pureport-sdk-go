@@ -1,29 +1,25 @@
-# pureport\client\CloudServicesApi
+# pureport\client\FacilitiesApi
 
 All URIs are relative to *https://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetCloudService**](CloudServicesApi.md#GetCloudService) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
-[**GetCloudServices**](CloudServicesApi.md#GetCloudServices) | **Get** /cloudServices | List cloud services
+[**FindFacilities**](FacilitiesApi.md#FindFacilities) | **Get** /facilities | List facilities
+[**GetFacility**](FacilitiesApi.md#GetFacility) | **Get** /facilities/{facilityId} | Get facility details
 
 
-# **GetCloudService**
-> CloudService GetCloudService(ctx, cloudServiceId)
-Get cloud service details
+# **FindFacilities**
+> []Facility FindFacilities(ctx, )
+List facilities
 
 
 
 ### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **cloudServiceId** | **string**|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**CloudService**](CloudService.md)
+[**[]Facility**](Facility.md)
 
 ### Authorization
 
@@ -36,18 +32,22 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetCloudServices**
-> []CloudService GetCloudServices(ctx, )
-List cloud services
+# **GetFacility**
+> Facility GetFacility(ctx, facilityId)
+Get facility details
 
 
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **facilityId** | **string**|  | 
 
 ### Return type
 
-[**[]CloudService**](CloudService.md)
+[**Facility**](Facility.md)
 
 ### Authorization
 

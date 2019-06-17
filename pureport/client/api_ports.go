@@ -24,24 +24,24 @@ var (
 	_ context.Context
 )
 
-type ConnectionsApiService service
+type PortsApiService service
 
 /*
-ConnectionsApiService Add new connection
+PortsApiService Add new port
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
- * @param optional nil or *AddConnectionOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Connection) -
+ * @param accountId
+ * @param optional nil or *AddPortOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of Port) -
 
 
 */
 
-type AddConnectionOpts struct {
+type AddPortOpts struct {
 	Body optional.Interface
 }
 
-func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId string, localVarOptionals *AddConnectionOpts) (*http.Response, error) {
+func (a *PortsApiService) AddPort(ctx context.Context, accountId string, localVarOptionals *AddPortOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -50,8 +50,8 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/connections"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", fmt.Sprintf("%v", networkId), -1)
+	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/ports"
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", fmt.Sprintf("%v", accountId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -77,18 +77,11 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
 
-		// ##################################################
-		// Pureport (start)
-		// ##################################################
-		if body, err := ValidateConnection(localVarOptionals.Body.Value()); err != nil {
-			return nil, reportError("body should be valid Connection")
-		} else {
-			localVarPostBody = body
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(Port)
+		if !localVarOptionalBodyok {
+			return nil, reportError("body should be Port")
 		}
-		// ##################################################
-		// Pureport (end)
-		// ##################################################
-
+		localVarPostBody = &localVarOptionalBody
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
@@ -106,18 +99,6 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 		return localVarHttpResponse, err
 	}
 
-	if localVarHttpResponse.StatusCode < 300 {
-
-		// If we succeed, return the data, otherwise pass on to decode error.
-		var v Connection
-		err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		if err != nil {
-			return localVarHttpResponse, err
-		}
-
-		return localVarHttpResponse, nil
-	}
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
 			body:  localVarBody,
@@ -131,25 +112,24 @@ func (a *ConnectionsApiService) AddConnection(ctx context.Context, networkId str
 }
 
 /*
-ConnectionsApiService Delete connection
+PortsApiService Delete port
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param connectionId
+ * @param portId
 
-@return Connection
+
 */
-func (a *ConnectionsApiService) DeleteConnection(ctx context.Context, connectionId string) (interface{}, *http.Response, error) {
+func (a *PortsApiService) DeletePort(ctx context.Context, portId string) (*http.Response, error) {
 	var (
-		localVarHttpMethod  = strings.ToUpper("Delete")
-		localVarPostBody    interface{}
-		localVarFileName    string
-		localVarFileBytes   []byte
-		localVarReturnValue interface{}
+		localVarHttpMethod = strings.ToUpper("Delete")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/connections/{connectionId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"connectionId"+"}", fmt.Sprintf("%v", connectionId), -1)
+	localVarPath := a.client.cfg.BasePath + "/ports/{portId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"portId"+"}", fmt.Sprintf("%v", portId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -174,34 +154,18 @@ func (a *ConnectionsApiService) DeleteConnection(ctx context.Context, connection
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
+		return localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-
-		// ##################################################
-		// Pureport (start)
-		// ##################################################
-		localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		// ##################################################
-		// Pureport (end)
-		// ##################################################
-
-		// If we succeed, return the data, otherwise pass on to decode error.
-		if err == nil {
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -210,31 +174,31 @@ func (a *ConnectionsApiService) DeleteConnection(ctx context.Context, connection
 			error: localVarHttpResponse.Status,
 		}
 
-		return localVarReturnValue, localVarHttpResponse, newErr
+		return localVarHttpResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHttpResponse, nil
+	return localVarHttpResponse, nil
 }
 
 /*
-ConnectionsApiService List connections across all networks for the account
+PortsApiService List ports
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accountId
 
-@return []Connection
+@return []Port
 */
-func (a *ConnectionsApiService) FindConnections(ctx context.Context, accountId string) ([]Connection, *http.Response, error) {
+func (a *PortsApiService) FindPorts(ctx context.Context, accountId string) ([]Port, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue []Connection
+		localVarReturnValue []Port
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/connections"
+	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/ports"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", fmt.Sprintf("%v", accountId), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -287,6 +251,18 @@ func (a *ConnectionsApiService) FindConnections(ctx context.Context, accountId s
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
+
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []Port
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
@@ -294,110 +270,25 @@ func (a *ConnectionsApiService) FindConnections(ctx context.Context, accountId s
 }
 
 /*
-ConnectionsApiService Get connection details
+PortsApiService Get port details
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param connectionId
+ * @param portId
 
-@return Connection
+@return Port
 */
-func (a *ConnectionsApiService) GetConnection(ctx context.Context, connectionId string) (interface{}, *http.Response, error) {
+func (a *PortsApiService) GetPort(ctx context.Context, portId string) (Port, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue interface{}
+		localVarReturnValue Port
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/connections/{connectionId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"connectionId"+"}", fmt.Sprintf("%v", connectionId), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode < 300 {
-
-		// ##################################################
-		// Pureport (start)
-		// ##################################################
-		localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		// ##################################################
-		// Pureport (end)
-		// ##################################################
-
-		// If we succeed, return the data, otherwise pass on to decode error.
-		if err == nil {
-			return localVarReturnValue, localVarHttpResponse, err
-		}
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericSwaggerError{
-			body:  localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-
-/*
-ConnectionsApiService List network connections
-
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
-
-@return []Connection
-*/
-func (a *ConnectionsApiService) GetConnections(ctx context.Context, networkId string) ([]Connection, *http.Response, error) {
-	var (
-		localVarHttpMethod  = strings.ToUpper("Get")
-		localVarPostBody    interface{}
-		localVarFileName    string
-		localVarFileBytes   []byte
-		localVarReturnValue []Connection
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/connections"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", fmt.Sprintf("%v", networkId), -1)
+	localVarPath := a.client.cfg.BasePath + "/ports/{portId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"portId"+"}", fmt.Sprintf("%v", portId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -450,6 +341,17 @@ func (a *ConnectionsApiService) GetConnections(ctx context.Context, networkId st
 			error: localVarHttpResponse.Status,
 		}
 
+		if localVarHttpResponse.StatusCode == 200 {
+			var v Port
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
@@ -457,32 +359,101 @@ func (a *ConnectionsApiService) GetConnections(ctx context.Context, networkId st
 }
 
 /*
-ConnectionsApiService Update connection
+PortsApiService Get port letter of authorization
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param connectionId
- * @param optional nil or *UpdateConnectionOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of Connection) -
+ * @param portId
 
-@return Connection
+
+*/
+func (a *PortsApiService) GetPortLOA(ctx context.Context, portId string) (*http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/ports/{portId}/loa"
+	localVarPath = strings.Replace(localVarPath, "{"+"portId"+"}", fmt.Sprintf("%v", portId), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+
+		return localVarHttpResponse, newErr
+	}
+
+	return localVarHttpResponse, nil
+}
+
+/*
+PortsApiService Update port
+
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param portId
+ * @param optional nil or *UpdatePortOpts - Optional Parameters:
+     * @param "Body" (optional.Interface of Port) -
+
+@return Port
 */
 
-type UpdateConnectionOpts struct {
+type UpdatePortOpts struct {
 	Body optional.Interface
 }
 
-func (a *ConnectionsApiService) UpdateConnection(ctx context.Context, connectionId string, localVarOptionals *UpdateConnectionOpts) (interface{}, *http.Response, error) {
+func (a *PortsApiService) UpdatePort(ctx context.Context, portId string, localVarOptionals *UpdatePortOpts) (Port, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Put")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue interface{}
+		localVarReturnValue Port
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/connections/{connectionId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"connectionId"+"}", fmt.Sprintf("%v", connectionId), -1)
+	localVarPath := a.client.cfg.BasePath + "/ports/{portId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"portId"+"}", fmt.Sprintf("%v", portId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -508,18 +479,11 @@ func (a *ConnectionsApiService) UpdateConnection(ctx context.Context, connection
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
 
-		// ##################################################
-		// Pureport (start)
-		// ##################################################
-		if body, err := ValidateConnection(localVarOptionals.Body.Value()); err != nil {
-			return nil, nil, reportError("body should be valid Connection")
-		} else {
-			localVarPostBody = body
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(Port)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be Port")
 		}
-		// ##################################################
-		// Pureport (end)
-		// ##################################################
-
+		localVarPostBody = &localVarOptionalBody
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
@@ -538,16 +502,8 @@ func (a *ConnectionsApiService) UpdateConnection(ctx context.Context, connection
 	}
 
 	if localVarHttpResponse.StatusCode < 300 {
-
-		// ##################################################
-		// Pureport (start)
-		// ##################################################
-		localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-		// ##################################################
-		// Pureport (end)
-		// ##################################################
-
 		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 		if err == nil {
 			return localVarReturnValue, localVarHttpResponse, err
 		}
@@ -558,6 +514,18 @@ func (a *ConnectionsApiService) UpdateConnection(ctx context.Context, connection
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
+
+		if localVarHttpResponse.StatusCode == 200 {
+			var v Port
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+
 		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 

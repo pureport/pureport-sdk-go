@@ -7,23 +7,27 @@ info:
 host: "api.pureport.com"
 basePath: "/"
 tags:
-- name: "apikeys"
 - name: "accounts"
-- name: "account members"
-- name: "account roles"
 - name: "connections"
 - name: "account invitations"
 - name: "networks"
+- name: "ports"
 - name: "supported connections"
+- name: "account members"
+- name: "apikeys"
 - name: "billing"
 - name: "account consent"
+- name: "supported ports"
+- name: "account roles"
 - name: "cloud regions"
+- name: "facilities"
 - name: "locations"
+- name: "auth"
 - name: "users"
-- name: "cloud services"
 - name: "options"
+- name: "cloud services"
 schemes:
-- "http"
+- "https"
 paths:
   /accounts:
     get:
@@ -767,6 +771,53 @@ paths:
               type: "object"
               additionalProperties:
                 type: "boolean"
+  /accounts/{accountId}/ports:
+    get:
+      tags:
+      - "ports"
+      summary: "List ports"
+      description: ""
+      operationId: "findPorts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "accountId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "AccountId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Port"
+    post:
+      tags:
+      - "ports"
+      summary: "Add new port"
+      description: ""
+      operationId: "addPort"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/Port"
+        x-exportParamName: "Body"
+      - name: "accountId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "AccountId"
+      responses:
+        default:
+          description: "successful operation"
   /accounts/{accountId}/roles:
     get:
       tags:
@@ -899,7 +950,7 @@ paths:
       - "supported connections"
       summary: "List supported connections"
       description: ""
-      operationId: "getSupportedConnections"
+      operationId: "getAccountSupportedConnections"
       produces:
       - "application/json"
       parameters:
@@ -915,6 +966,33 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/SupportedConnection"
+  /accounts/{accountId}/supportedPorts:
+    get:
+      tags:
+      - "supported ports"
+      summary: "List supported ports"
+      description: ""
+      operationId: "getSupportedPorts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "facility"
+        in: "query"
+        required: true
+        type: "string"
+        x-exportParamName: "Facility"
+      - name: "accountId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "AccountId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/SupportedPort"
   /cloudRegions:
     get:
       tags:
@@ -1055,6 +1133,43 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Connection"
+  /facilities:
+    get:
+      tags:
+      - "facilities"
+      summary: "List facilities"
+      description: ""
+      operationId: "findFacilities"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Facility"
+  /facilities/{facilityId}:
+    get:
+      tags:
+      - "facilities"
+      summary: "Get facility details"
+      description: ""
+      operationId: "getFacility"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "facilityId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "FacilityId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Facility"
   /invites:
     post:
       tags:
@@ -1112,7 +1227,7 @@ paths:
   /login:
     post:
       tags:
-      - "apikeys"
+      - "auth"
       summary: "Login with an API Key"
       description: ""
       operationId: "login"
@@ -1126,6 +1241,27 @@ paths:
         required: false
         schema:
           $ref: "#/definitions/LoginRequest"
+        x-exportParamName: "Body"
+      responses:
+        default:
+          description: "successful operation"
+  /login/refresh:
+    post:
+      tags:
+      - "auth"
+      summary: "Login with a refresh token"
+      description: ""
+      operationId: "loginWithRefreshToken"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/LoginWithRefreshTokenRequest"
         x-exportParamName: "Body"
       responses:
         default:
@@ -1198,7 +1334,6 @@ paths:
     get:
       tags:
       - "connections"
-      - "networks"
       summary: "List network connections"
       description: ""
       operationId: "getConnections"
@@ -1220,7 +1355,6 @@ paths:
     post:
       tags:
       - "connections"
-      - "networks"
       summary: "Add new connection"
       description: ""
       operationId: "addConnection"
@@ -1270,6 +1404,88 @@ paths:
               type: "array"
               items:
                 $ref: "#/definitions/Option"
+  /ports/{portId}:
+    get:
+      tags:
+      - "ports"
+      summary: "Get port details"
+      description: ""
+      operationId: "getPort"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "portId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "PortId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Port"
+    put:
+      tags:
+      - "ports"
+      summary: "Update port"
+      description: ""
+      operationId: "updatePort"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/Port"
+        x-exportParamName: "Body"
+      - name: "portId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "PortId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Port"
+    delete:
+      tags:
+      - "ports"
+      summary: "Delete port"
+      description: ""
+      operationId: "deletePort"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "portId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "PortId"
+      responses:
+        default:
+          description: "successful operation"
+  /ports/{portId}/loa:
+    get:
+      tags:
+      - "ports"
+      summary: "Get port letter of authorization"
+      description: ""
+      operationId: "getPortLOA"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "portId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "PortId"
+      responses:
+        default:
+          description: "successful operation"
   /supportedConnections/{supportedConnectionId}:
     get:
       tags:
@@ -1385,6 +1601,10 @@ definitions:
         uniqueItems: true
         items:
           $ref: "#/definitions/Link"
+      tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
     example:
       parent:
         href: "href"
@@ -1401,6 +1621,8 @@ definitions:
       - href: "href"
         id: "id"
         title: "title"
+      tags:
+        key: "tags"
   AccountBilling:
     type: "object"
     required:
@@ -1511,6 +1733,15 @@ definitions:
         title: "title"
       email: "email"
       invitedAt: "2000-01-23T04:56:07.000+00:00"
+  AccountInvoice:
+    type: "object"
+    properties:
+      account:
+        $ref: "#/definitions/Link"
+      invoice:
+        type: "object"
+        description: "The Stripe Invoice object (https://stripe.com/docs/api/invoices/object)"
+        properties: {}
   AccountMember:
     type: "object"
     required:
@@ -1937,7 +2168,7 @@ definitions:
       publicNatIp: "publicNatIp"
       state: "UP"
       pureportASN: 5
-      customerASN: 1
+      customerASN: 5
   BillingPlan:
     type: "object"
     properties:
@@ -1947,21 +2178,29 @@ definitions:
       billingInterval:
         type: "string"
         enum:
+        - "ONCE"
         - "DAY"
         - "WEEK"
         - "MONTH"
         - "YEAR"
       id:
         type: "string"
+      setupAmount:
+        type: "integer"
+        format: "int64"
       term:
         type: "string"
         enum:
         - "HOURLY"
+        - "MONTHLY"
+        - "ONE_YEAR"
+        - "TWO_YEAR"
     example:
       amount: 0
       term: "HOURLY"
       id: "id"
-      billingInterval: "DAY"
+      billingInterval: "ONCE"
+      setupAmount: 6
   CloudRegion:
     type: "object"
     required:
@@ -2069,6 +2308,9 @@ definitions:
         type: "string"
         enum:
         - "HOURLY"
+        - "MONTHLY"
+        - "ONE_YEAR"
+        - "TWO_YEAR"
       createdAt:
         type: "string"
         format: "date-time"
@@ -2117,6 +2359,7 @@ definitions:
         - "CONNECTION_UPDATE_STATE_CONFLICT"
         - "CONNECTION_DELETE_STATE_CONFLICT"
         - "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT"
+        - "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT"
         - "CONSENT_REQUIRED"
         - "ACCOUNT_ALREADY_CONSENTED"
         - "ACCOUNT_MEMBER_ALREADY_EXISTS"
@@ -2132,11 +2375,13 @@ definitions:
         - "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH"
         - "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS"
         - "NO_SUPPORTED_CONNECTION_FOR_CONNECTION"
+        - "NO_SUPPORTED_PORT_FOR_PORT"
         - "UNSUPPORTED_RESOURCE_LIMIT"
         - "MODIFICATION_NOT_ALLOWED"
         - "AWS_CONNECTION_SPEED_IMMUTABLE"
         - "INVALID_VLAN"
         - "INVALID_VLAN_RANGE"
+        - "VLAN_IN_USE"
         - "INVALID_CUSTOMER_ASN"
         - "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS"
         - "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK"
@@ -2160,6 +2405,9 @@ definitions:
         - "GATEWAY_UPDATE_SPEED_ERROR"
         - "GATEWAY_UPDATING_ERROR"
         - "GATEWAY_DELETING_ERROR"
+        - "PORT_PROVISIONING_ERROR"
+        - "PORT_UPDATING_ERROR"
+        - "PORT_DELETING_ERROR"
         - "AWS_CONNECTION_DELETE_ERROR"
         - "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR"
         - "ECX_CONNECTION_DELETE_ERROR"
@@ -2227,6 +2475,10 @@ definitions:
         - "DELETING"
         - "FAILED_TO_DELETE"
         - "DELETED"
+      tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
       type:
         type: "string"
         enum:
@@ -2234,7 +2486,7 @@ definitions:
         - "AZURE_EXPRESS_ROUTE"
         - "GOOGLE_CLOUD_INTERCONNECT"
         - "SITE_IPSEC_VPN"
-        - "DUMMY"
+        - "PORT"
     example:
       nat:
         mappings:
@@ -5264,7 +5516,7 @@ definitions:
           publicNatIp: "publicNatIp"
           state: "UP"
           pureportASN: 5
-          customerASN: 1
+          customerASN: 5
         errorMessage: "errorMessage"
         name: "name"
         description: "description"
@@ -5273,12 +5525,14 @@ definitions:
         state: "WAITING_TO_PROVISION"
         type: "STANDARD"
         remoteId: "remoteId"
-      speed: 5
+      speed: 2
       highAvailability: true
       network:
         href: "href"
         id: "id"
         title: "title"
+      tags:
+        key: "tags"
       createdAt: "2000-01-23T04:56:07.000+00:00"
       activeAt: "2000-01-23T04:56:07.000+00:00"
       deletedAt: "2000-01-23T04:56:07.000+00:00"
@@ -5293,7 +5547,7 @@ definitions:
           publicNatIp: "publicNatIp"
           state: "UP"
           pureportASN: 5
-          customerASN: 1
+          customerASN: 5
         errorMessage: "errorMessage"
         name: "name"
         description: "description"
@@ -5307,7 +5561,8 @@ definitions:
         amount: 0
         term: "HOURLY"
         id: "id"
-        billingInterval: "DAY"
+        billingInterval: "ONCE"
+        setupAmount: 6
       location:
         href: "href"
         id: "id"
@@ -5315,7 +5570,7 @@ definitions:
       href: "href"
       id: "id"
       state: "INITIALIZING"
-      customerASN: 6
+      customerASN: 1
   CustomerNetwork:
     type: "object"
     required:
@@ -5328,14 +5583,55 @@ definitions:
     example:
       address: "address"
       name: "name"
-  DummyConnection:
-    allOf:
-    - $ref: "#/definitions/Connection"
-    - type: "object"
-      properties:
-        peering:
-          readOnly: true
-          $ref: "#/definitions/PeeringConfiguration"
+  Facility:
+    type: "object"
+    required:
+    - "address"
+    - "name"
+    properties:
+      address:
+        $ref: "#/definitions/PhysicalAddress"
+      altIds:
+        type: "object"
+        additionalProperties:
+          type: "object"
+          properties: {}
+      href:
+        type: "string"
+      id:
+        type: "string"
+        minLength: 1
+        maxLength: 64
+      name:
+        type: "string"
+        minLength: 1
+        maxLength: 64
+      state:
+        type: "string"
+        enum:
+        - "ACTIVE"
+        - "UNAVAILABLE"
+        - "DELETED"
+      vendor:
+        type: "string"
+    example:
+      altIds:
+        key: "{}"
+      address:
+        country: "country"
+        city: "city"
+        street: "street"
+        postalCode: "postalCode"
+        placeId: "placeId"
+        geoCoordinates:
+          latitude: 0.80082819046101150206595775671303272247314453125
+          longitude: 6.02745618307040320615897144307382404804229736328125
+        state: "state"
+      vendor: "vendor"
+      name: "name"
+      href: "href"
+      id: "id"
+      state: "ACTIVE"
   Gateway:
     type: "object"
     discriminator: "type"
@@ -5379,6 +5675,7 @@ definitions:
         - "CONNECTION_UPDATE_STATE_CONFLICT"
         - "CONNECTION_DELETE_STATE_CONFLICT"
         - "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT"
+        - "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT"
         - "CONSENT_REQUIRED"
         - "ACCOUNT_ALREADY_CONSENTED"
         - "ACCOUNT_MEMBER_ALREADY_EXISTS"
@@ -5394,11 +5691,13 @@ definitions:
         - "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH"
         - "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS"
         - "NO_SUPPORTED_CONNECTION_FOR_CONNECTION"
+        - "NO_SUPPORTED_PORT_FOR_PORT"
         - "UNSUPPORTED_RESOURCE_LIMIT"
         - "MODIFICATION_NOT_ALLOWED"
         - "AWS_CONNECTION_SPEED_IMMUTABLE"
         - "INVALID_VLAN"
         - "INVALID_VLAN_RANGE"
+        - "VLAN_IN_USE"
         - "INVALID_CUSTOMER_ASN"
         - "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS"
         - "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK"
@@ -5422,6 +5721,9 @@ definitions:
         - "GATEWAY_UPDATE_SPEED_ERROR"
         - "GATEWAY_UPDATING_ERROR"
         - "GATEWAY_DELETING_ERROR"
+        - "PORT_PROVISIONING_ERROR"
+        - "PORT_UPDATING_ERROR"
+        - "PORT_DELETING_ERROR"
         - "AWS_CONNECTION_DELETE_ERROR"
         - "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR"
         - "ECX_CONNECTION_DELETE_ERROR"
@@ -5480,7 +5782,7 @@ definitions:
         publicNatIp: "publicNatIp"
         state: "UP"
         pureportASN: 5
-        customerASN: 1
+        customerASN: 5
       errorMessage: "errorMessage"
       name: "name"
       description: "description"
@@ -5717,9 +6019,6 @@ definitions:
         - "AES_128_GCM_128"
         - "AES_192_GCM_128"
         - "AES_256_GCM_128"
-        - "AES_128_GMAC"
-        - "AES_192_GMAC"
-        - "AES_256_GMAC"
       integrity:
         type: "string"
         enum:
@@ -5831,6 +6130,15 @@ definitions:
     example:
       secret: "secret"
       key: "key"
+  LoginWithRefreshTokenRequest:
+    type: "object"
+    required:
+    - "refreshToken"
+    properties:
+      refreshToken:
+        type: "string"
+    example:
+      refreshToken: "refreshToken"
   NATConfig:
     type: "object"
     properties:
@@ -8892,6 +9200,10 @@ definitions:
         type: "string"
         minLength: 1
         maxLength: 64
+      tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
     example:
       name: "name"
       description: "description"
@@ -8901,15 +9213,8 @@ definitions:
         href: "href"
         id: "id"
         title: "title"
-  NetworkInvoice:
-    type: "object"
-    properties:
-      account:
-        $ref: "#/definitions/Link"
-      invoice:
-        type: "object"
-        description: "The Stripe Invoice object (https://stripe.com/docs/api/invoices/object)"
-        properties: {}
+      tags:
+        key: "tags"
   Option:
     type: "object"
     properties:
@@ -8991,6 +9296,136 @@ definitions:
         enum:
         - "AVAILABLE"
         - "UNAVAILABLE"
+  Port:
+    type: "object"
+    required:
+    - "availabilityDomain"
+    - "billingTerm"
+    - "facility"
+    - "mediaType"
+    - "name"
+    - "provider"
+    - "speed"
+    properties:
+      account:
+        $ref: "#/definitions/Link"
+      availabilityDomain:
+        type: "string"
+        enum:
+        - "PRIMARY"
+        - "SECONDARY"
+      billingTerm:
+        type: "string"
+        enum:
+        - "HOURLY"
+        - "MONTHLY"
+        - "ONE_YEAR"
+        - "TWO_YEAR"
+      description:
+        type: "string"
+        minLength: 0
+        maxLength: 1024
+      facility:
+        $ref: "#/definitions/Link"
+      href:
+        type: "string"
+        readOnly: true
+      id:
+        type: "string"
+        minLength: 1
+        maxLength: 64
+      mediaType:
+        type: "string"
+        enum:
+        - "FX"
+        - "SX"
+        - "LX"
+        - "ZX"
+        - "SR"
+        - "LR"
+        - "ER"
+        - "ZR"
+        - "SR4"
+        - "LR4"
+        - "ER4"
+        - "ZR4"
+        - "CWDM4"
+        - "CDWM4"
+        - "ER4_LITE"
+      name:
+        type: "string"
+        minLength: 1
+        maxLength: 64
+      provider:
+        type: "string"
+        enum:
+        - "PUREPORT"
+        - "PACKET_FABRIC"
+      speed:
+        type: "integer"
+        format: "int32"
+        enum:
+        - 1000
+        - 10000
+        - 40000
+      state:
+        type: "string"
+        readOnly: true
+        enum:
+        - "REQUESTED"
+        - "ACTIVE"
+        - "DELETED"
+      tags:
+        type: "object"
+        additionalProperties:
+          type: "string"
+    example:
+      availabilityDomain: "PRIMARY"
+      billingTerm: "HOURLY"
+      description: "description"
+      mediaType: "FX"
+      speed: 0
+      tags:
+        key: "tags"
+      provider: "PUREPORT"
+      name: "name"
+      href: "href"
+      id: "id"
+      state: "REQUESTED"
+      facility:
+        href: "href"
+        id: "id"
+        title: "title"
+      account:
+        href: "href"
+        id: "id"
+        title: "title"
+  PortConnection:
+    allOf:
+    - $ref: "#/definitions/Connection"
+    - type: "object"
+      required:
+      - "customerASN"
+      - "primaryPort"
+      properties:
+        customerASN:
+          type: "integer"
+          format: "int64"
+          readOnly: true
+        primaryCustomerVlan:
+          type: "integer"
+          format: "int32"
+          minimum: 0
+          maximum: 4096
+        primaryPort:
+          $ref: "#/definitions/Link"
+        secondaryCustomerVlan:
+          type: "integer"
+          format: "int32"
+          minimum: 0
+          maximum: 4096
+        secondaryPort:
+          $ref: "#/definitions/Link"
   ProviderLink:
     type: "object"
     required:
@@ -9019,7 +9454,7 @@ definitions:
         - "GOOGLE_CLOUD"
         - "EQUINIX_CLOUD_EXCHANGE"
         - "PUREPORT"
-        - "DUMMY_CLOUD"
+        - "PACKET_FABRIC"
       providerId:
         type: "string"
       providerRegion:
@@ -9042,7 +9477,7 @@ definitions:
           - "AZURE_EXPRESS_ROUTE"
           - "GOOGLE_CLOUD_INTERCONNECT"
           - "SITE_IPSEC_VPN"
-          - "DUMMY"
+          - "PORT"
         maxItems: 2147483647
         minItems: 1
       vlans:
@@ -9221,6 +9656,7 @@ definitions:
           type: "string"
         primaryKey:
           type: "string"
+          description: "IPsec pre-shared key override for the primary gateway"
         routingType:
           type: "string"
           enum:
@@ -9231,6 +9667,7 @@ definitions:
           type: "string"
         secondaryKey:
           type: "string"
+          description: "IPsec pre-shared key override for the secondary gateway"
         trafficSelectors:
           type: "array"
           uniqueItems: true
@@ -9307,17 +9744,19 @@ definitions:
         - "AZURE_EXPRESS_ROUTE"
         - "GOOGLE_CLOUD_INTERCONNECT"
         - "SITE_IPSEC_VPN"
-        - "DUMMY"
+        - "PORT"
     example:
       billingPlans:
       - amount: 0
         term: "HOURLY"
         id: "id"
-        billingInterval: "DAY"
+        billingInterval: "ONCE"
+        setupAmount: 6
       - amount: 0
         term: "HOURLY"
         id: "id"
-        billingInterval: "DAY"
+        billingInterval: "ONCE"
+        setupAmount: 6
       billingProductId: "billingProductId"
       groups:
       - href: "href"
@@ -9356,6 +9795,83 @@ definitions:
         maxLength: 64
       name:
         type: "string"
+  SupportedPort:
+    type: "object"
+    properties:
+      availabilityDomains:
+        type: "array"
+        readOnly: true
+        items:
+          type: "string"
+          enum:
+          - "PRIMARY"
+          - "SECONDARY"
+      billingPlans:
+        type: "array"
+        readOnly: true
+        items:
+          $ref: "#/definitions/BillingPlan"
+      facility:
+        readOnly: true
+        $ref: "#/definitions/Link"
+      mediaTypes:
+        type: "array"
+        readOnly: true
+        items:
+          type: "string"
+          enum:
+          - "FX"
+          - "SX"
+          - "LX"
+          - "ZX"
+          - "SR"
+          - "LR"
+          - "ER"
+          - "ZR"
+          - "SR4"
+          - "LR4"
+          - "ER4"
+          - "ZR4"
+          - "CWDM4"
+          - "CDWM4"
+          - "ER4_LITE"
+      provider:
+        type: "string"
+        readOnly: true
+        enum:
+        - "PUREPORT"
+        - "PACKET_FABRIC"
+      speed:
+        type: "string"
+        readOnly: true
+        enum:
+        - "GBPS_1"
+        - "GBPS_10"
+        - "GBPS_40"
+    example:
+      billingPlans:
+      - amount: 0
+        term: "HOURLY"
+        id: "id"
+        billingInterval: "ONCE"
+        setupAmount: 6
+      - amount: 0
+        term: "HOURLY"
+        id: "id"
+        billingInterval: "ONCE"
+        setupAmount: 6
+      mediaTypes:
+      - "FX"
+      - "FX"
+      provider: "PUREPORT"
+      availabilityDomains:
+      - "PRIMARY"
+      - "PRIMARY"
+      facility:
+        href: "href"
+        id: "id"
+        title: "title"
+      speed: "GBPS_1"
   TrafficSelectorMapping:
     type: "object"
     required:
@@ -9369,6 +9885,10 @@ definitions:
   User:
     type: "object"
     properties:
+      company:
+        type: "string"
+        minLength: 0
+        maxLength: 128
       email:
         type: "string"
       firstName:
@@ -9385,6 +9905,10 @@ definitions:
         type: "string"
         minLength: 1
         maxLength: 128
+      phoneNumber:
+        type: "string"
+        minLength: 0
+        maxLength: 32
       username:
         type: "string"
         minLength: 1
@@ -9392,6 +9916,8 @@ definitions:
     example:
       firstName: "firstName"
       lastName: "lastName"
+      phoneNumber: "phoneNumber"
+      company: "company"
       href: "href"
       id: "id"
       email: "email"

@@ -1,19 +1,20 @@
-# pureport\client\AccountRolesApi
+# pureport\client\PortsApi
 
 All URIs are relative to *https://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateRole**](AccountRolesApi.md#CreateRole) | **Post** /accounts/{accountId}/roles | Add account role
-[**DeleteRole**](AccountRolesApi.md#DeleteRole) | **Delete** /accounts/{accountId}/roles/{roleId} | Delete role
-[**FindAllRoles**](AccountRolesApi.md#FindAllRoles) | **Get** /accounts/{accountId}/roles | List account roles
-[**GetRole**](AccountRolesApi.md#GetRole) | **Get** /accounts/{accountId}/roles/{roleId} | Get role details
-[**UpdateRole**](AccountRolesApi.md#UpdateRole) | **Put** /accounts/{accountId}/roles/{roleId} | Update role
+[**AddPort**](PortsApi.md#AddPort) | **Post** /accounts/{accountId}/ports | Add new port
+[**DeletePort**](PortsApi.md#DeletePort) | **Delete** /ports/{portId} | Delete port
+[**FindPorts**](PortsApi.md#FindPorts) | **Get** /accounts/{accountId}/ports | List ports
+[**GetPort**](PortsApi.md#GetPort) | **Get** /ports/{portId} | Get port details
+[**GetPortLOA**](PortsApi.md#GetPortLOA) | **Get** /ports/{portId}/loa | Get port letter of authorization
+[**UpdatePort**](PortsApi.md#UpdatePort) | **Put** /ports/{portId} | Update port
 
 
-# **CreateRole**
-> CreateRole(ctx, accountId, optional)
-Add account role
+# **AddPort**
+> AddPort(ctx, accountId, optional)
+Add new port
 
 
 
@@ -23,15 +24,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **accountId** | **string**|  | 
- **optional** | ***CreateRoleOpts** | optional parameters | nil if no parameters
+ **optional** | ***AddPortOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a CreateRoleOpts struct
+Optional parameters are passed through a pointer to a AddPortOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**optional.Interface of Role**](Role.md)|  | 
+ **body** | [**optional.Interface of Port**](Port.md)|  | 
 
 ### Return type
 
@@ -48,9 +49,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **DeleteRole**
-> DeleteRole(ctx, roleId, accountId)
-Delete role
+# **DeletePort**
+> DeletePort(ctx, portId)
+Delete port
 
 
 
@@ -59,8 +60,7 @@ Delete role
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **roleId** | **string**|  | 
-  **accountId** | **string**|  | 
+  **portId** | **string**|  | 
 
 ### Return type
 
@@ -77,9 +77,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **FindAllRoles**
-> []Role FindAllRoles(ctx, accountId)
-List account roles
+# **FindPorts**
+> []Port FindPorts(ctx, accountId)
+List ports
 
 
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Role**](Role.md)
+[**[]Port**](Port.md)
 
 ### Authorization
 
@@ -105,9 +105,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetRole**
-> Role GetRole(ctx, roleId, accountId)
-Get role details
+# **GetPort**
+> Port GetPort(ctx, portId)
+Get port details
 
 
 
@@ -116,12 +116,11 @@ Get role details
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **roleId** | **string**|  | 
-  **accountId** | **string**|  | 
+  **portId** | **string**|  | 
 
 ### Return type
 
-[**Role**](Role.md)
+[**Port**](Port.md)
 
 ### Authorization
 
@@ -134,9 +133,9 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **UpdateRole**
-> Role UpdateRole(ctx, roleId, accountId, optional)
-Update role
+# **GetPortLOA**
+> GetPortLOA(ctx, portId)
+Get port letter of authorization
 
 
 
@@ -145,22 +144,48 @@ Update role
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **roleId** | **string**|  | 
-  **accountId** | **string**|  | 
- **optional** | ***UpdateRoleOpts** | optional parameters | nil if no parameters
+  **portId** | **string**|  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **UpdatePort**
+> Port UpdatePort(ctx, portId, optional)
+Update port
+
+
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **portId** | **string**|  | 
+ **optional** | ***UpdatePortOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a UpdateRoleOpts struct
+Optional parameters are passed through a pointer to a UpdatePortOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
- **body** | [**optional.Interface of Role**](Role.md)|  | 
+ **body** | [**optional.Interface of Port**](Port.md)|  | 
 
 ### Return type
 
-[**Role**](Role.md)
+[**Port**](Port.md)
 
 ### Authorization
 

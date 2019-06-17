@@ -60,6 +60,8 @@ type APIClient struct {
 
 	ApikeysApi *ApikeysApiService
 
+	AuthApi *AuthApiService
+
 	BillingApi *BillingApiService
 
 	CloudRegionsApi *CloudRegionsApiService
@@ -68,13 +70,19 @@ type APIClient struct {
 
 	ConnectionsApi *ConnectionsApiService
 
+	FacilitiesApi *FacilitiesApiService
+
 	LocationsApi *LocationsApiService
 
 	NetworksApi *NetworksApiService
 
 	OptionsApi *OptionsApiService
 
+	PortsApi *PortsApiService
+
 	SupportedConnectionsApi *SupportedConnectionsApiService
+
+	SupportedPortsApi *SupportedPortsApiService
 
 	UsersApi *UsersApiService
 }
@@ -101,14 +109,18 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccountRolesApi = (*AccountRolesApiService)(&c.common)
 	c.AccountsApi = (*AccountsApiService)(&c.common)
 	c.ApikeysApi = (*ApikeysApiService)(&c.common)
+	c.AuthApi = (*AuthApiService)(&c.common)
 	c.BillingApi = (*BillingApiService)(&c.common)
 	c.CloudRegionsApi = (*CloudRegionsApiService)(&c.common)
 	c.CloudServicesApi = (*CloudServicesApiService)(&c.common)
 	c.ConnectionsApi = (*ConnectionsApiService)(&c.common)
+	c.FacilitiesApi = (*FacilitiesApiService)(&c.common)
 	c.LocationsApi = (*LocationsApiService)(&c.common)
 	c.NetworksApi = (*NetworksApiService)(&c.common)
 	c.OptionsApi = (*OptionsApiService)(&c.common)
+	c.PortsApi = (*PortsApiService)(&c.common)
 	c.SupportedConnectionsApi = (*SupportedConnectionsApiService)(&c.common)
+	c.SupportedPortsApi = (*SupportedPortsApiService)(&c.common)
 	c.UsersApi = (*UsersApiService)(&c.common)
 
 	return c

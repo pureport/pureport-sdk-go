@@ -23,28 +23,26 @@ var (
 	_ context.Context
 )
 
-type SupportedConnectionsApiService service
+type FacilitiesApiService service
 
 /*
-SupportedConnectionsApiService List supported connections
+FacilitiesApiService List facilities
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param accountId
 
-@return []SupportedConnection
+@return []Facility
 */
-func (a *SupportedConnectionsApiService) GetAccountSupportedConnections(ctx context.Context, accountId string) ([]SupportedConnection, *http.Response, error) {
+func (a *FacilitiesApiService) FindFacilities(ctx context.Context) ([]Facility, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue []SupportedConnection
+		localVarReturnValue []Facility
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/supportedConnections"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", fmt.Sprintf("%v", accountId), -1)
+	localVarPath := a.client.cfg.BasePath + "/facilities"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -98,7 +96,7 @@ func (a *SupportedConnectionsApiService) GetAccountSupportedConnections(ctx cont
 		}
 
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []SupportedConnection
+			var v []Facility
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -115,25 +113,25 @@ func (a *SupportedConnectionsApiService) GetAccountSupportedConnections(ctx cont
 }
 
 /*
-SupportedConnectionsApiService Get supported connection details
+FacilitiesApiService Get facility details
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param supportedConnectionId
+ * @param facilityId
 
-@return SupportedConnection
+@return Facility
 */
-func (a *SupportedConnectionsApiService) GetSupportedConnection(ctx context.Context, supportedConnectionId string) (SupportedConnection, *http.Response, error) {
+func (a *FacilitiesApiService) GetFacility(ctx context.Context, facilityId string) (Facility, *http.Response, error) {
 	var (
 		localVarHttpMethod  = strings.ToUpper("Get")
 		localVarPostBody    interface{}
 		localVarFileName    string
 		localVarFileBytes   []byte
-		localVarReturnValue SupportedConnection
+		localVarReturnValue Facility
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/supportedConnections/{supportedConnectionId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"supportedConnectionId"+"}", fmt.Sprintf("%v", supportedConnectionId), -1)
+	localVarPath := a.client.cfg.BasePath + "/facilities/{facilityId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"facilityId"+"}", fmt.Sprintf("%v", facilityId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -187,7 +185,7 @@ func (a *SupportedConnectionsApiService) GetSupportedConnection(ctx context.Cont
 		}
 
 		if localVarHttpResponse.StatusCode == 200 {
-			var v SupportedConnection
+			var v Facility
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

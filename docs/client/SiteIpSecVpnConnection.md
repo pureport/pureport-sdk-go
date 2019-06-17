@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **SecondaryGateway** | [***Gateway**](Gateway.md) |  | [optional] 
 **Speed** | **int32** |  | 
 **State** | **string** |  | [optional] 
+**Tags** | **map[string]string** |  | [optional] 
 **Type_** | **string** |  | 
 **AuthType** | **string** |  | 
 **EnableBGPPassword** | **bool** |  | [optional] 
@@ -32,10 +33,10 @@ Name | Type | Description | Notes
 **IkeVersion** | **string** |  | 
 **PhysicalAddress** | [***PhysicalAddress**](PhysicalAddress.md) |  | [optional] 
 **PrimaryCustomerRouterIP** | **string** |  | 
-**PrimaryKey** | **string** |  | [optional] 
+**PrimaryKey** | **string** | IPsec pre-shared key override for the primary gateway | [optional] 
 **RoutingType** | **string** |  | 
 **SecondaryCustomerRouterIP** | **string** |  | [optional] 
-**SecondaryKey** | **string** |  | [optional] 
+**SecondaryKey** | **string** | IPsec pre-shared key override for the secondary gateway | [optional] 
 **TrafficSelectors** | [**[]TrafficSelectorMapping**](TrafficSelectorMapping.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
