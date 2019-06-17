@@ -45,15 +45,6 @@ func init() {
 
 // NewViperCredentials creates a new credentials provider using Viper
 func NewViperCredentials(profile string) *Credentials {
-
-	if profile == "" {
-		profile = "default"
-	}
-
-	if p := vip.GetString(configAPIProfileStr); p != "" {
-		profile = p
-	}
-
 	return NewCredentials(&ViperProvider{
 		retrieved: false,
 		Profile:   profile,
@@ -72,8 +63,12 @@ func (p *ViperProvider) Retrieve() (Value, error) {
 	key := vip.GetString(configAPIKeyStr)
 	secret := vip.GetString(configAPISecretStr)
 
+	if profile := vip.GetString(configAPIProfileStr); profile != "" {
+		p.Profile = profile
+	}
+
 	if p.Profile == "" {
-		p.Profile = vip.GetString(configAPIProfileStr)
+		p.Profile = "default"
 	}
 
 	// Read from configuration file
