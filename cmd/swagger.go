@@ -12,7 +12,7 @@ import (
 var cmdSwagger = &cobra.Command{
 	Use:   "swagger",
 	Short: "Download Swagger",
-	Long:  "Command to download the Swagger Schema for the REST API",
+	Long:  "Command to download the Swagger Schema for the Pureport REST API",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		// Create the file
