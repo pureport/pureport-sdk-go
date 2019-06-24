@@ -19,7 +19,6 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -206,27 +205,18 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	// --------------------------------------------------
 	// Add tracing of HTTP Requests
 	// --------------------------------------------------
-	if dump, derr := httputil.DumpRequest(request, true); derr == nil {
-		log.Debugf("Request:\n%q", dump)
-	}
+	logRequest(request)
 
 	resp, err := c.cfg.HTTPClient.Do(request)
 
 	if err != nil {
 		log.Errorf("Error Response: %+v", err)
-
-	} else {
-
-		if dump, derr := httputil.DumpResponse(resp, true); derr == nil {
-
-			if resp.StatusCode > 300 {
-				log.Debugf("Response:\n%q", dump)
-			}
-		}
+		return resp, err
 	}
 
-	// --------------------------------------------------
+	logResponse(resp)
 
+	// --------------------------------------------------
 	return resp, err
 }
 
