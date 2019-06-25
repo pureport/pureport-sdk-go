@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **Parent** | [***Link**](Link.md) |  | [optional] 
 **SupportedConnectionGroups** | [**[]Link**](Link.md) |  | [optional] 
+**Tags** | **map[string]string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

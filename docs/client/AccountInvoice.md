@@ -1,4 +1,4 @@
-# NetworkInvoice
+# AccountInvoice
 
 ## Properties
 Name | Type | Description | Notes

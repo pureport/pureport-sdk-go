@@ -17,7 +17,7 @@ import "./client"
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://api.pureport.com*
+All URIs are relative to *https://api.pureport.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -49,8 +49,9 @@ Class | Method | HTTP request | Description
 *ApikeysApi* | [**DeleteApiKey**](docs/ApikeysApi.md#deleteapikey) | **Delete** /accounts/{accountId}/apikeys/{key} | Delete API Key
 *ApikeysApi* | [**FindApiKeys**](docs/ApikeysApi.md#findapikeys) | **Get** /accounts/{accountId}/apikeys | List API keys for an account
 *ApikeysApi* | [**GetApiKey**](docs/ApikeysApi.md#getapikey) | **Get** /accounts/{accountId}/apikeys/{key} | Get API Key details
-*ApikeysApi* | [**Login**](docs/ApikeysApi.md#login) | **Post** /login | Login with an API Key
 *ApikeysApi* | [**UpdateApiKey**](docs/ApikeysApi.md#updateapikey) | **Put** /accounts/{accountId}/apikeys/{key} | Update API Key
+*AuthApi* | [**Login**](docs/AuthApi.md#login) | **Post** /login | Login with an API Key
+*AuthApi* | [**LoginWithRefreshToken**](docs/AuthApi.md#loginwithrefreshtoken) | **Post** /login/refresh | Login with a refresh token
 *BillingApi* | [**AddPaymentInformation**](docs/BillingApi.md#addpaymentinformation) | **Post** /accounts/{accountId}/billing | Add payment method
 *BillingApi* | [**DeletePaymentInformation**](docs/BillingApi.md#deletepaymentinformation) | **Delete** /accounts/{accountId}/billing | Delete payment method
 *BillingApi* | [**FindBillingForAccount**](docs/BillingApi.md#findbillingforaccount) | **Get** /accounts/{accountId}/billing | Payment method for account
@@ -66,18 +67,25 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**GetConnection**](docs/ConnectionsApi.md#getconnection) | **Get** /connections/{connectionId} | Get connection details
 *ConnectionsApi* | [**GetConnections**](docs/ConnectionsApi.md#getconnections) | **Get** /networks/{networkId}/connections | List network connections
 *ConnectionsApi* | [**UpdateConnection**](docs/ConnectionsApi.md#updateconnection) | **Put** /connections/{connectionId} | Update connection
+*FacilitiesApi* | [**FindFacilities**](docs/FacilitiesApi.md#findfacilities) | **Get** /facilities | List facilities
+*FacilitiesApi* | [**GetFacility**](docs/FacilitiesApi.md#getfacility) | **Get** /facilities/{facilityId} | Get facility details
 *LocationsApi* | [**FindLocations**](docs/LocationsApi.md#findlocations) | **Get** /locations | List locations
 *LocationsApi* | [**GetLocation**](docs/LocationsApi.md#getlocation) | **Get** /locations/{locationId} | Get location details
-*NetworksApi* | [**AddConnection**](docs/NetworksApi.md#addconnection) | **Post** /networks/{networkId}/connections | Add new connection
 *NetworksApi* | [**AddNetwork**](docs/NetworksApi.md#addnetwork) | **Post** /accounts/{accountId}/networks | Add new network
 *NetworksApi* | [**DeleteNetwork**](docs/NetworksApi.md#deletenetwork) | **Delete** /networks/{networkId} | Delete network
 *NetworksApi* | [**FindNetworks**](docs/NetworksApi.md#findnetworks) | **Get** /accounts/{accountId}/networks | List networks
-*NetworksApi* | [**GetConnections**](docs/NetworksApi.md#getconnections) | **Get** /networks/{networkId}/connections | List network connections
 *NetworksApi* | [**GetNetwork**](docs/NetworksApi.md#getnetwork) | **Get** /networks/{networkId} | Get network details
 *NetworksApi* | [**UpdateNetwork**](docs/NetworksApi.md#updatenetwork) | **Put** /networks/{networkId} | Update network
 *OptionsApi* | [**GetOptions**](docs/OptionsApi.md#getoptions) | **Get** /options | Get available options
+*PortsApi* | [**AddPort**](docs/PortsApi.md#addport) | **Post** /accounts/{accountId}/ports | Add new port
+*PortsApi* | [**DeletePort**](docs/PortsApi.md#deleteport) | **Delete** /ports/{portId} | Delete port
+*PortsApi* | [**FindPorts**](docs/PortsApi.md#findports) | **Get** /accounts/{accountId}/ports | List ports
+*PortsApi* | [**GetPort**](docs/PortsApi.md#getport) | **Get** /ports/{portId} | Get port details
+*PortsApi* | [**GetPortLOA**](docs/PortsApi.md#getportloa) | **Get** /ports/{portId}/loa | Get port letter of authorization
+*PortsApi* | [**UpdatePort**](docs/PortsApi.md#updateport) | **Put** /ports/{portId} | Update port
+*SupportedConnectionsApi* | [**GetAccountSupportedConnections**](docs/SupportedConnectionsApi.md#getaccountsupportedconnections) | **Get** /accounts/{accountId}/supportedConnections | List supported connections
 *SupportedConnectionsApi* | [**GetSupportedConnection**](docs/SupportedConnectionsApi.md#getsupportedconnection) | **Get** /supportedConnections/{supportedConnectionId} | Get supported connection details
-*SupportedConnectionsApi* | [**GetSupportedConnections**](docs/SupportedConnectionsApi.md#getsupportedconnections) | **Get** /accounts/{accountId}/supportedConnections | List supported connections
+*SupportedPortsApi* | [**GetSupportedPorts**](docs/SupportedPortsApi.md#getsupportedports) | **Get** /accounts/{accountId}/supportedPorts | List supported ports
 *UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Get user details
 *UsersApi* | [**UpdateUser**](docs/UsersApi.md#updateuser) | **Put** /users/{userId} | Update user
 
@@ -88,6 +96,7 @@ Class | Method | HTTP request | Description
  - [AccountBilling](docs/AccountBilling.md)
  - [AccountConsent](docs/AccountConsent.md)
  - [AccountInvite](docs/AccountInvite.md)
+ - [AccountInvoice](docs/AccountInvoice.md)
  - [AccountMember](docs/AccountMember.md)
  - [ApiKey](docs/ApiKey.md)
  - [BgpConfig](docs/BgpConfig.md)
@@ -96,6 +105,7 @@ Class | Method | HTTP request | Description
  - [CloudService](docs/CloudService.md)
  - [Connection](docs/Connection.md)
  - [CustomerNetwork](docs/CustomerNetwork.md)
+ - [Facility](docs/Facility.md)
  - [Gateway](docs/Gateway.md)
  - [GeoCoordinates](docs/GeoCoordinates.md)
  - [Ikev1Config](docs/Ikev1Config.md)
@@ -108,14 +118,15 @@ Class | Method | HTTP request | Description
  - [Location](docs/Location.md)
  - [LocationLinkConnection](docs/LocationLinkConnection.md)
  - [LoginRequest](docs/LoginRequest.md)
+ - [LoginWithRefreshTokenRequest](docs/LoginWithRefreshTokenRequest.md)
  - [NatConfig](docs/NatConfig.md)
  - [NatMapping](docs/NatMapping.md)
  - [Network](docs/Network.md)
- - [NetworkInvoice](docs/NetworkInvoice.md)
  - [Option](docs/Option.md)
  - [PeeringConfiguration](docs/PeeringConfiguration.md)
  - [PhysicalAddress](docs/PhysicalAddress.md)
  - [Pod](docs/Pod.md)
+ - [Port](docs/Port.md)
  - [ProviderLink](docs/ProviderLink.md)
  - [ProviderVlan](docs/ProviderVlan.md)
  - [PublicPeeringBlock](docs/PublicPeeringBlock.md)
@@ -124,13 +135,14 @@ Class | Method | HTTP request | Description
  - [Role](docs/Role.md)
  - [SupportedConnection](docs/SupportedConnection.md)
  - [SupportedConnectionGroup](docs/SupportedConnectionGroup.md)
+ - [SupportedPort](docs/SupportedPort.md)
  - [TrafficSelectorMapping](docs/TrafficSelectorMapping.md)
  - [User](docs/User.md)
  - [VpnAuthConfig](docs/VpnAuthConfig.md)
  - [AwsDirectConnectConnection](docs/AwsDirectConnectConnection.md)
  - [AzureExpressRouteConnection](docs/AzureExpressRouteConnection.md)
- - [DummyConnection](docs/DummyConnection.md)
  - [GoogleCloudInterconnectConnection](docs/GoogleCloudInterconnectConnection.md)
+ - [PortConnection](docs/PortConnection.md)
  - [PskAuthConfig](docs/PskAuthConfig.md)
  - [SiteIpSecVpnConnection](docs/SiteIpSecVpnConnection.md)
  - [StandardGateway](docs/StandardGateway.md)

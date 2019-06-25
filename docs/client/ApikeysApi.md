@@ -1,6 +1,6 @@
 # pureport\client\ApikeysApi
 
-All URIs are relative to *http://api.pureport.com*
+All URIs are relative to *https://api.pureport.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**DeleteApiKey**](ApikeysApi.md#DeleteApiKey) | **Delete** /accounts/{accountId}/apikeys/{key} | Delete API Key
 [**FindApiKeys**](ApikeysApi.md#FindApiKeys) | **Get** /accounts/{accountId}/apikeys | List API keys for an account
 [**GetApiKey**](ApikeysApi.md#GetApiKey) | **Get** /accounts/{accountId}/apikeys/{key} | Get API Key details
-[**Login**](ApikeysApi.md#Login) | **Post** /login | Login with an API Key
 [**UpdateApiKey**](ApikeysApi.md#UpdateApiKey) | **Put** /accounts/{accountId}/apikeys/{key} | Update API Key
 
 
@@ -131,41 +130,6 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **Login**
-> Login(ctx, optional)
-Login with an API Key
-
-
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***LoginOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a LoginOpts struct
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**optional.Interface of LoginRequest**](LoginRequest.md)|  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
