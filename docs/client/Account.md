@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | [optional] 
 **Name** | **string** |  | 
 **Parent** | [***Link**](Link.md) |  | [optional] 
+**ShowChildAccountPricing** | **bool** |  | [optional] 
 **SupportedConnectionGroups** | [**[]Link**](Link.md) |  | [optional] 
 **Tags** | **map[string]string** |  | [optional] 
 

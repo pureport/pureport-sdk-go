@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | **string** |  | 
+**Name** | **string** |  | 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
 **Provider** | **string** |  | 

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Address** | [***PhysicalAddress**](PhysicalAddress.md) |  | 
 **Email** | **string** |  | 
 **Href** | **string** |  | [optional] 
+**Name** | **string** |  | 
 **StripeExpiry** | **string** |  | 
 **StripeLastFour** | **string** |  | 
 **StripeToken** | **string** |  | 
