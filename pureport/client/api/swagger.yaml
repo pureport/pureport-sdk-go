@@ -7,24 +7,25 @@ info:
 host: "api.pureport.com"
 basePath: "/"
 tags:
+- name: "options"
+- name: "facilities"
+- name: "account roles"
 - name: "accounts"
-- name: "connections"
-- name: "account invitations"
-- name: "networks"
-- name: "ports"
-- name: "supported connections"
 - name: "account members"
 - name: "apikeys"
 - name: "billing"
 - name: "account consent"
 - name: "supported ports"
-- name: "account roles"
+- name: "connections"
+- name: "account invitations"
+- name: "networks"
+- name: "ports"
+- name: "supported connections"
 - name: "cloud regions"
-- name: "facilities"
+- name: "gateways"
 - name: "locations"
 - name: "auth"
 - name: "users"
-- name: "options"
 - name: "cloud services"
 schemes:
 - "https"
@@ -1150,6 +1151,19 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Facility"
+  /facilities/kml:
+    get:
+      tags:
+      - "facilities"
+      summary: "List facilities (as KML)"
+      description: ""
+      operationId: "listFacilitiesAsKml"
+      produces:
+      - "application/vnd.google-earth.kml+xml"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
   /facilities/{facilityId}:
     get:
       tags:
@@ -1170,6 +1184,28 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Facility"
+  /gateways/{gatewayId}/bgpRoutes:
+    get:
+      tags:
+      - "gateways"
+      summary: "Get gateway bgp routes"
+      description: ""
+      operationId: "getGatewayBGPRoutes"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "gatewayId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "GatewayId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/BGPRoute"
   /invites:
     post:
       tags:
@@ -1377,6 +1413,26 @@ paths:
       responses:
         default:
           description: "successful operation"
+  /networks/{networkId}/respawn:
+    post:
+      tags:
+      - "networks"
+      summary: "Respawn controllers on network"
+      description: ""
+      operationId: "respawn"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "networkId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "NetworkId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Network"
   /options:
     get:
       tags:
@@ -1468,6 +1524,28 @@ paths:
       responses:
         default:
           description: "successful operation"
+  /ports/{portId}/accounts:
+    get:
+      tags:
+      - "ports"
+      summary: "Get accounts using this port"
+      description: ""
+      operationId: "getAccountsUsingPort"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "portId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "PortId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Link"
   /ports/{portId}/loa:
     get:
       tags:
@@ -1596,6 +1674,8 @@ definitions:
         maxLength: 64
       parent:
         $ref: "#/definitions/Link"
+      showChildAccountPricing:
+        type: "boolean"
       supportedConnectionGroups:
         type: "array"
         uniqueItems: true
@@ -1610,6 +1690,7 @@ definitions:
         href: "href"
         id: "id"
         title: "title"
+      showChildAccountPricing: true
       name: "name"
       description: "description"
       href: "href"
@@ -1628,6 +1709,7 @@ definitions:
     required:
     - "address"
     - "email"
+    - "name"
     - "stripeExpiry"
     - "stripeLastFour"
     - "stripeToken"
@@ -1640,6 +1722,10 @@ definitions:
         type: "string"
       href:
         type: "string"
+      name:
+        type: "string"
+        minLength: 1
+        maxLength: 64
       stripeExpiry:
         type: "string"
         pattern: "^\\d{2}\\/\\d{4}$"
@@ -1662,6 +1748,7 @@ definitions:
           longitude: 6.02745618307040320615897144307382404804229736328125
         state: "state"
       stripeToken: "stripeToken"
+      name: "name"
       href: "href"
       stripeExpiry: "stripeExpiry"
       stripeLastFour: "stripeLastFour"
@@ -2169,6 +2256,66 @@ definitions:
       state: "UP"
       pureportASN: 5
       customerASN: 5
+  BGPRoute:
+    type: "object"
+    properties:
+      best:
+        type: "boolean"
+      internal:
+        type: "boolean"
+      locPref:
+        type: "integer"
+        format: "int32"
+      metric:
+        type: "integer"
+        format: "int32"
+      multiPath:
+        type: "boolean"
+      network:
+        type: "string"
+      nextHop:
+        type: "string"
+      nextHopConnection:
+        $ref: "#/definitions/Link"
+      nextHopGateway:
+        $ref: "#/definitions/Link"
+      origin:
+        type: "string"
+        enum:
+        - "IGP"
+        - "EGP"
+      path:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int32"
+      valid:
+        type: "boolean"
+      weight:
+        type: "integer"
+        format: "int32"
+    example:
+      nextHop: "nextHop"
+      nextHopGateway:
+        href: "href"
+        id: "id"
+        title: "title"
+      internal: true
+      locPref: 0
+      origin: "IGP"
+      weight: 5
+      best: true
+      network: "network"
+      valid: true
+      path:
+      - 1
+      - 1
+      multiPath: true
+      metric: 6
+      nextHopConnection:
+        href: "href"
+        id: "id"
+        title: "title"
   BillingPlan:
     type: "object"
     properties:
@@ -2204,18 +2351,18 @@ definitions:
   CloudRegion:
     type: "object"
     required:
-    - "displayName"
+    - "name"
     - "provider"
     - "providerAssignedId"
     properties:
-      displayName:
-        type: "string"
       href:
         type: "string"
       id:
         type: "string"
         minLength: 1
         maxLength: 64
+      name:
+        type: "string"
       provider:
         type: "string"
         enum:
@@ -2226,7 +2373,7 @@ definitions:
         type: "string"
     example:
       provider: "AWS"
-      displayName: "displayName"
+      name: "name"
       href: "href"
       id: "id"
       providerAssignedId: "providerAssignedId"
@@ -2364,6 +2511,7 @@ definitions:
         - "ACCOUNT_ALREADY_CONSENTED"
         - "ACCOUNT_MEMBER_ALREADY_EXISTS"
         - "ACCOUNT_HAS_CHILD_ACCOUNTS"
+        - "PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED"
         - "REQUEST_ENTITY_TOO_LARGE"
         - "REQUEST_URI_TOO_LONG"
         - "UNSUPPORTED_MEDIA_TYPE"
@@ -2387,6 +2535,7 @@ definitions:
         - "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK"
         - "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS"
         - "PEERING_TYPE_CHANGE_NOT_ALLOWED"
+        - "PORT_BILLING_TERM_CHANGE_NOT_ALLOWED"
         - "INVALID_PEERING_STATE_FOR_OPERATION"
         - "INVALID_PEERING_TYPE_FOR_OPERATION"
         - "INVALID_PEERING_PNAT_CONFIGURATION"
@@ -5680,6 +5829,7 @@ definitions:
         - "ACCOUNT_ALREADY_CONSENTED"
         - "ACCOUNT_MEMBER_ALREADY_EXISTS"
         - "ACCOUNT_HAS_CHILD_ACCOUNTS"
+        - "PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED"
         - "REQUEST_ENTITY_TOO_LARGE"
         - "REQUEST_URI_TOO_LONG"
         - "UNSUPPORTED_MEDIA_TYPE"
@@ -5703,6 +5853,7 @@ definitions:
         - "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK"
         - "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS"
         - "PEERING_TYPE_CHANGE_NOT_ALLOWED"
+        - "PORT_BILLING_TERM_CHANGE_NOT_ALLOWED"
         - "INVALID_PEERING_STATE_FOR_OPERATION"
         - "INVALID_PEERING_TYPE_FOR_OPERATION"
         - "INVALID_PEERING_PNAT_CONFIGURATION"
@@ -9200,6 +9351,16 @@ definitions:
         type: "string"
         minLength: 1
         maxLength: 64
+      state:
+        type: "string"
+        readOnly: true
+        enum:
+        - "PENDING"
+        - "PROVISIONING"
+        - "ACTIVE"
+        - "DELETING"
+        - "DELETED"
+        - "ERROR"
       tags:
         type: "object"
         additionalProperties:
@@ -9209,6 +9370,7 @@ definitions:
       description: "description"
       href: "href"
       id: "id"
+      state: "PENDING"
       account:
         href: "href"
         id: "id"
@@ -9314,6 +9476,8 @@ definitions:
         enum:
         - "PRIMARY"
         - "SECONDARY"
+      availableToChildAccounts:
+        type: "boolean"
       billingTerm:
         type: "string"
         enum:
@@ -9336,22 +9500,6 @@ definitions:
         maxLength: 64
       mediaType:
         type: "string"
-        enum:
-        - "FX"
-        - "SX"
-        - "LX"
-        - "ZX"
-        - "SR"
-        - "LR"
-        - "ER"
-        - "ZR"
-        - "SR4"
-        - "LR4"
-        - "ER4"
-        - "ZR4"
-        - "CWDM4"
-        - "CDWM4"
-        - "ER4_LITE"
       name:
         type: "string"
         minLength: 1
@@ -9380,10 +9528,11 @@ definitions:
         additionalProperties:
           type: "string"
     example:
+      availableToChildAccounts: true
       availabilityDomain: "PRIMARY"
       billingTerm: "HOURLY"
       description: "description"
-      mediaType: "FX"
+      mediaType: "mediaType"
       speed: 0
       tags:
         key: "tags"
@@ -9819,22 +9968,6 @@ definitions:
         readOnly: true
         items:
           type: "string"
-          enum:
-          - "FX"
-          - "SX"
-          - "LX"
-          - "ZX"
-          - "SR"
-          - "LR"
-          - "ER"
-          - "ZR"
-          - "SR4"
-          - "LR4"
-          - "ER4"
-          - "ZR4"
-          - "CWDM4"
-          - "CDWM4"
-          - "ER4_LITE"
       provider:
         type: "string"
         readOnly: true
@@ -9861,8 +9994,8 @@ definitions:
         billingInterval: "ONCE"
         setupAmount: 6
       mediaTypes:
-      - "FX"
-      - "FX"
+      - "mediaTypes"
+      - "mediaTypes"
       provider: "PUREPORT"
       availabilityDomains:
       - "PRIMARY"

@@ -64,6 +64,9 @@
                     "$ref": "#/definitions/Link",
                     "originalRef": "Link"
                 },
+                "showChildAccountPricing": {
+                    "type": "boolean"
+                },
                 "supportedConnectionGroups": {
                     "items": {
                         "$ref": "#/definitions/Link",
@@ -100,6 +103,11 @@
                 "href": {
                     "type": "string"
                 },
+                "name": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
                 "stripeExpiry": {
                     "pattern": "^\\d{2}\\/\\d{4}$",
                     "type": "string"
@@ -117,6 +125,7 @@
             "required": [
                 "address",
                 "email",
+                "name",
                 "stripeExpiry",
                 "stripeLastFour",
                 "stripeToken"
@@ -330,6 +339,63 @@
             },
             "type": "object"
         },
+        "BGPRoute": {
+            "properties": {
+                "best": {
+                    "type": "boolean"
+                },
+                "internal": {
+                    "type": "boolean"
+                },
+                "locPref": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "metric": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "multiPath": {
+                    "type": "boolean"
+                },
+                "network": {
+                    "type": "string"
+                },
+                "nextHop": {
+                    "type": "string"
+                },
+                "nextHopConnection": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "nextHopGateway": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "origin": {
+                    "enum": [
+                        "IGP",
+                        "EGP"
+                    ],
+                    "type": "string"
+                },
+                "path": {
+                    "items": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "valid": {
+                    "type": "boolean"
+                },
+                "weight": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
         "BillingPlan": {
             "properties": {
                 "amount": {
@@ -367,15 +433,15 @@
         },
         "CloudRegion": {
             "properties": {
-                "displayName": {
-                    "type": "string"
-                },
                 "href": {
                     "type": "string"
                 },
                 "id": {
                     "maxLength": 64,
                     "minLength": 1,
+                    "type": "string"
+                },
+                "name": {
                     "type": "string"
                 },
                 "provider": {
@@ -391,7 +457,7 @@
                 }
             },
             "required": [
-                "displayName",
+                "name",
                 "provider",
                 "providerAssignedId"
             ],
@@ -535,6 +601,7 @@
                         "ACCOUNT_ALREADY_CONSENTED",
                         "ACCOUNT_MEMBER_ALREADY_EXISTS",
                         "ACCOUNT_HAS_CHILD_ACCOUNTS",
+                        "PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED",
                         "REQUEST_ENTITY_TOO_LARGE",
                         "REQUEST_URI_TOO_LONG",
                         "UNSUPPORTED_MEDIA_TYPE",
@@ -558,6 +625,7 @@
                         "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK",
                         "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS",
                         "PEERING_TYPE_CHANGE_NOT_ALLOWED",
+                        "PORT_BILLING_TERM_CHANGE_NOT_ALLOWED",
                         "INVALID_PEERING_STATE_FOR_OPERATION",
                         "INVALID_PEERING_TYPE_FOR_OPERATION",
                         "INVALID_PEERING_PNAT_CONFIGURATION",
@@ -802,6 +870,7 @@
                         "ACCOUNT_ALREADY_CONSENTED",
                         "ACCOUNT_MEMBER_ALREADY_EXISTS",
                         "ACCOUNT_HAS_CHILD_ACCOUNTS",
+                        "PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED",
                         "REQUEST_ENTITY_TOO_LARGE",
                         "REQUEST_URI_TOO_LONG",
                         "UNSUPPORTED_MEDIA_TYPE",
@@ -825,6 +894,7 @@
                         "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK",
                         "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS",
                         "PEERING_TYPE_CHANGE_NOT_ALLOWED",
+                        "PORT_BILLING_TERM_CHANGE_NOT_ALLOWED",
                         "INVALID_PEERING_STATE_FOR_OPERATION",
                         "INVALID_PEERING_TYPE_FOR_OPERATION",
                         "INVALID_PEERING_PNAT_CONFIGURATION",
@@ -1392,6 +1462,18 @@
                     "minLength": 1,
                     "type": "string"
                 },
+                "state": {
+                    "enum": [
+                        "PENDING",
+                        "PROVISIONING",
+                        "ACTIVE",
+                        "DELETING",
+                        "DELETED",
+                        "ERROR"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                },
                 "tags": {
                     "additionalProperties": {
                         "type": "string"
@@ -1519,6 +1601,9 @@
                     ],
                     "type": "string"
                 },
+                "availableToChildAccounts": {
+                    "type": "boolean"
+                },
                 "billingTerm": {
                     "enum": [
                         "HOURLY",
@@ -1547,23 +1632,6 @@
                     "type": "string"
                 },
                 "mediaType": {
-                    "enum": [
-                        "FX",
-                        "SX",
-                        "LX",
-                        "ZX",
-                        "SR",
-                        "LR",
-                        "ER",
-                        "ZR",
-                        "SR4",
-                        "LR4",
-                        "ER4",
-                        "ZR4",
-                        "CWDM4",
-                        "CDWM4",
-                        "ER4_LITE"
-                    ],
                     "type": "string"
                 },
                 "name": {
@@ -2139,23 +2207,6 @@
                 },
                 "mediaTypes": {
                     "items": {
-                        "enum": [
-                            "FX",
-                            "SX",
-                            "LX",
-                            "ZX",
-                            "SR",
-                            "LR",
-                            "ER",
-                            "ZR",
-                            "SR4",
-                            "LR4",
-                            "ER4",
-                            "ZR4",
-                            "CWDM4",
-                            "CDWM4",
-                            "ER4_LITE"
-                        ],
                         "type": "string"
                     },
                     "readOnly": true,
@@ -4076,6 +4127,25 @@
                 ]
             }
         },
+        "/facilities/kml": {
+            "get": {
+                "description": "",
+                "operationId": "listFacilitiesAsKml",
+                "parameters": [],
+                "produces": [
+                    "application/vnd.google-earth.kml+xml"
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "summary": "List facilities (as KML)",
+                "tags": [
+                    "facilities"
+                ]
+            }
+        },
         "/facilities/{facilityId}": {
             "get": {
                 "description": "",
@@ -4107,6 +4177,46 @@
                 "summary": "Get facility details",
                 "tags": [
                     "facilities"
+                ]
+            }
+        },
+        "/gateways/{gatewayId}/bgpRoutes": {
+            "get": {
+                "description": "",
+                "operationId": "getGatewayBGPRoutes",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "gatewayId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/BGPRoute",
+                                "originalRef": "BGPRoute"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/BGPRoute",
+                                "originalRef": "BGPRoute"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "Get gateway bgp routes",
+                "tags": [
+                    "gateways"
                 ]
             }
         },
@@ -4452,6 +4562,40 @@
                 ]
             }
         },
+        "/networks/{networkId}/respawn": {
+            "post": {
+                "description": "",
+                "operationId": "respawn",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "networkId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Network",
+                            "originalRef": "Network"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Network",
+                            "originalRef": "Network"
+                        }
+                    }
+                },
+                "summary": "Respawn controllers on network",
+                "tags": [
+                    "networks"
+                ]
+            }
+        },
         "/options": {
             "get": {
                 "description": "",
@@ -4604,6 +4748,46 @@
                 ]
             }
         },
+        "/ports/{portId}/accounts": {
+            "get": {
+                "description": "",
+                "operationId": "getAccountsUsingPort",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "portId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Link",
+                                "originalRef": "Link"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Link",
+                                "originalRef": "Link"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "summary": "Get accounts using this port",
+                "tags": [
+                    "ports"
+                ]
+            }
+        },
         "/ports/{portId}/loa": {
             "get": {
                 "description": "",
@@ -4746,22 +4930,16 @@
     "swagger": "2.0",
     "tags": [
         {
+            "name": "options"
+        },
+        {
+            "name": "facilities"
+        },
+        {
+            "name": "account roles"
+        },
+        {
             "name": "accounts"
-        },
-        {
-            "name": "connections"
-        },
-        {
-            "name": "account invitations"
-        },
-        {
-            "name": "networks"
-        },
-        {
-            "name": "ports"
-        },
-        {
-            "name": "supported connections"
         },
         {
             "name": "account members"
@@ -4779,13 +4957,25 @@
             "name": "supported ports"
         },
         {
-            "name": "account roles"
+            "name": "connections"
+        },
+        {
+            "name": "account invitations"
+        },
+        {
+            "name": "networks"
+        },
+        {
+            "name": "ports"
+        },
+        {
+            "name": "supported connections"
         },
         {
             "name": "cloud regions"
         },
         {
-            "name": "facilities"
+            "name": "gateways"
         },
         {
             "name": "locations"
@@ -4795,9 +4985,6 @@
         },
         {
             "name": "users"
-        },
-        {
-            "name": "options"
         },
         {
             "name": "cloud services"

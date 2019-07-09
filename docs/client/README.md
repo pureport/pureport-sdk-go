@@ -69,17 +69,21 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**UpdateConnection**](docs/ConnectionsApi.md#updateconnection) | **Put** /connections/{connectionId} | Update connection
 *FacilitiesApi* | [**FindFacilities**](docs/FacilitiesApi.md#findfacilities) | **Get** /facilities | List facilities
 *FacilitiesApi* | [**GetFacility**](docs/FacilitiesApi.md#getfacility) | **Get** /facilities/{facilityId} | Get facility details
+*FacilitiesApi* | [**ListFacilitiesAsKml**](docs/FacilitiesApi.md#listfacilitiesaskml) | **Get** /facilities/kml | List facilities (as KML)
+*GatewaysApi* | [**GetGatewayBGPRoutes**](docs/GatewaysApi.md#getgatewaybgproutes) | **Get** /gateways/{gatewayId}/bgpRoutes | Get gateway bgp routes
 *LocationsApi* | [**FindLocations**](docs/LocationsApi.md#findlocations) | **Get** /locations | List locations
 *LocationsApi* | [**GetLocation**](docs/LocationsApi.md#getlocation) | **Get** /locations/{locationId} | Get location details
 *NetworksApi* | [**AddNetwork**](docs/NetworksApi.md#addnetwork) | **Post** /accounts/{accountId}/networks | Add new network
 *NetworksApi* | [**DeleteNetwork**](docs/NetworksApi.md#deletenetwork) | **Delete** /networks/{networkId} | Delete network
 *NetworksApi* | [**FindNetworks**](docs/NetworksApi.md#findnetworks) | **Get** /accounts/{accountId}/networks | List networks
 *NetworksApi* | [**GetNetwork**](docs/NetworksApi.md#getnetwork) | **Get** /networks/{networkId} | Get network details
+*NetworksApi* | [**Respawn**](docs/NetworksApi.md#respawn) | **Post** /networks/{networkId}/respawn | Respawn controllers on network
 *NetworksApi* | [**UpdateNetwork**](docs/NetworksApi.md#updatenetwork) | **Put** /networks/{networkId} | Update network
 *OptionsApi* | [**GetOptions**](docs/OptionsApi.md#getoptions) | **Get** /options | Get available options
 *PortsApi* | [**AddPort**](docs/PortsApi.md#addport) | **Post** /accounts/{accountId}/ports | Add new port
 *PortsApi* | [**DeletePort**](docs/PortsApi.md#deleteport) | **Delete** /ports/{portId} | Delete port
 *PortsApi* | [**FindPorts**](docs/PortsApi.md#findports) | **Get** /accounts/{accountId}/ports | List ports
+*PortsApi* | [**GetAccountsUsingPort**](docs/PortsApi.md#getaccountsusingport) | **Get** /ports/{portId}/accounts | Get accounts using this port
 *PortsApi* | [**GetPort**](docs/PortsApi.md#getport) | **Get** /ports/{portId} | Get port details
 *PortsApi* | [**GetPortLOA**](docs/PortsApi.md#getportloa) | **Get** /ports/{portId}/loa | Get port letter of authorization
 *PortsApi* | [**UpdatePort**](docs/PortsApi.md#updateport) | **Put** /ports/{portId} | Update port
@@ -100,6 +104,7 @@ Class | Method | HTTP request | Description
  - [AccountMember](docs/AccountMember.md)
  - [ApiKey](docs/ApiKey.md)
  - [BgpConfig](docs/BgpConfig.md)
+ - [BgpRoute](docs/BgpRoute.md)
  - [BillingPlan](docs/BillingPlan.md)
  - [CloudRegion](docs/CloudRegion.md)
  - [CloudService](docs/CloudService.md)

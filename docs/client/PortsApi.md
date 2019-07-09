@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**AddPort**](PortsApi.md#AddPort) | **Post** /accounts/{accountId}/ports | Add new port
 [**DeletePort**](PortsApi.md#DeletePort) | **Delete** /ports/{portId} | Delete port
 [**FindPorts**](PortsApi.md#FindPorts) | **Get** /accounts/{accountId}/ports | List ports
+[**GetAccountsUsingPort**](PortsApi.md#GetAccountsUsingPort) | **Get** /ports/{portId}/accounts | Get accounts using this port
 [**GetPort**](PortsApi.md#GetPort) | **Get** /ports/{portId} | Get port details
 [**GetPortLOA**](PortsApi.md#GetPortLOA) | **Get** /ports/{portId}/loa | Get port letter of authorization
 [**UpdatePort**](PortsApi.md#UpdatePort) | **Put** /ports/{portId} | Update port
@@ -93,6 +94,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]Port**](Port.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetAccountsUsingPort**
+> []Link GetAccountsUsingPort(ctx, portId)
+Get accounts using this port
+
+
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **portId** | **string**|  | 
+
+### Return type
+
+[**[]Link**](Link.md)
 
 ### Authorization
 

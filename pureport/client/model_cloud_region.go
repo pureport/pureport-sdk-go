@@ -10,7 +10,7 @@
 package client
 
 type CloudRegion struct {
-	DisplayName        string `json:"displayName"`
+	Name               string `json:"Name"`
 	Href               string `json:"href,omitempty"`
 	Id                 string `json:"id,omitempty"`
 	Provider           string `json:"provider"`
