@@ -433,15 +433,15 @@
         },
         "CloudRegion": {
             "properties": {
-                "Name": {
-                    "type": "string"
-                },
                 "href": {
                     "type": "string"
                 },
                 "id": {
                     "maxLength": 64,
                     "minLength": 1,
+                    "type": "string"
+                },
+                "name": {
                     "type": "string"
                 },
                 "provider": {
@@ -457,7 +457,7 @@
                 }
             },
             "required": [
-                "Name",
+                "name",
                 "provider",
                 "providerAssignedId"
             ],

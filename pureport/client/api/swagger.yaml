@@ -2351,18 +2351,18 @@ definitions:
   CloudRegion:
     type: "object"
     required:
-    - "Name"
+    - "name"
     - "provider"
     - "providerAssignedId"
     properties:
-      Name:
-        type: "string"
       href:
         type: "string"
       id:
         type: "string"
         minLength: 1
         maxLength: 64
+      name:
+        type: "string"
       provider:
         type: "string"
         enum:
@@ -2373,10 +2373,10 @@ definitions:
         type: "string"
     example:
       provider: "AWS"
+      name: "name"
       href: "href"
       id: "id"
       providerAssignedId: "providerAssignedId"
-      Name: "Name"
   CloudService:
     type: "object"
     required:

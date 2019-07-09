@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
+**Name** | **string** |  | 
 **Provider** | **string** |  | 
 **ProviderAssignedId** | **string** |  | 
 
