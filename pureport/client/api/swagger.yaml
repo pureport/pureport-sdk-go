@@ -7,25 +7,25 @@ info:
 host: "api.pureport.com"
 basePath: "/"
 tags:
-- name: "options"
-- name: "facilities"
-- name: "account roles"
 - name: "accounts"
-- name: "account members"
-- name: "apikeys"
-- name: "billing"
-- name: "account consent"
-- name: "supported ports"
+- name: "account roles"
 - name: "connections"
 - name: "account invitations"
 - name: "networks"
 - name: "ports"
 - name: "supported connections"
+- name: "apikeys"
+- name: "billing"
+- name: "account consent"
+- name: "supported ports"
+- name: "account members"
 - name: "cloud regions"
 - name: "gateways"
 - name: "locations"
 - name: "auth"
 - name: "users"
+- name: "facilities"
+- name: "options"
 - name: "cloud services"
 schemes:
 - "https"
@@ -2351,18 +2351,18 @@ definitions:
   CloudRegion:
     type: "object"
     required:
-    - "name"
+    - "displayName"
     - "provider"
     - "providerAssignedId"
     properties:
+      displayName:
+        type: "string"
       href:
         type: "string"
       id:
         type: "string"
         minLength: 1
         maxLength: 64
-      name:
-        type: "string"
       provider:
         type: "string"
         enum:
@@ -2373,7 +2373,7 @@ definitions:
         type: "string"
     example:
       provider: "AWS"
-      name: "name"
+      displayName: "displayName"
       href: "href"
       id: "id"
       providerAssignedId: "providerAssignedId"
