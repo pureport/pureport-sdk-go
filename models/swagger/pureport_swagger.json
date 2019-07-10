@@ -433,15 +433,15 @@
         },
         "CloudRegion": {
             "properties": {
+                "displayName": {
+                    "type": "string"
+                },
                 "href": {
                     "type": "string"
                 },
                 "id": {
                     "maxLength": 64,
                     "minLength": 1,
-                    "type": "string"
-                },
-                "name": {
                     "type": "string"
                 },
                 "provider": {
@@ -457,7 +457,7 @@
                 }
             },
             "required": [
-                "name",
+                "displayName",
                 "provider",
                 "providerAssignedId"
             ],
@@ -4930,31 +4930,10 @@
     "swagger": "2.0",
     "tags": [
         {
-            "name": "options"
-        },
-        {
-            "name": "facilities"
-        },
-        {
-            "name": "account roles"
-        },
-        {
             "name": "accounts"
         },
         {
-            "name": "account members"
-        },
-        {
-            "name": "apikeys"
-        },
-        {
-            "name": "billing"
-        },
-        {
-            "name": "account consent"
-        },
-        {
-            "name": "supported ports"
+            "name": "account roles"
         },
         {
             "name": "connections"
@@ -4972,6 +4951,21 @@
             "name": "supported connections"
         },
         {
+            "name": "apikeys"
+        },
+        {
+            "name": "billing"
+        },
+        {
+            "name": "account consent"
+        },
+        {
+            "name": "supported ports"
+        },
+        {
+            "name": "account members"
+        },
+        {
             "name": "cloud regions"
         },
         {
@@ -4985,6 +4979,12 @@
         },
         {
             "name": "users"
+        },
+        {
+            "name": "facilities"
+        },
+        {
+            "name": "options"
         },
         {
             "name": "cloud services"
