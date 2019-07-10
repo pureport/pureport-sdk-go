@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**FindFacilities**](FacilitiesApi.md#FindFacilities) | **Get** /facilities | List facilities
 [**GetFacility**](FacilitiesApi.md#GetFacility) | **Get** /facilities/{facilityId} | Get facility details
+[**ListFacilitiesAsKml**](FacilitiesApi.md#ListFacilitiesAsKml) | **Get** /facilities/kml | List facilities (as KML)
 
 
 # **FindFacilities**
@@ -57,6 +58,30 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ListFacilitiesAsKml**
+> ListFacilitiesAsKml(ctx, )
+List facilities (as KML)
+
+
+
+### Required Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/vnd.google-earth.kml+xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

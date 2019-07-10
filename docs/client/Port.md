@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Account** | [***Link**](Link.md) |  | [optional] 
 **AvailabilityDomain** | **string** |  | 
+**AvailableToChildAccounts** | **bool** |  | [optional] 
 **BillingTerm** | **string** |  | 
 **Description** | **string** |  | [optional] 
 **Facility** | [***Link**](Link.md) |  | 
