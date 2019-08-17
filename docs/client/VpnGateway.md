@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Auth** | [***VpnAuthConfig**](VPNAuthConfig.md) |  | [optional] 
 **CustomerGatewayIP** | **string** |  | [optional] 
 **CustomerVtiIP** | **string** |  | [optional] 
+**IpsecStatus** | **string** |  | [optional] 
 **PureportGatewayIP** | **string** |  | [optional] 
 **PureportVtiIP** | **string** |  | [optional] 
 

@@ -27,7 +27,8 @@ Name | Type | Description | Notes
 **Tags** | **map[string]string** |  | [optional] 
 **Type_** | **string** |  | 
 **AwsAccountId** | **string** |  | 
-**AwsRegion** | **string** |  | 
+**AwsRegion** | **string** |  | [optional] 
+**CloudRegion** | [***Link**](Link.md) |  | [optional] 
 **CloudServices** | [**[]Link**](Link.md) |  | [optional] 
 **Peering** | [***PeeringConfiguration**](PeeringConfiguration.md) |  | [optional] 
 

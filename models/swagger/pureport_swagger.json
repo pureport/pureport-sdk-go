@@ -18,6 +18,11 @@
                             "minLength": 1,
                             "type": "string"
                         },
+                        "cloudRegion": {
+                            "$ref": "#/definitions/Link",
+                            "originalRef": "Link",
+                            "readOnly": true
+                        },
                         "cloudServices": {
                             "items": {
                                 "$ref": "#/definitions/Link",
@@ -33,8 +38,7 @@
                         }
                     },
                     "required": [
-                        "awsAccountId",
-                        "awsRegion"
+                        "awsAccountId"
                     ],
                     "type": "object"
                 }
@@ -42,6 +46,9 @@
         },
         "Account": {
             "properties": {
+                "demo": {
+                    "type": "boolean"
+                },
                 "description": {
                     "maxLength": 256,
                     "minLength": 0,
@@ -448,7 +455,8 @@
                     "enum": [
                         "AWS",
                         "AZURE",
-                        "GOOGLE_CLOUD"
+                        "GOOGLE_CLOUD",
+                        "ORACLE"
                     ],
                     "type": "string"
                 },
@@ -505,7 +513,8 @@
                     "enum": [
                         "AWS",
                         "AZURE",
-                        "GOOGLE_CLOUD"
+                        "GOOGLE_CLOUD",
+                        "ORACLE"
                     ],
                     "type": "string"
                 },
@@ -592,10 +601,12 @@
                         "CONFLICT",
                         "AWS_CONNECTION_HAS_ACTIVE_VIFS",
                         "EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE",
+                        "ORACLE_OCID_ALREADY_IN_USE",
                         "ADMIN_ACCESS_MUST_EXIST",
                         "CONNECTION_UPDATE_STATE_CONFLICT",
                         "CONNECTION_DELETE_STATE_CONFLICT",
                         "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
+                        "NETWORK_RESPAWN_STATE_CONFLICT",
                         "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
                         "CONSENT_REQUIRED",
                         "ACCOUNT_ALREADY_CONSENTED",
@@ -608,17 +619,23 @@
                         "UNPROCESSABLE_ENTITY",
                         "VALIDATION_ERROR",
                         "INVALID_LINK",
+                        "INVALID_AWS_REGION",
                         "INVALID_EXPRESS_ROUTE_SERVICE_KEY",
                         "INVALID_GOOGLE_PAIRING_KEY",
+                        "INVALID_ORACLE_OCID",
                         "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH",
+                        "ORACLE_OCID_BANDWIDTH_MISMATCH",
                         "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
                         "NO_SUPPORTED_CONNECTION_FOR_CONNECTION",
+                        "SUPPORTED_CONNECTION_IS_PENDING",
                         "NO_SUPPORTED_PORT_FOR_PORT",
                         "UNSUPPORTED_RESOURCE_LIMIT",
                         "MODIFICATION_NOT_ALLOWED",
                         "AWS_CONNECTION_SPEED_IMMUTABLE",
                         "INVALID_VLAN",
                         "INVALID_VLAN_RANGE",
+                        "UNSUPPORTED_TASK_FOR_RESOURCE",
+                        "UNSUPPORTED_TASK_NAME",
                         "VLAN_IN_USE",
                         "INVALID_CUSTOMER_ASN",
                         "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS",
@@ -644,6 +661,7 @@
                         "GATEWAY_UPDATE_SPEED_ERROR",
                         "GATEWAY_UPDATING_ERROR",
                         "GATEWAY_DELETING_ERROR",
+                        "ECX_GATEWAY_PROVISIONING_ERROR",
                         "PORT_PROVISIONING_ERROR",
                         "PORT_UPDATING_ERROR",
                         "PORT_DELETING_ERROR",
@@ -654,6 +672,7 @@
                         "NOT_IMPLEMENTED",
                         "SERVICE_UNAVAILABLE",
                         "EXPRESS_ROUTE_SERVICE_UNAVAILABLE",
+                        "ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE",
                         "INSUFFICIENT_CAPACITY",
                         "NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE"
                     ],
@@ -748,6 +767,7 @@
                         "AWS_DIRECT_CONNECT",
                         "AZURE_EXPRESS_ROUTE",
                         "GOOGLE_CLOUD_INTERCONNECT",
+                        "ORACLE_FAST_CONNECT",
                         "SITE_IPSEC_VPN",
                         "PORT"
                     ],
@@ -777,6 +797,27 @@
             ],
             "type": "object"
         },
+        "DateFilter": {
+            "properties": {
+                "gt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "gte": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "lt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "lte": {
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "Facility": {
             "properties": {
                 "address": {
@@ -785,7 +826,7 @@
                 },
                 "altIds": {
                     "additionalProperties": {
-                        "type": "object"
+                        "type": "string"
                     },
                     "type": "object"
                 },
@@ -861,10 +902,12 @@
                         "CONFLICT",
                         "AWS_CONNECTION_HAS_ACTIVE_VIFS",
                         "EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE",
+                        "ORACLE_OCID_ALREADY_IN_USE",
                         "ADMIN_ACCESS_MUST_EXIST",
                         "CONNECTION_UPDATE_STATE_CONFLICT",
                         "CONNECTION_DELETE_STATE_CONFLICT",
                         "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
+                        "NETWORK_RESPAWN_STATE_CONFLICT",
                         "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
                         "CONSENT_REQUIRED",
                         "ACCOUNT_ALREADY_CONSENTED",
@@ -877,17 +920,23 @@
                         "UNPROCESSABLE_ENTITY",
                         "VALIDATION_ERROR",
                         "INVALID_LINK",
+                        "INVALID_AWS_REGION",
                         "INVALID_EXPRESS_ROUTE_SERVICE_KEY",
                         "INVALID_GOOGLE_PAIRING_KEY",
+                        "INVALID_ORACLE_OCID",
                         "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH",
+                        "ORACLE_OCID_BANDWIDTH_MISMATCH",
                         "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
                         "NO_SUPPORTED_CONNECTION_FOR_CONNECTION",
+                        "SUPPORTED_CONNECTION_IS_PENDING",
                         "NO_SUPPORTED_PORT_FOR_PORT",
                         "UNSUPPORTED_RESOURCE_LIMIT",
                         "MODIFICATION_NOT_ALLOWED",
                         "AWS_CONNECTION_SPEED_IMMUTABLE",
                         "INVALID_VLAN",
                         "INVALID_VLAN_RANGE",
+                        "UNSUPPORTED_TASK_FOR_RESOURCE",
+                        "UNSUPPORTED_TASK_NAME",
                         "VLAN_IN_USE",
                         "INVALID_CUSTOMER_ASN",
                         "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS",
@@ -913,6 +962,7 @@
                         "GATEWAY_UPDATE_SPEED_ERROR",
                         "GATEWAY_UPDATING_ERROR",
                         "GATEWAY_DELETING_ERROR",
+                        "ECX_GATEWAY_PROVISIONING_ERROR",
                         "PORT_PROVISIONING_ERROR",
                         "PORT_UPDATING_ERROR",
                         "PORT_DELETING_ERROR",
@@ -923,6 +973,7 @@
                         "NOT_IMPLEMENTED",
                         "SERVICE_UNAVAILABLE",
                         "EXPRESS_ROUTE_SERVICE_UNAVAILABLE",
+                        "ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE",
                         "INSUFFICIENT_CAPACITY",
                         "NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE"
                     ],
@@ -964,7 +1015,8 @@
                         "UPDATING",
                         "FAILED_TO_UPDATE",
                         "DELETING",
-                        "FAILED_TO_DELETE"
+                        "FAILED_TO_DELETE",
+                        "DELETED"
                     ],
                     "readOnly": true,
                     "type": "string"
@@ -1381,6 +1433,30 @@
             ],
             "type": "object"
         },
+        "LoginResponse": {
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "expires_in": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "token_type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "access_token",
+                "expires_in",
+                "refresh_token",
+                "token_type"
+            ],
+            "type": "object"
+        },
         "LoginWithRefreshTokenRequest": {
             "properties": {
                 "refreshToken": {
@@ -1466,6 +1542,8 @@
                     "enum": [
                         "PENDING",
                         "PROVISIONING",
+                        "PENDING_CONTROLLERS",
+                        "PROVISIONING_CONTROLLERS",
                         "ACTIVE",
                         "DELETING",
                         "DELETED",
@@ -1479,6 +1557,52 @@
                         "type": "string"
                     },
                     "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "NetworkConnectionEgressIngress": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "connection": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "egress": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ingress": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "network": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                }
+            },
+            "type": "object"
+        },
+        "NetworkTimeUsage": {
+            "properties": {
+                "account": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "network": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link"
+                },
+                "time": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "usage": {
+                    "format": "int64",
+                    "type": "integer"
                 }
             },
             "type": "object"
@@ -1521,6 +1645,18 @@
         },
         "PeeringConfiguration": {
             "properties": {
+                "primaryPureportBgpIP": {
+                    "type": "string"
+                },
+                "primaryRemoteBgpIP": {
+                    "type": "string"
+                },
+                "secondaryPureportBgpIP": {
+                    "type": "string"
+                },
+                "secondaryRemoteBgpIP": {
+                    "type": "string"
+                },
                 "type": {
                     "enum": [
                         "PUBLIC",
@@ -1672,6 +1808,7 @@
                 }
             },
             "required": [
+                "account",
                 "availabilityDomain",
                 "billingTerm",
                 "facility",
@@ -1782,6 +1919,7 @@
                             "AWS_DIRECT_CONNECT",
                             "AZURE_EXPRESS_ROUTE",
                             "GOOGLE_CLOUD_INTERCONNECT",
+                            "ORACLE_FAST_CONNECT",
                             "SITE_IPSEC_VPN",
                             "PORT"
                         ],
@@ -2118,6 +2256,9 @@
                     ],
                     "type": "string"
                 },
+                "pending": {
+                    "type": "boolean"
+                },
                 "reachableCloudRegions": {
                     "items": {
                         "$ref": "#/definitions/Link",
@@ -2145,6 +2286,7 @@
                         "AWS_DIRECT_CONNECT",
                         "AZURE_EXPRESS_ROUTE",
                         "GOOGLE_CLOUD_INTERCONNECT",
+                        "ORACLE_FAST_CONNECT",
                         "SITE_IPSEC_VPN",
                         "PORT"
                     ],
@@ -2232,6 +2374,76 @@
             },
             "type": "object"
         },
+        "Task": {
+            "properties": {
+                "children": {
+                    "items": {
+                        "$ref": "#/definitions/Link",
+                        "originalRef": "Link"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                },
+                "completedAt": {
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "createdAt": {
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "description": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                },
+                "id": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "parent": {
+                    "$ref": "#/definitions/Link",
+                    "originalRef": "Link",
+                    "readOnly": true
+                },
+                "result": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "state": {
+                    "enum": [
+                        "CREATED",
+                        "RUNNING",
+                        "COMPLETED",
+                        "FAILED",
+                        "DELETED"
+                    ],
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "IPSEC_RESTART",
+                        "PING"
+                    ],
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "format": "date-time",
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "type": "object"
+        },
         "TrafficSelectorMapping": {
             "properties": {
                 "customerSide": {
@@ -2245,6 +2457,51 @@
                 "customerSide",
                 "pureportSide"
             ],
+            "type": "object"
+        },
+        "UsageByConnectionOptions": {
+            "properties": {
+                "date": {
+                    "$ref": "#/definitions/DateFilter",
+                    "originalRef": "DateFilter"
+                },
+                "includeChildAccounts": {
+                    "type": "boolean"
+                },
+                "trafficType": {
+                    "enum": [
+                        "ALL",
+                        "BACKBONE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "UsageByNetworkAndTimeOptions": {
+            "properties": {
+                "date": {
+                    "$ref": "#/definitions/DateFilter",
+                    "originalRef": "DateFilter"
+                },
+                "includeChildAccounts": {
+                    "type": "boolean"
+                },
+                "timeUnit": {
+                    "enum": [
+                        "HOURS",
+                        "DAYS"
+                    ],
+                    "type": "string"
+                },
+                "trafficType": {
+                    "enum": [
+                        "ALL",
+                        "BACKBONE"
+                    ],
+                    "type": "string"
+                }
+            },
             "type": "object"
         },
         "User": {
@@ -2319,6 +2576,21 @@
                         "customerVtiIP": {
                             "type": "string"
                         },
+                        "ipsecStatus": {
+                            "enum": [
+                                "CREATED",
+                                "CONNECTING",
+                                "ESTABLISHED",
+                                "PASSIVE",
+                                "REKEYING",
+                                "REKEYED",
+                                "DELETING",
+                                "DESTROYING",
+                                "DOWN"
+                            ],
+                            "readOnly": true,
+                            "type": "string"
+                        },
                         "pureportGatewayIP": {
                             "type": "string"
                         },
@@ -2372,6 +2644,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List accounts",
                 "tags": [
                     "accounts"
@@ -2398,10 +2678,33 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/Account",
+                            "originalRef": "Account"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Account",
+                            "originalRef": "Account"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Add new account",
                 "tags": [
                     "accounts"
@@ -2428,6 +2731,14 @@
                         "description": "successful operation"
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Delete account",
                 "tags": [
                     "accounts"
@@ -2460,6 +2771,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get account details",
                 "tags": [
                     "accounts"
@@ -2504,6 +2823,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Update account",
                 "tags": [
                     "accounts"
@@ -2544,6 +2871,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List API keys for an account",
                 "tags": [
                     "apikeys"
@@ -2576,10 +2911,33 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/ApiKey",
+                            "originalRef": "ApiKey"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/ApiKey",
+                            "originalRef": "ApiKey"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Create a new API key",
                 "tags": [
                     "apikeys"
@@ -2612,6 +2970,14 @@
                         "description": "successful operation"
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Delete API Key",
                 "tags": [
                     "apikeys"
@@ -2650,6 +3016,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get API Key details",
                 "tags": [
                     "apikeys"
@@ -2700,6 +3074,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Update API Key",
                 "tags": [
                     "apikeys"
@@ -2725,10 +3107,24 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "type": "string"
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Delete payment method",
                 "tags": [
                     "billing"
@@ -2749,10 +3145,26 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountBilling",
+                            "originalRef": "AccountBilling"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountBilling",
+                            "originalRef": "AccountBilling"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Payment method for account",
                 "tags": [
                     "billing"
@@ -2785,10 +3197,33 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountBilling",
+                            "originalRef": "AccountBilling"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountBilling",
+                            "originalRef": "AccountBilling"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Add payment method",
                 "tags": [
                     "billing"
@@ -2821,10 +3256,26 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountBilling",
+                            "originalRef": "AccountBilling"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountBilling",
+                            "originalRef": "AccountBilling"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Update payment method",
                 "tags": [
                     "billing"
@@ -2864,6 +3315,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Payment method configured for account",
                 "tags": [
                     "billing"
@@ -2904,6 +3363,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List connections across all networks for the account",
                 "tags": [
                     "connections"
@@ -2941,6 +3408,14 @@
                         "description": "Account MSA and AUP have not been accepted"
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Account consent to Master Service Agreement and Acceptable Use Policy",
                 "tags": [
                     "account consent"
@@ -2964,10 +3439,33 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountConsent",
+                            "originalRef": "AccountConsent"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountConsent",
+                            "originalRef": "AccountConsent"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Consent to Master Service Agreement and Acceptable Use Policy for this account",
                 "tags": [
                     "account consent"
@@ -3008,6 +3506,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List account invites",
                 "tags": [
                     "account invitations"
@@ -3040,10 +3546,33 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountInvite",
+                            "originalRef": "AccountInvite"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountInvite",
+                            "originalRef": "AccountInvite"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Invite account member",
                 "tags": [
                     "account invitations"
@@ -3076,6 +3605,14 @@
                         "description": "successful operation"
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Delete account invite",
                 "tags": [
                     "account invitations"
@@ -3114,6 +3651,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get account invite",
                 "tags": [
                     "account invitations"
@@ -3170,6 +3715,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Update account invite",
                 "tags": [
                     "account invitations"
@@ -3210,6 +3763,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List account members",
                 "tags": [
                     "account members"
@@ -3242,10 +3803,33 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/AccountMember",
+                            "originalRef": "AccountMember"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/AccountMember",
+                            "originalRef": "AccountMember"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Add account member",
                 "tags": [
                     "account members"
@@ -3278,6 +3862,14 @@
                         "description": "successful operation"
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Delete account member",
                 "tags": [
                     "account members"
@@ -3316,6 +3908,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get account member",
                 "tags": [
                     "account members"
@@ -3366,9 +3966,136 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Update account member",
                 "tags": [
                     "account members"
+                ]
+            }
+        },
+        "/accounts/{accountId}/metrics/usageByConnection": {
+            "post": {
+                "description": "",
+                "operationId": "usageByConnection",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UsageByConnectionOptions",
+                            "originalRef": "UsageByConnectionOptions"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json",
+                    "text/csv"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/NetworkConnectionEgressIngress",
+                                "originalRef": "NetworkConnectionEgressIngress"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/NetworkConnectionEgressIngress",
+                                "originalRef": "NetworkConnectionEgressIngress"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
+                "summary": "Retrieve usage by connection",
+                "tags": [
+                    "account metrics"
+                ]
+            }
+        },
+        "/accounts/{accountId}/metrics/usageByNetworkAndTime": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "usageByNetworkAndTime",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/UsageByNetworkAndTimeOptions",
+                            "originalRef": "UsageByNetworkAndTimeOptions"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json",
+                    "text/csv"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/NetworkTimeUsage",
+                                "originalRef": "NetworkTimeUsage"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/NetworkTimeUsage",
+                                "originalRef": "NetworkTimeUsage"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
+                "summary": "Retrieve usage by network over time",
+                "tags": [
+                    "account metrics"
                 ]
             }
         },
@@ -3406,6 +4133,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List networks",
                 "tags": [
                     "networks"
@@ -3438,10 +4173,33 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/Network",
+                            "originalRef": "Network"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Network",
+                            "originalRef": "Network"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Add new network",
                 "tags": [
                     "networks"
@@ -3486,6 +4244,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get permissions for account",
                 "tags": [
                     "accounts"
@@ -3526,6 +4292,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List ports",
                 "tags": [
                     "ports"
@@ -3558,10 +4332,33 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/Port",
+                            "originalRef": "Port"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Port",
+                            "originalRef": "Port"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Add new port",
                 "tags": [
                     "ports"
@@ -3602,6 +4399,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List account roles",
                 "tags": [
                     "account roles"
@@ -3634,10 +4439,33 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/Role",
+                            "originalRef": "Role"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Role",
+                            "originalRef": "Role"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Add account role",
                 "tags": [
                     "account roles"
@@ -3670,6 +4498,14 @@
                         "description": "successful operation"
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Delete role",
                 "tags": [
                     "account roles"
@@ -3708,6 +4544,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get role details",
                 "tags": [
                     "account roles"
@@ -3758,6 +4602,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Update role",
                 "tags": [
                     "account roles"
@@ -3798,6 +4650,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List supported connections",
                 "tags": [
                     "supported connections"
@@ -3844,6 +4704,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List supported ports",
                 "tags": [
                     "supported ports"
@@ -3877,6 +4745,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List cloud regions",
                 "tags": [
                     "cloud regions"
@@ -3911,6 +4787,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get cloud region details",
                 "tags": [
                     "cloud regions"
@@ -3944,6 +4828,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List cloud services",
                 "tags": [
                     "cloud services"
@@ -3978,6 +4870,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get cloud service details",
                 "tags": [
                     "cloud services"
@@ -4012,6 +4912,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Delete connection",
                 "tags": [
                     "connections"
@@ -4044,6 +4952,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get connection details",
                 "tags": [
                     "connections"
@@ -4088,8 +5004,125 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Update connection",
                 "tags": [
+                    "connections"
+                ]
+            }
+        },
+        "/connections/{connectionId}/tasks": {
+            "get": {
+                "description": "",
+                "operationId": "getConnectionTasks",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "connectionId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Task",
+                                "originalRef": "Task"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Task",
+                                "originalRef": "Task"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
+                "summary": "List connection tasks",
+                "tags": [
+                    "tasks",
+                    "connections"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "",
+                "operationId": "createConnectionTask",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Task",
+                            "originalRef": "Task"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "connectionId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/Task",
+                            "originalRef": "Task"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Task",
+                            "originalRef": "Task"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
+                "summary": "Add a new task",
+                "tags": [
+                    "tasks",
                     "connections"
                 ]
             }
@@ -4121,6 +5154,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List facilities",
                 "tags": [
                     "facilities"
@@ -4136,10 +5177,24 @@
                     "application/vnd.google-earth.kml+xml"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "type": "string"
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List facilities (as KML)",
                 "tags": [
                     "facilities"
@@ -4174,6 +5229,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get facility details",
                 "tags": [
                     "facilities"
@@ -4214,6 +5277,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get gateway bgp routes",
                 "tags": [
                     "gateways"
@@ -4247,6 +5318,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Accept all invites for the current user",
                 "tags": [
                     "account invitations"
@@ -4280,6 +5359,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List locations",
                 "tags": [
                     "locations"
@@ -4314,6 +5401,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get location details",
                 "tags": [
                     "locations"
@@ -4342,10 +5437,26 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/LoginResponse",
+                            "originalRef": "LoginResponse"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/LoginResponse",
+                            "originalRef": "LoginResponse"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Login with an API Key",
                 "tags": [
                     "auth"
@@ -4374,10 +5485,26 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/LoginResponse",
+                            "originalRef": "LoginResponse"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/LoginResponse",
+                            "originalRef": "LoginResponse"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Login with a refresh token",
                 "tags": [
                     "auth"
@@ -4404,6 +5531,14 @@
                         "description": "successful operation"
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Delete network",
                 "tags": [
                     "networks"
@@ -4436,6 +5571,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get network details",
                 "tags": [
                     "networks"
@@ -4480,6 +5623,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Update network",
                 "tags": [
                     "networks"
@@ -4520,6 +5671,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "List network connections",
                 "tags": [
                     "connections"
@@ -4552,10 +5711,33 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Location": {
+                                "description": "",
+                                "format": "uri",
+                                "type": "string"
+                            }
+                        },
+                        "responseSchema": {
+                            "$ref": "#/definitions/Connection",
+                            "originalRef": "Connection"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Connection",
+                            "originalRef": "Connection"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Add new connection",
                 "tags": [
                     "connections"
@@ -4590,6 +5772,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Respawn controllers on network",
                 "tags": [
                     "networks"
@@ -4640,6 +5830,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get available options",
                 "tags": [
                     "options"
@@ -4666,6 +5864,14 @@
                         "description": "successful operation"
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Delete port",
                 "tags": [
                     "ports"
@@ -4698,6 +5904,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get port details",
                 "tags": [
                     "ports"
@@ -4742,6 +5956,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Update port",
                 "tags": [
                     "ports"
@@ -4782,6 +6004,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get accounts using this port",
                 "tags": [
                     "ports"
@@ -4804,10 +6034,24 @@
                     "application/json"
                 ],
                 "responses": {
-                    "default": {
-                        "description": "successful operation"
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "type": "string"
+                        },
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get port letter of authorization",
                 "tags": [
                     "ports"
@@ -4842,9 +6086,100 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get supported connection details",
                 "tags": [
                     "supported connections"
+                ]
+            }
+        },
+        "/tasks": {
+            "get": {
+                "description": "",
+                "operationId": "getTasks",
+                "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "items": {
+                                "$ref": "#/definitions/Task",
+                                "originalRef": "Task"
+                            },
+                            "type": "array"
+                        },
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Task",
+                                "originalRef": "Task"
+                            },
+                            "type": "array"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
+                "summary": "List Tasks",
+                "tags": [
+                    "tasks"
+                ]
+            }
+        },
+        "/tasks/{taskId}": {
+            "get": {
+                "description": "",
+                "operationId": "getTask",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "taskId",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "responseSchema": {
+                            "$ref": "#/definitions/Task",
+                            "originalRef": "Task"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/Task",
+                            "originalRef": "Task"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
+                "summary": "Get Task details",
+                "tags": [
+                    "tasks"
                 ]
             }
         },
@@ -4876,6 +6211,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Get user details",
                 "tags": [
                     "users"
@@ -4917,6 +6260,14 @@
                         }
                     }
                 },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "read",
+                            "write"
+                        ]
+                    }
+                ],
                 "summary": "Update user",
                 "tags": [
                     "users"
@@ -4927,13 +6278,28 @@
     "schemes": [
         "https"
     ],
+    "securityDefinitions": {
+        "OAuth2": {
+            "description": "",
+            "flow": "password",
+            "scopes": {
+                "read": "Read Permission",
+                "write": "Write Permission"
+            },
+            "tokenUrl": "/login",
+            "type": "oauth2"
+        }
+    },
     "swagger": "2.0",
     "tags": [
         {
-            "name": "accounts"
+            "name": "tasks"
         },
         {
             "name": "account roles"
+        },
+        {
+            "name": "accounts"
         },
         {
             "name": "connections"
@@ -4961,6 +6327,9 @@
         },
         {
             "name": "supported ports"
+        },
+        {
+            "name": "account metrics"
         },
         {
             "name": "account members"

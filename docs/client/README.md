@@ -34,6 +34,8 @@ Class | Method | HTTP request | Description
 *AccountMembersApi* | [**FindAccountMembers**](docs/AccountMembersApi.md#findaccountmembers) | **Get** /accounts/{accountId}/members | List account members
 *AccountMembersApi* | [**GetAccountMember**](docs/AccountMembersApi.md#getaccountmember) | **Get** /accounts/{accountId}/members/{userId} | Get account member
 *AccountMembersApi* | [**UpdateAccountMember**](docs/AccountMembersApi.md#updateaccountmember) | **Put** /accounts/{accountId}/members/{userId} | Update account member
+*AccountMetricsApi* | [**UsageByConnection**](docs/AccountMetricsApi.md#usagebyconnection) | **Post** /accounts/{accountId}/metrics/usageByConnection | Retrieve usage by connection
+*AccountMetricsApi* | [**UsageByNetworkAndTime**](docs/AccountMetricsApi.md#usagebynetworkandtime) | **Post** /accounts/{accountId}/metrics/usageByNetworkAndTime | Retrieve usage by network over time
 *AccountRolesApi* | [**CreateRole**](docs/AccountRolesApi.md#createrole) | **Post** /accounts/{accountId}/roles | Add account role
 *AccountRolesApi* | [**DeleteRole**](docs/AccountRolesApi.md#deleterole) | **Delete** /accounts/{accountId}/roles/{roleId} | Delete role
 *AccountRolesApi* | [**FindAllRoles**](docs/AccountRolesApi.md#findallroles) | **Get** /accounts/{accountId}/roles | List account roles
@@ -62,9 +64,11 @@ Class | Method | HTTP request | Description
 *CloudServicesApi* | [**GetCloudService**](docs/CloudServicesApi.md#getcloudservice) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
 *CloudServicesApi* | [**GetCloudServices**](docs/CloudServicesApi.md#getcloudservices) | **Get** /cloudServices | List cloud services
 *ConnectionsApi* | [**AddConnection**](docs/ConnectionsApi.md#addconnection) | **Post** /networks/{networkId}/connections | Add new connection
+*ConnectionsApi* | [**CreateConnectionTask**](docs/ConnectionsApi.md#createconnectiontask) | **Post** /connections/{connectionId}/tasks | Add a new task
 *ConnectionsApi* | [**DeleteConnection**](docs/ConnectionsApi.md#deleteconnection) | **Delete** /connections/{connectionId} | Delete connection
 *ConnectionsApi* | [**FindConnections**](docs/ConnectionsApi.md#findconnections) | **Get** /accounts/{accountId}/connections | List connections across all networks for the account
 *ConnectionsApi* | [**GetConnection**](docs/ConnectionsApi.md#getconnection) | **Get** /connections/{connectionId} | Get connection details
+*ConnectionsApi* | [**GetConnectionTasks**](docs/ConnectionsApi.md#getconnectiontasks) | **Get** /connections/{connectionId}/tasks | List connection tasks
 *ConnectionsApi* | [**GetConnections**](docs/ConnectionsApi.md#getconnections) | **Get** /networks/{networkId}/connections | List network connections
 *ConnectionsApi* | [**UpdateConnection**](docs/ConnectionsApi.md#updateconnection) | **Put** /connections/{connectionId} | Update connection
 *FacilitiesApi* | [**FindFacilities**](docs/FacilitiesApi.md#findfacilities) | **Get** /facilities | List facilities
@@ -90,6 +94,10 @@ Class | Method | HTTP request | Description
 *SupportedConnectionsApi* | [**GetAccountSupportedConnections**](docs/SupportedConnectionsApi.md#getaccountsupportedconnections) | **Get** /accounts/{accountId}/supportedConnections | List supported connections
 *SupportedConnectionsApi* | [**GetSupportedConnection**](docs/SupportedConnectionsApi.md#getsupportedconnection) | **Get** /supportedConnections/{supportedConnectionId} | Get supported connection details
 *SupportedPortsApi* | [**GetSupportedPorts**](docs/SupportedPortsApi.md#getsupportedports) | **Get** /accounts/{accountId}/supportedPorts | List supported ports
+*TasksApi* | [**CreateConnectionTask**](docs/TasksApi.md#createconnectiontask) | **Post** /connections/{connectionId}/tasks | Add a new task
+*TasksApi* | [**GetConnectionTasks**](docs/TasksApi.md#getconnectiontasks) | **Get** /connections/{connectionId}/tasks | List connection tasks
+*TasksApi* | [**GetTask**](docs/TasksApi.md#gettask) | **Get** /tasks/{taskId} | Get Task details
+*TasksApi* | [**GetTasks**](docs/TasksApi.md#gettasks) | **Get** /tasks | List Tasks
 *UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Get user details
 *UsersApi* | [**UpdateUser**](docs/UsersApi.md#updateuser) | **Put** /users/{userId} | Update user
 
@@ -110,6 +118,7 @@ Class | Method | HTTP request | Description
  - [CloudService](docs/CloudService.md)
  - [Connection](docs/Connection.md)
  - [CustomerNetwork](docs/CustomerNetwork.md)
+ - [DateFilter](docs/DateFilter.md)
  - [Facility](docs/Facility.md)
  - [Gateway](docs/Gateway.md)
  - [GeoCoordinates](docs/GeoCoordinates.md)
@@ -123,10 +132,13 @@ Class | Method | HTTP request | Description
  - [Location](docs/Location.md)
  - [LocationLinkConnection](docs/LocationLinkConnection.md)
  - [LoginRequest](docs/LoginRequest.md)
+ - [LoginResponse](docs/LoginResponse.md)
  - [LoginWithRefreshTokenRequest](docs/LoginWithRefreshTokenRequest.md)
  - [NatConfig](docs/NatConfig.md)
  - [NatMapping](docs/NatMapping.md)
  - [Network](docs/Network.md)
+ - [NetworkConnectionEgressIngress](docs/NetworkConnectionEgressIngress.md)
+ - [NetworkTimeUsage](docs/NetworkTimeUsage.md)
  - [Option](docs/Option.md)
  - [PeeringConfiguration](docs/PeeringConfiguration.md)
  - [PhysicalAddress](docs/PhysicalAddress.md)
@@ -141,7 +153,10 @@ Class | Method | HTTP request | Description
  - [SupportedConnection](docs/SupportedConnection.md)
  - [SupportedConnectionGroup](docs/SupportedConnectionGroup.md)
  - [SupportedPort](docs/SupportedPort.md)
+ - [Task](docs/Task.md)
  - [TrafficSelectorMapping](docs/TrafficSelectorMapping.md)
+ - [UsageByConnectionOptions](docs/UsageByConnectionOptions.md)
+ - [UsageByNetworkAndTimeOptions](docs/UsageByNetworkAndTimeOptions.md)
  - [User](docs/User.md)
  - [VpnAuthConfig](docs/VpnAuthConfig.md)
  - [AwsDirectConnectConnection](docs/AwsDirectConnectConnection.md)
@@ -155,8 +170,31 @@ Class | Method | HTTP request | Description
 
 
 ## Documentation For Authorization
- Endpoints do not require authorization.
 
+## OAuth2
+- **Type**: OAuth
+- **Flow**: password
+- **Authorization URL**: 
+- **Scopes**: 
+ - **read**: Read Permission
+ - **write**: Write Permission
+
+Example
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
 
 ## Author
 
