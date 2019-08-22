@@ -27,7 +27,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

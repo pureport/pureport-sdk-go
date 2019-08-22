@@ -7,8 +7,9 @@ info:
 host: "api.pureport.com"
 basePath: "/"
 tags:
-- name: "accounts"
+- name: "tasks"
 - name: "account roles"
+- name: "accounts"
 - name: "connections"
 - name: "account invitations"
 - name: "networks"
@@ -18,6 +19,7 @@ tags:
 - name: "billing"
 - name: "account consent"
 - name: "supported ports"
+- name: "account metrics"
 - name: "account members"
 - name: "cloud regions"
 - name: "gateways"
@@ -53,6 +55,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Account"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     post:
       tags:
       - "accounts"
@@ -71,8 +77,19 @@ paths:
           $ref: "#/definitions/Account"
         x-exportParamName: "Body"
       responses:
-        default:
+        200:
           description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/Account"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}:
     get:
       tags:
@@ -93,6 +110,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Account"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     put:
       tags:
       - "accounts"
@@ -120,6 +141,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Account"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     delete:
       tags:
       - "accounts"
@@ -137,6 +162,10 @@ paths:
       responses:
         default:
           description: "successful operation"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/apikeys:
     get:
       tags:
@@ -159,6 +188,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/ApiKey"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     post:
       tags:
       - "apikeys"
@@ -182,8 +215,19 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/ApiKey"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/apikeys/{key}:
     get:
       tags:
@@ -209,6 +253,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/ApiKey"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     put:
       tags:
       - "apikeys"
@@ -241,6 +289,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/ApiKey"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     delete:
       tags:
       - "apikeys"
@@ -263,6 +315,10 @@ paths:
       responses:
         default:
           description: "successful operation"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/billing:
     get:
       tags:
@@ -279,8 +335,14 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/AccountBilling"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     post:
       tags:
       - "billing"
@@ -304,8 +366,19 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/AccountBilling"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     put:
       tags:
       - "billing"
@@ -329,8 +402,14 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/AccountBilling"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     delete:
       tags:
       - "billing"
@@ -348,8 +427,14 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          schema:
+            type: "string"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/billing/configured:
     get:
       tags:
@@ -377,6 +462,10 @@ paths:
           description: "successful operation"
           schema:
             type: "boolean"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/connections:
     get:
       tags:
@@ -399,6 +488,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Connection"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/consent:
     get:
       tags:
@@ -421,6 +514,10 @@ paths:
             $ref: "#/definitions/AccountConsent"
         404:
           description: "Account MSA and AUP have not been accepted"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     post:
       tags:
       - "account consent"
@@ -439,8 +536,19 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/AccountConsent"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/invites:
     get:
       tags:
@@ -463,6 +571,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/AccountInvite"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     post:
       tags:
       - "account invitations"
@@ -486,8 +598,19 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/AccountInvite"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/invites/{inviteId}:
     get:
       tags:
@@ -513,6 +636,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/AccountInvite"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     put:
       tags:
       - "account invitations"
@@ -551,6 +678,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/AccountInvite"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     delete:
       tags:
       - "account invitations"
@@ -573,6 +704,10 @@ paths:
       responses:
         default:
           description: "successful operation"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/members:
     get:
       tags:
@@ -595,6 +730,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/AccountMember"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     post:
       tags:
       - "account members"
@@ -618,8 +757,19 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/AccountMember"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/members/{userId}:
     get:
       tags:
@@ -645,6 +795,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/AccountMember"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     put:
       tags:
       - "account members"
@@ -677,6 +831,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/AccountMember"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     delete:
       tags:
       - "account members"
@@ -699,6 +857,78 @@ paths:
       responses:
         default:
           description: "successful operation"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
+  /accounts/{accountId}/metrics/usageByConnection:
+    post:
+      tags:
+      - "account metrics"
+      summary: "Retrieve usage by connection"
+      description: ""
+      operationId: "usageByConnection"
+      produces:
+      - "application/json"
+      - "text/csv"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/UsageByConnectionOptions"
+        x-exportParamName: "Body"
+      - name: "accountId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "AccountId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/NetworkConnectionEgressIngress"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
+  /accounts/{accountId}/metrics/usageByNetworkAndTime:
+    post:
+      tags:
+      - "account metrics"
+      summary: "Retrieve usage by network over time"
+      description: ""
+      operationId: "usageByNetworkAndTime"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      - "text/csv"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/UsageByNetworkAndTimeOptions"
+        x-exportParamName: "Body"
+      - name: "accountId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "AccountId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/NetworkTimeUsage"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/networks:
     get:
       tags:
@@ -721,6 +951,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Network"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     post:
       tags:
       - "networks"
@@ -744,8 +978,19 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/Network"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/permissions:
     get:
       tags:
@@ -772,6 +1017,10 @@ paths:
               type: "object"
               additionalProperties:
                 type: "boolean"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/ports:
     get:
       tags:
@@ -794,6 +1043,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Port"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     post:
       tags:
       - "ports"
@@ -817,8 +1070,19 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/Port"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/roles:
     get:
       tags:
@@ -841,6 +1105,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Role"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     post:
       tags:
       - "account roles"
@@ -864,8 +1132,19 @@ paths:
         type: "string"
         x-exportParamName: "AccountId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/Role"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/roles/{roleId}:
     get:
       tags:
@@ -891,6 +1170,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Role"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     put:
       tags:
       - "account roles"
@@ -923,6 +1206,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Role"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     delete:
       tags:
       - "account roles"
@@ -945,6 +1232,10 @@ paths:
       responses:
         default:
           description: "successful operation"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/supportedConnections:
     get:
       tags:
@@ -967,6 +1258,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/SupportedConnection"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /accounts/{accountId}/supportedPorts:
     get:
       tags:
@@ -994,6 +1289,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/SupportedPort"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /cloudRegions:
     get:
       tags:
@@ -1011,6 +1310,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/CloudRegion"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /cloudRegions/{cloudRegionId}:
     get:
       tags:
@@ -1031,6 +1334,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/CloudRegion"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /cloudServices:
     get:
       tags:
@@ -1048,6 +1355,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/CloudService"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /cloudServices/{cloudServiceId}:
     get:
       tags:
@@ -1068,6 +1379,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/CloudService"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /connections/{connectionId}:
     get:
       tags:
@@ -1088,6 +1403,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Connection"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     put:
       tags:
       - "connections"
@@ -1115,6 +1434,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Connection"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     delete:
       tags:
       - "connections"
@@ -1134,6 +1457,74 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Connection"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
+  /connections/{connectionId}/tasks:
+    get:
+      tags:
+      - "tasks"
+      - "connections"
+      summary: "List connection tasks"
+      description: ""
+      operationId: "getConnectionTasks"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "connectionId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "ConnectionId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Task"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
+    post:
+      tags:
+      - "tasks"
+      - "connections"
+      summary: "Add a new task"
+      description: ""
+      operationId: "createConnectionTask"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/Task"
+        x-exportParamName: "Body"
+      - name: "connectionId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "ConnectionId"
+      responses:
+        200:
+          description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/Task"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /facilities:
     get:
       tags:
@@ -1151,6 +1542,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Facility"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /facilities/kml:
     get:
       tags:
@@ -1162,8 +1557,14 @@ paths:
       - "application/vnd.google-earth.kml+xml"
       parameters: []
       responses:
-        default:
+        200:
           description: "successful operation"
+          schema:
+            type: "string"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /facilities/{facilityId}:
     get:
       tags:
@@ -1184,6 +1585,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Facility"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /gateways/{gatewayId}/bgpRoutes:
     get:
       tags:
@@ -1206,6 +1611,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/BGPRoute"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /invites:
     post:
       tags:
@@ -1223,6 +1632,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/AccountInvite"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /locations:
     get:
       tags:
@@ -1240,6 +1653,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Location"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /locations/{locationId}:
     get:
       tags:
@@ -1260,6 +1677,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Location"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /login:
     post:
       tags:
@@ -1279,8 +1700,14 @@ paths:
           $ref: "#/definitions/LoginRequest"
         x-exportParamName: "Body"
       responses:
-        default:
+        200:
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/LoginResponse"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /login/refresh:
     post:
       tags:
@@ -1300,8 +1727,14 @@ paths:
           $ref: "#/definitions/LoginWithRefreshTokenRequest"
         x-exportParamName: "Body"
       responses:
-        default:
+        200:
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/LoginResponse"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /networks/{networkId}:
     get:
       tags:
@@ -1322,6 +1755,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Network"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     put:
       tags:
       - "networks"
@@ -1349,6 +1786,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Network"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     delete:
       tags:
       - "networks"
@@ -1366,6 +1807,10 @@ paths:
       responses:
         default:
           description: "successful operation"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /networks/{networkId}/connections:
     get:
       tags:
@@ -1388,6 +1833,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Connection"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     post:
       tags:
       - "connections"
@@ -1411,8 +1860,19 @@ paths:
         type: "string"
         x-exportParamName: "NetworkId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          headers:
+            Location:
+              type: "string"
+              format: "uri"
+              description: ""
+          schema:
+            $ref: "#/definitions/Connection"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /networks/{networkId}/respawn:
     post:
       tags:
@@ -1433,6 +1893,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Network"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /options:
     get:
       tags:
@@ -1460,6 +1924,10 @@ paths:
               type: "array"
               items:
                 $ref: "#/definitions/Option"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /ports/{portId}:
     get:
       tags:
@@ -1480,6 +1948,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Port"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     put:
       tags:
       - "ports"
@@ -1507,6 +1979,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Port"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     delete:
       tags:
       - "ports"
@@ -1524,6 +2000,10 @@ paths:
       responses:
         default:
           description: "successful operation"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /ports/{portId}/accounts:
     get:
       tags:
@@ -1546,6 +2026,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Link"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /ports/{portId}/loa:
     get:
       tags:
@@ -1562,8 +2046,14 @@ paths:
         type: "string"
         x-exportParamName: "PortId"
       responses:
-        default:
+        200:
           description: "successful operation"
+          schema:
+            type: "string"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /supportedConnections/{supportedConnectionId}:
     get:
       tags:
@@ -1584,6 +2074,55 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/SupportedConnection"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
+  /tasks:
+    get:
+      tags:
+      - "tasks"
+      summary: "List Tasks"
+      description: ""
+      operationId: "getTasks"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Task"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
+  /tasks/{taskId}:
+    get:
+      tags:
+      - "tasks"
+      summary: "Get Task details"
+      description: ""
+      operationId: "getTask"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "taskId"
+        in: "path"
+        required: true
+        type: "string"
+        x-exportParamName: "TaskId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Task"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
   /users/{userId}:
     get:
       tags:
@@ -1604,6 +2143,10 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/User"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
     put:
       tags:
       - "users"
@@ -1629,6 +2172,19 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/User"
+      security:
+      - OAuth2:
+        - "read"
+        - "write"
+securityDefinitions:
+  OAuth2:
+    description: ""
+    type: "oauth2"
+    tokenUrl: "/login"
+    flow: "password"
+    scopes:
+      read: "Read Permission"
+      write: "Write Permission"
 definitions:
   AWSDirectConnectConnection:
     allOf:
@@ -1636,7 +2192,6 @@ definitions:
     - type: "object"
       required:
       - "awsAccountId"
-      - "awsRegion"
       properties:
         awsAccountId:
           type: "string"
@@ -1645,6 +2200,9 @@ definitions:
           type: "string"
           minLength: 1
           maxLength: 64
+        cloudRegion:
+          readOnly: true
+          $ref: "#/definitions/Link"
         cloudServices:
           type: "array"
           uniqueItems: true
@@ -1658,6 +2216,8 @@ definitions:
     required:
     - "name"
     properties:
+      demo:
+        type: "boolean"
       description:
         type: "string"
         minLength: 0
@@ -1702,6 +2262,7 @@ definitions:
       - href: "href"
         id: "id"
         title: "title"
+      demo: true
       tags:
         key: "tags"
   AccountBilling:
@@ -2369,6 +2930,7 @@ definitions:
         - "AWS"
         - "AZURE"
         - "GOOGLE_CLOUD"
+        - "ORACLE"
       providerAssignedId:
         type: "string"
     example:
@@ -2418,6 +2980,7 @@ definitions:
         - "AWS"
         - "AZURE"
         - "GOOGLE_CLOUD"
+        - "ORACLE"
       service:
         type: "string"
     example:
@@ -2502,10 +3065,12 @@ definitions:
         - "CONFLICT"
         - "AWS_CONNECTION_HAS_ACTIVE_VIFS"
         - "EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE"
+        - "ORACLE_OCID_ALREADY_IN_USE"
         - "ADMIN_ACCESS_MUST_EXIST"
         - "CONNECTION_UPDATE_STATE_CONFLICT"
         - "CONNECTION_DELETE_STATE_CONFLICT"
         - "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT"
+        - "NETWORK_RESPAWN_STATE_CONFLICT"
         - "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT"
         - "CONSENT_REQUIRED"
         - "ACCOUNT_ALREADY_CONSENTED"
@@ -2518,17 +3083,23 @@ definitions:
         - "UNPROCESSABLE_ENTITY"
         - "VALIDATION_ERROR"
         - "INVALID_LINK"
+        - "INVALID_AWS_REGION"
         - "INVALID_EXPRESS_ROUTE_SERVICE_KEY"
         - "INVALID_GOOGLE_PAIRING_KEY"
+        - "INVALID_ORACLE_OCID"
         - "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH"
+        - "ORACLE_OCID_BANDWIDTH_MISMATCH"
         - "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS"
         - "NO_SUPPORTED_CONNECTION_FOR_CONNECTION"
+        - "SUPPORTED_CONNECTION_IS_PENDING"
         - "NO_SUPPORTED_PORT_FOR_PORT"
         - "UNSUPPORTED_RESOURCE_LIMIT"
         - "MODIFICATION_NOT_ALLOWED"
         - "AWS_CONNECTION_SPEED_IMMUTABLE"
         - "INVALID_VLAN"
         - "INVALID_VLAN_RANGE"
+        - "UNSUPPORTED_TASK_FOR_RESOURCE"
+        - "UNSUPPORTED_TASK_NAME"
         - "VLAN_IN_USE"
         - "INVALID_CUSTOMER_ASN"
         - "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS"
@@ -2554,6 +3125,7 @@ definitions:
         - "GATEWAY_UPDATE_SPEED_ERROR"
         - "GATEWAY_UPDATING_ERROR"
         - "GATEWAY_DELETING_ERROR"
+        - "ECX_GATEWAY_PROVISIONING_ERROR"
         - "PORT_PROVISIONING_ERROR"
         - "PORT_UPDATING_ERROR"
         - "PORT_DELETING_ERROR"
@@ -2564,6 +3136,7 @@ definitions:
         - "NOT_IMPLEMENTED"
         - "SERVICE_UNAVAILABLE"
         - "EXPRESS_ROUTE_SERVICE_UNAVAILABLE"
+        - "ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE"
         - "INSUFFICIENT_CAPACITY"
         - "NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE"
       errorMessage:
@@ -2634,6 +3207,7 @@ definitions:
         - "AWS_DIRECT_CONNECT"
         - "AZURE_EXPRESS_ROUTE"
         - "GOOGLE_CLOUD_INTERCONNECT"
+        - "ORACLE_FAST_CONNECT"
         - "SITE_IPSEC_VPN"
         - "PORT"
     example:
@@ -5732,6 +6306,26 @@ definitions:
     example:
       address: "address"
       name: "name"
+  DateFilter:
+    type: "object"
+    properties:
+      gt:
+        type: "string"
+        format: "date-time"
+      gte:
+        type: "string"
+        format: "date-time"
+      lt:
+        type: "string"
+        format: "date-time"
+      lte:
+        type: "string"
+        format: "date-time"
+    example:
+      lt: "2000-01-23T04:56:07.000+00:00"
+      gte: "2000-01-23T04:56:07.000+00:00"
+      lte: "2000-01-23T04:56:07.000+00:00"
+      gt: "2000-01-23T04:56:07.000+00:00"
   Facility:
     type: "object"
     required:
@@ -5743,8 +6337,7 @@ definitions:
       altIds:
         type: "object"
         additionalProperties:
-          type: "object"
-          properties: {}
+          type: "string"
       href:
         type: "string"
       id:
@@ -5765,7 +6358,7 @@ definitions:
         type: "string"
     example:
       altIds:
-        key: "{}"
+        key: "altIds"
       address:
         country: "country"
         city: "city"
@@ -5820,10 +6413,12 @@ definitions:
         - "CONFLICT"
         - "AWS_CONNECTION_HAS_ACTIVE_VIFS"
         - "EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE"
+        - "ORACLE_OCID_ALREADY_IN_USE"
         - "ADMIN_ACCESS_MUST_EXIST"
         - "CONNECTION_UPDATE_STATE_CONFLICT"
         - "CONNECTION_DELETE_STATE_CONFLICT"
         - "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT"
+        - "NETWORK_RESPAWN_STATE_CONFLICT"
         - "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT"
         - "CONSENT_REQUIRED"
         - "ACCOUNT_ALREADY_CONSENTED"
@@ -5836,17 +6431,23 @@ definitions:
         - "UNPROCESSABLE_ENTITY"
         - "VALIDATION_ERROR"
         - "INVALID_LINK"
+        - "INVALID_AWS_REGION"
         - "INVALID_EXPRESS_ROUTE_SERVICE_KEY"
         - "INVALID_GOOGLE_PAIRING_KEY"
+        - "INVALID_ORACLE_OCID"
         - "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH"
+        - "ORACLE_OCID_BANDWIDTH_MISMATCH"
         - "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS"
         - "NO_SUPPORTED_CONNECTION_FOR_CONNECTION"
+        - "SUPPORTED_CONNECTION_IS_PENDING"
         - "NO_SUPPORTED_PORT_FOR_PORT"
         - "UNSUPPORTED_RESOURCE_LIMIT"
         - "MODIFICATION_NOT_ALLOWED"
         - "AWS_CONNECTION_SPEED_IMMUTABLE"
         - "INVALID_VLAN"
         - "INVALID_VLAN_RANGE"
+        - "UNSUPPORTED_TASK_FOR_RESOURCE"
+        - "UNSUPPORTED_TASK_NAME"
         - "VLAN_IN_USE"
         - "INVALID_CUSTOMER_ASN"
         - "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS"
@@ -5872,6 +6473,7 @@ definitions:
         - "GATEWAY_UPDATE_SPEED_ERROR"
         - "GATEWAY_UPDATING_ERROR"
         - "GATEWAY_DELETING_ERROR"
+        - "ECX_GATEWAY_PROVISIONING_ERROR"
         - "PORT_PROVISIONING_ERROR"
         - "PORT_UPDATING_ERROR"
         - "PORT_DELETING_ERROR"
@@ -5882,6 +6484,7 @@ definitions:
         - "NOT_IMPLEMENTED"
         - "SERVICE_UNAVAILABLE"
         - "EXPRESS_ROUTE_SERVICE_UNAVAILABLE"
+        - "ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE"
         - "INSUFFICIENT_CAPACITY"
         - "NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE"
       errorMessage:
@@ -5916,6 +6519,7 @@ definitions:
         - "FAILED_TO_UPDATE"
         - "DELETING"
         - "FAILED_TO_DELETE"
+        - "DELETED"
       type:
         type: "string"
         readOnly: true
@@ -6281,6 +6885,28 @@ definitions:
     example:
       secret: "secret"
       key: "key"
+  LoginResponse:
+    type: "object"
+    required:
+    - "access_token"
+    - "expires_in"
+    - "refresh_token"
+    - "token_type"
+    properties:
+      access_token:
+        type: "string"
+      expires_in:
+        type: "integer"
+        format: "int32"
+      refresh_token:
+        type: "string"
+      token_type:
+        type: "string"
+    example:
+      access_token: "access_token"
+      refresh_token: "refresh_token"
+      token_type: "token_type"
+      expires_in: 0
   LoginWithRefreshTokenRequest:
     type: "object"
     required:
@@ -9357,6 +9983,8 @@ definitions:
         enum:
         - "PENDING"
         - "PROVISIONING"
+        - "PENDING_CONTROLLERS"
+        - "PROVISIONING_CONTROLLERS"
         - "ACTIVE"
         - "DELETING"
         - "DELETED"
@@ -9377,6 +10005,60 @@ definitions:
         title: "title"
       tags:
         key: "tags"
+  NetworkConnectionEgressIngress:
+    type: "object"
+    properties:
+      account:
+        $ref: "#/definitions/Link"
+      connection:
+        $ref: "#/definitions/Link"
+      egress:
+        type: "integer"
+        format: "int64"
+      ingress:
+        type: "integer"
+        format: "int64"
+      network:
+        $ref: "#/definitions/Link"
+    example:
+      ingress: 6
+      connection:
+        href: "href"
+        id: "id"
+        title: "title"
+      account:
+        href: "href"
+        id: "id"
+        title: "title"
+      egress: 0
+      network:
+        href: "href"
+        id: "id"
+        title: "title"
+  NetworkTimeUsage:
+    type: "object"
+    properties:
+      account:
+        $ref: "#/definitions/Link"
+      network:
+        $ref: "#/definitions/Link"
+      time:
+        type: "string"
+        format: "date-time"
+      usage:
+        type: "integer"
+        format: "int64"
+    example:
+      usage: 0
+      time: "2000-01-23T04:56:07.000+00:00"
+      account:
+        href: "href"
+        id: "id"
+        title: "title"
+      network:
+        href: "href"
+        id: "id"
+        title: "title"
   Option:
     type: "object"
     properties:
@@ -9408,6 +10090,14 @@ definitions:
     required:
     - "type"
     properties:
+      primaryPureportBgpIP:
+        type: "string"
+      primaryRemoteBgpIP:
+        type: "string"
+      secondaryPureportBgpIP:
+        type: "string"
+      secondaryRemoteBgpIP:
+        type: "string"
       type:
         type: "string"
         enum:
@@ -9461,6 +10151,7 @@ definitions:
   Port:
     type: "object"
     required:
+    - "account"
     - "availabilityDomain"
     - "billingTerm"
     - "facility"
@@ -9625,6 +10316,7 @@ definitions:
           - "AWS_DIRECT_CONNECT"
           - "AZURE_EXPRESS_ROUTE"
           - "GOOGLE_CLOUD_INTERCONNECT"
+          - "ORACLE_FAST_CONNECT"
           - "SITE_IPSEC_VPN"
           - "PORT"
         maxItems: 2147483647
@@ -9869,6 +10561,8 @@ definitions:
         enum:
         - "PUBLIC"
         - "PRIVATE"
+      pending:
+        type: "boolean"
       reachableCloudRegions:
         type: "array"
         uniqueItems: true
@@ -9892,6 +10586,7 @@ definitions:
         - "AWS_DIRECT_CONNECT"
         - "AZURE_EXPRESS_ROUTE"
         - "GOOGLE_CLOUD_INTERCONNECT"
+        - "ORACLE_FAST_CONNECT"
         - "SITE_IPSEC_VPN"
         - "PORT"
     example:
@@ -9907,6 +10602,7 @@ definitions:
         billingInterval: "ONCE"
         setupAmount: 6
       billingProductId: "billingProductId"
+      pending: true
       groups:
       - href: "href"
         id: "id"
@@ -10005,6 +10701,78 @@ definitions:
         id: "id"
         title: "title"
       speed: "GBPS_1"
+  Task:
+    type: "object"
+    required:
+    - "type"
+    properties:
+      children:
+        type: "array"
+        readOnly: true
+        items:
+          $ref: "#/definitions/Link"
+      completedAt:
+        type: "string"
+        format: "date-time"
+        readOnly: true
+      createdAt:
+        type: "string"
+        format: "date-time"
+        readOnly: true
+      description:
+        type: "string"
+        readOnly: true
+      href:
+        type: "string"
+      id:
+        type: "string"
+        minLength: 1
+        maxLength: 64
+      parent:
+        readOnly: true
+        $ref: "#/definitions/Link"
+      result:
+        type: "string"
+        readOnly: true
+      state:
+        type: "string"
+        readOnly: true
+        enum:
+        - "CREATED"
+        - "RUNNING"
+        - "COMPLETED"
+        - "FAILED"
+        - "DELETED"
+      type:
+        type: "string"
+        enum:
+        - "IPSEC_RESTART"
+        - "PING"
+      updatedAt:
+        type: "string"
+        format: "date-time"
+        readOnly: true
+    example:
+      result: "result"
+      createdAt: "2000-01-23T04:56:07.000+00:00"
+      parent:
+        href: "href"
+        id: "id"
+        title: "title"
+      completedAt: "2000-01-23T04:56:07.000+00:00"
+      children:
+      - href: "href"
+        id: "id"
+        title: "title"
+      - href: "href"
+        id: "id"
+        title: "title"
+      description: "description"
+      href: "href"
+      id: "id"
+      state: "CREATED"
+      type: "IPSEC_RESTART"
+      updatedAt: "2000-01-23T04:56:07.000+00:00"
   TrafficSelectorMapping:
     type: "object"
     required:
@@ -10015,6 +10783,44 @@ definitions:
         type: "string"
       pureportSide:
         type: "string"
+  UsageByConnectionOptions:
+    type: "object"
+    properties:
+      date:
+        $ref: "#/definitions/DateFilter"
+      includeChildAccounts:
+        type: "boolean"
+      trafficType:
+        type: "string"
+        enum:
+        - "ALL"
+        - "BACKBONE"
+  UsageByNetworkAndTimeOptions:
+    type: "object"
+    properties:
+      date:
+        $ref: "#/definitions/DateFilter"
+      includeChildAccounts:
+        type: "boolean"
+      timeUnit:
+        type: "string"
+        enum:
+        - "HOURS"
+        - "DAYS"
+      trafficType:
+        type: "string"
+        enum:
+        - "ALL"
+        - "BACKBONE"
+    example:
+      date:
+        lt: "2000-01-23T04:56:07.000+00:00"
+        gte: "2000-01-23T04:56:07.000+00:00"
+        lte: "2000-01-23T04:56:07.000+00:00"
+        gt: "2000-01-23T04:56:07.000+00:00"
+      includeChildAccounts: true
+      trafficType: "ALL"
+      timeUnit: "HOURS"
   User:
     type: "object"
     properties:
@@ -10075,6 +10881,19 @@ definitions:
           type: "string"
         customerVtiIP:
           type: "string"
+        ipsecStatus:
+          type: "string"
+          readOnly: true
+          enum:
+          - "CREATED"
+          - "CONNECTING"
+          - "ESTABLISHED"
+          - "PASSIVE"
+          - "REKEYING"
+          - "REKEYED"
+          - "DELETING"
+          - "DESTROYING"
+          - "DOWN"
         pureportGatewayIP:
           type: "string"
         pureportVtiIP:

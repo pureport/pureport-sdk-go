@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **AddPaymentInformation**
-> AddPaymentInformation(ctx, accountId, optional)
+> AccountBilling AddPaymentInformation(ctx, accountId, optional)
 Add payment method
 
 
@@ -35,11 +35,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**AccountBilling**](AccountBilling.md)
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -49,7 +49,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeletePaymentInformation**
-> DeletePaymentInformation(ctx, accountId)
+> string DeletePaymentInformation(ctx, accountId)
 Delete payment method
 
 
@@ -63,11 +63,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+**string**
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -77,7 +77,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **FindBillingForAccount**
-> FindBillingForAccount(ctx, accountId)
+> AccountBilling FindBillingForAccount(ctx, accountId)
 Payment method for account
 
 
@@ -91,11 +91,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**AccountBilling**](AccountBilling.md)
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -132,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -142,7 +142,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdatePaymentInformation**
-> UpdatePaymentInformation(ctx, accountId, optional)
+> AccountBilling UpdatePaymentInformation(ctx, accountId, optional)
 Update payment method
 
 
@@ -165,11 +165,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**AccountBilling**](AccountBilling.md)
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

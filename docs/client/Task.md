@@ -1,17 +1,19 @@
-# Account
+# Task
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Demo** | **bool** |  | [optional] 
+**Children** | [**[]Link**](Link.md) |  | [optional] 
+**CompletedAt** | [**time.Time**](time.Time.md) |  | [optional] 
+**CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] 
 **Description** | **string** |  | [optional] 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
-**Name** | **string** |  | 
 **Parent** | [***Link**](Link.md) |  | [optional] 
-**ShowChildAccountPricing** | **bool** |  | [optional] 
-**SupportedConnectionGroups** | [**[]Link**](Link.md) |  | [optional] 
-**Tags** | **map[string]string** |  | [optional] 
+**Result** | **string** |  | [optional] 
+**State** | **string** |  | [optional] 
+**Type_** | **string** |  | 
+**UpdatedAt** | [**time.Time**](time.Time.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

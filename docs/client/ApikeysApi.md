@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **CreateApiKey**
-> CreateApiKey(ctx, accountId, optional)
+> ApiKey CreateApiKey(ctx, accountId, optional)
 Create a new API key
 
 
@@ -35,11 +35,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ApiKey**](ApiKey.md)
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -96,7 +96,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -164,7 +164,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

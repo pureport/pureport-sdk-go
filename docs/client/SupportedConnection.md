@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | [optional] 
 **Location** | [***Link**](Link.md) |  | 
 **PeeringType** | **string** |  | 
+**Pending** | **bool** |  | [optional] 
 **ReachableCloudRegions** | [**[]Link**](Link.md) |  | [optional] 
 **Speed** | **int32** |  | 
 **Type_** | **string** |  | 

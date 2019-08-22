@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **CreateAccount**
-> CreateAccount(ctx, optional)
+> Account CreateAccount(ctx, optional)
 Add new account
 
 
@@ -34,11 +34,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**Account**](Account.md)
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -129,7 +129,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -194,7 +194,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

@@ -24,7 +24,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -62,7 +62,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFacilitiesAsKml**
-> ListFacilitiesAsKml(ctx, )
+> string ListFacilitiesAsKml(ctx, )
 List facilities (as KML)
 
 
@@ -72,11 +72,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
- (empty response body)
+**string**
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

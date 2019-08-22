@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **Login**
-> Login(ctx, optional)
+> LoginResponse Login(ctx, optional)
 Login with an API Key
 
 
@@ -30,11 +30,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**LoginResponse**](LoginResponse.md)
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -44,7 +44,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **LoginWithRefreshToken**
-> LoginWithRefreshToken(ctx, optional)
+> LoginResponse LoginWithRefreshToken(ctx, optional)
 Login with a refresh token
 
 
@@ -65,11 +65,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**LoginResponse**](LoginResponse.md)
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

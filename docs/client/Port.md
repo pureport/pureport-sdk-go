@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Account** | [***Link**](Link.md) |  | [optional] 
+**Account** | [***Link**](Link.md) |  | 
 **AvailabilityDomain** | **string** |  | 
 **AvailableToChildAccounts** | **bool** |  | [optional] 
 **BillingTerm** | **string** |  | 
