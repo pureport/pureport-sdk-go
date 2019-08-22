@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **Consent**
-> Consent(ctx, accountId)
+> AccountConsent Consent(ctx, accountId)
 Consent to Master Service Agreement and Acceptable Use Policy for this account
 
 
@@ -23,11 +23,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**AccountConsent**](AccountConsent.md)
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[OAuth2](../README.md#OAuth2)
 
 ### HTTP request headers
 

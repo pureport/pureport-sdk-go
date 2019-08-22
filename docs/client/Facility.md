@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Address** | [***PhysicalAddress**](PhysicalAddress.md) |  | 
-**AltIds** | [**map[string]interface{}**](interface{}.md) |  | [optional] 
+**AltIds** | **map[string]string** |  | [optional] 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
 **Name** | **string** |  | 
