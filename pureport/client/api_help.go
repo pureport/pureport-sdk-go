@@ -16,7 +16,6 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"reflect"
 )
 
 // Linger please
@@ -24,48 +23,40 @@ var (
 	_ _context.Context
 )
 
-// OptionsApiService OptionsApi service
-type OptionsApiService service
+// HelpApiService HelpApi service
+type HelpApiService service
 
-// GetOptionsOpts Optional parameters for the method 'GetOptions'
-type GetOptionsOpts struct {
-	Type_ optional.Interface
+// GetHelpUrlOpts Optional parameters for the method 'GetHelpUrl'
+type GetHelpUrlOpts struct {
+	RedirectTo optional.String
 }
 
 /*
-GetOptions Get available options
+GetHelpUrl Retrieve the URL for the help portal using an SSO login
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *GetOptionsOpts - Optional Parameters:
- * @param "Type_" (optional.Interface of []string) -
-@return map[string][]Option
+ * @param optional nil or *GetHelpUrlOpts - Optional Parameters:
+ * @param "RedirectTo" (optional.String) -
+@return string
 */
-func (a *OptionsApiService) GetOptions(ctx _context.Context, localVarOptionals *GetOptionsOpts) (map[string][]Option, *_nethttp.Response, error) {
+func (a *HelpApiService) GetHelpUrl(ctx _context.Context, localVarOptionals *GetHelpUrlOpts) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  map[string][]Option
+		localVarReturnValue  string
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/options"
+	localVarPath := a.client.cfg.BasePath + "/help"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
-		t := localVarOptionals.Type_.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("type", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("type", parameterToString(t, "multi"))
-		}
+	if localVarOptionals != nil && localVarOptionals.RedirectTo.IsSet() {
+		localVarQueryParams.Add("redirectTo", parameterToString(localVarOptionals.RedirectTo.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -77,7 +68,7 @@ func (a *OptionsApiService) GetOptions(ctx _context.Context, localVarOptionals *
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{"text/plain"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -105,7 +96,7 @@ func (a *OptionsApiService) GetOptions(ctx _context.Context, localVarOptionals *
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v map[string][]Option
+		var v string
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()

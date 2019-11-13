@@ -12,11 +12,9 @@ package client
 
 import (
 	_context "context"
-	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"reflect"
 )
 
 // Linger please
@@ -24,49 +22,31 @@ var (
 	_ _context.Context
 )
 
-// OptionsApiService OptionsApi service
-type OptionsApiService service
-
-// GetOptionsOpts Optional parameters for the method 'GetOptions'
-type GetOptionsOpts struct {
-	Type_ optional.Interface
-}
+// PublicPeeringStatsApiService PublicPeeringStatsApi service
+type PublicPeeringStatsApiService service
 
 /*
-GetOptions Get available options
+GetPublicPeeringPoolStats Get Public Peering Pool Statistics details
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *GetOptionsOpts - Optional Parameters:
- * @param "Type_" (optional.Interface of []string) -
-@return map[string][]Option
+@return PublicPeeringPoolStats
 */
-func (a *OptionsApiService) GetOptions(ctx _context.Context, localVarOptionals *GetOptionsOpts) (map[string][]Option, *_nethttp.Response, error) {
+func (a *PublicPeeringStatsApiService) GetPublicPeeringPoolStats(ctx _context.Context) (PublicPeeringPoolStats, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  map[string][]Option
+		localVarReturnValue  PublicPeeringPoolStats
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/options"
+	localVarPath := a.client.cfg.BasePath + "/publicPeeringPoolStats"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
-		t := localVarOptionals.Type_.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("type", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("type", parameterToString(t, "multi"))
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -105,7 +85,7 @@ func (a *OptionsApiService) GetOptions(ctx _context.Context, localVarOptionals *
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v map[string][]Option
+		var v PublicPeeringPoolStats
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()

@@ -25,35 +25,33 @@ var (
 	_ _context.Context
 )
 
-// NetworksApiService NetworksApi service
-type NetworksApiService service
+// SupportedConnectionsGroupsApiService SupportedConnectionsGroupsApi service
+type SupportedConnectionsGroupsApiService service
 
-// AddNetworkOpts Optional parameters for the method 'AddNetwork'
-type AddNetworkOpts struct {
-	Network optional.Interface
+// CreateSupportedConnectionGroupOpts Optional parameters for the method 'CreateSupportedConnectionGroup'
+type CreateSupportedConnectionGroupOpts struct {
+	SupportedConnectionGroup optional.Interface
 }
 
 /*
-AddNetwork Add new network
+CreateSupportedConnectionGroup Add supported connection group
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param accountId
- * @param optional nil or *AddNetworkOpts - Optional Parameters:
- * @param "Network" (optional.Interface of Network) -
-@return Network
+ * @param optional nil or *CreateSupportedConnectionGroupOpts - Optional Parameters:
+ * @param "SupportedConnectionGroup" (optional.Interface of SupportedConnectionGroup) -
+@return SupportedConnectionGroup
 */
-func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, localVarOptionals *AddNetworkOpts) (Network, *_nethttp.Response, error) {
+func (a *SupportedConnectionsGroupsApiService) CreateSupportedConnectionGroup(ctx _context.Context, localVarOptionals *CreateSupportedConnectionGroupOpts) (SupportedConnectionGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  SupportedConnectionGroup
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/networks"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/supportedConnections/groups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -77,12 +75,12 @@ func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Network.IsSet() {
-		localVarOptionalNetwork, localVarOptionalNetworkok := localVarOptionals.Network.Value().(Network)
-		if !localVarOptionalNetworkok {
-			return localVarReturnValue, nil, reportError("network should be Network")
+	if localVarOptionals != nil && localVarOptionals.SupportedConnectionGroup.IsSet() {
+		localVarOptionalSupportedConnectionGroup, localVarOptionalSupportedConnectionGroupok := localVarOptionals.SupportedConnectionGroup.Value().(SupportedConnectionGroup)
+		if !localVarOptionalSupportedConnectionGroupok {
+			return localVarReturnValue, nil, reportError("supportedConnectionGroup should be SupportedConnectionGroup")
 		}
-		localVarPostBody = &localVarOptionalNetwork
+		localVarPostBody = &localVarOptionalSupportedConnectionGroup
 	}
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -106,7 +104,7 @@ func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, 
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v SupportedConnectionGroup
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -129,11 +127,11 @@ func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, 
 }
 
 /*
-DeleteNetwork Delete network
+DeleteSupportedConnectionGroup Delete supported connection group
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
+ * @param supportedConnectionGroupId
 */
-func (a *NetworksApiService) DeleteNetwork(ctx _context.Context, networkId string) (*_nethttp.Response, error) {
+func (a *SupportedConnectionsGroupsApiService) DeleteSupportedConnectionGroup(ctx _context.Context, supportedConnectionGroupId string) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -143,8 +141,8 @@ func (a *NetworksApiService) DeleteNetwork(ctx _context.Context, networkId strin
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/supportedConnections/groups/{supportedConnectionGroupId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"supportedConnectionGroupId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", supportedConnectionGroupId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -195,24 +193,24 @@ func (a *NetworksApiService) DeleteNetwork(ctx _context.Context, networkId strin
 }
 
 /*
-FindNetworks List networks
+GetSupportedConnectionGroup Get supported connection group details
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param accountId
-@return []Network
+ * @param supportedConnectionGroupId
+@return SupportedConnectionGroup
 */
-func (a *NetworksApiService) FindNetworks(ctx _context.Context, accountId string) ([]Network, *_nethttp.Response, error) {
+func (a *SupportedConnectionsGroupsApiService) GetSupportedConnectionGroup(ctx _context.Context, supportedConnectionGroupId string) (SupportedConnectionGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Network
+		localVarReturnValue  SupportedConnectionGroup
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/networks"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/supportedConnections/groups/{supportedConnectionGroupId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"supportedConnectionGroupId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", supportedConnectionGroupId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -256,7 +254,7 @@ func (a *NetworksApiService) FindNetworks(ctx _context.Context, accountId string
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v []Network
+		var v SupportedConnectionGroup
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -279,24 +277,22 @@ func (a *NetworksApiService) FindNetworks(ctx _context.Context, accountId string
 }
 
 /*
-GetInternal1 Get internal network details
+GetSupportedConnectionGroups List supported connections groups
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
-@return Network
+@return []SupportedConnectionGroup
 */
-func (a *NetworksApiService) GetInternal1(ctx _context.Context, networkId string) (Network, *_nethttp.Response, error) {
+func (a *SupportedConnectionsGroupsApiService) GetSupportedConnectionGroups(ctx _context.Context) ([]SupportedConnectionGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  []SupportedConnectionGroup
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/details"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/supportedConnections/groups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -340,7 +336,7 @@ func (a *NetworksApiService) GetInternal1(ctx _context.Context, networkId string
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v []SupportedConnectionGroup
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -362,200 +358,32 @@ func (a *NetworksApiService) GetInternal1(ctx _context.Context, networkId string
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-/*
-GetNetwork Get network details
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
-@return Network
-*/
-func (a *NetworksApiService) GetNetwork(ctx _context.Context, networkId string) (Network, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Network
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		var v Network
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+// UpdateSupportedConnectionGroupOpts Optional parameters for the method 'UpdateSupportedConnectionGroup'
+type UpdateSupportedConnectionGroupOpts struct {
+	SupportedConnectionGroup optional.Interface
 }
 
 /*
-Respawn Respawn controllers on network
+UpdateSupportedConnectionGroup Update supported connection group
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
-@return Network
+ * @param supportedConnectionGroupId
+ * @param optional nil or *UpdateSupportedConnectionGroupOpts - Optional Parameters:
+ * @param "SupportedConnectionGroup" (optional.Interface of SupportedConnectionGroup) -
+@return SupportedConnectionGroup
 */
-func (a *NetworksApiService) Respawn(ctx _context.Context, networkId string) (Network, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Network
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/respawn"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		var v Network
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-// UpdateNetworkOpts Optional parameters for the method 'UpdateNetwork'
-type UpdateNetworkOpts struct {
-	Network optional.Interface
-}
-
-/*
-UpdateNetwork Update network
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
- * @param optional nil or *UpdateNetworkOpts - Optional Parameters:
- * @param "Network" (optional.Interface of Network) -
-@return Network
-*/
-func (a *NetworksApiService) UpdateNetwork(ctx _context.Context, networkId string, localVarOptionals *UpdateNetworkOpts) (Network, *_nethttp.Response, error) {
+func (a *SupportedConnectionsGroupsApiService) UpdateSupportedConnectionGroup(ctx _context.Context, supportedConnectionGroupId string, localVarOptionals *UpdateSupportedConnectionGroupOpts) (SupportedConnectionGroup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  SupportedConnectionGroup
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/supportedConnections/groups/{supportedConnectionGroupId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"supportedConnectionGroupId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", supportedConnectionGroupId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -579,12 +407,12 @@ func (a *NetworksApiService) UpdateNetwork(ctx _context.Context, networkId strin
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Network.IsSet() {
-		localVarOptionalNetwork, localVarOptionalNetworkok := localVarOptionals.Network.Value().(Network)
-		if !localVarOptionalNetworkok {
-			return localVarReturnValue, nil, reportError("network should be Network")
+	if localVarOptionals != nil && localVarOptionals.SupportedConnectionGroup.IsSet() {
+		localVarOptionalSupportedConnectionGroup, localVarOptionalSupportedConnectionGroupok := localVarOptionals.SupportedConnectionGroup.Value().(SupportedConnectionGroup)
+		if !localVarOptionalSupportedConnectionGroupok {
+			return localVarReturnValue, nil, reportError("supportedConnectionGroup should be SupportedConnectionGroup")
 		}
-		localVarPostBody = &localVarOptionalNetwork
+		localVarPostBody = &localVarOptionalSupportedConnectionGroup
 	}
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -608,7 +436,7 @@ func (a *NetworksApiService) UpdateNetwork(ctx _context.Context, networkId strin
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v SupportedConnectionGroup
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()

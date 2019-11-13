@@ -25,35 +25,33 @@ var (
 	_ _context.Context
 )
 
-// NetworksApiService NetworksApi service
-type NetworksApiService service
+// PublicPeeringBlocksApiService PublicPeeringBlocksApi service
+type PublicPeeringBlocksApiService service
 
-// AddNetworkOpts Optional parameters for the method 'AddNetwork'
-type AddNetworkOpts struct {
-	Network optional.Interface
+// CreatePublicPeeringBlockOpts Optional parameters for the method 'CreatePublicPeeringBlock'
+type CreatePublicPeeringBlockOpts struct {
+	PublicPeeringBlock optional.Interface
 }
 
 /*
-AddNetwork Add new network
+CreatePublicPeeringBlock Add Public Peering CIDR Blocks
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param accountId
- * @param optional nil or *AddNetworkOpts - Optional Parameters:
- * @param "Network" (optional.Interface of Network) -
-@return Network
+ * @param optional nil or *CreatePublicPeeringBlockOpts - Optional Parameters:
+ * @param "PublicPeeringBlock" (optional.Interface of PublicPeeringBlock) -
+@return PublicPeeringBlock
 */
-func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, localVarOptionals *AddNetworkOpts) (Network, *_nethttp.Response, error) {
+func (a *PublicPeeringBlocksApiService) CreatePublicPeeringBlock(ctx _context.Context, localVarOptionals *CreatePublicPeeringBlockOpts) (PublicPeeringBlock, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  PublicPeeringBlock
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/networks"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/publicPeeringBlocks"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -77,12 +75,12 @@ func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Network.IsSet() {
-		localVarOptionalNetwork, localVarOptionalNetworkok := localVarOptionals.Network.Value().(Network)
-		if !localVarOptionalNetworkok {
-			return localVarReturnValue, nil, reportError("network should be Network")
+	if localVarOptionals != nil && localVarOptionals.PublicPeeringBlock.IsSet() {
+		localVarOptionalPublicPeeringBlock, localVarOptionalPublicPeeringBlockok := localVarOptionals.PublicPeeringBlock.Value().(PublicPeeringBlock)
+		if !localVarOptionalPublicPeeringBlockok {
+			return localVarReturnValue, nil, reportError("publicPeeringBlock should be PublicPeeringBlock")
 		}
-		localVarPostBody = &localVarOptionalNetwork
+		localVarPostBody = &localVarOptionalPublicPeeringBlock
 	}
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -106,7 +104,7 @@ func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, 
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v PublicPeeringBlock
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -129,11 +127,11 @@ func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, 
 }
 
 /*
-DeleteNetwork Delete network
+DeletePublicPeeringBlock Delete Public Peering CIDR
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
+ * @param publicPeeringBlockId
 */
-func (a *NetworksApiService) DeleteNetwork(ctx _context.Context, networkId string) (*_nethttp.Response, error) {
+func (a *PublicPeeringBlocksApiService) DeletePublicPeeringBlock(ctx _context.Context, publicPeeringBlockId string) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -143,8 +141,8 @@ func (a *NetworksApiService) DeleteNetwork(ctx _context.Context, networkId strin
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/publicPeeringBlocks/{publicPeeringBlockId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"publicPeeringBlockId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", publicPeeringBlockId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -195,24 +193,24 @@ func (a *NetworksApiService) DeleteNetwork(ctx _context.Context, networkId strin
 }
 
 /*
-FindNetworks List networks
+GetPublicPeeringBlock Get Public Peering CIDR details
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param accountId
-@return []Network
+ * @param publicPeeringBlockId
+@return PublicPeeringBlock
 */
-func (a *NetworksApiService) FindNetworks(ctx _context.Context, accountId string) ([]Network, *_nethttp.Response, error) {
+func (a *PublicPeeringBlocksApiService) GetPublicPeeringBlock(ctx _context.Context, publicPeeringBlockId string) (PublicPeeringBlock, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Network
+		localVarReturnValue  PublicPeeringBlock
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/networks"
-	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/publicPeeringBlocks/{publicPeeringBlockId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"publicPeeringBlockId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", publicPeeringBlockId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -256,7 +254,7 @@ func (a *NetworksApiService) FindNetworks(ctx _context.Context, accountId string
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v []Network
+		var v PublicPeeringBlock
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -279,24 +277,22 @@ func (a *NetworksApiService) FindNetworks(ctx _context.Context, accountId string
 }
 
 /*
-GetInternal1 Get internal network details
+GetPublicPeeringBlocks List Public Peering CIDR Blocks
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
-@return Network
+@return []PublicPeeringBlock
 */
-func (a *NetworksApiService) GetInternal1(ctx _context.Context, networkId string) (Network, *_nethttp.Response, error) {
+func (a *PublicPeeringBlocksApiService) GetPublicPeeringBlocks(ctx _context.Context) ([]PublicPeeringBlock, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  []PublicPeeringBlock
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/details"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/publicPeeringBlocks"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -340,7 +336,7 @@ func (a *NetworksApiService) GetInternal1(ctx _context.Context, networkId string
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v []PublicPeeringBlock
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -362,207 +358,39 @@ func (a *NetworksApiService) GetInternal1(ctx _context.Context, networkId string
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-/*
-GetNetwork Get network details
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
-@return Network
-*/
-func (a *NetworksApiService) GetNetwork(ctx _context.Context, networkId string) (Network, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Network
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		var v Network
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+// UpdatePublicPeeringBlockOpts Optional parameters for the method 'UpdatePublicPeeringBlock'
+type UpdatePublicPeeringBlockOpts struct {
+	PublicPeeringBlock optional.Interface
 }
 
 /*
-Respawn Respawn controllers on network
+UpdatePublicPeeringBlock Update Public Peering CIDR
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
-@return Network
+ * @param publicPeeringBlockId
+ * @param optional nil or *UpdatePublicPeeringBlockOpts - Optional Parameters:
+ * @param "PublicPeeringBlock" (optional.Interface of PublicPeeringBlock) -
+@return PublicPeeringBlock
 */
-func (a *NetworksApiService) Respawn(ctx _context.Context, networkId string) (Network, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Network
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/respawn"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		var v Network
-		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-		if err != nil {
-			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-// UpdateNetworkOpts Optional parameters for the method 'UpdateNetwork'
-type UpdateNetworkOpts struct {
-	Network optional.Interface
-}
-
-/*
-UpdateNetwork Update network
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
- * @param optional nil or *UpdateNetworkOpts - Optional Parameters:
- * @param "Network" (optional.Interface of Network) -
-@return Network
-*/
-func (a *NetworksApiService) UpdateNetwork(ctx _context.Context, networkId string, localVarOptionals *UpdateNetworkOpts) (Network, *_nethttp.Response, error) {
+func (a *PublicPeeringBlocksApiService) UpdatePublicPeeringBlock(ctx _context.Context, publicPeeringBlockId string, localVarOptionals *UpdatePublicPeeringBlockOpts) (PublicPeeringBlock, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  PublicPeeringBlock
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/publicPeeringBlocks/{publicPeeringBlockId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"publicPeeringBlockId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", publicPeeringBlockId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -579,12 +407,12 @@ func (a *NetworksApiService) UpdateNetwork(ctx _context.Context, networkId strin
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Network.IsSet() {
-		localVarOptionalNetwork, localVarOptionalNetworkok := localVarOptionals.Network.Value().(Network)
-		if !localVarOptionalNetworkok {
-			return localVarReturnValue, nil, reportError("network should be Network")
+	if localVarOptionals != nil && localVarOptionals.PublicPeeringBlock.IsSet() {
+		localVarOptionalPublicPeeringBlock, localVarOptionalPublicPeeringBlockok := localVarOptionals.PublicPeeringBlock.Value().(PublicPeeringBlock)
+		if !localVarOptionalPublicPeeringBlockok {
+			return localVarReturnValue, nil, reportError("publicPeeringBlock should be PublicPeeringBlock")
 		}
-		localVarPostBody = &localVarOptionalNetwork
+		localVarPostBody = &localVarOptionalPublicPeeringBlock
 	}
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -608,7 +436,7 @@ func (a *NetworksApiService) UpdateNetwork(ctx _context.Context, networkId strin
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v PublicPeeringBlock
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()

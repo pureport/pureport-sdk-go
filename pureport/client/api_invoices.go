@@ -13,6 +13,7 @@ package client
 import (
 	_context "context"
 	"fmt"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
@@ -24,28 +25,35 @@ var (
 	_ _context.Context
 )
 
-// CloudServicesApiService CloudServicesApi service
-type CloudServicesApiService service
+// InvoicesApiService InvoicesApi service
+type InvoicesApiService service
+
+// ListInvoicesForAccountOpts Optional parameters for the method 'ListInvoicesForAccount'
+type ListInvoicesForAccountOpts struct {
+	RequestBody optional.Interface
+}
 
 /*
-GetCloudService Get cloud service details
+ListInvoicesForAccount List invoices
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cloudServiceId
-@return CloudService
+ * @param accountId
+ * @param optional nil or *ListInvoicesForAccountOpts - Optional Parameters:
+ * @param "RequestBody" (optional.Interface of map[string]map[string]interface{}) -
+@return []AccountInvoice
 */
-func (a *CloudServicesApiService) GetCloudService(ctx _context.Context, cloudServiceId string) (CloudService, *_nethttp.Response, error) {
+func (a *InvoicesApiService) ListInvoicesForAccount(ctx _context.Context, accountId string, localVarOptionals *ListInvoicesForAccountOpts) ([]AccountInvoice, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  CloudService
+		localVarReturnValue  []AccountInvoice
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/cloudServices/{cloudServiceId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"cloudServiceId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", cloudServiceId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/invoices"
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -68,6 +76,15 @@ func (a *CloudServicesApiService) GetCloudService(ctx _context.Context, cloudSer
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.RequestBody.IsSet() {
+		localVarOptionalRequestBody, localVarOptionalRequestBodyok := localVarOptionals.RequestBody.Value().(map[string]map[string]interface{})
+		if !localVarOptionalRequestBodyok {
+			return localVarReturnValue, nil, reportError("requestBody should be map[string]map[string]interface{}")
+		}
+		localVarPostBody = &localVarOptionalRequestBody
+	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -89,7 +106,7 @@ func (a *CloudServicesApiService) GetCloudService(ctx _context.Context, cloudSer
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v CloudService
+		var v []AccountInvoice
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -112,22 +129,24 @@ func (a *CloudServicesApiService) GetCloudService(ctx _context.Context, cloudSer
 }
 
 /*
-GetCloudServices List cloud services
+ListUpcomingInvoicesForAccount List upcoming invoices
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return []CloudService
+ * @param accountId
+@return []AccountInvoice
 */
-func (a *CloudServicesApiService) GetCloudServices(ctx _context.Context) ([]CloudService, *_nethttp.Response, error) {
+func (a *InvoicesApiService) ListUpcomingInvoicesForAccount(ctx _context.Context, accountId string) ([]AccountInvoice, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []CloudService
+		localVarReturnValue  []AccountInvoice
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/cloudServices"
+	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/invoices/upcoming"
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -171,7 +190,7 @@ func (a *CloudServicesApiService) GetCloudServices(ctx _context.Context) ([]Clou
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v []CloudService
+		var v []AccountInvoice
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()

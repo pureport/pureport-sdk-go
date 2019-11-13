@@ -25,34 +25,36 @@ var (
 	_ _context.Context
 )
 
-// NetworksApiService NetworksApi service
-type NetworksApiService service
+// LimitsApiService LimitsApi service
+type LimitsApiService service
 
-// AddNetworkOpts Optional parameters for the method 'AddNetwork'
-type AddNetworkOpts struct {
-	Network optional.Interface
+// CreateResourceLimitOpts Optional parameters for the method 'CreateResourceLimit'
+type CreateResourceLimitOpts struct {
+	ResourceLimit optional.Interface
 }
 
 /*
-AddNetwork Add new network
+CreateResourceLimit Create a resource limit override
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param childResourceType
  * @param accountId
- * @param optional nil or *AddNetworkOpts - Optional Parameters:
- * @param "Network" (optional.Interface of Network) -
-@return Network
+ * @param optional nil or *CreateResourceLimitOpts - Optional Parameters:
+ * @param "ResourceLimit" (optional.Interface of ResourceLimit) -
+@return ResourceLimit
 */
-func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, localVarOptionals *AddNetworkOpts) (Network, *_nethttp.Response, error) {
+func (a *LimitsApiService) CreateResourceLimit(ctx _context.Context, childResourceType string, accountId string, localVarOptionals *CreateResourceLimitOpts) (ResourceLimit, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  ResourceLimit
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/networks"
+	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/limits/{childResourceType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"childResourceType"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", childResourceType)), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -77,12 +79,12 @@ func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Network.IsSet() {
-		localVarOptionalNetwork, localVarOptionalNetworkok := localVarOptionals.Network.Value().(Network)
-		if !localVarOptionalNetworkok {
-			return localVarReturnValue, nil, reportError("network should be Network")
+	if localVarOptionals != nil && localVarOptionals.ResourceLimit.IsSet() {
+		localVarOptionalResourceLimit, localVarOptionalResourceLimitok := localVarOptionals.ResourceLimit.Value().(ResourceLimit)
+		if !localVarOptionalResourceLimitok {
+			return localVarReturnValue, nil, reportError("resourceLimit should be ResourceLimit")
 		}
-		localVarPostBody = &localVarOptionalNetwork
+		localVarPostBody = &localVarOptionalResourceLimit
 	}
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -106,7 +108,109 @@ func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, 
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v ResourceLimit
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// CreateResourceLimit1Opts Optional parameters for the method 'CreateResourceLimit1'
+type CreateResourceLimit1Opts struct {
+	ResourceLimit optional.Interface
+}
+
+/*
+CreateResourceLimit1 Create a resource limit override
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param childResourceType
+ * @param networkId
+ * @param optional nil or *CreateResourceLimit1Opts - Optional Parameters:
+ * @param "ResourceLimit" (optional.Interface of ResourceLimit) -
+@return ResourceLimit
+*/
+func (a *LimitsApiService) CreateResourceLimit1(ctx _context.Context, childResourceType string, networkId string, localVarOptionals *CreateResourceLimit1Opts) (ResourceLimit, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ResourceLimit
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/limits/{childResourceType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"childResourceType"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", childResourceType)), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.ResourceLimit.IsSet() {
+		localVarOptionalResourceLimit, localVarOptionalResourceLimitok := localVarOptionals.ResourceLimit.Value().(ResourceLimit)
+		if !localVarOptionalResourceLimitok {
+			return localVarReturnValue, nil, reportError("resourceLimit should be ResourceLimit")
+		}
+		localVarPostBody = &localVarOptionalResourceLimit
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v ResourceLimit
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -129,11 +233,12 @@ func (a *NetworksApiService) AddNetwork(ctx _context.Context, accountId string, 
 }
 
 /*
-DeleteNetwork Delete network
+DeleteResourceLimit Delete a resource limit override
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
+ * @param childResourceType
+ * @param accountId
 */
-func (a *NetworksApiService) DeleteNetwork(ctx _context.Context, networkId string) (*_nethttp.Response, error) {
+func (a *LimitsApiService) DeleteResourceLimit(ctx _context.Context, childResourceType string, accountId string) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -143,7 +248,76 @@ func (a *NetworksApiService) DeleteNetwork(ctx _context.Context, networkId strin
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}"
+	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/limits/{childResourceType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"childResourceType"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", childResourceType)), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+/*
+DeleteResourceLimit1 Delete a resource limit override
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param childResourceType
+ * @param networkId
+*/
+func (a *LimitsApiService) DeleteResourceLimit1(ctx _context.Context, childResourceType string, networkId string) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/limits/{childResourceType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"childResourceType"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", childResourceType)), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -195,23 +369,23 @@ func (a *NetworksApiService) DeleteNetwork(ctx _context.Context, networkId strin
 }
 
 /*
-FindNetworks List networks
+GetResourceLimit Get resource limits including default values
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accountId
-@return []Network
+@return []ResourceLimit
 */
-func (a *NetworksApiService) FindNetworks(ctx _context.Context, accountId string) ([]Network, *_nethttp.Response, error) {
+func (a *LimitsApiService) GetResourceLimit(ctx _context.Context, accountId string) ([]ResourceLimit, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Network
+		localVarReturnValue  []ResourceLimit
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/networks"
+	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/limits"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -256,7 +430,7 @@ func (a *NetworksApiService) FindNetworks(ctx _context.Context, accountId string
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v []Network
+		var v []ResourceLimit
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -279,24 +453,26 @@ func (a *NetworksApiService) FindNetworks(ctx _context.Context, accountId string
 }
 
 /*
-GetInternal1 Get internal network details
+GetResourceLimit1 Get resource limit override. Does not return default.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
-@return Network
+ * @param childResourceType
+ * @param accountId
+@return ResourceLimit
 */
-func (a *NetworksApiService) GetInternal1(ctx _context.Context, networkId string) (Network, *_nethttp.Response, error) {
+func (a *LimitsApiService) GetResourceLimit1(ctx _context.Context, childResourceType string, accountId string) (ResourceLimit, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  ResourceLimit
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/details"
-	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
+	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/limits/{childResourceType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"childResourceType"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", childResourceType)), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -340,7 +516,7 @@ func (a *NetworksApiService) GetInternal1(ctx _context.Context, networkId string
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v ResourceLimit
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -363,23 +539,23 @@ func (a *NetworksApiService) GetInternal1(ctx _context.Context, networkId string
 }
 
 /*
-GetNetwork Get network details
+GetResourceLimit2 Get resource limits including default values
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param networkId
-@return Network
+@return []ResourceLimit
 */
-func (a *NetworksApiService) GetNetwork(ctx _context.Context, networkId string) (Network, *_nethttp.Response, error) {
+func (a *LimitsApiService) GetResourceLimit2(ctx _context.Context, networkId string) ([]ResourceLimit, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  []ResourceLimit
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}"
+	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/limits"
 	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -424,7 +600,7 @@ func (a *NetworksApiService) GetNetwork(ctx _context.Context, networkId string) 
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v []ResourceLimit
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -447,23 +623,25 @@ func (a *NetworksApiService) GetNetwork(ctx _context.Context, networkId string) 
 }
 
 /*
-Respawn Respawn controllers on network
+GetResourceLimit3 Get resource limit override. Does not return default.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param childResourceType
  * @param networkId
-@return Network
+@return ResourceLimit
 */
-func (a *NetworksApiService) Respawn(ctx _context.Context, networkId string) (Network, *_nethttp.Response, error) {
+func (a *LimitsApiService) GetResourceLimit3(ctx _context.Context, childResourceType string, networkId string) (ResourceLimit, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  ResourceLimit
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/respawn"
+	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/limits/{childResourceType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"childResourceType"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", childResourceType)), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -508,7 +686,7 @@ func (a *NetworksApiService) Respawn(ctx _context.Context, networkId string) (Ne
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v ResourceLimit
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
@@ -530,31 +708,135 @@ func (a *NetworksApiService) Respawn(ctx _context.Context, networkId string) (Ne
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// UpdateNetworkOpts Optional parameters for the method 'UpdateNetwork'
-type UpdateNetworkOpts struct {
-	Network optional.Interface
+// UpdateResourceLimitOpts Optional parameters for the method 'UpdateResourceLimit'
+type UpdateResourceLimitOpts struct {
+	ResourceLimit optional.Interface
 }
 
 /*
-UpdateNetwork Update network
+UpdateResourceLimit Update a resource limit override
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param networkId
- * @param optional nil or *UpdateNetworkOpts - Optional Parameters:
- * @param "Network" (optional.Interface of Network) -
-@return Network
+ * @param childResourceType
+ * @param accountId
+ * @param optional nil or *UpdateResourceLimitOpts - Optional Parameters:
+ * @param "ResourceLimit" (optional.Interface of ResourceLimit) -
+@return ResourceLimit
 */
-func (a *NetworksApiService) UpdateNetwork(ctx _context.Context, networkId string, localVarOptionals *UpdateNetworkOpts) (Network, *_nethttp.Response, error) {
+func (a *LimitsApiService) UpdateResourceLimit(ctx _context.Context, childResourceType string, accountId string, localVarOptionals *UpdateResourceLimitOpts) (ResourceLimit, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Network
+		localVarReturnValue  ResourceLimit
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}"
+	localVarPath := a.client.cfg.BasePath + "/accounts/{accountId}/limits/{childResourceType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"childResourceType"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", childResourceType)), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", accountId)), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.ResourceLimit.IsSet() {
+		localVarOptionalResourceLimit, localVarOptionalResourceLimitok := localVarOptionals.ResourceLimit.Value().(ResourceLimit)
+		if !localVarOptionalResourceLimitok {
+			return localVarReturnValue, nil, reportError("resourceLimit should be ResourceLimit")
+		}
+		localVarPostBody = &localVarOptionalResourceLimit
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		var v ResourceLimit
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// UpdateResourceLimit1Opts Optional parameters for the method 'UpdateResourceLimit1'
+type UpdateResourceLimit1Opts struct {
+	ResourceLimit optional.Interface
+}
+
+/*
+UpdateResourceLimit1 Update a resource limit override
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param childResourceType
+ * @param networkId
+ * @param optional nil or *UpdateResourceLimit1Opts - Optional Parameters:
+ * @param "ResourceLimit" (optional.Interface of ResourceLimit) -
+@return ResourceLimit
+*/
+func (a *LimitsApiService) UpdateResourceLimit1(ctx _context.Context, childResourceType string, networkId string, localVarOptionals *UpdateResourceLimit1Opts) (ResourceLimit, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ResourceLimit
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/networks/{networkId}/limits/{childResourceType}"
+	localVarPath = strings.Replace(localVarPath, "{"+"childResourceType"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", childResourceType)), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"networkId"+"}", _neturl.QueryEscape(fmt.Sprintf("%v", networkId)), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -579,12 +861,12 @@ func (a *NetworksApiService) UpdateNetwork(ctx _context.Context, networkId strin
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Network.IsSet() {
-		localVarOptionalNetwork, localVarOptionalNetworkok := localVarOptionals.Network.Value().(Network)
-		if !localVarOptionalNetworkok {
-			return localVarReturnValue, nil, reportError("network should be Network")
+	if localVarOptionals != nil && localVarOptionals.ResourceLimit.IsSet() {
+		localVarOptionalResourceLimit, localVarOptionalResourceLimitok := localVarOptionals.ResourceLimit.Value().(ResourceLimit)
+		if !localVarOptionalResourceLimitok {
+			return localVarReturnValue, nil, reportError("resourceLimit should be ResourceLimit")
 		}
-		localVarPostBody = &localVarOptionalNetwork
+		localVarPostBody = &localVarOptionalResourceLimit
 	}
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -608,7 +890,7 @@ func (a *NetworksApiService) UpdateNetwork(ctx _context.Context, networkId strin
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v Network
+		var v ResourceLimit
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
