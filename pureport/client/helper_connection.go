@@ -77,6 +77,8 @@ func DecodeConnectionData(cli *APIClient, b []byte, contentType string) (interfa
 		decodedConnection = c
 	}
 
+	log.Debugf("Decoded Connection: %v, err=%v", string(b), err)
+
 	return decodedConnection, err
 }
 
