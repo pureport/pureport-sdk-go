@@ -14,13 +14,13 @@ import (
 	"time"
 )
 
-// AzureExpressRouteConnection struct for AzureExpressRouteConnection
-type AzureExpressRouteConnection struct {
+// GenericConnection struct for GenericConnection
+type GenericConnection struct {
 	ActiveAt         time.Time            `json:"activeAt,omitempty"`
 	BillingPlan      BillingPlan          `json:"billingPlan,omitempty"`
 	BillingTerm      string               `json:"billingTerm"`
 	CreatedAt        time.Time            `json:"createdAt,omitempty"`
-	CustomerASN      int64                `json:"customerASN,omitempty"`
+	CustomerASN      int64                `json:"customerASN"`
 	CustomerNetworks []CustomerNetwork    `json:"customerNetworks,omitempty"`
 	DeletedAt        time.Time            `json:"deletedAt,omitempty"`
 	Description      string               `json:"description,omitempty"`
@@ -40,5 +40,4 @@ type AzureExpressRouteConnection struct {
 	Tags             map[string]string    `json:"tags,omitempty"`
 	Type             string               `json:"type"`
 	Peering          PeeringConfiguration `json:"peering,omitempty"`
-	ServiceKey       string               `json:"serviceKey"`
 }

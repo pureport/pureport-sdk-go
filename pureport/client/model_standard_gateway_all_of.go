@@ -10,8 +10,7 @@
 
 package client
 
-// CustomerNetwork struct for CustomerNetwork
-type CustomerNetwork struct {
-	Address string `json:"address"`
-	Name    string `json:"name,omitempty"`
+// StandardGatewayAllOf struct for StandardGatewayAllOf
+type StandardGatewayAllOf struct {
+	Vlan int32 `json:"vlan,omitempty"`
 }

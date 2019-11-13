@@ -14,8 +14,8 @@ import (
 	"time"
 )
 
-// AzureExpressRouteConnection struct for AzureExpressRouteConnection
-type AzureExpressRouteConnection struct {
+// OracleFastConnectConnection struct for OracleFastConnectConnection
+type OracleFastConnectConnection struct {
 	ActiveAt         time.Time            `json:"activeAt,omitempty"`
 	BillingPlan      BillingPlan          `json:"billingPlan,omitempty"`
 	BillingTerm      string               `json:"billingTerm"`
@@ -39,6 +39,8 @@ type AzureExpressRouteConnection struct {
 	State            string               `json:"state,omitempty"`
 	Tags             map[string]string    `json:"tags,omitempty"`
 	Type             string               `json:"type"`
-	Peering          PeeringConfiguration `json:"peering,omitempty"`
-	ServiceKey       string               `json:"serviceKey"`
+	CloudRegion      Link                 `json:"cloudRegion"`
+	Peering          PeeringConfiguration `json:"peering"`
+	PrimaryOcid      string               `json:"primaryOcid"`
+	SecondaryOcid    string               `json:"secondaryOcid"`
 }

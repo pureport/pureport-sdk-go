@@ -10,8 +10,7 @@
 
 package client
 
-// CustomerNetwork struct for CustomerNetwork
-type CustomerNetwork struct {
-	Address string `json:"address"`
-	Name    string `json:"name,omitempty"`
+// PskAuthConfigAllOf struct for PskAuthConfigAllOf
+type PskAuthConfigAllOf struct {
+	Key string `json:"key,omitempty"`
 }

@@ -10,8 +10,7 @@
 
 package client
 
-// CustomerNetwork struct for CustomerNetwork
-type CustomerNetwork struct {
-	Address string `json:"address"`
-	Name    string `json:"name,omitempty"`
+// GenericConnectionAllOf struct for GenericConnectionAllOf
+type GenericConnectionAllOf struct {
+	Peering PeeringConfiguration `json:"peering,omitempty"`
 }
