@@ -1,12 +1,13 @@
 # PhysicalAddress
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **City** | **string** |  | [optional] 
 **Country** | **string** |  | [optional] 
-**GeoCoordinates** | [***GeoCoordinates**](GeoCoordinates.md) |  | [optional] 
-**PlaceId** | **string** |  | [optional] 
+**GeoCoordinates** | [**GeoCoordinates**](GeoCoordinates.md) |  | [optional] 
+**PlaceId** | **string** | A valid Google Place ID | [optional] 
 **PostalCode** | **string** |  | [optional] 
 **State** | **string** |  | [optional] 
 **Street** | **string** |  | [optional] 

@@ -1,9 +1,11 @@
 # CloudRegion
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | **string** |  | 
+**GeoCoordinates** | [**GeoCoordinates**](GeoCoordinates.md) |  | [optional] 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
 **Provider** | **string** |  | 

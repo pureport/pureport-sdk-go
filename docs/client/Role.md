@@ -1,9 +1,10 @@
 # Role
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Account** | [***Link**](Link.md) |  | 
+**Account** | [**Link**](Link.md) |  | 
 **Description** | **string** |  | [optional] 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 

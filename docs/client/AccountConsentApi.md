@@ -1,4 +1,4 @@
-# pureport\client\AccountConsentApi
+# \AccountConsentApi
 
 All URIs are relative to *https://api.pureport.com*
 
@@ -8,18 +8,20 @@ Method | HTTP request | Description
 [**HasConsent**](AccountConsentApi.md#HasConsent) | **Get** /accounts/{accountId}/consent | Account consent to Master Service Agreement and Acceptable Use Policy
 
 
-# **Consent**
+
+## Consent
+
 > AccountConsent Consent(ctx, accountId)
+
 Consent to Master Service Agreement and Acceptable Use Policy for this account
 
-
-
 ### Required Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **accountId** | **string**|  | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**accountId** | **string**|  | 
 
 ### Return type
 
@@ -31,23 +33,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **HasConsent**
+
+## HasConsent
+
 > AccountConsent HasConsent(ctx, accountId)
+
 Account consent to Master Service Agreement and Acceptable Use Policy
 
-
-
 ### Required Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **accountId** | **string**|  | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**accountId** | **string**|  | 
 
 ### Return type
 
@@ -59,8 +65,10 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

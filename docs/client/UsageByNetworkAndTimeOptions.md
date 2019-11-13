@@ -1,9 +1,10 @@
 # UsageByNetworkAndTimeOptions
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Date** | [***DateFilter**](DateFilter.md) |  | [optional] 
+**Date** | [**DateFilter**](DateFilter.md) |  | [optional] 
 **IncludeChildAccounts** | **bool** |  | [optional] 
 **TimeUnit** | **string** |  | [optional] 
 **TrafficType** | **string** |  | [optional] 

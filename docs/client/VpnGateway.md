@@ -1,23 +1,24 @@
 # VpnGateway
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AvailabilityDomain** | **string** |  | [optional] 
-**BgpConfig** | [***BgpConfig**](BGPConfig.md) |  | [optional] 
-**Description** | **string** |  | [optional] 
-**ErrorCode** | **string** |  | [optional] 
-**ErrorMessage** | **string** |  | [optional] 
-**Id** | **string** |  | [optional] 
-**LinkState** | **string** |  | [optional] 
-**Name** | **string** |  | [optional] 
-**RemoteId** | **string** |  | [optional] 
-**State** | **string** |  | [optional] 
-**Type_** | **string** |  | [optional] 
-**Auth** | [***VpnAuthConfig**](VPNAuthConfig.md) |  | [optional] 
+**AvailabilityDomain** | **string** |  | [optional] [readonly] 
+**BgpConfig** | [**BgpConfig**](BGPConfig.md) |  | [optional] 
+**Description** | **string** |  | [optional] [readonly] 
+**ErrorCode** | **string** |  | [optional] [readonly] 
+**ErrorMessage** | **string** |  | [optional] [readonly] 
+**Id** | **string** |  | [optional] [readonly] 
+**LinkState** | **string** |  | [optional] [readonly] 
+**Name** | **string** |  | [optional] [readonly] 
+**RemoteId** | **string** |  | [optional] [readonly] 
+**State** | **string** |  | [optional] [readonly] 
+**Type** | **string** |  | [optional] [readonly] 
+**Auth** | [**VpnAuthConfig**](VPNAuthConfig.md) |  | [optional] 
 **CustomerGatewayIP** | **string** |  | [optional] 
 **CustomerVtiIP** | **string** |  | [optional] 
-**IpsecStatus** | **string** |  | [optional] 
+**OsNetworkId** | **string** |  | [optional] [readonly] 
 **PureportGatewayIP** | **string** |  | [optional] 
 **PureportVtiIP** | **string** |  | [optional] 
 

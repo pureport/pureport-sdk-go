@@ -1,6 +1,7 @@
 # CustomerNetwork
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Address** | **string** |  | 

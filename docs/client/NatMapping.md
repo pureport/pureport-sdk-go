@@ -1,9 +1,10 @@
 # NatMapping
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Block** | **string** |  | [optional] 
+**Block** | **string** |  | [optional] [readonly] 
 **NatCidr** | **string** |  | [optional] 
 **NativeCidr** | **string** |  | 
 
