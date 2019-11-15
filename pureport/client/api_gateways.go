@@ -13,7 +13,6 @@ package client
 import (
 	_context "context"
 	"fmt"
-	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
@@ -29,9 +28,9 @@ var (
 type GatewaysApiService service
 
 // CreateGatewayTaskOpts Optional parameters for the method 'CreateGatewayTask'
-type CreateGatewayTaskOpts struct {
-	Task optional.Interface
-}
+//type CreateGatewayTaskOpts struct {
+//	Task optional.Interface
+//}
 
 /*
 CreateGatewayTask Add a new task

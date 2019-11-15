@@ -82,7 +82,7 @@ func (a *ConnectionsApiService) AddConnection(ctx _context.Context, networkId st
 		// ##################################################
 		// Pureport (start)
 		// ##################################################
-		if body, err := ValidateConnection(localVarOptionals.Body.Value()); err != nil {
+		if body, err := ValidateConnection(localVarOptionals.Connection.Value()); err != nil {
 			return nil, nil, reportError("body should be valid Connection")
 		} else {
 			localVarPostBody = body
@@ -143,9 +143,9 @@ func (a *ConnectionsApiService) AddConnection(ctx _context.Context, networkId st
 }
 
 // CreateConnectionTaskOpts Optional parameters for the method 'CreateConnectionTask'
-type CreateConnectionTaskOpts struct {
-	Task optional.Interface
-}
+//type CreateConnectionTaskOpts struct {
+//	Task optional.Interface
+//}
 
 /*
 CreateConnectionTask Add a new task
@@ -911,7 +911,7 @@ func (a *ConnectionsApiService) UpdateConnection(ctx _context.Context, connectio
 		// ##################################################
 		// Pureport (start)
 		// ##################################################
-		if body, err := ValidateConnection(localVarOptionals.Body.Value()); err != nil {
+		if body, err := ValidateConnection(localVarOptionals.Connection.Value()); err != nil {
 			return nil, nil, reportError("body should be valid Connection")
 		} else {
 			localVarPostBody = body
@@ -919,13 +919,6 @@ func (a *ConnectionsApiService) UpdateConnection(ctx _context.Context, connectio
 		// ##################################################
 		// Pureport (end)
 		// ##################################################
-	}
-
-		localVarOptionalConnection, localVarOptionalConnectionok := localVarOptionals.Connection.Value().(Connection)
-		if !localVarOptionalConnectionok {
-			return localVarReturnValue, nil, reportError("connection should be Connection")
-		}
-		localVarPostBody = &localVarOptionalConnection
 	}
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)

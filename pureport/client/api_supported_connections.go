@@ -127,9 +127,9 @@ func (a *SupportedConnectionsApiService) CreateSupportedConnection(ctx _context.
 }
 
 // CreateSupportedConnectionGroupOpts Optional parameters for the method 'CreateSupportedConnectionGroup'
-type CreateSupportedConnectionGroupOpts struct {
-	SupportedConnectionGroup optional.Interface
-}
+//type CreateSupportedConnectionGroupOpts struct {
+//	SupportedConnectionGroup optional.Interface
+//}
 
 /*
 CreateSupportedConnectionGroup Add supported connection group
@@ -873,9 +873,9 @@ func (a *SupportedConnectionsApiService) UpdateSupportedConnection(ctx _context.
 }
 
 // UpdateSupportedConnectionGroupOpts Optional parameters for the method 'UpdateSupportedConnectionGroup'
-type UpdateSupportedConnectionGroupOpts struct {
-	SupportedConnectionGroup optional.Interface
-}
+//type UpdateSupportedConnectionGroupOpts struct {
+//	SupportedConnectionGroup optional.Interface
+//}
 
 /*
 UpdateSupportedConnectionGroup Update supported connection group
