@@ -2,7 +2,6 @@ package session
 
 import (
 	"context"
-	"os"
 
 	"github.com/op/go-logging"
 	"github.com/pureport/pureport-sdk-go/pureport"
