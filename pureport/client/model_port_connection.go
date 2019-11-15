@@ -31,10 +31,10 @@ type PortConnection struct {
 	Id                    string            `json:"id,omitempty"`
 	Location              Link              `json:"location"`
 	Name                  string            `json:"name"`
-	Nat                   NatConfig         `json:"nat,omitempty"`
+	Nat                   *NatConfig        `json:"nat,omitempty"`
 	Network               Link              `json:"network,omitempty"`
-	PrimaryGateway        Gateway           `json:"primaryGateway,omitempty"`
-	SecondaryGateway      Gateway           `json:"secondaryGateway,omitempty"`
+	PrimaryGateway        *StandardGateway  `json:"primaryGateway,omitempty"`
+	SecondaryGateway      *StandardGateway  `json:"secondaryGateway,omitempty"`
 	Speed                 int32             `json:"speed"`
 	State                 string            `json:"state,omitempty"`
 	Tags                  map[string]string `json:"tags,omitempty"`

@@ -31,7 +31,7 @@ type Connection struct {
 	Id               string            `json:"id,omitempty"`
 	Location         Link              `json:"location"`
 	Name             string            `json:"name"`
-	Nat              NatConfig         `json:"nat,omitempty"`
+	Nat              *NatConfig        `json:"nat,omitempty"`
 	Network          Link              `json:"network,omitempty"`
 	PrimaryGateway   *Gateway          `json:"primaryGateway,omitempty"`
 	SecondaryGateway *Gateway          `json:"secondaryGateway,omitempty"`

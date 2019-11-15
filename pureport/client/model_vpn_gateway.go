@@ -13,7 +13,7 @@ package client
 // VpnGateway struct for VpnGateway
 type VpnGateway struct {
 	AvailabilityDomain string        `json:"availabilityDomain,omitempty"`
-	BgpConfig          BgpConfig     `json:"bgpConfig,omitempty"`
+	BgpConfig          *BgpConfig    `json:"bgpConfig,omitempty"`
 	Description        string        `json:"description,omitempty"`
 	ErrorCode          string        `json:"errorCode,omitempty"`
 	ErrorMessage       string        `json:"errorMessage,omitempty"`
