@@ -27,12 +27,6 @@ func createClient(cfg *pureport.Configuration) *client.APIClient {
 	c.BasePath = cfg.EndPoint
 	//c.AddDefaultHeader()
 
-	if hostname, err := os.Hostname(); err != nil {
-		c.Host = ""
-	} else {
-		c.Host = hostname
-	}
-
 	return client.NewAPIClient(c)
 }
 
