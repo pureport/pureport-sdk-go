@@ -7,7 +7,7 @@ def utils = new com.pureport.Utils()
 pipeline {
     agent {
       docker {
-        image 'golang:1.12'
+        image 'golang:1.13'
       }
     }
     options {
