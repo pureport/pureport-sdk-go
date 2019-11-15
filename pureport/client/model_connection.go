@@ -33,8 +33,8 @@ type Connection struct {
 	Name             string            `json:"name"`
 	Nat              NatConfig         `json:"nat,omitempty"`
 	Network          Link              `json:"network,omitempty"`
-	PrimaryGateway   Gateway           `json:"primaryGateway,omitempty"`
-	SecondaryGateway Gateway           `json:"secondaryGateway,omitempty"`
+	PrimaryGateway   *Gateway          `json:"primaryGateway,omitempty"`
+	SecondaryGateway *Gateway          `json:"secondaryGateway,omitempty"`
 	Speed            int32             `json:"speed"`
 	State            string            `json:"state,omitempty"`
 	Tags             map[string]string `json:"tags,omitempty"`
