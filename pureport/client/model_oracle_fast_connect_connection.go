@@ -17,7 +17,7 @@ import (
 // OracleFastConnectConnection struct for OracleFastConnectConnection
 type OracleFastConnectConnection struct {
 	ActiveAt         time.Time             `json:"activeAt,omitempty"`
-	BillingPlan      BillingPlan           `json:"billingPlan,omitempty"`
+	BillingPlan      *BillingPlan          `json:"billingPlan,omitempty"`
 	BillingTerm      string                `json:"billingTerm"`
 	CreatedAt        time.Time             `json:"createdAt,omitempty"`
 	CustomerASN      int64                 `json:"customerASN,omitempty"`
