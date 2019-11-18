@@ -7,7 +7,7 @@ def utils = new com.pureport.Utils()
 pipeline {
     agent {
       docker {
-        image 'golang:1.12'
+        image 'golang:1.13'
       }
     }
     options {
@@ -16,6 +16,7 @@ pipeline {
     environment {
         GOPATH="/go"
         GOCACHE="/tmp/go/.cache"
+        GOLANGCI_LINT_CACHE="/tmp/go/.cache"
         PATH="/go/bin:${PATH}"
 
         PUREPORT_ENDPOINT="https://dev1-api.pureportdev.com"
