@@ -1,4 +1,4 @@
-# \PublicPeeringBlocksApi
+# pureport\client\PublicPeeringBlocksApi
 
 All URIs are relative to *https://api.pureport.com*
 

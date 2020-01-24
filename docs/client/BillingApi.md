@@ -1,4 +1,4 @@
-# \BillingApi
+# pureport\client\BillingApi
 
 All URIs are relative to *https://api.pureport.com*
 

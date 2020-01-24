@@ -1,4 +1,4 @@
-# \AccountRolesApi
+# pureport\client\AccountRolesApi
 
 All URIs are relative to *https://api.pureport.com*
 

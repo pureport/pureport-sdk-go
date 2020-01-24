@@ -1,4 +1,4 @@
-# \CloudServicesApi
+# pureport\client\CloudServicesApi
 
 All URIs are relative to *https://api.pureport.com*
 

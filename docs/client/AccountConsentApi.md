@@ -1,4 +1,4 @@
-# \AccountConsentApi
+# pureport\client\AccountConsentApi
 
 All URIs are relative to *https://api.pureport.com*
 

@@ -1,4 +1,4 @@
-# \CloudRegionsApi
+# pureport\client\CloudRegionsApi
 
 All URIs are relative to *https://api.pureport.com*
 

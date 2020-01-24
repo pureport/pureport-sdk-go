@@ -1,4 +1,4 @@
-# \PodsApi
+# pureport\client\PodsApi
 
 All URIs are relative to *https://api.pureport.com*
 

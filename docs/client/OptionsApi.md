@@ -1,4 +1,4 @@
-# \OptionsApi
+# pureport\client\OptionsApi
 
 All URIs are relative to *https://api.pureport.com*
 

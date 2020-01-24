@@ -1,4 +1,4 @@
-# \TasksApi
+# pureport\client\TasksApi
 
 All URIs are relative to *https://api.pureport.com*
 

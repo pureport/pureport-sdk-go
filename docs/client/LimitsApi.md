@@ -1,4 +1,4 @@
-# \LimitsApi
+# pureport\client\LimitsApi
 
 All URIs are relative to *https://api.pureport.com*
 

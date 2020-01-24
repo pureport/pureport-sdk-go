@@ -1,4 +1,4 @@
-# \HelpApi
+# pureport\client\HelpApi
 
 All URIs are relative to *https://api.pureport.com*
 

@@ -1,4 +1,4 @@
-# \FacilitiesApi
+# pureport\client\FacilitiesApi
 
 All URIs are relative to *https://api.pureport.com*
 

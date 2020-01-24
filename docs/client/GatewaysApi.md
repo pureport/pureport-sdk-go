@@ -1,4 +1,4 @@
-# \GatewaysApi
+# pureport\client\GatewaysApi
 
 All URIs are relative to *https://api.pureport.com*
 

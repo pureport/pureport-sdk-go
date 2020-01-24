@@ -1,4 +1,4 @@
-# \ProviderLinksApi
+# pureport\client\ProviderLinksApi
 
 All URIs are relative to *https://api.pureport.com*
 

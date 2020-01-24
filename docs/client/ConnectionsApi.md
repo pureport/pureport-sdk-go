@@ -1,4 +1,4 @@
-# \ConnectionsApi
+# pureport\client\ConnectionsApi
 
 All URIs are relative to *https://api.pureport.com*
 

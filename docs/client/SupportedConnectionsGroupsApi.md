@@ -1,4 +1,4 @@
-# \SupportedConnectionsGroupsApi
+# pureport\client\SupportedConnectionsGroupsApi
 
 All URIs are relative to *https://api.pureport.com*
 
