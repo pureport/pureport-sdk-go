@@ -53,8 +53,6 @@ func (a *AccountsApiService) CreateAccount(ctx _context.Context, localVarOptiona
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/accounts"
 
-	log.Debug("XXXXXX Accounts path: %+v", localVarPath)
-
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
