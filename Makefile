@@ -34,8 +34,11 @@ gen-swagger:
 	rm docs/client/*
 	mv pureport/client/README.md docs/client/
 	mv pureport/client/docs/* docs/client/
+	rm pureport/client/go.*
+	rm pureport/client/.travis.yml
+	rm pureport/client/.gitignore
+	rm pureport/client/git_push.sh
 	rmdir pureport/client/docs
-	find . -iname "*.md" -exec sed -i '' 's/\[default to null\]//g' {} +
 
 gen-strings:
 	@echo "Generating strings files for enums"
@@ -68,14 +71,14 @@ ci-test-generate-validate:
 # --------------------------------------------------
 #  Sandbox Testing
 # --------------------------------------------------
-sandbox-tests: sandbox-test-go112
+sandbox-tests: sandbox-test-go113
 
-sandbox-build-go112:
-	docker build -f ./pureporttesting/sandbox/Dockerfile.test.go1.12 -t "pureport-sdk-go-1.12" .
-sandbox-go112: sandbox-build-go112
-	docker run -i -t pureport-sdk-go-1.12 bash
-sandbox-test-go112: sandbox-build-go112
-	docker run -t pureport-sdk-go-1.12
+sandbox-build-go113:
+	docker build -f ./pureporttesting/sandbox/Dockerfile.test.go1.13 -t "pureport-sdk-go-1.13" .
+sandbox-go113: sandbox-build-go113
+	docker run -i -t pureport-sdk-go-1.13 bash
+sandbox-test-go113: sandbox-build-go113
+	docker run -t pureport-sdk-go-1.13
 
 # --------------------------------------------------
 #  Linting/Verify

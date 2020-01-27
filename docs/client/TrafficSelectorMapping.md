@@ -1,6 +1,7 @@
 # TrafficSelectorMapping
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CustomerSide** | **string** |  | 

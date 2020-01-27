@@ -1,9 +1,10 @@
 # Location
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**GeoCoordinates** | [***GeoCoordinates**](GeoCoordinates.md) |  | 
+**GeoCoordinates** | [**GeoCoordinates**](GeoCoordinates.md) |  | 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
 **LocationLinks** | [**[]LocationLinkConnection**](LocationLinkConnection.md) |  | [optional] 

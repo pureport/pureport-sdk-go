@@ -1,0 +1,6553 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@pureport.com
+  description: Pureport API
+  title: Pureport Control Plane
+  version: 1.0.0
+servers:
+- url: https://api.pureport.com
+paths:
+  /accounts:
+    get:
+      operationId: findAllAccounts
+      parameters:
+      - explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Account'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List accounts
+      tags:
+      - accounts
+    post:
+      operationId: createAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Add new account
+      tags:
+      - accounts
+  /accounts/{accountId}:
+    delete:
+      operationId: deleteAccount
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Delete account
+      tags:
+      - accounts
+    get:
+      operationId: getAccount
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get account details
+      tags:
+      - accounts
+    put:
+      operationId: updateAccount
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update account
+      tags:
+      - accounts
+  /accounts/{accountId}/apikeys:
+    get:
+      operationId: findApiKeys
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiKey'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List API keys for an account
+      tags:
+      - apikeys
+    post:
+      operationId: createApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKey'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Create a new API key
+      tags:
+      - apikeys
+  /accounts/{accountId}/apikeys/{key}:
+    delete:
+      operationId: deleteApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Delete API Key
+      tags:
+      - apikeys
+    get:
+      operationId: getApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get API Key details
+      tags:
+      - apikeys
+    put:
+      operationId: updateApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKey'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update API Key
+      tags:
+      - apikeys
+  /accounts/{accountId}/billing:
+    delete:
+      operationId: deletePaymentInformation
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Delete payment method
+      tags:
+      - billing
+    get:
+      operationId: findBillingForAccount
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBilling'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Payment method for account
+      tags:
+      - billing
+    post:
+      operationId: addPaymentInformation
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountBilling'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBilling'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Add payment method
+      tags:
+      - billing
+    put:
+      operationId: updatePaymentInformation
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountBilling'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBilling'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update payment method
+      tags:
+      - billing
+  /accounts/{accountId}/billing/configured:
+    get:
+      operationId: isBillingConfiguredForAccount
+      parameters:
+      - explode: true
+        in: query
+        name: ancestorOnly
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: boolean
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Payment method configured for account
+      tags:
+      - billing
+  /accounts/{accountId}/connections:
+    get:
+      operationId: findConnections
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Connection'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List connections across all networks for the account
+      tags:
+      - connections
+  /accounts/{accountId}/consent:
+    get:
+      operationId: hasConsent
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        404:
+          description: Account MSA and AUP have not been accepted
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountConsent'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Account consent to Master Service Agreement and Acceptable Use Policy
+      tags:
+      - account consent
+    post:
+      operationId: consent
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountConsent'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Consent to Master Service Agreement and Acceptable Use Policy for this
+        account
+      tags:
+      - account consent
+  /accounts/{accountId}/invites:
+    get:
+      operationId: findAccountInvites
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccountInvite'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List account invites
+      tags:
+      - account invitations
+    post:
+      operationId: inviteAccount
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountInvite'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInvite'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Invite account member
+      tags:
+      - account invitations
+  /accounts/{accountId}/invites/{inviteId}:
+    delete:
+      operationId: deleteAccountInvite
+      parameters:
+      - explode: false
+        in: path
+        name: inviteId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Delete account invite
+      tags:
+      - account invitations
+    get:
+      operationId: getAccountInvite
+      parameters:
+      - explode: false
+        in: path
+        name: inviteId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInvite'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get account invite
+      tags:
+      - account invitations
+    put:
+      operationId: updateAccountInvite
+      parameters:
+      - explode: true
+        in: query
+        name: reinvite
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: false
+        in: path
+        name: inviteId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountInvite'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountInvite'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update account invite
+      tags:
+      - account invitations
+  /accounts/{accountId}/invoices:
+    post:
+      operationId: listInvoicesForAccount
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              additionalProperties:
+                type: object
+              type: object
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccountInvoice'
+                type: array
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: List invoices
+      tags:
+      - invoices
+  /accounts/{accountId}/invoices/upcoming:
+    get:
+      operationId: listUpcomingInvoicesForAccount
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccountInvoice'
+                type: array
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: List upcoming invoices
+      tags:
+      - invoices
+  /accounts/{accountId}/limits:
+    get:
+      operationId: getResourceLimit
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ResourceLimit'
+                type: array
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Get resource limits including default values
+      tags:
+      - limits
+  /accounts/{accountId}/limits/{childResourceType}:
+    delete:
+      operationId: deleteResourceLimit
+      parameters:
+      - explode: false
+        in: path
+        name: childResourceType
+        required: true
+        schema:
+          enum:
+          - MEMBER
+          - ROLE
+          - CONNECTION
+          - NETWORK
+          - ACCOUNT
+          - CLOUD_SERVICE_ROUTE
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Delete a resource limit override
+      tags:
+      - limits
+    get:
+      operationId: getResourceLimit_1
+      parameters:
+      - explode: false
+        in: path
+        name: childResourceType
+        required: true
+        schema:
+          enum:
+          - MEMBER
+          - ROLE
+          - CONNECTION
+          - NETWORK
+          - ACCOUNT
+          - CLOUD_SERVICE_ROUTE
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimit'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Get resource limit override. Does not return default.
+      tags:
+      - limits
+    post:
+      operationId: createResourceLimit
+      parameters:
+      - explode: false
+        in: path
+        name: childResourceType
+        required: true
+        schema:
+          enum:
+          - MEMBER
+          - ROLE
+          - CONNECTION
+          - NETWORK
+          - ACCOUNT
+          - CLOUD_SERVICE_ROUTE
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceLimit'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimit'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api_key:
+        - ADMIN
+      summary: Create a resource limit override
+      tags:
+      - limits
+    put:
+      operationId: updateResourceLimit
+      parameters:
+      - explode: false
+        in: path
+        name: childResourceType
+        required: true
+        schema:
+          enum:
+          - MEMBER
+          - ROLE
+          - CONNECTION
+          - NETWORK
+          - ACCOUNT
+          - CLOUD_SERVICE_ROUTE
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceLimit'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimit'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Update a resource limit override
+      tags:
+      - limits
+  /accounts/{accountId}/members:
+    get:
+      operationId: findAccountMembers
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccountMember'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List account members
+      tags:
+      - account members
+    post:
+      operationId: addAccountMember
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountMember'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountMember'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Add account member
+      tags:
+      - account members
+  /accounts/{accountId}/members/{userId}:
+    delete:
+      operationId: deleteAccountMember
+      parameters:
+      - explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Delete account member
+      tags:
+      - account members
+    get:
+      operationId: getAccountMember
+      parameters:
+      - explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountMember'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get account member
+      tags:
+      - account members
+    put:
+      operationId: updateAccountMember
+      parameters:
+      - explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountMember'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountMember'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update account member
+      tags:
+      - account members
+  /accounts/{accountId}/metrics/usageByConnection:
+    post:
+      operationId: usageByConnection
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UsageByConnectionOptions'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/NetworkConnectionEgressIngress'
+                type: array
+            text/csv:
+              schema:
+                items:
+                  $ref: '#/components/schemas/NetworkConnectionEgressIngress'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Retrieve usage by connection
+      tags:
+      - account metrics
+  /accounts/{accountId}/metrics/usageByConnectionAndTime:
+    post:
+      operationId: usageByConnection_1
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UsageByConnectionAndTimeOptions'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConnectionTimeEgressIngress'
+                type: array
+            text/csv:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConnectionTimeEgressIngress'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Retrieve usage by connection and time
+      tags:
+      - account metrics
+  /accounts/{accountId}/metrics/usageByNetworkAndTime:
+    post:
+      operationId: usageByNetworkAndTime
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsageByNetworkAndTimeOptions'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/NetworkTimeUsage'
+                type: array
+            text/csv:
+              schema:
+                items:
+                  $ref: '#/components/schemas/NetworkTimeUsage'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Retrieve usage by network over time
+      tags:
+      - account metrics
+  /accounts/{accountId}/networks:
+    get:
+      operationId: findNetworks
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Network'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List networks
+      tags:
+      - networks
+    post:
+      operationId: addNetwork
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Network'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Add new network
+      tags:
+      - networks
+  /accounts/{accountId}/permissions:
+    get:
+      description: |-
+        Returns the effective set of permissions that the current subject has for the given account
+                    based on the roles they have been granted.
+      operationId: getAccountPermissions
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  additionalProperties:
+                    type: boolean
+                  type: object
+                type: object
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get permissions for account
+      tags:
+      - accounts
+  /accounts/{accountId}/ports:
+    get:
+      operationId: findPorts
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Port'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List ports
+      tags:
+      - ports
+    post:
+      operationId: addPort
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Port'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Add new port
+      tags:
+      - ports
+  /accounts/{accountId}/roles:
+    get:
+      operationId: findAllRoles
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Role'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List account roles
+      tags:
+      - account roles
+    post:
+      operationId: createRole
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Add account role
+      tags:
+      - account roles
+  /accounts/{accountId}/roles/{roleId}:
+    delete:
+      operationId: deleteRole
+      parameters:
+      - explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Delete role
+      tags:
+      - account roles
+    get:
+      operationId: getRole
+      parameters:
+      - explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get role details
+      tags:
+      - account roles
+    put:
+      operationId: updateRole
+      parameters:
+      - explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update role
+      tags:
+      - account roles
+  /accounts/{accountId}/supportedConnections:
+    get:
+      operationId: getAccountSupportedConnections
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SupportedConnection'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List supported connections
+      tags:
+      - supported connections
+  /accounts/{accountId}/supportedPorts:
+    get:
+      operationId: getSupportedPorts
+      parameters:
+      - explode: true
+        in: query
+        name: facility
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: includeProvisioned
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SupportedPort'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List supported ports
+      tags:
+      - supported ports
+  /cloudRegions:
+    get:
+      operationId: getCloudRegions
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CloudRegion'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List cloud regions
+      tags:
+      - cloud regions
+    post:
+      operationId: createCloudRegion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudRegion'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudRegion'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Add cloud region
+      tags:
+      - cloud regions
+  /cloudRegions/{cloudRegionId}:
+    delete:
+      operationId: deleteCloudRegion
+      parameters:
+      - explode: false
+        in: path
+        name: cloudRegionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Delete cloud region
+      tags:
+      - cloud regions
+    get:
+      operationId: getCloudRegion
+      parameters:
+      - explode: false
+        in: path
+        name: cloudRegionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudRegion'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get cloud region details
+      tags:
+      - cloud regions
+    put:
+      operationId: updateCloudRegion
+      parameters:
+      - explode: false
+        in: path
+        name: cloudRegionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudRegion'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudRegion'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Update cloud region
+      tags:
+      - cloud regions
+  /cloudServices:
+    get:
+      operationId: getCloudServices
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CloudService'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List cloud services
+      tags:
+      - cloud services
+  /cloudServices/{cloudServiceId}:
+    get:
+      operationId: getCloudService
+      parameters:
+      - explode: false
+        in: path
+        name: cloudServiceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudService'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get cloud service details
+      tags:
+      - cloud services
+  /connections/{connectionId}:
+    delete:
+      operationId: deleteConnection
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Delete connection
+      tags:
+      - connections
+    get:
+      operationId: getConnection
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get connection details
+      tags:
+      - connections
+    put:
+      operationId: updateConnection
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Connection'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update connection
+      tags:
+      - connections
+  /connections/{connectionId}/details:
+    get:
+      operationId: getInternal
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Get internal connection details
+      tags:
+      - connections
+  /connections/{connectionId}/respawn:
+    post:
+      operationId: respawnConnection
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Respawn connection
+      tags:
+      - connections
+  /connections/{connectionId}/tasks:
+    get:
+      operationId: getConnectionTasks
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Task'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List connection tasks
+      tags:
+      - tasks
+      - connections
+    post:
+      operationId: createConnectionTask
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Add a new task
+      tags:
+      - tasks
+      - connections
+  /facilities:
+    get:
+      operationId: findFacilities
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Facility'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List facilities
+      tags:
+      - facilities
+    post:
+      operationId: createFacility
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Facility'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Facility'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Add new facility
+      tags:
+      - facilities
+  /facilities/kml:
+    get:
+      operationId: listFacilitiesAsKml
+      responses:
+        default:
+          content:
+            application/vnd.google-earth.kml+xml:
+              schema:
+                type: string
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List facilities (as KML)
+      tags:
+      - facilities
+  /facilities/{facilityId}:
+    delete:
+      operationId: deleteFacility
+      parameters:
+      - explode: false
+        in: path
+        name: facilityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Delete facility
+      tags:
+      - facilities
+    get:
+      operationId: getFacility
+      parameters:
+      - explode: false
+        in: path
+        name: facilityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Facility'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get facility details
+      tags:
+      - facilities
+    put:
+      operationId: updateFacility
+      parameters:
+      - explode: false
+        in: path
+        name: facilityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Facility'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Facility'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Update facility
+      tags:
+      - facilities
+  /gateways/{gatewayId}/bgpRoutes:
+    get:
+      operationId: getGatewayBGPRoutes
+      parameters:
+      - explode: false
+        in: path
+        name: gatewayId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BGPRoute'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get gateway bgp routes
+      tags:
+      - gateways
+  /gateways/{gatewayId}/tasks:
+    get:
+      operationId: getGatewayTasks
+      parameters:
+      - explode: false
+        in: path
+        name: gatewayId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Task'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List connection tasks
+      tags:
+      - tasks
+      - gateways
+    post:
+      operationId: createGatewayTask
+      parameters:
+      - explode: false
+        in: path
+        name: gatewayId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Add a new task
+      tags:
+      - tasks
+      - gateways
+  /help:
+    get:
+      operationId: getHelpUrl
+      parameters:
+      - explode: true
+        in: query
+        name: redirectTo
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        default:
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Retrieve the URL for the help portal using an SSO login
+      tags:
+      - help
+  /invites:
+    post:
+      operationId: acceptAllInvites
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccountInvite'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Accept all invites for the current user
+      tags:
+      - account invitations
+  /locations:
+    get:
+      operationId: findLocations
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Location'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List locations
+      tags:
+      - locations
+    post:
+      operationId: createLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Add new location
+      tags:
+      - locations
+  /locations/{locationId}:
+    delete:
+      operationId: deleteLocation
+      parameters:
+      - explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Delete location
+      tags:
+      - locations
+    get:
+      operationId: getLocation
+      parameters:
+      - explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get location details
+      tags:
+      - locations
+    put:
+      operationId: updateLocation
+      parameters:
+      - explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Update location
+      tags:
+      - locations
+  /locations/{locationId}/pods:
+    get:
+      operationId: listPods
+      parameters:
+      - explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Pod'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: List pods for a location
+      tags:
+      - locations
+  /login:
+    post:
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Login with an API Key
+      tags:
+      - auth
+  /login/refresh:
+    post:
+      operationId: loginWithRefreshToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginWithRefreshTokenRequest'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Login with a refresh token
+      tags:
+      - auth
+  /networks/{networkId}:
+    delete:
+      operationId: deleteNetwork
+      parameters:
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Delete network
+      tags:
+      - networks
+    get:
+      operationId: getNetwork
+      parameters:
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get network details
+      tags:
+      - networks
+    put:
+      operationId: updateNetwork
+      parameters:
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Network'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update network
+      tags:
+      - networks
+  /networks/{networkId}/connections:
+    get:
+      operationId: getConnections
+      parameters:
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Connection'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List network connections
+      tags:
+      - connections
+    post:
+      operationId: addConnection
+      parameters:
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Connection'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Add new connection
+      tags:
+      - connections
+  /networks/{networkId}/details:
+    get:
+      operationId: getInternal_1
+      parameters:
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Get internal network details
+      tags:
+      - networks
+  /networks/{networkId}/limits:
+    get:
+      operationId: getResourceLimit_2
+      parameters:
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ResourceLimit'
+                type: array
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Get resource limits including default values
+      tags:
+      - limits
+  /networks/{networkId}/limits/{childResourceType}:
+    delete:
+      operationId: deleteResourceLimit_1
+      parameters:
+      - explode: false
+        in: path
+        name: childResourceType
+        required: true
+        schema:
+          enum:
+          - MEMBER
+          - ROLE
+          - CONNECTION
+          - NETWORK
+          - ACCOUNT
+          - CLOUD_SERVICE_ROUTE
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Delete a resource limit override
+      tags:
+      - limits
+    get:
+      operationId: getResourceLimit_3
+      parameters:
+      - explode: false
+        in: path
+        name: childResourceType
+        required: true
+        schema:
+          enum:
+          - MEMBER
+          - ROLE
+          - CONNECTION
+          - NETWORK
+          - ACCOUNT
+          - CLOUD_SERVICE_ROUTE
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimit'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Get resource limit override. Does not return default.
+      tags:
+      - limits
+    post:
+      operationId: createResourceLimit_1
+      parameters:
+      - explode: false
+        in: path
+        name: childResourceType
+        required: true
+        schema:
+          enum:
+          - MEMBER
+          - ROLE
+          - CONNECTION
+          - NETWORK
+          - ACCOUNT
+          - CLOUD_SERVICE_ROUTE
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceLimit'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimit'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api_key:
+        - ADMIN
+      summary: Create a resource limit override
+      tags:
+      - limits
+    put:
+      operationId: updateResourceLimit_1
+      parameters:
+      - explode: false
+        in: path
+        name: childResourceType
+        required: true
+        schema:
+          enum:
+          - MEMBER
+          - ROLE
+          - CONNECTION
+          - NETWORK
+          - ACCOUNT
+          - CLOUD_SERVICE_ROUTE
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceLimit'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimit'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Update a resource limit override
+      tags:
+      - limits
+  /networks/{networkId}/respawn:
+    post:
+      operationId: respawn
+      parameters:
+      - explode: false
+        in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Respawn controllers on network
+      tags:
+      - networks
+  /options:
+    get:
+      operationId: getOptions
+      parameters:
+      - explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  items:
+                    $ref: '#/components/schemas/Option'
+                  type: array
+                type: object
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get available options
+      tags:
+      - options
+  /pods:
+    get:
+      operationId: findPods
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Pod'
+                type: array
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: List all pods
+      tags:
+      - pods
+    post:
+      operationId: createPod
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pod'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pod'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api_key:
+        - ADMIN
+      summary: Add new pod
+      tags:
+      - pods
+  /pods/{podId}:
+    delete:
+      operationId: deletePodResource
+      parameters:
+      - explode: false
+        in: path
+        name: podId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Delete pod
+      tags:
+      - pods
+    get:
+      operationId: getPodResource
+      parameters:
+      - explode: false
+        in: path
+        name: podId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pod'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Get pod details
+      tags:
+      - pods
+    put:
+      operationId: updatePodResource
+      parameters:
+      - explode: false
+        in: path
+        name: podId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pod'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pod'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Update pod
+      tags:
+      - pods
+  /ports/{portId}:
+    delete:
+      operationId: deletePort
+      parameters:
+      - explode: false
+        in: path
+        name: portId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Delete port
+      tags:
+      - ports
+    get:
+      operationId: getPort
+      parameters:
+      - explode: false
+        in: path
+        name: portId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get port details
+      tags:
+      - ports
+    put:
+      operationId: updatePort
+      parameters:
+      - explode: false
+        in: path
+        name: portId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Port'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Port'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update port
+      tags:
+      - ports
+  /ports/{portId}/accounts:
+    get:
+      operationId: getAccountsUsingPort
+      parameters:
+      - explode: false
+        in: path
+        name: portId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Link'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get accounts using this port
+      tags:
+      - ports
+  /ports/{portId}/loa:
+    get:
+      operationId: getPortLOA
+      parameters:
+      - explode: false
+        in: path
+        name: portId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get port letter of authorization
+      tags:
+      - ports
+  /providerLinks:
+    get:
+      operationId: findAllProviderLinks
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProviderLink'
+                type: array
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: List all provider links
+      tags:
+      - provider links
+    post:
+      operationId: createLink
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderLink'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderLink'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api_key:
+        - ADMIN
+      summary: Add new provider link
+      tags:
+      - provider links
+  /providerLinks/{linkId}:
+    delete:
+      operationId: deleteProviderLink
+      parameters:
+      - explode: false
+        in: path
+        name: linkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Delete provider link
+      tags:
+      - provider links
+    get:
+      operationId: getProviderLink
+      parameters:
+      - explode: false
+        in: path
+        name: linkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderLink'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Get provider link details
+      tags:
+      - provider links
+    put:
+      operationId: updateProviderLink
+      parameters:
+      - explode: false
+        in: path
+        name: linkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderLink'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderLink'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Update provider link
+      tags:
+      - provider links
+  /providerLinks/{linkId}/vlans:
+    get:
+      operationId: getVlans
+      parameters:
+      - explode: false
+        in: path
+        name: linkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProviderVlan'
+                type: array
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Get provider link VLANs
+      tags:
+      - provider links
+  /publicPeeringBlocks:
+    get:
+      operationId: getPublicPeeringBlocks
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PublicPeeringBlock'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: List Public Peering CIDR Blocks
+      tags:
+      - public peering blocks
+    post:
+      operationId: createPublicPeeringBlock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicPeeringBlock'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicPeeringBlock'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Add Public Peering CIDR Blocks
+      tags:
+      - public peering blocks
+  /publicPeeringBlocks/{publicPeeringBlockId}:
+    delete:
+      operationId: deletePublicPeeringBlock
+      parameters:
+      - explode: false
+        in: path
+        name: publicPeeringBlockId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Delete Public Peering CIDR
+      tags:
+      - public peering blocks
+    get:
+      operationId: getPublicPeeringBlock
+      parameters:
+      - explode: false
+        in: path
+        name: publicPeeringBlockId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicPeeringBlock'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Get Public Peering CIDR details
+      tags:
+      - public peering blocks
+    put:
+      operationId: updatePublicPeeringBlock
+      parameters:
+      - explode: false
+        in: path
+        name: publicPeeringBlockId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PublicPeeringBlock'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicPeeringBlock'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Update Public Peering CIDR
+      tags:
+      - public peering blocks
+  /publicPeeringPoolStats:
+    get:
+      operationId: getPublicPeeringPoolStats
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicPeeringPoolStats'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Get Public Peering Pool Statistics details
+      tags:
+      - public peering stats
+  /supportedConnections:
+    get:
+      operationId: getSupportedConnections
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SupportedConnection'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: List supported connections
+      tags:
+      - supported connections
+    post:
+      operationId: createSupportedConnection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupportedConnection'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportedConnection'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Add supported connection
+      tags:
+      - supported connections
+  /supportedConnections/groups:
+    get:
+      operationId: getSupportedConnectionGroups
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SupportedConnectionGroup'
+                type: array
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: List supported connections groups
+      tags:
+      - supported connections groups
+      - supported connections
+    post:
+      operationId: createSupportedConnectionGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupportedConnectionGroup'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportedConnectionGroup'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api_key:
+        - ADMIN
+      summary: Add supported connection group
+      tags:
+      - supported connections groups
+      - supported connections
+  /supportedConnections/groups/{supportedConnectionGroupId}:
+    delete:
+      operationId: deleteSupportedConnectionGroup
+      parameters:
+      - explode: false
+        in: path
+        name: supportedConnectionGroupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Delete supported connection group
+      tags:
+      - supported connections groups
+      - supported connections
+    get:
+      operationId: getSupportedConnectionGroup
+      parameters:
+      - explode: false
+        in: path
+        name: supportedConnectionGroupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportedConnectionGroup'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Get supported connection group details
+      tags:
+      - supported connections groups
+      - supported connections
+    put:
+      operationId: updateSupportedConnectionGroup
+      parameters:
+      - explode: false
+        in: path
+        name: supportedConnectionGroupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupportedConnectionGroup'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportedConnectionGroup'
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Update supported connection group
+      tags:
+      - supported connections groups
+      - supported connections
+  /supportedConnections/{supportedConnectionId}:
+    delete:
+      operationId: deleteSupportedConnection
+      parameters:
+      - explode: false
+        in: path
+        name: supportedConnectionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Delete supported connection
+      tags:
+      - supported connections
+    get:
+      operationId: getSupportedConnection
+      parameters:
+      - explode: false
+        in: path
+        name: supportedConnectionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportedConnection'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get supported connection details
+      tags:
+      - supported connections
+    put:
+      operationId: updateSupportedConnection
+      parameters:
+      - explode: false
+        in: path
+        name: supportedConnectionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupportedConnection'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportedConnection'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Update supported connection
+      tags:
+      - supported connections
+  /tasks:
+    get:
+      operationId: getTasks
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Task'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: List Tasks
+      tags:
+      - tasks
+  /tasks/{taskId}:
+    delete:
+      operationId: deleteTask
+      parameters:
+      - explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      - api_key:
+        - ADMIN
+      summary: Delete Task
+      tags:
+      - tasks
+    get:
+      operationId: getTask
+      parameters:
+      - explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get Task details
+      tags:
+      - tasks
+  /users:
+    get:
+      operationId: findAllUsers
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: List users
+      tags:
+      - users
+    post:
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: default response
+          headers:
+            Location:
+              explode: false
+              schema:
+                type: string
+              style: simple
+      security:
+      - api_key:
+        - ADMIN
+      summary: Add new user
+      tags:
+      - users
+  /users/{userId}:
+    delete:
+      operationId: deleteUser
+      parameters:
+      - explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - api_key:
+        - ADMIN
+      summary: Delete user
+      tags:
+      - users
+    get:
+      operationId: getUser
+      parameters:
+      - explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get user details
+      tags:
+      - users
+    put:
+      operationId: updateUser
+      parameters:
+      - explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update user
+      tags:
+      - users
+components:
+  schemas:
+    AWSDirectConnectConnection:
+      allOf:
+      - $ref: '#/components/schemas/Connection'
+      - $ref: '#/components/schemas/AWSDirectConnectConnection_allOf'
+      required:
+      - awsAccountId
+      - billingTerm
+      - location
+      - name
+      - speed
+      - type
+      type: object
+    Account:
+      example:
+        parent:
+          href: href
+          id: id
+          title: title
+        showChildAccountPricing: true
+        name: name
+        technicalContactEmail: technicalContactEmail
+        description: description
+        href: href
+        id: id
+        supportedConnectionGroups:
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        demo: true
+        tags:
+          key: tags
+      properties:
+        demo:
+          type: boolean
+        description:
+          maxLength: 256
+          minLength: 0
+          type: string
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        parent:
+          $ref: '#/components/schemas/Link'
+        showChildAccountPricing:
+          type: boolean
+        supportedConnectionGroups:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+          uniqueItems: true
+        tags:
+          additionalProperties:
+            type: string
+          type: object
+        technicalContactEmail:
+          type: string
+      required:
+      - name
+      type: object
+    AccountBilling:
+      example:
+        address:
+          country: country
+          city: city
+          street: street
+          postalCode: postalCode
+          placeId: placeId
+          geoCoordinates:
+            latitude: 0.8008281904610115
+            longitude: 6.027456183070403
+          state: state
+        stripeToken: stripeToken
+        name: name
+        href: href
+        stripeExpiry: stripeExpiry
+        stripeLastFour: stripeLastFour
+        account:
+          href: href
+          id: id
+          title: title
+        email: email
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        address:
+          $ref: '#/components/schemas/PhysicalAddress'
+        email:
+          type: string
+        href:
+          type: string
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        stripeExpiry:
+          pattern: ^\d{2}\/\d{4}$
+          type: string
+        stripeLastFour:
+          pattern: ^\d{4}$
+          type: string
+        stripeToken:
+          maxLength: 64
+          minLength: 1
+          type: string
+      required:
+      - address
+      - email
+      - name
+      - stripeExpiry
+      - stripeLastFour
+      - stripeToken
+      type: object
+    AccountConsent:
+      example:
+        consentAt: 2000-01-23T04:56:07.000+00:00
+        href: href
+        userId: userId
+      properties:
+        consentAt:
+          format: date-time
+          type: string
+        href:
+          type: string
+        userId:
+          type: string
+      type: object
+    AccountInvite:
+      example:
+        expired: true
+        invitedBy:
+          href: href
+          id: id
+          title: title
+        roles:
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        href: href
+        id: id
+        account:
+          href: href
+          id: id
+          title: title
+        email: email
+        invitedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        email:
+          type: string
+        expired:
+          type: boolean
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        invitedAt:
+          format: date-time
+          type: string
+        invitedBy:
+          $ref: '#/components/schemas/Link'
+        roles:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+      required:
+      - account
+      - email
+      - roles
+      type: object
+    AccountInvoice:
+      example:
+        invoice: '{}'
+        account:
+          href: href
+          id: id
+          title: title
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        invoice:
+          description: The Stripe Invoice object (https://stripe.com/docs/api/invoices/object)
+          type: object
+      type: object
+    AccountMember:
+      example:
+        roles:
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        href: href
+        user:
+          href: href
+          id: id
+          title: title
+        account:
+          href: href
+          id: id
+          title: title
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        href:
+          type: string
+        roles:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        user:
+          $ref: '#/components/schemas/Link'
+      required:
+      - account
+      - roles
+      - user
+      type: object
+    ApiKey:
+      example:
+        roles:
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        name: name
+        description: description
+        href: href
+        secret: secret
+        account:
+          href: href
+          id: id
+          title: title
+        key: key
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        description:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        href:
+          type: string
+        key:
+          type: string
+        name:
+          maxLength: 255
+          minLength: 1
+          type: string
+        roles:
+          items:
+            $ref: '#/components/schemas/Link'
+          maxItems: 100
+          minItems: 1
+          type: array
+          uniqueItems: true
+        secret:
+          type: string
+      type: object
+    AzureExpressRouteConnection:
+      allOf:
+      - $ref: '#/components/schemas/Connection'
+      - $ref: '#/components/schemas/AzureExpressRouteConnection_allOf'
+      required:
+      - billingTerm
+      - location
+      - name
+      - serviceKey
+      - speed
+      - type
+      type: object
+    BGPConfig:
+      example:
+        peeringSubnet: peeringSubnet
+        password: password
+        customerIP: customerIP
+        pureportIP: pureportIP
+        publicNatIp: publicNatIp
+        state: UP
+        pureportASN: 5
+        customerASN: 5
+      properties:
+        customerASN:
+          format: int64
+          readOnly: true
+          type: integer
+        customerIP:
+          readOnly: true
+          type: string
+        password:
+          readOnly: true
+          type: string
+        peeringSubnet:
+          readOnly: true
+          type: string
+        publicNatIp:
+          readOnly: true
+          type: string
+        pureportASN:
+          format: int64
+          readOnly: true
+          type: integer
+        pureportIP:
+          readOnly: true
+          type: string
+        state:
+          enum:
+          - UP
+          - DOWN
+          - PENDING
+          readOnly: true
+          type: string
+      type: object
+    BGPRoute:
+      example:
+        nextHop: nextHop
+        nextHopGateway:
+          href: href
+          id: id
+          title: title
+        internal: true
+        locPref: 0
+        origin: origin
+        weight: 5
+        best: true
+        network: network
+        valid: true
+        path:
+        - 1
+        - 1
+        multiPath: true
+        metric: 6
+        nextHopConnection:
+          href: href
+          id: id
+          title: title
+      properties:
+        best:
+          type: boolean
+        internal:
+          type: boolean
+        locPref:
+          format: int32
+          type: integer
+        metric:
+          format: int32
+          type: integer
+        multiPath:
+          type: boolean
+        network:
+          type: string
+        nextHop:
+          type: string
+        nextHopConnection:
+          $ref: '#/components/schemas/Link'
+        nextHopGateway:
+          $ref: '#/components/schemas/Link'
+        origin:
+          type: string
+        path:
+          items:
+            format: int32
+            type: integer
+          type: array
+        valid:
+          type: boolean
+        weight:
+          format: int32
+          type: integer
+      type: object
+    BillingPlan:
+      example:
+        amount: 0
+        term: HOURLY
+        id: id
+        billingInterval: ONCE
+        setupAmount: 6
+      properties:
+        amount:
+          format: int64
+          type: integer
+        billingInterval:
+          enum:
+          - ONCE
+          - DAY
+          - WEEK
+          - MONTH
+          - YEAR
+          type: string
+        id:
+          type: string
+        setupAmount:
+          format: int64
+          type: integer
+        term:
+          enum:
+          - HOURLY
+          - MONTHLY
+          - ONE_YEAR
+          - TWO_YEAR
+          type: string
+      readOnly: true
+      type: object
+    CloudRegion:
+      example:
+        provider: AWS
+        displayName: displayName
+        geoCoordinates:
+          latitude: 0.8008281904610115
+          longitude: 6.027456183070403
+        href: href
+        id: id
+        providerAssignedId: providerAssignedId
+      properties:
+        displayName:
+          type: string
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        provider:
+          enum:
+          - AWS
+          - AZURE
+          - GOOGLE_CLOUD
+          - ORACLE
+          type: string
+        providerAssignedId:
+          type: string
+      required:
+      - displayName
+      - provider
+      - providerAssignedId
+      type: object
+    CloudService:
+      example:
+        ipv4PrefixCount: 0
+        provider: AWS
+        ipv6PrefixCount: 0
+        service: service
+        cloudRegion:
+          href: href
+          id: id
+          title: title
+        name: name
+        deactivatedAt: 2000-01-23T04:56:07.000+00:00
+        href: href
+        id: id
+        deactivated: true
+      properties:
+        cloudRegion:
+          $ref: '#/components/schemas/Link'
+        deactivated:
+          readOnly: true
+          type: boolean
+        deactivatedAt:
+          format: date-time
+          readOnly: true
+          type: string
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        ipv4PrefixCount:
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        ipv6PrefixCount:
+          format: int32
+          minimum: 0
+          readOnly: true
+          type: integer
+        name:
+          type: string
+        provider:
+          enum:
+          - AWS
+          - AZURE
+          - GOOGLE_CLOUD
+          - ORACLE
+          type: string
+        service:
+          type: string
+      required:
+      - deactivated
+      - name
+      - provider
+      - service
+      type: object
+    Connection:
+      discriminator:
+        mapping:
+          AWS_DIRECT_CONNECT: '#/components/schemas/AWSDirectConnectConnection'
+          AZURE_EXPRESS_ROUTE: '#/components/schemas/AzureExpressRouteConnection'
+          COMCAST: '#/components/schemas/GenericConnection'
+          COX_COMMUNICATIONS: '#/components/schemas/GenericConnection'
+          GOOGLE_CLOUD_INTERCONNECT: '#/components/schemas/GoogleCloudInterconnectConnection'
+          ORACLE_FAST_CONNECT: '#/components/schemas/OracleFastConnectConnection'
+          PORT: '#/components/schemas/PortConnection'
+          SITE_IPSEC_VPN: '#/components/schemas/SiteIPSecVPNConnection'
+          ZAYO: '#/components/schemas/GenericConnection'
+        propertyName: type
+      example:
+        nat:
+          mappings:
+          - natCidr: natCidr
+            nativeCidr: nativeCidr
+            block: block
+          - natCidr: natCidr
+            nativeCidr: nativeCidr
+            block: block
+          - natCidr: natCidr
+            nativeCidr: nativeCidr
+            block: block
+          - natCidr: natCidr
+            nativeCidr: nativeCidr
+            block: block
+          - natCidr: natCidr
+            nativeCidr: nativeCidr
+            block: block
+          blocks:
+          - blocks
+          - blocks
+          pnatCidr: pnatCidr
+          enabled: true
+        billingTerm: HOURLY
+        errorMessage: errorMessage
+        description: description
+        errorCode: BAD_REQUEST
+        customerNetworks:
+        - address: address
+          name: name
+        - address: address
+          name: name
+        type: AWS_DIRECT_CONNECT
+        primaryGateway:
+          linkState: UP
+          availabilityDomain: PRIMARY
+          bgpConfig:
+            peeringSubnet: peeringSubnet
+            password: password
+            customerIP: customerIP
+            pureportIP: pureportIP
+            publicNatIp: publicNatIp
+            state: UP
+            pureportASN: 5
+            customerASN: 5
+          errorMessage: errorMessage
+          name: name
+          description: description
+          errorCode: BAD_REQUEST
+          id: id
+          state: WAITING_TO_PROVISION
+          type: STANDARD
+          remoteId: remoteId
+        speed: 2
+        highAvailability: true
+        network:
+          href: href
+          id: id
+          title: title
+        tags:
+          key: tags
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        activeAt: 2000-01-23T04:56:07.000+00:00
+        deletedAt: 2000-01-23T04:56:07.000+00:00
+        secondaryGateway:
+          linkState: UP
+          availabilityDomain: PRIMARY
+          bgpConfig:
+            peeringSubnet: peeringSubnet
+            password: password
+            customerIP: customerIP
+            pureportIP: pureportIP
+            publicNatIp: publicNatIp
+            state: UP
+            pureportASN: 5
+            customerASN: 5
+          errorMessage: errorMessage
+          name: name
+          description: description
+          errorCode: BAD_REQUEST
+          id: id
+          state: WAITING_TO_PROVISION
+          type: STANDARD
+          remoteId: remoteId
+        name: name
+        billingPlan:
+          amount: 0
+          term: HOURLY
+          id: id
+          billingInterval: ONCE
+          setupAmount: 6
+        location:
+          href: href
+          id: id
+          title: title
+        href: href
+        id: id
+        state: INITIALIZING
+        customerASN: 1
+      properties:
+        activeAt:
+          format: date-time
+          readOnly: true
+          type: string
+        billingPlan:
+          $ref: '#/components/schemas/BillingPlan'
+        billingTerm:
+          enum:
+          - HOURLY
+          - MONTHLY
+          - ONE_YEAR
+          - TWO_YEAR
+          type: string
+        createdAt:
+          format: date-time
+          readOnly: true
+          type: string
+        customerASN:
+          format: int64
+          type: integer
+        customerNetworks:
+          items:
+            $ref: '#/components/schemas/CustomerNetwork'
+          type: array
+          uniqueItems: true
+        deletedAt:
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        errorCode:
+          enum:
+          - BAD_REQUEST
+          - RESOURCE_LIMITATION_EXCEEDED
+          - JSON_PROCESSING_ERROR
+          - UNAUTHORIZED
+          - ACCESS_TOKEN_GENERAL
+          - ACCESS_TOKEN_MISSING
+          - ACCESS_TOKEN_EXPIRED
+          - ACCESS_TOKEN_ALGORITHM_MISMATCH
+          - ACCESS_TOKEN_INVALID_SIGNATURE
+          - ACCESS_TOKEN_DECODE_ERROR
+          - API_KEY_NOT_FOUND
+          - PAYMENT_REQUIRED
+          - FORBIDDEN
+          - NOT_FOUND
+          - METHOD_NOT_ALLOWED
+          - REQUEST_TIMEOUT
+          - CONFLICT
+          - AWS_CONNECTION_HAS_ACTIVE_VIFS
+          - EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE
+          - ORACLE_OCID_ALREADY_IN_USE
+          - ADMIN_ACCESS_MUST_EXIST
+          - CONNECTION_UPDATE_STATE_CONFLICT
+          - CONNECTION_DELETE_STATE_CONFLICT
+          - NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
+          - ACCOUNT_DELETE_NON_DELETED_PORT_STATE_CONFLICT
+          - NETWORK_RESPAWN_STATE_CONFLICT
+          - PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
+          - CONSENT_REQUIRED
+          - ACCOUNT_ALREADY_CONSENTED
+          - ACCOUNT_MEMBER_ALREADY_EXISTS
+          - ACCOUNT_HAS_CHILD_ACCOUNTS
+          - PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED
+          - REQUEST_ENTITY_TOO_LARGE
+          - REQUEST_URI_TOO_LONG
+          - UNSUPPORTED_MEDIA_TYPE
+          - UNPROCESSABLE_ENTITY
+          - VALIDATION_ERROR
+          - INVALID_LINK
+          - INVALID_AWS_REGION
+          - INVALID_EXPRESS_ROUTE_SERVICE_KEY
+          - INVALID_GOOGLE_PAIRING_KEY
+          - INVALID_ORACLE_OCID
+          - EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH
+          - ORACLE_OCID_BANDWIDTH_MISMATCH
+          - MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS
+          - NO_SUPPORTED_CONNECTION_FOR_CONNECTION
+          - SUPPORTED_CONNECTION_IS_PENDING
+          - NO_SUPPORTED_PORT_FOR_PORT
+          - UNSUPPORTED_RESOURCE_LIMIT
+          - MODIFICATION_NOT_ALLOWED
+          - AWS_CONNECTION_SPEED_IMMUTABLE
+          - INVALID_VLAN
+          - INVALID_VLAN_RANGE
+          - INVALID_VLAN_FOR_CONNECTION
+          - UNSUPPORTED_TASK_FOR_RESOURCE
+          - UNSUPPORTED_TASK_NAME
+          - VLAN_IN_USE
+          - INVALID_CUSTOMER_ASN
+          - INVALID_NAT_OVERLAPPING_NATIVE_CIDRS
+          - INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK
+          - CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS
+          - PEERING_TYPE_CHANGE_NOT_ALLOWED
+          - PORT_BILLING_TERM_CHANGE_NOT_ALLOWED
+          - INVALID_PEERING_STATE_FOR_OPERATION
+          - INVALID_PEERING_TYPE_FOR_OPERATION
+          - INVALID_PEERING_PNAT_CONFIGURATION
+          - INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS
+          - INVALID_NAT_CIDR_ALLOCATION
+          - INVALID_NAT_OVERLAPPING_NAT_CIDRS
+          - INVALID_STRIPE_CONFIGURATION
+          - INTERNAL_SERVER_ERROR
+          - JSON_GENERATION_ERROR
+          - NETWORK_PROVISIONING_ERROR
+          - CONNECTION_PROVISIONING_ERROR
+          - CONNECTION_UPDATE_SPEED_ERROR
+          - CONNECTION_DELETING_ERROR
+          - CONNECTION_UPDATING_ERROR
+          - GATEWAY_PROVISIONING_ERROR
+          - GATEWAY_UPDATE_SPEED_ERROR
+          - GATEWAY_UPDATING_ERROR
+          - GATEWAY_DELETING_ERROR
+          - ECX_GATEWAY_PROVISIONING_ERROR
+          - PORT_PROVISIONING_ERROR
+          - PORT_UPDATING_ERROR
+          - PORT_DELETING_ERROR
+          - AWS_CONNECTION_DELETE_ERROR
+          - GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR
+          - ECX_CONNECTION_DELETE_ERROR
+          - GOOGLE_OPERATION_TIMEOUT
+          - INVALID_TASK_CONFIGURATION
+          - CURRENTLY_UNSUPPORTED_TASK_TYPE
+          - NOT_IMPLEMENTED
+          - SERVICE_UNAVAILABLE
+          - EXPRESS_ROUTE_SERVICE_UNAVAILABLE
+          - ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE
+          - INSUFFICIENT_CAPACITY
+          - NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE
+          readOnly: true
+          type: string
+        errorMessage:
+          readOnly: true
+          type: string
+        highAvailability:
+          type: boolean
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        location:
+          $ref: '#/components/schemas/Link'
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        nat:
+          $ref: '#/components/schemas/NATConfig'
+        network:
+          $ref: '#/components/schemas/Link'
+        primaryGateway:
+          $ref: '#/components/schemas/Gateway'
+        secondaryGateway:
+          $ref: '#/components/schemas/Gateway'
+        speed:
+          format: int32
+          type: integer
+        state:
+          enum:
+          - INITIALIZING
+          - WAITING_TO_PROVISION
+          - PROVISIONING
+          - FAILED_TO_PROVISION
+          - ACTIVE
+          - DOWN
+          - UPDATING
+          - FAILED_TO_UPDATE
+          - DELETING
+          - FAILED_TO_DELETE
+          - DELETED
+          readOnly: true
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          type: object
+        type:
+          enum:
+          - AWS_DIRECT_CONNECT
+          - AZURE_EXPRESS_ROUTE
+          - GOOGLE_CLOUD_INTERCONNECT
+          - ORACLE_FAST_CONNECT
+          - SITE_IPSEC_VPN
+          - PORT
+          - COMCAST
+          - COX_COMMUNICATIONS
+          - ZAYO
+          type: string
+      required:
+      - billingTerm
+      - location
+      - name
+      - speed
+      - type
+      type: object
+    ConnectionTimeEgressIngress:
+      example:
+        ingress: 6
+        connection:
+          href: href
+          id: id
+          title: title
+        time: 2000-01-23T04:56:07.000+00:00
+        egress: 0
+      properties:
+        connection:
+          $ref: '#/components/schemas/Link'
+        egress:
+          format: int64
+          type: integer
+        ingress:
+          format: int64
+          type: integer
+        time:
+          format: date-time
+          type: string
+      type: object
+    CustomerNetwork:
+      example:
+        address: address
+        name: name
+      properties:
+        address:
+          type: string
+        name:
+          type: string
+      required:
+      - address
+      type: object
+    DateFilter:
+      example:
+        lt: 2000-01-23T04:56:07.000+00:00
+        gte: 2000-01-23T04:56:07.000+00:00
+        lte: 2000-01-23T04:56:07.000+00:00
+        gt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        gt:
+          format: date-time
+          type: string
+        gte:
+          format: date-time
+          type: string
+        lt:
+          format: date-time
+          type: string
+        lte:
+          format: date-time
+          type: string
+      type: object
+    Facility:
+      example:
+        altIds:
+          key: altIds
+        address:
+          country: country
+          city: city
+          street: street
+          postalCode: postalCode
+          placeId: placeId
+          geoCoordinates:
+            latitude: 0.8008281904610115
+            longitude: 6.027456183070403
+          state: state
+        vendor: vendor
+        name: name
+        href: href
+        id: id
+        state: ACTIVE
+      properties:
+        address:
+          $ref: '#/components/schemas/PhysicalAddress'
+        altIds:
+          additionalProperties:
+            type: string
+          type: object
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        state:
+          enum:
+          - ACTIVE
+          - UNAVAILABLE
+          - DELETED
+          type: string
+        vendor:
+          type: string
+      required:
+      - address
+      - name
+      type: object
+    Gateway:
+      discriminator:
+        mapping:
+          STANDARD: '#/components/schemas/StandardGateway'
+          VPN: '#/components/schemas/VPNGateway'
+        propertyName: type
+      example:
+        linkState: UP
+        availabilityDomain: PRIMARY
+        bgpConfig:
+          peeringSubnet: peeringSubnet
+          password: password
+          customerIP: customerIP
+          pureportIP: pureportIP
+          publicNatIp: publicNatIp
+          state: UP
+          pureportASN: 5
+          customerASN: 5
+        errorMessage: errorMessage
+        name: name
+        description: description
+        errorCode: BAD_REQUEST
+        id: id
+        state: WAITING_TO_PROVISION
+        type: STANDARD
+        remoteId: remoteId
+      properties:
+        availabilityDomain:
+          enum:
+          - PRIMARY
+          - SECONDARY
+          readOnly: true
+          type: string
+        bgpConfig:
+          $ref: '#/components/schemas/BGPConfig'
+        description:
+          readOnly: true
+          type: string
+        errorCode:
+          enum:
+          - BAD_REQUEST
+          - RESOURCE_LIMITATION_EXCEEDED
+          - JSON_PROCESSING_ERROR
+          - UNAUTHORIZED
+          - ACCESS_TOKEN_GENERAL
+          - ACCESS_TOKEN_MISSING
+          - ACCESS_TOKEN_EXPIRED
+          - ACCESS_TOKEN_ALGORITHM_MISMATCH
+          - ACCESS_TOKEN_INVALID_SIGNATURE
+          - ACCESS_TOKEN_DECODE_ERROR
+          - API_KEY_NOT_FOUND
+          - PAYMENT_REQUIRED
+          - FORBIDDEN
+          - NOT_FOUND
+          - METHOD_NOT_ALLOWED
+          - REQUEST_TIMEOUT
+          - CONFLICT
+          - AWS_CONNECTION_HAS_ACTIVE_VIFS
+          - EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE
+          - ORACLE_OCID_ALREADY_IN_USE
+          - ADMIN_ACCESS_MUST_EXIST
+          - CONNECTION_UPDATE_STATE_CONFLICT
+          - CONNECTION_DELETE_STATE_CONFLICT
+          - NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
+          - ACCOUNT_DELETE_NON_DELETED_PORT_STATE_CONFLICT
+          - NETWORK_RESPAWN_STATE_CONFLICT
+          - PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
+          - CONSENT_REQUIRED
+          - ACCOUNT_ALREADY_CONSENTED
+          - ACCOUNT_MEMBER_ALREADY_EXISTS
+          - ACCOUNT_HAS_CHILD_ACCOUNTS
+          - PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED
+          - REQUEST_ENTITY_TOO_LARGE
+          - REQUEST_URI_TOO_LONG
+          - UNSUPPORTED_MEDIA_TYPE
+          - UNPROCESSABLE_ENTITY
+          - VALIDATION_ERROR
+          - INVALID_LINK
+          - INVALID_AWS_REGION
+          - INVALID_EXPRESS_ROUTE_SERVICE_KEY
+          - INVALID_GOOGLE_PAIRING_KEY
+          - INVALID_ORACLE_OCID
+          - EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH
+          - ORACLE_OCID_BANDWIDTH_MISMATCH
+          - MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS
+          - NO_SUPPORTED_CONNECTION_FOR_CONNECTION
+          - SUPPORTED_CONNECTION_IS_PENDING
+          - NO_SUPPORTED_PORT_FOR_PORT
+          - UNSUPPORTED_RESOURCE_LIMIT
+          - MODIFICATION_NOT_ALLOWED
+          - AWS_CONNECTION_SPEED_IMMUTABLE
+          - INVALID_VLAN
+          - INVALID_VLAN_RANGE
+          - INVALID_VLAN_FOR_CONNECTION
+          - UNSUPPORTED_TASK_FOR_RESOURCE
+          - UNSUPPORTED_TASK_NAME
+          - VLAN_IN_USE
+          - INVALID_CUSTOMER_ASN
+          - INVALID_NAT_OVERLAPPING_NATIVE_CIDRS
+          - INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK
+          - CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS
+          - PEERING_TYPE_CHANGE_NOT_ALLOWED
+          - PORT_BILLING_TERM_CHANGE_NOT_ALLOWED
+          - INVALID_PEERING_STATE_FOR_OPERATION
+          - INVALID_PEERING_TYPE_FOR_OPERATION
+          - INVALID_PEERING_PNAT_CONFIGURATION
+          - INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS
+          - INVALID_NAT_CIDR_ALLOCATION
+          - INVALID_NAT_OVERLAPPING_NAT_CIDRS
+          - INVALID_STRIPE_CONFIGURATION
+          - INTERNAL_SERVER_ERROR
+          - JSON_GENERATION_ERROR
+          - NETWORK_PROVISIONING_ERROR
+          - CONNECTION_PROVISIONING_ERROR
+          - CONNECTION_UPDATE_SPEED_ERROR
+          - CONNECTION_DELETING_ERROR
+          - CONNECTION_UPDATING_ERROR
+          - GATEWAY_PROVISIONING_ERROR
+          - GATEWAY_UPDATE_SPEED_ERROR
+          - GATEWAY_UPDATING_ERROR
+          - GATEWAY_DELETING_ERROR
+          - ECX_GATEWAY_PROVISIONING_ERROR
+          - PORT_PROVISIONING_ERROR
+          - PORT_UPDATING_ERROR
+          - PORT_DELETING_ERROR
+          - AWS_CONNECTION_DELETE_ERROR
+          - GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR
+          - ECX_CONNECTION_DELETE_ERROR
+          - GOOGLE_OPERATION_TIMEOUT
+          - INVALID_TASK_CONFIGURATION
+          - CURRENTLY_UNSUPPORTED_TASK_TYPE
+          - NOT_IMPLEMENTED
+          - SERVICE_UNAVAILABLE
+          - EXPRESS_ROUTE_SERVICE_UNAVAILABLE
+          - ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE
+          - INSUFFICIENT_CAPACITY
+          - NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE
+          readOnly: true
+          type: string
+        errorMessage:
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: string
+        linkState:
+          enum:
+          - UP
+          - DOWN
+          - PENDING
+          readOnly: true
+          type: string
+        name:
+          readOnly: true
+          type: string
+        remoteId:
+          readOnly: true
+          type: string
+        state:
+          enum:
+          - WAITING_TO_PROVISION
+          - PROVISIONING
+          - FAILED_TO_PROVISION
+          - ACTIVE
+          - DOWN
+          - UPDATING
+          - FAILED_TO_UPDATE
+          - DELETING
+          - FAILED_TO_DELETE
+          - DELETED
+          readOnly: true
+          type: string
+        type:
+          enum:
+          - STANDARD
+          - VPN
+          readOnly: true
+          type: string
+      readOnly: true
+      type: object
+    GenericConnection:
+      allOf:
+      - $ref: '#/components/schemas/Connection'
+      - $ref: '#/components/schemas/GenericConnection_allOf'
+      required:
+      - billingTerm
+      - customerASN
+      - location
+      - name
+      - speed
+      - type
+      type: object
+    GeoCoordinates:
+      example:
+        latitude: 0.8008281904610115
+        longitude: 6.027456183070403
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+      required:
+      - latitude
+      - longitude
+      type: object
+    GoogleCloudInterconnectConnection:
+      allOf:
+      - $ref: '#/components/schemas/Connection'
+      - $ref: '#/components/schemas/GoogleCloudInterconnectConnection_allOf'
+      required:
+      - billingTerm
+      - location
+      - name
+      - primaryPairingKey
+      - speed
+      - type
+      type: object
+    IKEV1Config:
+      properties:
+        esp:
+          $ref: '#/components/schemas/IKEV1ESPConfig'
+        ike:
+          $ref: '#/components/schemas/IKEV1IKEConfig'
+      required:
+      - esp
+      - ike
+      type: object
+    IKEV1ESPConfig:
+      properties:
+        dhGroup:
+          enum:
+          - MODP_1024
+          - MODP_1536
+          - MODP_2048
+          - MODP_3072
+          - MODP_4096
+          - MODP_6144
+          - MODP_8192
+          - ECP_192
+          - ECP_224
+          - ECP_256
+          - ECP_384
+          - ECP_521
+          type: string
+        encryption:
+          enum:
+          - NULL
+          - AES_128
+          - AES_192
+          - AES_256
+          - AES_128_CTR
+          - AES_192_CTR
+          - AES_256_CTR
+          - AES_128_GCM_64
+          - AES_192_GCM_64
+          - AES_256_GCM_64
+          - AES_128_GCM_96
+          - AES_192_GCM_96
+          - AES_256_GCM_96
+          - AES_128_GCM_128
+          - AES_192_GCM_128
+          - AES_256_GCM_128
+          - AES_128_GMAC
+          - AES_192_GMAC
+          - AES_256_GMAC
+          type: string
+        integrity:
+          enum:
+          - MD5_HMAC
+          - SHA1_HMAC
+          - SHA256_HMAC
+          - SHA384_HMAC
+          - SHA512_HMAC
+          - AES_XCBC
+          type: string
+        lifetime:
+          format: int32
+          maximum: 28800
+          minimum: 900
+          type: integer
+      required:
+      - dhGroup
+      - encryption
+      type: object
+    IKEV1IKEConfig:
+      properties:
+        dhGroup:
+          enum:
+          - MODP_1024
+          - MODP_1536
+          - MODP_2048
+          - MODP_3072
+          - MODP_4096
+          - MODP_6144
+          - MODP_8192
+          - ECP_192
+          - ECP_224
+          - ECP_256
+          - ECP_384
+          - ECP_521
+          type: string
+        dpdDelay:
+          format: int32
+          maximum: 900
+          minimum: 0
+          type: integer
+        dpdTimeout:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        encryption:
+          enum:
+          - AES_128
+          - AES_192
+          - AES_256
+          type: string
+        integrity:
+          enum:
+          - MD5_HMAC
+          - SHA1_HMAC
+          - SHA256_HMAC
+          - SHA384_HMAC
+          - SHA512_HMAC
+          type: string
+        lifetime:
+          format: int32
+          maximum: 86400
+          minimum: 3600
+          type: integer
+      required:
+      - dhGroup
+      - encryption
+      - integrity
+      type: object
+    IKEV2Config:
+      properties:
+        esp:
+          $ref: '#/components/schemas/IKEV2ESPConfig'
+        ike:
+          $ref: '#/components/schemas/IKEV2IKEConfig'
+      required:
+      - esp
+      - ike
+      type: object
+    IKEV2ESPConfig:
+      properties:
+        dhGroup:
+          enum:
+          - MODP_1024
+          - MODP_1536
+          - MODP_2048
+          - MODP_3072
+          - MODP_4096
+          - MODP_6144
+          - MODP_8192
+          - ECP_192
+          - ECP_224
+          - ECP_256
+          - ECP_384
+          - ECP_521
+          type: string
+        encryption:
+          enum:
+          - NULL
+          - AES_128
+          - AES_192
+          - AES_256
+          - AES_128_CTR
+          - AES_192_CTR
+          - AES_256_CTR
+          - AES_128_GCM_64
+          - AES_192_GCM_64
+          - AES_256_GCM_64
+          - AES_128_GCM_96
+          - AES_192_GCM_96
+          - AES_256_GCM_96
+          - AES_128_GCM_128
+          - AES_192_GCM_128
+          - AES_256_GCM_128
+          - AES_128_GMAC
+          - AES_192_GMAC
+          - AES_256_GMAC
+          type: string
+        integrity:
+          enum:
+          - MD5_HMAC
+          - SHA1_HMAC
+          - SHA256_HMAC
+          - SHA384_HMAC
+          - SHA512_HMAC
+          - AES_XCBC
+          type: string
+        lifetime:
+          format: int32
+          maximum: 28800
+          minimum: 900
+          type: integer
+      required:
+      - dhGroup
+      - encryption
+      type: object
+    IKEV2IKEConfig:
+      properties:
+        dhGroup:
+          enum:
+          - MODP_1024
+          - MODP_1536
+          - MODP_2048
+          - MODP_3072
+          - MODP_4096
+          - MODP_6144
+          - MODP_8192
+          - ECP_192
+          - ECP_224
+          - ECP_256
+          - ECP_384
+          - ECP_521
+          type: string
+        dpdDelay:
+          format: int32
+          maximum: 900
+          minimum: 0
+          type: integer
+        dpdTimeout:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        encryption:
+          enum:
+          - NULL
+          - AES_128
+          - AES_192
+          - AES_256
+          - AES_128_CTR
+          - AES_192_CTR
+          - AES_256_CTR
+          - AES_128_GCM_64
+          - AES_192_GCM_64
+          - AES_256_GCM_64
+          - AES_128_GCM_96
+          - AES_192_GCM_96
+          - AES_256_GCM_96
+          - AES_128_GCM_128
+          - AES_192_GCM_128
+          - AES_256_GCM_128
+          type: string
+        integrity:
+          enum:
+          - MD5_HMAC
+          - SHA1_HMAC
+          - SHA256_HMAC
+          - SHA384_HMAC
+          - SHA512_HMAC
+          - AES_XCBC
+          type: string
+        lifetime:
+          format: int32
+          maximum: 86400
+          minimum: 3600
+          type: integer
+        prf:
+          enum:
+          - MD5
+          - SHA_1
+          - AES_XCBC
+          - SHA_256
+          - SHA_384
+          - SHA_512
+          type: string
+      required:
+      - dhGroup
+      - encryption
+      type: object
+    Link:
+      example:
+        href: href
+        id: id
+        title: title
+      properties:
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        title:
+          type: string
+      required:
+      - href
+      type: object
+    Location:
+      example:
+        name: name
+        geoCoordinates:
+          latitude: 0.8008281904610115
+          longitude: 6.027456183070403
+        href: href
+        id: id
+        locationLinks:
+        - location:
+            href: href
+            id: id
+            title: title
+          speed: 0
+        - location:
+            href: href
+            id: id
+            title: title
+          speed: 0
+      properties:
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        locationLinks:
+          items:
+            $ref: '#/components/schemas/LocationLinkConnection'
+          type: array
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+      required:
+      - geoCoordinates
+      - name
+      type: object
+    LocationLinkConnection:
+      example:
+        location:
+          href: href
+          id: id
+          title: title
+        speed: 0
+      properties:
+        location:
+          $ref: '#/components/schemas/Link'
+        speed:
+          enum:
+          - 50
+          - 100
+          - 200
+          - 300
+          - 400
+          - 500
+          - 1000
+          - 2000
+          - 3000
+          - 4000
+          - 5000
+          - 10000
+          format: int32
+          type: integer
+      type: object
+    LoginRequest:
+      example:
+        secret: secret
+        key: key
+      properties:
+        key:
+          type: string
+        secret:
+          type: string
+      required:
+      - key
+      - secret
+      type: object
+    LoginResponse:
+      example:
+        access_token: access_token
+        refresh_token: refresh_token
+        token_type: token_type
+        expires_in: 0
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          format: int32
+          type: integer
+        refresh_token:
+          type: string
+        token_type:
+          type: string
+      required:
+      - access_token
+      - expires_in
+      - refresh_token
+      - token_type
+      type: object
+    LoginWithRefreshTokenRequest:
+      example:
+        refreshToken: refreshToken
+      properties:
+        refreshToken:
+          type: string
+      required:
+      - refreshToken
+      type: object
+    NATConfig:
+      example:
+        mappings:
+        - natCidr: natCidr
+          nativeCidr: nativeCidr
+          block: block
+        - natCidr: natCidr
+          nativeCidr: nativeCidr
+          block: block
+        - natCidr: natCidr
+          nativeCidr: nativeCidr
+          block: block
+        - natCidr: natCidr
+          nativeCidr: nativeCidr
+          block: block
+        - natCidr: natCidr
+          nativeCidr: nativeCidr
+          block: block
+        blocks:
+        - blocks
+        - blocks
+        pnatCidr: pnatCidr
+        enabled: true
+      properties:
+        blocks:
+          items:
+            type: string
+          readOnly: true
+          type: array
+        enabled:
+          type: boolean
+        mappings:
+          items:
+            $ref: '#/components/schemas/NATMapping'
+          maxItems: 1000
+          minItems: 0
+          type: array
+        pnatCidr:
+          readOnly: true
+          type: string
+      type: object
+    NATMapping:
+      example:
+        natCidr: natCidr
+        nativeCidr: nativeCidr
+        block: block
+      properties:
+        block:
+          readOnly: true
+          type: string
+        natCidr:
+          type: string
+        nativeCidr:
+          type: string
+      required:
+      - nativeCidr
+      type: object
+    Network:
+      example:
+        name: name
+        description: description
+        href: href
+        id: id
+        state: PENDING
+        account:
+          href: href
+          id: id
+          title: title
+        tags:
+          key: tags
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        description:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        state:
+          enum:
+          - PENDING
+          - PROVISIONING
+          - PENDING_CONTROLLERS
+          - PROVISIONING_CONTROLLERS
+          - ACTIVE
+          - DELETING
+          - DELETED
+          - ERROR
+          readOnly: true
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    NetworkConnectionEgressIngress:
+      example:
+        ingress: 6
+        connection:
+          href: href
+          id: id
+          title: title
+        account:
+          href: href
+          id: id
+          title: title
+        egress: 0
+        network:
+          href: href
+          id: id
+          title: title
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        connection:
+          $ref: '#/components/schemas/Link'
+        egress:
+          format: int64
+          type: integer
+        ingress:
+          format: int64
+          type: integer
+        network:
+          $ref: '#/components/schemas/Link'
+      type: object
+    NetworkTimeUsage:
+      example:
+        usage: 0
+        time: 2000-01-23T04:56:07.000+00:00
+        account:
+          href: href
+          id: id
+          title: title
+        network:
+          href: href
+          id: id
+          title: title
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        network:
+          $ref: '#/components/schemas/Link'
+        time:
+          format: date-time
+          type: string
+        usage:
+          format: int64
+          type: integer
+      type: object
+    Option:
+      properties:
+        aead:
+          type: boolean
+        default:
+          type: boolean
+        description:
+          type: string
+        unsafe:
+          type: boolean
+        value:
+          type: string
+      type: object
+    OracleFastConnectConnection:
+      allOf:
+      - $ref: '#/components/schemas/Connection'
+      - $ref: '#/components/schemas/OracleFastConnectConnection_allOf'
+      required:
+      - billingTerm
+      - cloudRegion
+      - location
+      - name
+      - peering
+      - primaryOcid
+      - secondaryOcid
+      - speed
+      - type
+      type: object
+    PSKAuthConfig:
+      allOf:
+      - $ref: '#/components/schemas/VPNAuthConfig'
+      - $ref: '#/components/schemas/PSKAuthConfig_allOf'
+      type: object
+    PeeringConfiguration:
+      properties:
+        primaryPureportBgpIP:
+          type: string
+        primaryRemoteBgpIP:
+          type: string
+        secondaryPureportBgpIP:
+          type: string
+        secondaryRemoteBgpIP:
+          type: string
+        type:
+          enum:
+          - PUBLIC
+          - PRIVATE
+          type: string
+      required:
+      - type
+      type: object
+    PhysicalAddress:
+      example:
+        country: country
+        city: city
+        street: street
+        postalCode: postalCode
+        placeId: placeId
+        geoCoordinates:
+          latitude: 0.8008281904610115
+          longitude: 6.027456183070403
+        state: state
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        geoCoordinates:
+          $ref: '#/components/schemas/GeoCoordinates'
+        placeId:
+          description: A valid Google Place ID
+          type: string
+        postalCode:
+          type: string
+        state:
+          type: string
+        street:
+          type: string
+      type: object
+    Pod:
+      example:
+        location:
+          href: href
+          id: id
+          title: title
+        href: href
+        id: id
+        status: AVAILABLE
+      properties:
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        location:
+          $ref: '#/components/schemas/Link'
+        status:
+          enum:
+          - AVAILABLE
+          - UNAVAILABLE
+          type: string
+      required:
+      - id
+      type: object
+    Port:
+      example:
+        availableToChildAccounts: true
+        availabilityDomain: PRIMARY
+        billingTerm: HOURLY
+        description: description
+        mediaType: mediaType
+        speed: 0
+        tags:
+          key: tags
+        provider: PUREPORT
+        name: name
+        href: href
+        id: id
+        state: REQUESTED
+        facility:
+          href: href
+          id: id
+          title: title
+        account:
+          href: href
+          id: id
+          title: title
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        availabilityDomain:
+          enum:
+          - PRIMARY
+          - SECONDARY
+          type: string
+        availableToChildAccounts:
+          type: boolean
+        billingTerm:
+          enum:
+          - HOURLY
+          - MONTHLY
+          - ONE_YEAR
+          - TWO_YEAR
+          type: string
+        description:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        facility:
+          $ref: '#/components/schemas/Link'
+        href:
+          readOnly: true
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        mediaType:
+          type: string
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        provider:
+          enum:
+          - PUREPORT
+          - PACKET_FABRIC
+          type: string
+        speed:
+          enum:
+          - 1000
+          - 10000
+          - 40000
+          format: int32
+          type: integer
+        state:
+          enum:
+          - REQUESTED
+          - ACTIVE
+          - DELETED
+          readOnly: true
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+      - account
+      - availabilityDomain
+      - billingTerm
+      - facility
+      - mediaType
+      - name
+      - provider
+      - speed
+      type: object
+    PortConnection:
+      allOf:
+      - $ref: '#/components/schemas/Connection'
+      - $ref: '#/components/schemas/PortConnection_allOf'
+      required:
+      - billingTerm
+      - customerASN
+      - location
+      - name
+      - primaryPort
+      - speed
+      - type
+      type: object
+    ProviderLink:
+      example:
+        vlans: vlans
+        maxAvailableBandwidth: 0
+        providerRegion: providerRegion
+        availabilityDomain: PRIMARY
+        pod:
+          href: href
+          id: id
+          title: title
+        supportedConnectionTypes:
+        - AWS_DIRECT_CONNECT
+        - AWS_DIRECT_CONNECT
+        - AWS_DIRECT_CONNECT
+        - AWS_DIRECT_CONNECT
+        - AWS_DIRECT_CONNECT
+        provider: AWS
+        providerId: providerId
+        href: href
+        id: id
+        speed: 6
+        status: AVAILABLE
+      properties:
+        availabilityDomain:
+          enum:
+          - PRIMARY
+          - SECONDARY
+          type: string
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        maxAvailableBandwidth:
+          format: int32
+          type: integer
+        pod:
+          $ref: '#/components/schemas/Link'
+        provider:
+          enum:
+          - AWS
+          - GOOGLE_CLOUD
+          - EQUINIX_CLOUD_EXCHANGE
+          - PUREPORT
+          - PACKET_FABRIC
+          - COMCAST
+          - COX_COMMUNICATIONS
+          - ZAYO
+          type: string
+        providerId:
+          type: string
+        providerRegion:
+          type: string
+        speed:
+          format: int32
+          type: integer
+        status:
+          enum:
+          - AVAILABLE
+          - UNAVAILABLE
+          type: string
+        supportedConnectionTypes:
+          items:
+            enum:
+            - AWS_DIRECT_CONNECT
+            - AZURE_EXPRESS_ROUTE
+            - GOOGLE_CLOUD_INTERCONNECT
+            - ORACLE_FAST_CONNECT
+            - SITE_IPSEC_VPN
+            - PORT
+            - COMCAST
+            - COX_COMMUNICATIONS
+            - ZAYO
+            type: string
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+          uniqueItems: true
+        vlans:
+          pattern: \d{1,4}(-\d{1,4})?(,\d{1,4}(-\d{1,4})?)*
+          type: string
+      required:
+      - id
+      type: object
+    ProviderVlan:
+      example:
+        lastAllocatedAt: 2000-01-23T04:56:07.000+00:00
+        vlan: 6
+        lastDeallocatedAt: 2000-01-23T04:56:07.000+00:00
+        speed: 0
+        allocated: true
+      properties:
+        allocated:
+          type: boolean
+        lastAllocatedAt:
+          format: date-time
+          type: string
+        lastDeallocatedAt:
+          format: date-time
+          type: string
+        speed:
+          format: int32
+          type: integer
+        vlan:
+          format: int32
+          type: integer
+      type: object
+    PublicPeeringBlock:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        cidrBlock: cidrBlock
+        href: href
+        id: id
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        cidrBlock:
+          type: string
+        createdAt:
+          format: date-time
+          readOnly: true
+          type: string
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        updatedAt:
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - cidrBlock
+      type: object
+    PublicPeeringPoolStats:
+      example:
+        totalDeletedIps: 1
+        totalSubnets: 2
+        totalAllocatedIps: 0
+        time: 2000-01-23T04:56:07.000+00:00
+        totalFreeIps: 5
+        totalBlocks: 6
+        totalIps: 5
+      properties:
+        time:
+          format: date-time
+          readOnly: true
+          type: string
+        totalAllocatedIps:
+          format: int32
+          readOnly: true
+          type: integer
+        totalBlocks:
+          format: int32
+          readOnly: true
+          type: integer
+        totalDeletedIps:
+          format: int32
+          readOnly: true
+          type: integer
+        totalFreeIps:
+          format: int32
+          readOnly: true
+          type: integer
+        totalIps:
+          format: int32
+          readOnly: true
+          type: integer
+        totalSubnets:
+          format: int32
+          readOnly: true
+          type: integer
+      type: object
+    ResourceLimit:
+      example:
+        parentResourceType: MEMBER
+        childResourceType: MEMBER
+        limit: 0
+        href: href
+        parentResourceId: parentResourceId
+      properties:
+        childResourceType:
+          enum:
+          - MEMBER
+          - ROLE
+          - CONNECTION
+          - NETWORK
+          - ACCOUNT
+          - CLOUD_SERVICE_ROUTE
+          type: string
+        href:
+          type: string
+        limit:
+          format: int32
+          minimum: 0
+          type: integer
+        parentResourceId:
+          maxLength: 64
+          minLength: 1
+          type: string
+        parentResourceType:
+          enum:
+          - MEMBER
+          - ROLE
+          - CONNECTION
+          - NETWORK
+          - ACCOUNT
+          - CLOUD_SERVICE_ROUTE
+          type: string
+      required:
+      - childResourceType
+      - limit
+      type: object
+    Role:
+      example:
+        permissions:
+          key:
+            key: true
+        name: name
+        description: description
+        href: href
+        id: id
+        account:
+          href: href
+          id: id
+          title: title
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        description:
+          maxLength: 256
+          minLength: 0
+          type: string
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        name:
+          type: string
+        permissions:
+          additionalProperties:
+            additionalProperties:
+              type: boolean
+            type: object
+          type: object
+      required:
+      - account
+      - name
+      type: object
+    SiteIPSecVPNConnection:
+      allOf:
+      - $ref: '#/components/schemas/Connection'
+      - $ref: '#/components/schemas/SiteIPSecVPNConnection_allOf'
+      required:
+      - authType
+      - billingTerm
+      - ikeVersion
+      - location
+      - name
+      - primaryCustomerRouterIP
+      - routingType
+      - speed
+      - type
+      type: object
+    StandardGateway:
+      allOf:
+      - $ref: '#/components/schemas/Gateway'
+      - $ref: '#/components/schemas/StandardGateway_allOf'
+      type: object
+    SupportedConnection:
+      example:
+        billingPlans:
+        - amount: 0
+          term: HOURLY
+          id: id
+          billingInterval: ONCE
+          setupAmount: 6
+        - amount: 0
+          term: HOURLY
+          id: id
+          billingInterval: ONCE
+          setupAmount: 6
+        billingProductId: billingProductId
+        pending: true
+        groups:
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        location:
+          href: href
+          id: id
+          title: title
+        href: href
+        id: id
+        reachableCloudRegions:
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        type: AWS_DIRECT_CONNECT
+        peeringType: PUBLIC
+        speed: 0
+        highAvailability: true
+      properties:
+        billingPlans:
+          items:
+            $ref: '#/components/schemas/BillingPlan'
+          readOnly: true
+          type: array
+        billingProductId:
+          type: string
+        groups:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+          uniqueItems: true
+        highAvailability:
+          type: boolean
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        location:
+          $ref: '#/components/schemas/Link'
+        peeringType:
+          enum:
+          - PUBLIC
+          - PRIVATE
+          type: string
+        pending:
+          type: boolean
+        reachableCloudRegions:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+          uniqueItems: true
+        speed:
+          enum:
+          - 50
+          - 100
+          - 200
+          - 300
+          - 400
+          - 500
+          - 1000
+          - 2000
+          - 3000
+          - 4000
+          - 5000
+          - 10000
+          format: int32
+          type: integer
+        type:
+          enum:
+          - AWS_DIRECT_CONNECT
+          - AZURE_EXPRESS_ROUTE
+          - GOOGLE_CLOUD_INTERCONNECT
+          - ORACLE_FAST_CONNECT
+          - SITE_IPSEC_VPN
+          - PORT
+          - COMCAST
+          - COX_COMMUNICATIONS
+          - ZAYO
+          type: string
+      required:
+      - billingProductId
+      - location
+      - peeringType
+      - speed
+      - type
+      type: object
+    SupportedConnectionGroup:
+      example:
+        name: name
+        href: href
+        id: id
+      properties:
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    SupportedPort:
+      example:
+        billingPlans:
+        - amount: 0
+          term: HOURLY
+          id: id
+          billingInterval: ONCE
+          setupAmount: 6
+        - amount: 0
+          term: HOURLY
+          id: id
+          billingInterval: ONCE
+          setupAmount: 6
+        mediaTypes:
+        - mediaTypes
+        - mediaTypes
+        provider: PUREPORT
+        availabilityDomains:
+        - PRIMARY
+        - PRIMARY
+        facility:
+          href: href
+          id: id
+          title: title
+        speed: 0
+      properties:
+        availabilityDomains:
+          items:
+            enum:
+            - PRIMARY
+            - SECONDARY
+            readOnly: true
+            type: string
+          readOnly: true
+          type: array
+        billingPlans:
+          items:
+            $ref: '#/components/schemas/BillingPlan'
+          readOnly: true
+          type: array
+        facility:
+          $ref: '#/components/schemas/Link'
+        mediaTypes:
+          items:
+            readOnly: true
+            type: string
+          readOnly: true
+          type: array
+        provider:
+          enum:
+          - PUREPORT
+          - PACKET_FABRIC
+          readOnly: true
+          type: string
+        speed:
+          format: int32
+          readOnly: true
+          type: integer
+      type: object
+    Task:
+      example:
+        result: result
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        parent:
+          href: href
+          id: id
+          title: title
+        completedAt: 2000-01-23T04:56:07.000+00:00
+        children:
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        description: description
+        href: href
+        id: id
+        state: CREATED
+        type: IPSEC_RESTART
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        children:
+          items:
+            $ref: '#/components/schemas/Link'
+          readOnly: true
+          type: array
+        completedAt:
+          format: date-time
+          readOnly: true
+          type: string
+        createdAt:
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          readOnly: true
+          type: string
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        parent:
+          $ref: '#/components/schemas/Link'
+        result:
+          readOnly: true
+          type: string
+        state:
+          enum:
+          - CREATED
+          - RUNNING
+          - COMPLETED
+          - FAILED
+          - DELETED
+          readOnly: true
+          type: string
+        type:
+          enum:
+          - IPSEC_RESTART
+          - PING
+          type: string
+        updatedAt:
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - type
+      type: object
+    TrafficSelectorMapping:
+      properties:
+        customerSide:
+          type: string
+        pureportSide:
+          type: string
+      required:
+      - customerSide
+      - pureportSide
+      type: object
+    UsageByConnectionAndTimeOptions:
+      example:
+        date:
+          lt: 2000-01-23T04:56:07.000+00:00
+          gte: 2000-01-23T04:56:07.000+00:00
+          lte: 2000-01-23T04:56:07.000+00:00
+          gt: 2000-01-23T04:56:07.000+00:00
+        connectionIds:
+        - connectionIds
+        - connectionIds
+        trafficType: ALL
+        timeUnit: HOURS
+      properties:
+        connectionIds:
+          items:
+            type: string
+          type: array
+        date:
+          $ref: '#/components/schemas/DateFilter'
+        timeUnit:
+          enum:
+          - HOURS
+          - DAYS
+          type: string
+        trafficType:
+          enum:
+          - ALL
+          - BACKBONE
+          type: string
+      type: object
+    UsageByConnectionOptions:
+      example:
+        date:
+          lt: 2000-01-23T04:56:07.000+00:00
+          gte: 2000-01-23T04:56:07.000+00:00
+          lte: 2000-01-23T04:56:07.000+00:00
+          gt: 2000-01-23T04:56:07.000+00:00
+        includeChildAccounts: true
+        trafficType: ALL
+      properties:
+        date:
+          $ref: '#/components/schemas/DateFilter'
+        includeChildAccounts:
+          type: boolean
+        trafficType:
+          enum:
+          - ALL
+          - BACKBONE
+          type: string
+      type: object
+    UsageByNetworkAndTimeOptions:
+      example:
+        date:
+          lt: 2000-01-23T04:56:07.000+00:00
+          gte: 2000-01-23T04:56:07.000+00:00
+          lte: 2000-01-23T04:56:07.000+00:00
+          gt: 2000-01-23T04:56:07.000+00:00
+        includeChildAccounts: true
+        trafficType: ALL
+        timeUnit: HOURS
+      properties:
+        date:
+          $ref: '#/components/schemas/DateFilter'
+        includeChildAccounts:
+          type: boolean
+        timeUnit:
+          enum:
+          - HOURS
+          - DAYS
+          type: string
+        trafficType:
+          enum:
+          - ALL
+          - BACKBONE
+          type: string
+      type: object
+    User:
+      example:
+        firstName: firstName
+        lastName: lastName
+        phoneNumber: phoneNumber
+        company: company
+        href: href
+        id: id
+        email: email
+        username: username
+      properties:
+        company:
+          maxLength: 128
+          minLength: 0
+          type: string
+        email:
+          type: string
+        firstName:
+          maxLength: 128
+          minLength: 1
+          type: string
+        href:
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        lastName:
+          maxLength: 128
+          minLength: 1
+          type: string
+        phoneNumber:
+          maxLength: 32
+          minLength: 0
+          type: string
+        username:
+          maxLength: 128
+          minLength: 1
+          type: string
+      type: object
+    VPNAuthConfig:
+      discriminator:
+        mapping:
+          psk: '#/components/schemas/PSKAuthConfig'
+        propertyName: type
+      properties:
+        type:
+          enum:
+          - PSK
+          readOnly: true
+          type: string
+      type: object
+    VPNGateway:
+      allOf:
+      - $ref: '#/components/schemas/Gateway'
+      - $ref: '#/components/schemas/VPNGateway_allOf'
+      type: object
+    AWSDirectConnectConnection_allOf:
+      properties:
+        awsAccountId:
+          pattern: ^\d{12}$
+          type: string
+        awsRegion:
+          maxLength: 64
+          minLength: 1
+          type: string
+        cloudRegion:
+          $ref: '#/components/schemas/Link'
+        cloudServices:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+          uniqueItems: true
+        peering:
+          $ref: '#/components/schemas/PeeringConfiguration'
+    AzureExpressRouteConnection_allOf:
+      properties:
+        peering:
+          $ref: '#/components/schemas/PeeringConfiguration'
+        serviceKey:
+          maxLength: 64
+          minLength: 1
+          type: string
+    GenericConnection_allOf:
+      properties:
+        peering:
+          $ref: '#/components/schemas/PeeringConfiguration'
+    GoogleCloudInterconnectConnection_allOf:
+      properties:
+        primaryPairingKey:
+          maxLength: 64
+          minLength: 1
+          type: string
+        secondaryPairingKey:
+          maxLength: 64
+          minLength: 1
+          type: string
+    OracleFastConnectConnection_allOf:
+      properties:
+        cloudRegion:
+          $ref: '#/components/schemas/Link'
+        peering:
+          $ref: '#/components/schemas/PeeringConfiguration'
+        primaryOcid:
+          maxLength: 256
+          minLength: 1
+          type: string
+        secondaryOcid:
+          maxLength: 256
+          minLength: 1
+          type: string
+    PSKAuthConfig_allOf:
+      properties:
+        key:
+          type: string
+    PortConnection_allOf:
+      properties:
+        primaryCustomerVlan:
+          format: int32
+          maximum: 4096
+          minimum: 0
+          type: integer
+        primaryPort:
+          $ref: '#/components/schemas/Link'
+        secondaryCustomerVlan:
+          format: int32
+          maximum: 4096
+          minimum: 0
+          type: integer
+        secondaryPort:
+          $ref: '#/components/schemas/Link'
+    SiteIPSecVPNConnection_allOf:
+      properties:
+        authType:
+          enum:
+          - PSK
+          type: string
+        enableBGPPassword:
+          type: boolean
+        ikeV1:
+          $ref: '#/components/schemas/IKEV1Config'
+        ikeV2:
+          $ref: '#/components/schemas/IKEV2Config'
+        ikeVersion:
+          enum:
+          - V1
+          - V2
+          type: string
+        physicalAddress:
+          $ref: '#/components/schemas/PhysicalAddress'
+        primaryCustomerRouterIP:
+          type: string
+        primaryKey:
+          description: IPsec pre-shared key override for the primary gateway
+          type: string
+        routingType:
+          enum:
+          - POLICY_BASED
+          - ROUTE_BASED_STATIC
+          - ROUTE_BASED_BGP
+          type: string
+        secondaryCustomerRouterIP:
+          type: string
+        secondaryKey:
+          description: IPsec pre-shared key override for the secondary gateway
+          type: string
+        trafficSelectors:
+          items:
+            $ref: '#/components/schemas/TrafficSelectorMapping'
+          maxItems: 100
+          minItems: 0
+          type: array
+          uniqueItems: true
+    StandardGateway_allOf:
+      properties:
+        vlan:
+          format: int32
+          readOnly: true
+          type: integer
+    VPNGateway_allOf:
+      properties:
+        auth:
+          $ref: '#/components/schemas/VPNAuthConfig'
+        customerGatewayIP:
+          type: string
+        customerVtiIP:
+          type: string
+        osNetworkId:
+          readOnly: true
+          type: string
+        pureportGatewayIP:
+          type: string
+        pureportVtiIP:
+          type: string
+  securitySchemes:
+    OAuth2:
+      flows:
+        clientCredentials:
+          scopes:
+            read: Read Permission
+            write: Write Permission
+          tokenUrl: /login
+      in: header
+      type: oauth2

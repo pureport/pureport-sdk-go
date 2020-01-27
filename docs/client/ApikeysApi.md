@@ -11,27 +11,31 @@ Method | HTTP request | Description
 [**UpdateApiKey**](ApikeysApi.md#UpdateApiKey) | **Put** /accounts/{accountId}/apikeys/{key} | Update API Key
 
 
-# **CreateApiKey**
+
+## CreateApiKey
+
 > ApiKey CreateApiKey(ctx, accountId, optional)
+
 Create a new API key
-
-
 
 ### Required Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **accountId** | **string**|  | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**accountId** | **string**|  | 
  **optional** | ***CreateApiKeyOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
+
 Optional parameters are passed through a pointer to a CreateApiKeyOpts struct
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**optional.Interface of ApiKey**](ApiKey.md)|  | 
+ **apiKey** | [**optional.Interface of ApiKey**](ApiKey.md)|  | 
 
 ### Return type
 
@@ -43,24 +47,28 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **DeleteApiKey**
+
+## DeleteApiKey
+
 > DeleteApiKey(ctx, key, accountId)
+
 Delete API Key
-
-
 
 ### Required Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **key** | **string**|  | 
-  **accountId** | **string**|  | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**key** | **string**|  | 
+**accountId** | **string**|  | 
 
 ### Return type
 
@@ -72,23 +80,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **FindApiKeys**
+
+## FindApiKeys
+
 > []ApiKey FindApiKeys(ctx, accountId)
+
 List API keys for an account
-
-
 
 ### Required Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **accountId** | **string**|  | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**accountId** | **string**|  | 
 
 ### Return type
 
@@ -100,24 +112,28 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **GetApiKey**
+
+## GetApiKey
+
 > ApiKey GetApiKey(ctx, key, accountId)
+
 Get API Key details
-
-
 
 ### Required Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **key** | **string**|  | 
-  **accountId** | **string**|  | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**key** | **string**|  | 
+**accountId** | **string**|  | 
 
 ### Return type
 
@@ -129,34 +145,40 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **UpdateApiKey**
+
+## UpdateApiKey
+
 > ApiKey UpdateApiKey(ctx, key, accountId, optional)
+
 Update API Key
-
-
 
 ### Required Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **key** | **string**|  | 
-  **accountId** | **string**|  | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**key** | **string**|  | 
+**accountId** | **string**|  | 
  **optional** | ***UpdateApiKeyOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
+
 Optional parameters are passed through a pointer to a UpdateApiKeyOpts struct
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **body** | [**optional.Interface of ApiKey**](ApiKey.md)|  | 
+ **apiKey** | [**optional.Interface of ApiKey**](ApiKey.md)|  | 
 
 ### Return type
 
@@ -168,8 +190,10 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

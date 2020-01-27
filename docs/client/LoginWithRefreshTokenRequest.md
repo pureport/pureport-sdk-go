@@ -1,6 +1,7 @@
 # LoginWithRefreshTokenRequest
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RefreshToken** | **string** |  | 

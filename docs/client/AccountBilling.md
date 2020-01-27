@@ -1,10 +1,11 @@
 # AccountBilling
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Account** | [***Link**](Link.md) |  | [optional] 
-**Address** | [***PhysicalAddress**](PhysicalAddress.md) |  | 
+**Account** | [**Link**](Link.md) |  | [optional] 
+**Address** | [**PhysicalAddress**](PhysicalAddress.md) |  | 
 **Email** | **string** |  | 
 **Href** | **string** |  | [optional] 
 **Name** | **string** |  | 

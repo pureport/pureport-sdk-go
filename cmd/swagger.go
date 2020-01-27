@@ -25,7 +25,7 @@ var cmdSwagger = &cobra.Command{
 		ctx := cliSession.GetSessionContext()
 		cl := &http.Client{}
 
-		req, err := http.NewRequest("GET", cliSession.Configuration.EndPoint+"/swagger.json", nil)
+		req, err := http.NewRequest("GET", cliSession.Configuration.EndPoint+"/openapi.json", nil)
 
 		// AccessToken Authentication
 		if auth, ok := ctx.Value(client.ContextAccessToken).(string); ok {

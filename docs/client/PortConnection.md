@@ -1,35 +1,36 @@
 # PortConnection
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActiveAt** | [**time.Time**](time.Time.md) |  | [optional] 
-**BillingPlan** | [***BillingPlan**](BillingPlan.md) |  | [optional] 
+**ActiveAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
+**BillingPlan** | [**BillingPlan**](BillingPlan.md) |  | [optional] 
 **BillingTerm** | **string** |  | 
-**CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] 
+**CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **CustomerASN** | **int64** |  | 
 **CustomerNetworks** | [**[]CustomerNetwork**](CustomerNetwork.md) |  | [optional] 
-**DeletedAt** | [**time.Time**](time.Time.md) |  | [optional] 
+**DeletedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **Description** | **string** |  | [optional] 
-**ErrorCode** | **string** |  | [optional] 
-**ErrorMessage** | **string** |  | [optional] 
+**ErrorCode** | **string** |  | [optional] [readonly] 
+**ErrorMessage** | **string** |  | [optional] [readonly] 
 **HighAvailability** | **bool** |  | [optional] 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
-**Location** | [***Link**](Link.md) |  | 
+**Location** | [**Link**](Link.md) |  | 
 **Name** | **string** |  | 
-**Nat** | [***NatConfig**](NATConfig.md) |  | [optional] 
-**Network** | [***Link**](Link.md) |  | [optional] 
-**PrimaryGateway** | [***Gateway**](Gateway.md) |  | [optional] 
-**SecondaryGateway** | [***Gateway**](Gateway.md) |  | [optional] 
+**Nat** | [**NatConfig**](NATConfig.md) |  | [optional] 
+**Network** | [**Link**](Link.md) |  | [optional] 
+**PrimaryGateway** | [**Gateway**](Gateway.md) |  | [optional] 
+**SecondaryGateway** | [**Gateway**](Gateway.md) |  | [optional] 
 **Speed** | **int32** |  | 
-**State** | **string** |  | [optional] 
+**State** | **string** |  | [optional] [readonly] 
 **Tags** | **map[string]string** |  | [optional] 
-**Type_** | **string** |  | 
+**Type** | **string** |  | 
 **PrimaryCustomerVlan** | **int32** |  | [optional] 
-**PrimaryPort** | [***Link**](Link.md) |  | 
+**PrimaryPort** | [**Link**](Link.md) |  | 
 **SecondaryCustomerVlan** | **int32** |  | [optional] 
-**SecondaryPort** | [***Link**](Link.md) |  | [optional] 
+**SecondaryPort** | [**Link**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

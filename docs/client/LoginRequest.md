@@ -1,6 +1,7 @@
 # LoginRequest
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Key** | **string** |  | 

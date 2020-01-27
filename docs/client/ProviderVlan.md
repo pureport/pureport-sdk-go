@@ -1,6 +1,7 @@
 # ProviderVlan
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Allocated** | **bool** |  | [optional] 

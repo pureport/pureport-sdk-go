@@ -1,15 +1,16 @@
 # CloudService
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CloudRegion** | [***Link**](Link.md) |  | [optional] 
-**Deactivated** | **bool** |  | 
-**DeactivatedAt** | [**time.Time**](time.Time.md) |  | [optional] 
+**CloudRegion** | [**Link**](Link.md) |  | [optional] 
+**Deactivated** | **bool** |  | [readonly] 
+**DeactivatedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
-**Ipv4PrefixCount** | **int32** |  | [optional] 
-**Ipv6PrefixCount** | **int32** |  | [optional] 
+**Ipv4PrefixCount** | **int32** |  | [optional] [readonly] 
+**Ipv6PrefixCount** | **int32** |  | [optional] [readonly] 
 **Name** | **string** |  | 
 **Provider** | **string** |  | 
 **Service** | **string** |  | 

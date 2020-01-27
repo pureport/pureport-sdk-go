@@ -7,19 +7,33 @@ Method | HTTP request | Description
 [**GetSupportedPorts**](SupportedPortsApi.md#GetSupportedPorts) | **Get** /accounts/{accountId}/supportedPorts | List supported ports
 
 
-# **GetSupportedPorts**
-> []SupportedPort GetSupportedPorts(ctx, facility, accountId)
+
+## GetSupportedPorts
+
+> []SupportedPort GetSupportedPorts(ctx, facility, accountId, optional)
+
 List supported ports
-
-
 
 ### Required Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **facility** | **string**|  | 
-  **accountId** | **string**|  | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**facility** | **string**|  | 
+**accountId** | **string**|  | 
+ **optional** | ***GetSupportedPortsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetSupportedPortsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **includeProvisioned** | **optional.Bool**|  | 
 
 ### Return type
 
@@ -31,8 +45,10 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

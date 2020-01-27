@@ -1,9 +1,10 @@
 # UsageByConnectionOptions
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Date** | [***DateFilter**](DateFilter.md) |  | [optional] 
+**Date** | [**DateFilter**](DateFilter.md) |  | [optional] 
 **IncludeChildAccounts** | **bool** |  | [optional] 
 **TrafficType** | **string** |  | [optional] 
 
