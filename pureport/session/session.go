@@ -2,7 +2,6 @@ package session
 
 import (
 	"context"
-	"os"
 
 	"github.com/op/go-logging"
 	"github.com/pureport/pureport-sdk-go/pureport"
@@ -26,12 +25,6 @@ func createClient(cfg *pureport.Configuration) *client.APIClient {
 	c.UserAgent = cfg.UserAgent
 	c.BasePath = cfg.EndPoint
 	//c.AddDefaultHeader()
-
-	if hostname, err := os.Hostname(); err != nil {
-		c.Host = ""
-	} else {
-		c.Host = hostname
-	}
 
 	return client.NewAPIClient(c)
 }

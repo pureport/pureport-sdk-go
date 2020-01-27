@@ -1,13 +1,14 @@
 # ProviderLink
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AvailabilityDomain** | **string** |  | [optional] 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | 
 **MaxAvailableBandwidth** | **int32** |  | [optional] 
-**Pod** | [***Link**](Link.md) |  | [optional] 
+**Pod** | [**Link**](Link.md) |  | [optional] 
 **Provider** | **string** |  | [optional] 
 **ProviderId** | **string** |  | [optional] 
 **ProviderRegion** | **string** |  | [optional] 

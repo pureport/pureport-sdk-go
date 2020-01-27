@@ -1,6 +1,7 @@
 # GeoCoordinates
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Latitude** | **float32** |  | 

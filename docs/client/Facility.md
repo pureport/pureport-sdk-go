@@ -1,9 +1,10 @@
 # Facility
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | [***PhysicalAddress**](PhysicalAddress.md) |  | 
+**Address** | [**PhysicalAddress**](PhysicalAddress.md) |  | 
 **AltIds** | **map[string]string** |  | [optional] 
 **Href** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 

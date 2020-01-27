@@ -49,7 +49,7 @@ func DecodeConnectionData(cli *APIClient, b []byte, contentType string) (interfa
 		return decodedConnection, err
 	}
 	// Check the Connection type and decode as sub type
-	switch base.Type_ {
+	switch base.Type {
 	case "AWS_DIRECT_CONNECT":
 
 		var c = AwsDirectConnectConnection{}

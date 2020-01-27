@@ -1,9 +1,10 @@
 # ApiKey
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Account** | [***Link**](Link.md) |  | [optional] 
+**Account** | [**Link**](Link.md) |  | [optional] 
 **Description** | **string** |  | [optional] 
 **Href** | **string** |  | [optional] 
 **Key** | **string** |  | [optional] 

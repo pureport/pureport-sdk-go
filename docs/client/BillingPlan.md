@@ -1,6 +1,7 @@
 # BillingPlan
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | **int64** |  | [optional] 
