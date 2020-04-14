@@ -41,14 +41,14 @@ AddConnection Add new connection
  * @param "Connection" (optional.Interface of Connection) -
 @return Connection
 */
-func (a *ConnectionsApiService) AddConnection(ctx _context.Context, networkId string, localVarOptionals *AddConnectionOpts) (interface{}, *_nethttp.Response, error) {
+func (a *ConnectionsApiService) AddConnection(ctx _context.Context, networkId string, localVarOptionals *AddConnectionOpts) (Connection, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  interface{}
+		localVarReturnValue  Connection
 	)
 
 	// create path and map variables
@@ -78,18 +78,11 @@ func (a *ConnectionsApiService) AddConnection(ctx _context.Context, networkId st
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Connection.IsSet() {
-
-		// ##################################################
-		// Pureport (start)
-		// ##################################################
-		if body, err := ValidateConnection(localVarOptionals.Connection.Value()); err != nil {
-			return nil, nil, reportError("body should be valid Connection")
-		} else {
-			localVarPostBody = body
+		localVarOptionalConnection, localVarOptionalConnectionok := localVarOptionals.Connection.Value().(Connection)
+		if !localVarOptionalConnectionok {
+			return localVarReturnValue, nil, reportError("connection should be Connection")
 		}
-		// ##################################################
-		// Pureport (end)
-		// ##################################################
+		localVarPostBody = &localVarOptionalConnection
 	}
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -123,14 +116,7 @@ func (a *ConnectionsApiService) AddConnection(ctx _context.Context, networkId st
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	// ##################################################
-	// Pureport (start)
-	// ##################################################
-	localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	// ##################################################
-	// Pureport (end)
-	// ##################################################
-
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
@@ -143,9 +129,9 @@ func (a *ConnectionsApiService) AddConnection(ctx _context.Context, networkId st
 }
 
 // CreateConnectionTaskOpts Optional parameters for the method 'CreateConnectionTask'
-//type CreateConnectionTaskOpts struct {
-//	Task optional.Interface
-//}
+type CreateConnectionTaskOpts struct {
+	Task optional.Interface
+}
 
 /*
 CreateConnectionTask Add a new task
@@ -248,14 +234,14 @@ DeleteConnection Delete connection
  * @param connectionId
 @return Connection
 */
-func (a *ConnectionsApiService) DeleteConnection(ctx _context.Context, connectionId string) (interface{}, *_nethttp.Response, error) {
+func (a *ConnectionsApiService) DeleteConnection(ctx _context.Context, connectionId string) (Connection, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  interface{}
+		localVarReturnValue  Connection
 	)
 
 	// create path and map variables
@@ -314,14 +300,7 @@ func (a *ConnectionsApiService) DeleteConnection(ctx _context.Context, connectio
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	// ##################################################
-	// Pureport (start)
-	// ##################################################
-	localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	// ##################################################
-	// Pureport (end)
-	// ##################################################
-
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
@@ -423,14 +402,14 @@ GetConnection Get connection details
  * @param connectionId
 @return Connection
 */
-func (a *ConnectionsApiService) GetConnection(ctx _context.Context, connectionId string) (interface{}, *_nethttp.Response, error) {
+func (a *ConnectionsApiService) GetConnection(ctx _context.Context, connectionId string) (Connection, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  interface{}
+		localVarReturnValue  Connection
 	)
 
 	// create path and map variables
@@ -489,14 +468,7 @@ func (a *ConnectionsApiService) GetConnection(ctx _context.Context, connectionId
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	// ##################################################
-	// Pureport (start)
-	// ##################################################
-	localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	// ##################################################
-	// Pureport (end)
-	// ##################################################
-
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
@@ -682,14 +654,14 @@ GetInternal Get internal connection details
  * @param connectionId
 @return Connection
 */
-func (a *ConnectionsApiService) GetInternal(ctx _context.Context, connectionId string) (interface{}, *_nethttp.Response, error) {
+func (a *ConnectionsApiService) GetInternal(ctx _context.Context, connectionId string) (Connection, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  interface{}
+		localVarReturnValue  Connection
 	)
 
 	// create path and map variables
@@ -748,14 +720,7 @@ func (a *ConnectionsApiService) GetInternal(ctx _context.Context, connectionId s
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	// ##################################################
-	// Pureport (start)
-	// ##################################################
-	localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	// ##################################################
-	// Pureport (end)
-	// ##################################################
-
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
@@ -773,14 +738,14 @@ RespawnConnection Respawn connection
  * @param connectionId
 @return Connection
 */
-func (a *ConnectionsApiService) RespawnConnection(ctx _context.Context, connectionId string) (interface{}, *_nethttp.Response, error) {
+func (a *ConnectionsApiService) RespawnConnection(ctx _context.Context, connectionId string) (Connection, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  interface{}
+		localVarReturnValue  Connection
 	)
 
 	// create path and map variables
@@ -839,14 +804,7 @@ func (a *ConnectionsApiService) RespawnConnection(ctx _context.Context, connecti
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	// ##################################################
-	// Pureport (start)
-	// ##################################################
-	localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	// ##################################################
-	// Pureport (end)
-	// ##################################################
-
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
@@ -871,14 +829,14 @@ UpdateConnection Update connection
  * @param "Connection" (optional.Interface of Connection) -
 @return Connection
 */
-func (a *ConnectionsApiService) UpdateConnection(ctx _context.Context, connectionId string, localVarOptionals *UpdateConnectionOpts) (interface{}, *_nethttp.Response, error) {
+func (a *ConnectionsApiService) UpdateConnection(ctx _context.Context, connectionId string, localVarOptionals *UpdateConnectionOpts) (Connection, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  interface{}
+		localVarReturnValue  Connection
 	)
 
 	// create path and map variables
@@ -908,17 +866,11 @@ func (a *ConnectionsApiService) UpdateConnection(ctx _context.Context, connectio
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Connection.IsSet() {
-		// ##################################################
-		// Pureport (start)
-		// ##################################################
-		if body, err := ValidateConnection(localVarOptionals.Connection.Value()); err != nil {
-			return nil, nil, reportError("body should be valid Connection")
-		} else {
-			localVarPostBody = body
+		localVarOptionalConnection, localVarOptionalConnectionok := localVarOptionals.Connection.Value().(Connection)
+		if !localVarOptionalConnectionok {
+			return localVarReturnValue, nil, reportError("connection should be Connection")
 		}
-		// ##################################################
-		// Pureport (end)
-		// ##################################################
+		localVarPostBody = &localVarOptionalConnection
 	}
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -952,14 +904,7 @@ func (a *ConnectionsApiService) UpdateConnection(ctx _context.Context, connectio
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	// ##################################################
-	// Pureport (start)
-	// ##################################################
-	localVarReturnValue, err = DecodeConnectionData(a.client, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	// ##################################################
-	// Pureport (end)
-	// ##################################################
-
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,

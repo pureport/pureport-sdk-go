@@ -30,14 +30,12 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/op/go-logging"
 	"golang.org/x/oauth2"
 )
 
 var (
 	jsonCheck = regexp.MustCompile(`(?i:(?:application|text)/(?:vnd\.[^;]+\+)?json)`)
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
-	log       = logging.MustGetLogger("main_logger")
 )
 
 // APIClient manages communication with the Pureport Control Plane API v1.0.0
@@ -246,22 +244,7 @@ func parameterToJson(obj interface{}) (string, error) {
 
 // callAPI do the request.
 func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
-
-	// --------------------------------------------------
-	// Add tracing of HTTP Requests
-	// --------------------------------------------------
-	logRequest(request)
-	resp, err := c.cfg.HTTPClient.Do(request)
-
-	if err != nil {
-		log.Errorf("Error Response: %+v", err)
-		return resp, err
-	}
-
-	logResponse(resp)
-	// --------------------------------------------------
-
-	return resp, err
+	return c.cfg.HTTPClient.Do(request)
 }
 
 // ChangeBasePath changes base path to allow switching to mocks

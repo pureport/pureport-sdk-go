@@ -13,7 +13,7 @@ package client
 // VpnGateway struct for VpnGateway
 type VpnGateway struct {
 	AvailabilityDomain string        `json:"availabilityDomain,omitempty"`
-	BgpConfig          *BgpConfig    `json:"bgpConfig,omitempty"`
+	BgpConfig          BgpConfig     `json:"bgpConfig,omitempty"`
 	Description        string        `json:"description,omitempty"`
 	ErrorCode          string        `json:"errorCode,omitempty"`
 	ErrorMessage       string        `json:"errorMessage,omitempty"`
@@ -23,7 +23,7 @@ type VpnGateway struct {
 	RemoteId           string        `json:"remoteId,omitempty"`
 	State              string        `json:"state,omitempty"`
 	Type               string        `json:"type,omitempty"`
-	Auth               PskAuthConfig `json:"auth,omitempty"`
+	Auth               VpnAuthConfig `json:"auth,omitempty"`
 	CustomerGatewayIP  string        `json:"customerGatewayIP,omitempty"`
 	CustomerVtiIP      string        `json:"customerVtiIP,omitempty"`
 	OsNetworkId        string        `json:"osNetworkId,omitempty"`

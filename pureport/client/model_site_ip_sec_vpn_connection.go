@@ -17,7 +17,7 @@ import (
 // SiteIpSecVpnConnection struct for SiteIpSecVpnConnection
 type SiteIpSecVpnConnection struct {
 	ActiveAt                time.Time         `json:"activeAt,omitempty"`
-	BillingPlan             *BillingPlan      `json:"billingPlan,omitempty"`
+	BillingPlan             BillingPlan       `json:"billingPlan,omitempty"`
 	BillingTerm             string            `json:"billingTerm"`
 	CreatedAt               time.Time         `json:"createdAt,omitempty"`
 	CustomerASN             int64             `json:"customerASN,omitempty"`
@@ -31,18 +31,18 @@ type SiteIpSecVpnConnection struct {
 	Id                      string            `json:"id,omitempty"`
 	Location                Link              `json:"location"`
 	Name                    string            `json:"name"`
-	Nat                     *NatConfig        `json:"nat,omitempty"`
+	Nat                     NatConfig         `json:"nat,omitempty"`
 	Network                 Link              `json:"network,omitempty"`
-	PrimaryGateway          *VpnGateway       `json:"primaryGateway,omitempty"`
-	SecondaryGateway        *VpnGateway       `json:"secondaryGateway,omitempty"`
+	PrimaryGateway          Gateway           `json:"primaryGateway,omitempty"`
+	SecondaryGateway        Gateway           `json:"secondaryGateway,omitempty"`
 	Speed                   int32             `json:"speed"`
 	State                   string            `json:"state,omitempty"`
 	Tags                    map[string]string `json:"tags,omitempty"`
 	Type                    string            `json:"type"`
 	AuthType                string            `json:"authType"`
 	EnableBGPPassword       bool              `json:"enableBGPPassword,omitempty"`
-	IkeV1                   *Ikev1Config      `json:"ikeV1,omitempty"`
-	IkeV2                   *Ikev2Config      `json:"ikeV2,omitempty"`
+	IkeV1                   Ikev1Config       `json:"ikeV1,omitempty"`
+	IkeV2                   Ikev2Config       `json:"ikeV2,omitempty"`
 	IkeVersion              string            `json:"ikeVersion"`
 	PhysicalAddress         PhysicalAddress   `json:"physicalAddress,omitempty"`
 	PrimaryCustomerRouterIP string            `json:"primaryCustomerRouterIP"`

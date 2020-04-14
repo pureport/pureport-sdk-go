@@ -17,7 +17,7 @@ import (
 // Connection struct for Connection
 type Connection struct {
 	ActiveAt         time.Time         `json:"activeAt,omitempty"`
-	BillingPlan      *BillingPlan      `json:"billingPlan,omitempty"`
+	BillingPlan      BillingPlan       `json:"billingPlan,omitempty"`
 	BillingTerm      string            `json:"billingTerm"`
 	CreatedAt        time.Time         `json:"createdAt,omitempty"`
 	CustomerASN      int64             `json:"customerASN,omitempty"`
@@ -31,10 +31,10 @@ type Connection struct {
 	Id               string            `json:"id,omitempty"`
 	Location         Link              `json:"location"`
 	Name             string            `json:"name"`
-	Nat              *NatConfig        `json:"nat,omitempty"`
+	Nat              NatConfig         `json:"nat,omitempty"`
 	Network          Link              `json:"network,omitempty"`
-	PrimaryGateway   *Gateway          `json:"primaryGateway,omitempty"`
-	SecondaryGateway *Gateway          `json:"secondaryGateway,omitempty"`
+	PrimaryGateway   Gateway           `json:"primaryGateway,omitempty"`
+	SecondaryGateway Gateway           `json:"secondaryGateway,omitempty"`
 	Speed            int32             `json:"speed"`
 	State            string            `json:"state,omitempty"`
 	Tags             map[string]string `json:"tags,omitempty"`
