@@ -14,12 +14,15 @@ package client
 type Account struct {
 	Demo                      bool              `json:"demo,omitempty"`
 	Description               string            `json:"description,omitempty"`
+	HasChildren               bool              `json:"hasChildren,omitempty"`
 	Href                      string            `json:"href,omitempty"`
 	Id                        string            `json:"id,omitempty"`
 	Name                      string            `json:"name"`
 	Parent                    Link              `json:"parent,omitempty"`
+	PricingHidden             bool              `json:"pricingHidden,omitempty"`
 	ShowChildAccountPricing   bool              `json:"showChildAccountPricing,omitempty"`
 	SupportedConnectionGroups []Link            `json:"supportedConnectionGroups,omitempty"`
 	Tags                      map[string]string `json:"tags,omitempty"`
-	TechnicalContactEmail     string            `json:"technicalContactEmail,omitempty"`
+	TechnicalContactEmails    []string          `json:"technicalContactEmails,omitempty"`
+	Verified                  bool              `json:"verified,omitempty"`
 }

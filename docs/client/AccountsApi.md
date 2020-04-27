@@ -107,7 +107,10 @@ Optional parameters are passed through a pointer to a FindAllAccountsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ids** | [**optional.Interface of []string**](string.md)|  | 
+ **parentId** | **optional.String**|  | 
  **name** | **optional.String**|  | 
+ **limit** | **optional.Int32**|  | 
 
 ### Return type
 

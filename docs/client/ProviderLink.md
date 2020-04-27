@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AvailabilityDomain** | **string** |  | [optional] 
-**Href** | **string** |  | [optional] 
+**AvailabilityDomain** | **string** |  | 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | 
-**MaxAvailableBandwidth** | **int32** |  | [optional] 
-**Pod** | [**Link**](Link.md) |  | [optional] 
-**Provider** | **string** |  | [optional] 
-**ProviderId** | **string** |  | [optional] 
+**MaxAvailableBandwidth** | **int32** |  | 
+**Pod** | [**Link**](Link.md) |  | 
+**Provider** | **string** |  | 
+**ProviderId** | **string** |  | 
 **ProviderRegion** | **string** |  | [optional] 
-**Speed** | **int32** |  | [optional] 
-**Status** | **string** |  | [optional] 
-**SupportedConnectionTypes** | **[]string** |  | [optional] 
-**Vlans** | **string** |  | [optional] 
+**Speed** | **int32** |  | 
+**Status** | **string** |  | 
+**SupportedConnectionTypes** | **[]string** |  | 
+**Vlans** | **string** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

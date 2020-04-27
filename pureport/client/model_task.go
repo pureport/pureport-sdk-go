@@ -24,6 +24,7 @@ type Task struct {
 	Id          string    `json:"id,omitempty"`
 	Parent      Link      `json:"parent,omitempty"`
 	Result      string    `json:"result,omitempty"`
+	StartedAt   time.Time `json:"startedAt,omitempty"`
 	State       string    `json:"state,omitempty"`
 	Type        string    `json:"type"`
 	UpdatedAt   time.Time `json:"updatedAt,omitempty"`

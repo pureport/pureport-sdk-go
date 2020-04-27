@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AuthType** | **string** |  | [optional] 
+**BgpPasswordConfiguration** | [**BgpPasswordConfiguration**](BGPPasswordConfiguration.md) |  | [optional] 
 **EnableBGPPassword** | **bool** |  | [optional] 
 **IkeV1** | [**Ikev1Config**](IKEV1Config.md) |  | [optional] 
 **IkeV2** | [**Ikev2Config**](IKEV2Config.md) |  | [optional] 

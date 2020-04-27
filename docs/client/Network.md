@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Account** | [**Link**](Link.md) |  | [optional] 
 **Description** | **string** |  | [optional] 
-**Href** | **string** |  | [optional] 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
-**Name** | **string** |  | [optional] 
+**Name** | **string** |  | 
 **State** | **string** |  | [optional] [readonly] 
 **Tags** | **map[string]string** |  | [optional] 
 

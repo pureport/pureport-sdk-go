@@ -13,11 +13,11 @@ package client
 // User struct for User
 type User struct {
 	Company     string `json:"company,omitempty"`
-	Email       string `json:"email,omitempty"`
-	FirstName   string `json:"firstName,omitempty"`
+	Email       string `json:"email"`
+	FirstName   string `json:"firstName"`
 	Href        string `json:"href,omitempty"`
 	Id          string `json:"id,omitempty"`
-	LastName    string `json:"lastName,omitempty"`
+	LastName    string `json:"lastName"`
 	PhoneNumber string `json:"phoneNumber,omitempty"`
-	Username    string `json:"username,omitempty"`
+	Username    string `json:"username"`
 }

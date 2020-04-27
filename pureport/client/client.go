@@ -56,11 +56,15 @@ type APIClient struct {
 
 	AccountMetricsApi *AccountMetricsApiService
 
+	AccountNotificationsApi *AccountNotificationsApiService
+
 	AccountRolesApi *AccountRolesApiService
 
 	AccountsApi *AccountsApiService
 
 	ApikeysApi *ApikeysApiService
+
+	AuditApi *AuditApiService
 
 	AuthApi *AuthApiService
 
@@ -74,13 +78,11 @@ type APIClient struct {
 
 	FacilitiesApi *FacilitiesApiService
 
+	GatewayMetricsApi *GatewayMetricsApiService
+
 	GatewaysApi *GatewaysApiService
 
 	HelpApi *HelpApiService
-
-	InvoicesApi *InvoicesApiService
-
-	LimitsApi *LimitsApiService
 
 	LocationsApi *LocationsApiService
 
@@ -88,23 +90,17 @@ type APIClient struct {
 
 	OptionsApi *OptionsApiService
 
-	PodsApi *PodsApiService
-
 	PortsApi *PortsApiService
 
-	ProviderLinksApi *ProviderLinksApiService
-
-	PublicPeeringBlocksApi *PublicPeeringBlocksApiService
-
-	PublicPeeringStatsApi *PublicPeeringStatsApiService
-
 	SupportedConnectionsApi *SupportedConnectionsApiService
-
-	SupportedConnectionsGroupsApi *SupportedConnectionsGroupsApiService
 
 	SupportedPortsApi *SupportedPortsApiService
 
 	TasksApi *TasksApiService
+
+	ThirdPartyApi *ThirdPartyApiService
+
+	UserDomainsApi *UserDomainsApiService
 
 	UsersApi *UsersApiService
 }
@@ -129,31 +125,29 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AccountInvitationsApi = (*AccountInvitationsApiService)(&c.common)
 	c.AccountMembersApi = (*AccountMembersApiService)(&c.common)
 	c.AccountMetricsApi = (*AccountMetricsApiService)(&c.common)
+	c.AccountNotificationsApi = (*AccountNotificationsApiService)(&c.common)
 	c.AccountRolesApi = (*AccountRolesApiService)(&c.common)
 	c.AccountsApi = (*AccountsApiService)(&c.common)
 	c.ApikeysApi = (*ApikeysApiService)(&c.common)
+	c.AuditApi = (*AuditApiService)(&c.common)
 	c.AuthApi = (*AuthApiService)(&c.common)
 	c.BillingApi = (*BillingApiService)(&c.common)
 	c.CloudRegionsApi = (*CloudRegionsApiService)(&c.common)
 	c.CloudServicesApi = (*CloudServicesApiService)(&c.common)
 	c.ConnectionsApi = (*ConnectionsApiService)(&c.common)
 	c.FacilitiesApi = (*FacilitiesApiService)(&c.common)
+	c.GatewayMetricsApi = (*GatewayMetricsApiService)(&c.common)
 	c.GatewaysApi = (*GatewaysApiService)(&c.common)
 	c.HelpApi = (*HelpApiService)(&c.common)
-	c.InvoicesApi = (*InvoicesApiService)(&c.common)
-	c.LimitsApi = (*LimitsApiService)(&c.common)
 	c.LocationsApi = (*LocationsApiService)(&c.common)
 	c.NetworksApi = (*NetworksApiService)(&c.common)
 	c.OptionsApi = (*OptionsApiService)(&c.common)
-	c.PodsApi = (*PodsApiService)(&c.common)
 	c.PortsApi = (*PortsApiService)(&c.common)
-	c.ProviderLinksApi = (*ProviderLinksApiService)(&c.common)
-	c.PublicPeeringBlocksApi = (*PublicPeeringBlocksApiService)(&c.common)
-	c.PublicPeeringStatsApi = (*PublicPeeringStatsApiService)(&c.common)
 	c.SupportedConnectionsApi = (*SupportedConnectionsApiService)(&c.common)
-	c.SupportedConnectionsGroupsApi = (*SupportedConnectionsGroupsApiService)(&c.common)
 	c.SupportedPortsApi = (*SupportedPortsApiService)(&c.common)
 	c.TasksApi = (*TasksApiService)(&c.common)
+	c.ThirdPartyApi = (*ThirdPartyApiService)(&c.common)
+	c.UserDomainsApi = (*UserDomainsApiService)(&c.common)
 	c.UsersApi = (*UsersApiService)(&c.common)
 
 	return c

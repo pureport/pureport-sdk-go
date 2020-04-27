@@ -5,7 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActiveAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
+**AdvertiseInternalRoutes** | **bool** |  | [optional] 
 **BillingPlan** | [**BillingPlan**](BillingPlan.md) |  | [optional] 
+**BillingProvider** | **string** |  | [optional] 
 **BillingTerm** | **string** |  | 
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **CustomerASN** | **int64** |  | [optional] 
@@ -14,8 +16,8 @@ Name | Type | Description | Notes
 **Description** | **string** |  | [optional] 
 **ErrorCode** | **string** |  | [optional] [readonly] 
 **ErrorMessage** | **string** |  | [optional] [readonly] 
-**HighAvailability** | **bool** |  | [optional] 
-**Href** | **string** |  | [optional] 
+**HighAvailability** | **bool** |  | 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
 **Location** | [**Link**](Link.md) |  | 
 **Name** | **string** |  | 
@@ -27,6 +29,7 @@ Name | Type | Description | Notes
 **State** | **string** |  | [optional] [readonly] 
 **Tags** | **map[string]string** |  | [optional] 
 **Type** | **string** |  | 
+**BgpPasswordConfiguration** | [**BgpPasswordConfiguration**](BGPPasswordConfiguration.md) |  | [optional] 
 **Peering** | [**PeeringConfiguration**](PeeringConfiguration.md) |  | [optional] 
 **ServiceKey** | **string** |  | 
 

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BgpPasswordConfiguration** | [**BgpPasswordConfiguration**](BGPPasswordConfiguration.md) |  | [optional] 
 **Peering** | [**PeeringConfiguration**](PeeringConfiguration.md) |  | [optional] 
 **ServiceKey** | **string** |  | [optional] 
 

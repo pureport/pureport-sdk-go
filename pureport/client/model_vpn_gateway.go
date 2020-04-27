@@ -12,21 +12,25 @@ package client
 
 // VpnGateway struct for VpnGateway
 type VpnGateway struct {
-	AvailabilityDomain string        `json:"availabilityDomain,omitempty"`
-	BgpConfig          *BgpConfig    `json:"bgpConfig,omitempty"`
-	Description        string        `json:"description,omitempty"`
-	ErrorCode          string        `json:"errorCode,omitempty"`
-	ErrorMessage       string        `json:"errorMessage,omitempty"`
-	Id                 string        `json:"id,omitempty"`
-	LinkState          string        `json:"linkState,omitempty"`
-	Name               string        `json:"name,omitempty"`
-	RemoteId           string        `json:"remoteId,omitempty"`
-	State              string        `json:"state,omitempty"`
-	Type               string        `json:"type,omitempty"`
-	Auth               PskAuthConfig `json:"auth,omitempty"`
-	CustomerGatewayIP  string        `json:"customerGatewayIP,omitempty"`
-	CustomerVtiIP      string        `json:"customerVtiIP,omitempty"`
-	OsNetworkId        string        `json:"osNetworkId,omitempty"`
-	PureportGatewayIP  string        `json:"pureportGatewayIP,omitempty"`
-	PureportVtiIP      string        `json:"pureportVtiIP,omitempty"`
+	AvailabilityDomain        string        `json:"availabilityDomain,omitempty"`
+	BgpConfig                 *BgpConfig    `json:"bgpConfig,omitempty"`
+	Connection                *Link         `json:"connection,omitempty"`
+	Description               string        `json:"description,omitempty"`
+	ErrorCode                 string        `json:"errorCode,omitempty"`
+	ErrorMessage              string        `json:"errorMessage,omitempty"`
+	Href                      string        `json:"href,omitempty"`
+	Id                        string        `json:"id,omitempty"`
+	LinkState                 string        `json:"linkState,omitempty"`
+	Name                      string        `json:"name,omitempty"`
+	PureportInternalGatewayIP string        `json:"pureportInternalGatewayIP,omitempty"`
+	RemoteId                  string        `json:"remoteId,omitempty"`
+	State                     string        `json:"state,omitempty"`
+	Type                      string        `json:"type,omitempty"`
+	Version                   string        `json:"version,omitempty"`
+	Auth                      PskAuthConfig `json:"auth,omitempty"`
+	CustomerGatewayIP         string        `json:"customerGatewayIP,omitempty"`
+	CustomerVtiIP             string        `json:"customerVtiIP,omitempty"`
+	OsNetworkId               string        `json:"osNetworkId,omitempty"`
+	PureportGatewayIP         string        `json:"pureportGatewayIP,omitempty"`
+	PureportVtiIP             string        `json:"pureportVtiIP,omitempty"`
 }

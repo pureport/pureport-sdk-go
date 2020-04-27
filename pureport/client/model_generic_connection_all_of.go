@@ -12,5 +12,14 @@ package client
 
 // GenericConnectionAllOf struct for GenericConnectionAllOf
 type GenericConnectionAllOf struct {
-	Peering PeeringConfiguration `json:"peering,omitempty"`
+	BgpPasswordConfiguration BgpPasswordConfiguration `json:"bgpPasswordConfiguration,omitempty"`
+	GatewayCidr              string                   `json:"gatewayCidr,omitempty"`
+	Peering                  *PeeringConfiguration    `json:"peering,omitempty"`
+	PrimaryGatewayIP         string                   `json:"primaryGatewayIP,omitempty"`
+	PrimaryVlan              int32                    `json:"primaryVlan,omitempty"`
+	RoutingType              string                   `json:"routingType,omitempty"`
+	SecondaryGatewayIP       string                   `json:"secondaryGatewayIP,omitempty"`
+	SecondaryVlan            int32                    `json:"secondaryVlan,omitempty"`
+	StaticRoutes             []StaticRouteDto         `json:"staticRoutes,omitempty"`
+	VirtualGatewayIP         string                   `json:"virtualGatewayIP,omitempty"`
 }
