@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CidrBlock** | **string** |  | 
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
-**Href** | **string** |  | [optional] 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 

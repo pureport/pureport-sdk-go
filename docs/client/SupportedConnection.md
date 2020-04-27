@@ -5,15 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BillingPlans** | [**[]BillingPlan**](BillingPlan.md) |  | [optional] [readonly] 
-**BillingProductId** | **string** |  | 
+**BillingProductIds** | **map[string]string** |  | 
 **Groups** | [**[]Link**](Link.md) |  | [optional] 
-**HighAvailability** | **bool** |  | [optional] 
-**Href** | **string** |  | [optional] 
+**HighAvailability** | **bool** |  | 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
 **Location** | [**Link**](Link.md) |  | 
 **PeeringType** | **string** |  | 
-**Pending** | **bool** |  | [optional] 
+**Pending** | **bool** |  | 
 **ReachableCloudRegions** | [**[]Link**](Link.md) |  | [optional] 
+**RequiresApproval** | **bool** |  | 
 **Speed** | **int32** |  | 
 **Type** | **string** |  | 
 

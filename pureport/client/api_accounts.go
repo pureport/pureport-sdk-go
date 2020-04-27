@@ -17,6 +17,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"reflect"
 	"strings"
 )
 
@@ -194,14 +195,20 @@ func (a *AccountsApiService) DeleteAccount(ctx _context.Context, accountId strin
 
 // FindAllAccountsOpts Optional parameters for the method 'FindAllAccounts'
 type FindAllAccountsOpts struct {
-	Name optional.String
+	Ids      optional.Interface
+	ParentId optional.String
+	Name     optional.String
+	Limit    optional.Int32
 }
 
 /*
 FindAllAccounts List accounts
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *FindAllAccountsOpts - Optional Parameters:
+ * @param "Ids" (optional.Interface of []string) -
+ * @param "ParentId" (optional.String) -
  * @param "Name" (optional.String) -
+ * @param "Limit" (optional.Int32) -
 @return []Account
 */
 func (a *AccountsApiService) FindAllAccounts(ctx _context.Context, localVarOptionals *FindAllAccountsOpts) ([]Account, *_nethttp.Response, error) {
@@ -221,8 +228,25 @@ func (a *AccountsApiService) FindAllAccounts(ctx _context.Context, localVarOptio
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Ids.IsSet() {
+		t := localVarOptionals.Ids.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("ids", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("ids", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.ParentId.IsSet() {
+		localVarQueryParams.Add("parentId", parameterToString(localVarOptionals.ParentId.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.Name.IsSet() {
 		localVarQueryParams.Add("name", parameterToString(localVarOptionals.Name.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

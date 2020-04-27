@@ -14,6 +14,6 @@ package client
 type LoginResponse struct {
 	AccessToken  string `json:"access_token"`
 	ExpiresIn    int32  `json:"expires_in"`
-	RefreshToken string `json:"refresh_token"`
+	RefreshToken string `json:"refresh_token,omitempty"`
 	TokenType    string `json:"token_type"`
 }

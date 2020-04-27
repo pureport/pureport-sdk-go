@@ -14,7 +14,7 @@ package client
 type Location struct {
 	GeoCoordinates GeoCoordinates           `json:"geoCoordinates"`
 	Href           string                   `json:"href,omitempty"`
-	Id             string                   `json:"id,omitempty"`
+	Id             string                   `json:"id"`
 	LocationLinks  []LocationLinkConnection `json:"locationLinks,omitempty"`
 	Name           string                   `json:"name"`
 }

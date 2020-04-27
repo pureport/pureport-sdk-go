@@ -15,13 +15,19 @@ type Port struct {
 	Account                  Link              `json:"account"`
 	AvailabilityDomain       string            `json:"availabilityDomain"`
 	AvailableToChildAccounts bool              `json:"availableToChildAccounts,omitempty"`
+	BillingPlan              BillingPlan       `json:"billingPlan,omitempty"`
 	BillingTerm              string            `json:"billingTerm"`
 	Description              string            `json:"description,omitempty"`
+	DeviceId                 string            `json:"deviceId,omitempty"`
 	Facility                 Link              `json:"facility"`
 	Href                     string            `json:"href,omitempty"`
 	Id                       string            `json:"id,omitempty"`
+	InterfaceId              string            `json:"interfaceId,omitempty"`
+	LoaCustomerName          string            `json:"loaCustomerName,omitempty"`
 	MediaType                string            `json:"mediaType"`
 	Name                     string            `json:"name"`
+	PatchPanelId             string            `json:"patchPanelId,omitempty"`
+	PatchPanelPortNumbers    []int32           `json:"patchPanelPortNumbers,omitempty"`
 	Provider                 string            `json:"provider"`
 	Speed                    int32             `json:"speed"`
 	State                    string            `json:"state,omitempty"`

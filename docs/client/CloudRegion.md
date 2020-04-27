@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | **string** |  | 
 **GeoCoordinates** | [**GeoCoordinates**](GeoCoordinates.md) |  | [optional] 
-**Href** | **string** |  | [optional] 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
 **Provider** | **string** |  | 
 **ProviderAssignedId** | **string** |  | 

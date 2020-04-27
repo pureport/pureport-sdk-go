@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Account** | [**Link**](Link.md) |  | 
-**Href** | **string** |  | [optional] 
+**Href** | **string** |  | [optional] [readonly] 
 **Roles** | [**[]Link**](Link.md) |  | 
 **User** | [**Link**](Link.md) |  | 
 

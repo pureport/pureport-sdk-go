@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Account** | [**Link**](Link.md) |  | 
 **Email** | **string** |  | 
-**Expired** | **bool** |  | [optional] 
-**Href** | **string** |  | [optional] 
+**Expired** | **bool** |  | [optional] [readonly] 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
 **InvitedAt** | [**time.Time**](time.Time.md) |  | [optional] 
 **InvitedBy** | [**Link**](Link.md) |  | [optional] 

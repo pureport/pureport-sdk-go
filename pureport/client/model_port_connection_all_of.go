@@ -12,8 +12,16 @@ package client
 
 // PortConnectionAllOf struct for PortConnectionAllOf
 type PortConnectionAllOf struct {
-	PrimaryCustomerVlan   int32 `json:"primaryCustomerVlan,omitempty"`
-	PrimaryPort           Link  `json:"primaryPort,omitempty"`
-	SecondaryCustomerVlan int32 `json:"secondaryCustomerVlan,omitempty"`
-	SecondaryPort         Link  `json:"secondaryPort,omitempty"`
+	BgpPasswordConfiguration BgpPasswordConfiguration `json:"bgpPasswordConfiguration,omitempty"`
+	BillingLongHaul          string                   `json:"billingLongHaul,omitempty"`
+	GatewayCidr              string                   `json:"gatewayCidr,omitempty"`
+	PrimaryCustomerVlan      int32                    `json:"primaryCustomerVlan,omitempty"`
+	PrimaryGatewayIP         string                   `json:"primaryGatewayIP,omitempty"`
+	PrimaryPort              Link                     `json:"primaryPort,omitempty"`
+	RoutingType              string                   `json:"routingType,omitempty"`
+	SecondaryCustomerVlan    int32                    `json:"secondaryCustomerVlan,omitempty"`
+	SecondaryGatewayIP       string                   `json:"secondaryGatewayIP,omitempty"`
+	SecondaryPort            Link                     `json:"secondaryPort,omitempty"`
+	StaticRoutes             []StaticRouteDto         `json:"staticRoutes,omitempty"`
+	VirtualGatewayIP         string                   `json:"virtualGatewayIP,omitempty"`
 }

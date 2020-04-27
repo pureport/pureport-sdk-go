@@ -16,11 +16,12 @@ import (
 
 // CloudService struct for CloudService
 type CloudService struct {
-	CloudRegion     Link      `json:"cloudRegion,omitempty"`
+	CloudRegion     Link      `json:"cloudRegion"`
 	Deactivated     bool      `json:"deactivated"`
 	DeactivatedAt   time.Time `json:"deactivatedAt,omitempty"`
 	Href            string    `json:"href,omitempty"`
 	Id              string    `json:"id,omitempty"`
+	IpPrefixes      []string  `json:"ipPrefixes,omitempty"`
 	Ipv4PrefixCount int32     `json:"ipv4PrefixCount,omitempty"`
 	Ipv6PrefixCount int32     `json:"ipv6PrefixCount,omitempty"`
 	Name            string    `json:"name"`

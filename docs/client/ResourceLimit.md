@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ChildResourceType** | **string** |  | 
-**Href** | **string** |  | [optional] 
+**Href** | **string** |  | [optional] [readonly] 
 **Limit** | **int32** |  | 
 **ParentResourceId** | **string** |  | [optional] 
 **ParentResourceType** | **string** |  | [optional] 

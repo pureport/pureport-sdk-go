@@ -12,8 +12,9 @@ package client
 
 // Pod struct for Pod
 type Pod struct {
+	Facility Link   `json:"facility,omitempty"`
 	Href     string `json:"href,omitempty"`
 	Id       string `json:"id"`
-	Location Link   `json:"location,omitempty"`
-	Status   string `json:"status,omitempty"`
+	Location Link   `json:"location"`
+	Status   string `json:"status"`
 }

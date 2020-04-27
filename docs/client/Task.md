@@ -8,10 +8,11 @@ Name | Type | Description | Notes
 **CompletedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **Description** | **string** |  | [optional] [readonly] 
-**Href** | **string** |  | [optional] 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
 **Parent** | [**Link**](Link.md) |  | [optional] 
 **Result** | **string** |  | [optional] [readonly] 
+**StartedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **State** | **string** |  | [optional] [readonly] 
 **Type** | **string** |  | 
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 

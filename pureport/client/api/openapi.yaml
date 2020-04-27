@@ -14,10 +14,35 @@ paths:
       parameters:
       - explode: true
         in: query
+        name: ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        style: form
+      - explode: true
+        in: query
+        name: parentId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
         name: name
         required: false
         schema:
           type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
         style: form
       responses:
         default:
@@ -297,6 +322,219 @@ paths:
       summary: Update API Key
       tags:
       - apikeys
+  /accounts/{accountId}/auditLog:
+    get:
+      operationId: findAuditLogs
+      parameters:
+      - explode: true
+        in: query
+        name: pageNumber
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 100
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sortDirection
+        required: false
+        schema:
+          enum:
+          - ASC
+          - DESC
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: startTime
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: endTime
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: includeChildAccounts
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: include child object records if specified subject is of type
+          NETWORK or CONNECTION
+        explode: true
+        in: query
+        name: includeChildSubjects
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: eventTypes
+        required: false
+        schema:
+          items:
+            enum:
+            - USER_LOGIN
+            - USER_FORGOT_PASSWORD
+            - API_LOGIN
+            - ACCOUNT_CREATE
+            - ACCOUNT_UPDATE
+            - ACCOUNT_DELETE
+            - ACCOUNT_BILLING_CREATE
+            - ACCOUNT_BILLING_UPDATE
+            - ACCOUNT_BILLING_DELETE
+            - NETWORK_CREATE
+            - NETWORK_UPDATE
+            - NETWORK_DELETE
+            - CONNECTION_CREATE
+            - CONNECTION_UPDATE
+            - CONNECTION_DELETE
+            - GATEWAY_CREATE
+            - GATEWAY_UPDATE
+            - GATEWAY_DELETE
+            - API_KEY_CREATE
+            - API_KEY_UPDATE
+            - API_KEY_DELETE
+            - ROLE_CREATE
+            - ROLE_UPDATE
+            - ROLE_DELETE
+            - USER_CREATE
+            - USER_UPDATE
+            - USER_DELETE
+            - USER_DOMAIN_CREATE
+            - USER_DOMAIN_UPDATE
+            - USER_DOMAIN_DELETE
+            - PORT_CREATE
+            - PORT_UPDATE
+            - PORT_DELETE
+            - MEMBER_INVITE_CREATE
+            - MEMBER_INVITE_ACCEPT
+            - MEMBER_INVITE_UPDATE
+            - MEMBER_INVITE_DELETE
+            - ACCOUNT_MEMBER_CREATE
+            - ACCOUNT_MEMBER_UPDATE
+            - ACCOUNT_MEMBER_DELETE
+            - CONNECTION_STATE_CHANGE
+            - GATEWAY_STATE_CHANGE
+            - GATEWAY_BGP_STATUS_CHANGE
+            - GATEWAY_IPSEC_STATUS_CHANGE
+            - NOTIFICATION_CREATE
+            - NOTIFICATION_UPDATE
+            - NOTIFICATION_DELETE
+            - TASK_CREATE
+            - TASK_UPDATE
+            - TASK_DELETE
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: result
+        required: false
+        schema:
+          enum:
+          - SUCCESS
+          - FAILURE
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: principalId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: ipAddress
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: correlationId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: subjectId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: subjectType
+        required: false
+        schema:
+          enum:
+          - ACCOUNT
+          - CONNECTION
+          - NETWORK
+          - USER
+          - USER_DOMAIN
+          - ROLE
+          - API_KEY
+          - GATEWAY
+          - NOTIFICATION
+          - ACCOUNT_INVITE
+          - ACCOUNT_BILLING
+          - PORT
+          - ACCOUNT_MEMBER
+          - TASK
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageAuditEntry'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      tags:
+      - audit
   /accounts/{accountId}/billing:
     delete:
       operationId: deletePaymentInformation
@@ -694,254 +932,6 @@ paths:
       summary: Update account invite
       tags:
       - account invitations
-  /accounts/{accountId}/invoices:
-    post:
-      operationId: listInvoicesForAccount
-      parameters:
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          '*/*':
-            schema:
-              additionalProperties:
-                type: object
-              type: object
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/AccountInvoice'
-                type: array
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: List invoices
-      tags:
-      - invoices
-  /accounts/{accountId}/invoices/upcoming:
-    get:
-      operationId: listUpcomingInvoicesForAccount
-      parameters:
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/AccountInvoice'
-                type: array
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: List upcoming invoices
-      tags:
-      - invoices
-  /accounts/{accountId}/limits:
-    get:
-      operationId: getResourceLimit
-      parameters:
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ResourceLimit'
-                type: array
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Get resource limits including default values
-      tags:
-      - limits
-  /accounts/{accountId}/limits/{childResourceType}:
-    delete:
-      operationId: deleteResourceLimit
-      parameters:
-      - explode: false
-        in: path
-        name: childResourceType
-        required: true
-        schema:
-          enum:
-          - MEMBER
-          - ROLE
-          - CONNECTION
-          - NETWORK
-          - ACCOUNT
-          - CLOUD_SERVICE_ROUTE
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Delete a resource limit override
-      tags:
-      - limits
-    get:
-      operationId: getResourceLimit_1
-      parameters:
-      - explode: false
-        in: path
-        name: childResourceType
-        required: true
-        schema:
-          enum:
-          - MEMBER
-          - ROLE
-          - CONNECTION
-          - NETWORK
-          - ACCOUNT
-          - CLOUD_SERVICE_ROUTE
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceLimit'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Get resource limit override. Does not return default.
-      tags:
-      - limits
-    post:
-      operationId: createResourceLimit
-      parameters:
-      - explode: false
-        in: path
-        name: childResourceType
-        required: true
-        schema:
-          enum:
-          - MEMBER
-          - ROLE
-          - CONNECTION
-          - NETWORK
-          - ACCOUNT
-          - CLOUD_SERVICE_ROUTE
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ResourceLimit'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceLimit'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - api_key:
-        - ADMIN
-      summary: Create a resource limit override
-      tags:
-      - limits
-    put:
-      operationId: updateResourceLimit
-      parameters:
-      - explode: false
-        in: path
-        name: childResourceType
-        required: true
-        schema:
-          enum:
-          - MEMBER
-          - ROLE
-          - CONNECTION
-          - NETWORK
-          - ACCOUNT
-          - CLOUD_SERVICE_ROUTE
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ResourceLimit'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceLimit'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Update a resource limit override
-      tags:
-      - limits
   /accounts/{accountId}/members:
     get:
       operationId: findAccountMembers
@@ -1274,6 +1264,91 @@ paths:
       summary: Add new network
       tags:
       - networks
+  /accounts/{accountId}/notifications:
+    get:
+      operationId: findAccountNotifications
+      parameters:
+      - explode: true
+        in: query
+        name: startTime
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: endTime
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - READ
+          - UNREAD
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccountNotification'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Retrieve all notifications for this account
+      tags:
+      - account notifications
+    post:
+      operationId: updateAccountNotificationsStatus
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              additionalProperties:
+                enum:
+                - READ
+                - UNREAD
+                type: string
+              type: object
+      responses:
+        default:
+          content:
+            application/json: {}
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Update an authenticated user's read status for account notifications
+      tags:
+      - account notifications
   /accounts/{accountId}/permissions:
     get:
       description: |-
@@ -1614,60 +1689,7 @@ paths:
       summary: List cloud regions
       tags:
       - cloud regions
-    post:
-      operationId: createCloudRegion
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CloudRegion'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CloudRegion'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Add cloud region
-      tags:
-      - cloud regions
   /cloudRegions/{cloudRegionId}:
-    delete:
-      operationId: deleteCloudRegion
-      parameters:
-      - explode: false
-        in: path
-        name: cloudRegionId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Delete cloud region
-      tags:
-      - cloud regions
     get:
       operationId: getCloudRegion
       parameters:
@@ -1690,37 +1712,6 @@ paths:
         - read
         - write
       summary: Get cloud region details
-      tags:
-      - cloud regions
-    put:
-      operationId: updateCloudRegion
-      parameters:
-      - explode: false
-        in: path
-        name: cloudRegionId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CloudRegion'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CloudRegion'
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Update cloud region
       tags:
       - cloud regions
   /cloudServices:
@@ -1845,60 +1836,6 @@ paths:
       summary: Update connection
       tags:
       - connections
-  /connections/{connectionId}/details:
-    get:
-      operationId: getInternal
-      parameters:
-      - explode: false
-        in: path
-        name: connectionId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Connection'
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Get internal connection details
-      tags:
-      - connections
-  /connections/{connectionId}/respawn:
-    post:
-      operationId: respawnConnection
-      parameters:
-      - explode: false
-        in: path
-        name: connectionId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Connection'
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Respawn connection
-      tags:
-      - connections
   /connections/{connectionId}/tasks:
     get:
       operationId: getConnectionTasks
@@ -1982,35 +1919,6 @@ paths:
       summary: List facilities
       tags:
       - facilities
-    post:
-      operationId: createFacility
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Facility'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Facility'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Add new facility
-      tags:
-      - facilities
   /facilities/kml:
     get:
       operationId: listFacilitiesAsKml
@@ -2029,30 +1937,6 @@ paths:
       tags:
       - facilities
   /facilities/{facilityId}:
-    delete:
-      operationId: deleteFacility
-      parameters:
-      - explode: false
-        in: path
-        name: facilityId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Delete facility
-      tags:
-      - facilities
     get:
       operationId: getFacility
       parameters:
@@ -2077,37 +1961,31 @@ paths:
       summary: Get facility details
       tags:
       - facilities
-    put:
-      operationId: updateFacility
+  /gateways/{gatewayId}:
+    get:
+      operationId: getGateway
       parameters:
       - explode: false
         in: path
-        name: facilityId
+        name: gatewayId
         required: true
         schema:
           type: string
         style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Facility'
       responses:
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Facility'
+                $ref: '#/components/schemas/Gateway'
           description: default response
       security:
       - OAuth2:
         - read
         - write
-      - api_key:
-        - ADMIN
-      summary: Update facility
+      summary: Get gateway details
       tags:
-      - facilities
+      - gateways
   /gateways/{gatewayId}/bgpRoutes:
     get:
       operationId: getGatewayBGPRoutes
@@ -2133,6 +2011,179 @@ paths:
         - read
         - write
       summary: Get gateway bgp routes
+      tags:
+      - gateways
+  /gateways/{gatewayId}/ipRoutes:
+    get:
+      operationId: getGatewayIPRoutes
+      parameters:
+      - explode: false
+        in: path
+        name: gatewayId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/IPRoute'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Get gateway ip routes
+      tags:
+      - gateways
+  /gateways/{gatewayId}/metrics/connectivity:
+    post:
+      operationId: connectivityOverTime
+      parameters:
+      - explode: false
+        in: path
+        name: gatewayId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DateFilter'
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConnectivityByGateway'
+                type: array
+            text/csv:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConnectivityByGateway'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Retrieve connectivity details over time for gateway
+      tags:
+      - gateway metrics
+      - gateways
+  /gateways/{gatewayId}/metrics/connectivity/current:
+    get:
+      operationId: currentConnectivity
+      parameters:
+      - explode: false
+        in: path
+        name: gatewayId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConnectivityByGateway'
+                type: array
+            text/csv:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConnectivityByGateway'
+                type: array
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Retrieve latest connectivity details for gateway
+      tags:
+      - gateway metrics
+      - gateways
+  /gateways/{gatewayId}/respawn:
+    post:
+      operationId: respawnGateway
+      parameters:
+      - explode: false
+        in: path
+        name: gatewayId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Respawn gateway
+      tags:
+      - gateways
+  /gateways/{gatewayId}/start:
+    post:
+      operationId: startGateway
+      parameters:
+      - explode: false
+        in: path
+        name: gatewayId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Start gateway
+      tags:
+      - gateways
+  /gateways/{gatewayId}/stop:
+    post:
+      operationId: stopGateway
+      parameters:
+      - explode: false
+        in: path
+        name: gatewayId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+          description: default response
+      security:
+      - OAuth2:
+        - read
+        - write
+      summary: Stop gateway
       tags:
       - gateways
   /gateways/{gatewayId}/tasks:
@@ -2262,60 +2313,7 @@ paths:
       summary: List locations
       tags:
       - locations
-    post:
-      operationId: createLocation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Location'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Location'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Add new location
-      tags:
-      - locations
   /locations/{locationId}:
-    delete:
-      operationId: deleteLocation
-      parameters:
-      - explode: false
-        in: path
-        name: locationId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Delete location
-      tags:
-      - locations
     get:
       operationId: getLocation
       parameters:
@@ -2338,66 +2336,6 @@ paths:
         - read
         - write
       summary: Get location details
-      tags:
-      - locations
-    put:
-      operationId: updateLocation
-      parameters:
-      - explode: false
-        in: path
-        name: locationId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Location'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Location'
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Update location
-      tags:
-      - locations
-  /locations/{locationId}/pods:
-    get:
-      operationId: listPods
-      parameters:
-      - explode: false
-        in: path
-        name: locationId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Pod'
-                type: array
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: List pods for a location
       tags:
       - locations
   /login:
@@ -2582,222 +2520,6 @@ paths:
       summary: Add new connection
       tags:
       - connections
-  /networks/{networkId}/details:
-    get:
-      operationId: getInternal_1
-      parameters:
-      - explode: false
-        in: path
-        name: networkId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Network'
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Get internal network details
-      tags:
-      - networks
-  /networks/{networkId}/limits:
-    get:
-      operationId: getResourceLimit_2
-      parameters:
-      - explode: false
-        in: path
-        name: networkId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ResourceLimit'
-                type: array
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Get resource limits including default values
-      tags:
-      - limits
-  /networks/{networkId}/limits/{childResourceType}:
-    delete:
-      operationId: deleteResourceLimit_1
-      parameters:
-      - explode: false
-        in: path
-        name: childResourceType
-        required: true
-        schema:
-          enum:
-          - MEMBER
-          - ROLE
-          - CONNECTION
-          - NETWORK
-          - ACCOUNT
-          - CLOUD_SERVICE_ROUTE
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: networkId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Delete a resource limit override
-      tags:
-      - limits
-    get:
-      operationId: getResourceLimit_3
-      parameters:
-      - explode: false
-        in: path
-        name: childResourceType
-        required: true
-        schema:
-          enum:
-          - MEMBER
-          - ROLE
-          - CONNECTION
-          - NETWORK
-          - ACCOUNT
-          - CLOUD_SERVICE_ROUTE
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: networkId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceLimit'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Get resource limit override. Does not return default.
-      tags:
-      - limits
-    post:
-      operationId: createResourceLimit_1
-      parameters:
-      - explode: false
-        in: path
-        name: childResourceType
-        required: true
-        schema:
-          enum:
-          - MEMBER
-          - ROLE
-          - CONNECTION
-          - NETWORK
-          - ACCOUNT
-          - CLOUD_SERVICE_ROUTE
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: networkId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ResourceLimit'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceLimit'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - api_key:
-        - ADMIN
-      summary: Create a resource limit override
-      tags:
-      - limits
-    put:
-      operationId: updateResourceLimit_1
-      parameters:
-      - explode: false
-        in: path
-        name: childResourceType
-        required: true
-        schema:
-          enum:
-          - MEMBER
-          - ROLE
-          - CONNECTION
-          - NETWORK
-          - ACCOUNT
-          - CLOUD_SERVICE_ROUTE
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: networkId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ResourceLimit'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceLimit'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Update a resource limit override
-      tags:
-      - limits
   /networks/{networkId}/respawn:
     post:
       operationId: respawn
@@ -2854,123 +2576,61 @@ paths:
       summary: Get available options
       tags:
       - options
-  /pods:
+  /options/isBackbone:
     get:
-      operationId: findPods
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Pod'
-                type: array
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: List all pods
-      tags:
-      - pods
-    post:
-      operationId: createPod
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pod'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pod'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - api_key:
-        - ADMIN
-      summary: Add new pod
-      tags:
-      - pods
-  /pods/{podId}:
-    delete:
-      operationId: deletePodResource
+      operationId: isBackbone
       parameters:
-      - explode: false
-        in: path
-        name: podId
-        required: true
+      - explode: true
+        in: query
+        name: portId
+        required: false
         schema:
           type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Delete pod
-      tags:
-      - pods
-    get:
-      operationId: getPodResource
-      parameters:
-      - explode: false
-        in: path
-        name: podId
-        required: true
+        style: form
+      - explode: true
+        in: query
+        name: locationId
+        required: false
         schema:
           type: string
-        style: simple
+        style: form
+      - explode: true
+        in: query
+        name: speed
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: billingTerm
+        required: false
+        schema:
+          default: HOURLY
+          enum:
+          - HOURLY
+          - MONTHLY
+          - ONE_YEAR
+          - TWO_YEAR
+          type: string
+        style: form
       responses:
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pod'
+                additionalProperties:
+                  type: boolean
+                type: object
           description: default response
       security:
-      - api_key:
-        - ADMIN
-      summary: Get pod details
+      - OAuth2:
+        - read
+        - write
+      summary: Get whether this configuration will have longHaul related charges.
       tags:
-      - pods
-    put:
-      operationId: updatePodResource
-      parameters:
-      - explode: false
-        in: path
-        name: podId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pod'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pod'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Update pod
-      tags:
-      - pods
+      - options
   /ports/{portId}:
     delete:
       operationId: deletePort
@@ -3099,488 +2759,7 @@ paths:
       summary: Get port letter of authorization
       tags:
       - ports
-  /providerLinks:
-    get:
-      operationId: findAllProviderLinks
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ProviderLink'
-                type: array
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: List all provider links
-      tags:
-      - provider links
-    post:
-      operationId: createLink
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProviderLink'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProviderLink'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - api_key:
-        - ADMIN
-      summary: Add new provider link
-      tags:
-      - provider links
-  /providerLinks/{linkId}:
-    delete:
-      operationId: deleteProviderLink
-      parameters:
-      - explode: false
-        in: path
-        name: linkId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Delete provider link
-      tags:
-      - provider links
-    get:
-      operationId: getProviderLink
-      parameters:
-      - explode: false
-        in: path
-        name: linkId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProviderLink'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Get provider link details
-      tags:
-      - provider links
-    put:
-      operationId: updateProviderLink
-      parameters:
-      - explode: false
-        in: path
-        name: linkId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProviderLink'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProviderLink'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Update provider link
-      tags:
-      - provider links
-  /providerLinks/{linkId}/vlans:
-    get:
-      operationId: getVlans
-      parameters:
-      - explode: false
-        in: path
-        name: linkId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ProviderVlan'
-                type: array
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Get provider link VLANs
-      tags:
-      - provider links
-  /publicPeeringBlocks:
-    get:
-      operationId: getPublicPeeringBlocks
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/PublicPeeringBlock'
-                type: array
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: List Public Peering CIDR Blocks
-      tags:
-      - public peering blocks
-    post:
-      operationId: createPublicPeeringBlock
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PublicPeeringBlock'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicPeeringBlock'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Add Public Peering CIDR Blocks
-      tags:
-      - public peering blocks
-  /publicPeeringBlocks/{publicPeeringBlockId}:
-    delete:
-      operationId: deletePublicPeeringBlock
-      parameters:
-      - explode: false
-        in: path
-        name: publicPeeringBlockId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Delete Public Peering CIDR
-      tags:
-      - public peering blocks
-    get:
-      operationId: getPublicPeeringBlock
-      parameters:
-      - explode: false
-        in: path
-        name: publicPeeringBlockId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicPeeringBlock'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Get Public Peering CIDR details
-      tags:
-      - public peering blocks
-    put:
-      operationId: updatePublicPeeringBlock
-      parameters:
-      - explode: false
-        in: path
-        name: publicPeeringBlockId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          '*/*':
-            schema:
-              $ref: '#/components/schemas/PublicPeeringBlock'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicPeeringBlock'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Update Public Peering CIDR
-      tags:
-      - public peering blocks
-  /publicPeeringPoolStats:
-    get:
-      operationId: getPublicPeeringPoolStats
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PublicPeeringPoolStats'
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Get Public Peering Pool Statistics details
-      tags:
-      - public peering stats
-  /supportedConnections:
-    get:
-      operationId: getSupportedConnections
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/SupportedConnection'
-                type: array
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: List supported connections
-      tags:
-      - supported connections
-    post:
-      operationId: createSupportedConnection
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SupportedConnection'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SupportedConnection'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Add supported connection
-      tags:
-      - supported connections
-  /supportedConnections/groups:
-    get:
-      operationId: getSupportedConnectionGroups
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/SupportedConnectionGroup'
-                type: array
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: List supported connections groups
-      tags:
-      - supported connections groups
-      - supported connections
-    post:
-      operationId: createSupportedConnectionGroup
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SupportedConnectionGroup'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SupportedConnectionGroup'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - api_key:
-        - ADMIN
-      summary: Add supported connection group
-      tags:
-      - supported connections groups
-      - supported connections
-  /supportedConnections/groups/{supportedConnectionGroupId}:
-    delete:
-      operationId: deleteSupportedConnectionGroup
-      parameters:
-      - explode: false
-        in: path
-        name: supportedConnectionGroupId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Delete supported connection group
-      tags:
-      - supported connections groups
-      - supported connections
-    get:
-      operationId: getSupportedConnectionGroup
-      parameters:
-      - explode: false
-        in: path
-        name: supportedConnectionGroupId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SupportedConnectionGroup'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Get supported connection group details
-      tags:
-      - supported connections groups
-      - supported connections
-    put:
-      operationId: updateSupportedConnectionGroup
-      parameters:
-      - explode: false
-        in: path
-        name: supportedConnectionGroupId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SupportedConnectionGroup'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SupportedConnectionGroup'
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: Update supported connection group
-      tags:
-      - supported connections groups
-      - supported connections
   /supportedConnections/{supportedConnectionId}:
-    delete:
-      operationId: deleteSupportedConnection
-      parameters:
-      - explode: false
-        in: path
-        name: supportedConnectionId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Delete supported connection
-      tags:
-      - supported connections
     get:
       operationId: getSupportedConnection
       parameters:
@@ -3605,40 +2784,24 @@ paths:
       summary: Get supported connection details
       tags:
       - supported connections
-    put:
-      operationId: updateSupportedConnection
-      parameters:
-      - explode: false
-        in: path
-        name: supportedConnectionId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SupportedConnection'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SupportedConnection'
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Update supported connection
-      tags:
-      - supported connections
   /tasks:
     get:
       operationId: getTasks
+      parameters:
+      - explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          enum:
+          - CREATED
+          - RUNNING
+          - COMPLETED
+          - FAILED
+          - DELETED
+          - AGGREGATE
+          type: string
+        style: form
       responses:
         default:
           content:
@@ -3656,30 +2819,6 @@ paths:
       tags:
       - tasks
   /tasks/{taskId}:
-    delete:
-      operationId: deleteTask
-      parameters:
-      - explode: false
-        in: path
-        name: taskId
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        default:
-          content:
-            application/json: {}
-          description: default response
-      security:
-      - OAuth2:
-        - read
-        - write
-      - api_key:
-        - ADMIN
-      summary: Delete Task
-      tags:
-      - tasks
     get:
       operationId: getTask
       parameters:
@@ -3704,57 +2843,13 @@ paths:
       summary: Get Task details
       tags:
       - tasks
-  /users:
+  /thirdParty/packetFabric/customers/{marketCode}:
     get:
-      operationId: findAllUsers
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/User'
-                type: array
-          description: default response
-      security:
-      - api_key:
-        - ADMIN
-      summary: List users
-      tags:
-      - users
-    post:
-      operationId: createUser
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: default response
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
-      security:
-      - api_key:
-        - ADMIN
-      summary: Add new user
-      tags:
-      - users
-  /users/{userId}:
-    delete:
-      operationId: deleteUser
+      operationId: getPacketFabric
       parameters:
       - explode: false
         in: path
-        name: userId
+        name: marketCode
         required: true
         schema:
           type: string
@@ -3762,14 +2857,47 @@ paths:
       responses:
         default:
           content:
-            application/json: {}
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PacketFabricCustomer'
+                type: array
           description: default response
       security:
-      - api_key:
-        - ADMIN
-      summary: Delete user
+      - OAuth2:
+        - read
+        - write
       tags:
-      - users
+      - third party
+  /userDomainProvider:
+    get:
+      operationId: getUserDomain_1
+      parameters:
+      - explode: true
+        in: query
+        name: emailAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        400:
+          description: An invalid email address was provided
+        404:
+          description: Could not find a valid user domain provider
+        default:
+          content:
+            application/json:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+          description: default response
+      summary: Find a user domain provider given an email address
+      tags:
+      - user domains
+  /users/{userId}:
     get:
       operationId: getUser
       parameters:
@@ -3832,10 +2960,83 @@ components:
       required:
       - awsAccountId
       - billingTerm
+      - highAvailability
       - location
       - name
       - speed
       - type
+      type: object
+    AccessSwitch:
+      properties:
+        availabilityDomain:
+          enum:
+          - PRIMARY
+          - SECONDARY
+          type: string
+        href:
+          readOnly: true
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        pod:
+          $ref: '#/components/schemas/Link'
+        status:
+          enum:
+          - AVAILABLE
+          - UNAVAILABLE
+          type: string
+      required:
+      - availabilityDomain
+      - id
+      - pod
+      - status
+      type: object
+    AccessSwitchPort:
+      properties:
+        accessSwitch:
+          $ref: '#/components/schemas/Link'
+        connectorType:
+          enum:
+          - SC
+          - LC
+          type: string
+        href:
+          readOnly: true
+          type: string
+        id:
+          maxLength: 64
+          minLength: 1
+          type: string
+        mediaType:
+          type: string
+        name:
+          type: string
+        patchPanelId:
+          type: string
+        patchPanelPortNumbers:
+          items:
+            format: int32
+            type: integer
+          type: array
+          uniqueItems: true
+        speed:
+          enum:
+          - 1000
+          - 10000
+          - 40000
+          format: int32
+          type: integer
+      required:
+      - accessSwitch
+      - connectorType
+      - id
+      - mediaType
+      - name
+      - patchPanelId
+      - patchPanelPortNumbers
+      - speed
       type: object
     Account:
       example:
@@ -3844,9 +3045,20 @@ components:
           id: id
           title: title
         showChildAccountPricing: true
-        name: name
-        technicalContactEmail: technicalContactEmail
+        hasChildren: true
+        verified: true
         description: description
+        technicalContactEmails:
+        - technicalContactEmails
+        - technicalContactEmails
+        - technicalContactEmails
+        - technicalContactEmails
+        - technicalContactEmails
+        demo: true
+        tags:
+          key: tags
+        name: name
+        pricingHidden: true
         href: href
         id: id
         supportedConnectionGroups:
@@ -3856,9 +3068,6 @@ components:
         - href: href
           id: id
           title: title
-        demo: true
-        tags:
-          key: tags
       properties:
         demo:
           type: boolean
@@ -3866,7 +3075,11 @@ components:
           maxLength: 256
           minLength: 0
           type: string
+        hasChildren:
+          readOnly: true
+          type: boolean
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -3878,6 +3091,9 @@ components:
           type: string
         parent:
           $ref: '#/components/schemas/Link'
+        pricingHidden:
+          readOnly: true
+          type: boolean
         showChildAccountPricing:
           type: boolean
         supportedConnectionGroups:
@@ -3889,13 +3105,21 @@ components:
           additionalProperties:
             type: string
           type: object
-        technicalContactEmail:
-          type: string
+        technicalContactEmails:
+          items:
+            type: string
+          maxItems: 10
+          minItems: 0
+          type: array
+          uniqueItems: true
+        verified:
+          type: boolean
       required:
       - name
       type: object
     AccountBilling:
       example:
+        collectionMethod: CREDIT_CARD
         address:
           country: country
           city: city
@@ -3921,9 +3145,15 @@ components:
           $ref: '#/components/schemas/Link'
         address:
           $ref: '#/components/schemas/PhysicalAddress'
+        collectionMethod:
+          enum:
+          - CREDIT_CARD
+          - NET_30
+          type: string
         email:
           type: string
         href:
+          readOnly: true
           type: string
         name:
           maxLength: 64
@@ -3940,12 +3170,11 @@ components:
           minLength: 1
           type: string
       required:
+      - account
       - address
+      - collectionMethod
       - email
       - name
-      - stripeExpiry
-      - stripeLastFour
-      - stripeToken
       type: object
     AccountConsent:
       example:
@@ -3955,11 +3184,26 @@ components:
       properties:
         consentAt:
           format: date-time
+          readOnly: true
           type: string
         href:
           type: string
         userId:
+          readOnly: true
           type: string
+      type: object
+    AccountDetailedInvoice:
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        invoiceId:
+          readOnly: true
+          type: string
+        items:
+          items:
+            $ref: '#/components/schemas/DetailedInvoiceItem'
+          readOnly: true
+          type: array
       type: object
     AccountInvite:
       example:
@@ -3989,8 +3233,10 @@ components:
         email:
           type: string
         expired:
+          readOnly: true
           type: boolean
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -4011,17 +3257,12 @@ components:
       - roles
       type: object
     AccountInvoice:
-      example:
-        invoice: '{}'
-        account:
-          href: href
-          id: id
-          title: title
       properties:
         account:
           $ref: '#/components/schemas/Link'
         invoice:
           description: The Stripe Invoice object (https://stripe.com/docs/api/invoices/object)
+          readOnly: true
           type: object
       type: object
     AccountMember:
@@ -4046,6 +3287,7 @@ components:
         account:
           $ref: '#/components/schemas/Link'
         href:
+          readOnly: true
           type: string
         roles:
           items:
@@ -4057,6 +3299,52 @@ components:
       - account
       - roles
       - user
+      type: object
+    AccountNotification:
+      example:
+        notification:
+          availabilityDomain: PRIMARY
+          impactedServices:
+          - PUREPORT_CONSOLE
+          - PUREPORT_CONSOLE
+          - PUREPORT_CONSOLE
+          - PUREPORT_CONSOLE
+          - PUREPORT_CONSOLE
+          start: 2000-01-23T04:56:07.000+00:00
+          description: description
+          type: INCIDENT
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          end: 2000-01-23T04:56:07.000+00:00
+          locations:
+          - href: href
+            id: id
+            title: title
+          - href: href
+            id: id
+            title: title
+          href: href
+          id: id
+          state: DRAFT
+          connectionTypes:
+          - AWS_DIRECT_CONNECT
+          - AWS_DIRECT_CONNECT
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        connections:
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+      properties:
+        connections:
+          items:
+            $ref: '#/components/schemas/Link'
+          readOnly: true
+          type: array
+          uniqueItems: true
+        notification:
+          $ref: '#/components/schemas/Notification'
       type: object
     ApiKey:
       example:
@@ -4093,8 +3381,10 @@ components:
           minLength: 0
           type: string
         href:
+          readOnly: true
           type: string
         key:
+          readOnly: true
           type: string
         name:
           maxLength: 255
@@ -4108,6 +3398,217 @@ components:
           type: array
           uniqueItems: true
         secret:
+          readOnly: true
+          type: string
+      required:
+      - name
+      - roles
+      type: object
+    AuditEntry:
+      example:
+        request:
+          method: method
+          queryParameters:
+            key:
+            - queryParameters
+            - queryParameters
+          body: body
+          url: url
+        subject:
+          href: href
+          id: id
+          title: title
+        changes:
+        - current: '{}'
+          previous: '{}'
+          property: property
+        - current: '{}'
+          previous: '{}'
+          property: property
+        ipAddress: ipAddress
+        userAgent: userAgent
+        eventType: USER_LOGIN
+        source: API
+        subjectType: ACCOUNT
+        principal:
+          href: href
+          id: id
+          title: title
+        result: SUCCESS
+        response:
+          executionTime: 0
+          statusCodeFamily: INFORMATIONAL
+          body: body
+          statusCode: 6
+        correlationId: correlationId
+        account:
+          href: href
+          id: id
+          title: title
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        changes:
+          items:
+            $ref: '#/components/schemas/ChangeObject'
+          readOnly: true
+          type: array
+          uniqueItems: true
+        correlationId:
+          readOnly: true
+          type: string
+        eventType:
+          enum:
+          - USER_LOGIN
+          - USER_FORGOT_PASSWORD
+          - API_LOGIN
+          - ACCOUNT_CREATE
+          - ACCOUNT_UPDATE
+          - ACCOUNT_DELETE
+          - ACCOUNT_BILLING_CREATE
+          - ACCOUNT_BILLING_UPDATE
+          - ACCOUNT_BILLING_DELETE
+          - NETWORK_CREATE
+          - NETWORK_UPDATE
+          - NETWORK_DELETE
+          - CONNECTION_CREATE
+          - CONNECTION_UPDATE
+          - CONNECTION_DELETE
+          - GATEWAY_CREATE
+          - GATEWAY_UPDATE
+          - GATEWAY_DELETE
+          - API_KEY_CREATE
+          - API_KEY_UPDATE
+          - API_KEY_DELETE
+          - ROLE_CREATE
+          - ROLE_UPDATE
+          - ROLE_DELETE
+          - USER_CREATE
+          - USER_UPDATE
+          - USER_DELETE
+          - USER_DOMAIN_CREATE
+          - USER_DOMAIN_UPDATE
+          - USER_DOMAIN_DELETE
+          - PORT_CREATE
+          - PORT_UPDATE
+          - PORT_DELETE
+          - MEMBER_INVITE_CREATE
+          - MEMBER_INVITE_ACCEPT
+          - MEMBER_INVITE_UPDATE
+          - MEMBER_INVITE_DELETE
+          - ACCOUNT_MEMBER_CREATE
+          - ACCOUNT_MEMBER_UPDATE
+          - ACCOUNT_MEMBER_DELETE
+          - CONNECTION_STATE_CHANGE
+          - GATEWAY_STATE_CHANGE
+          - GATEWAY_BGP_STATUS_CHANGE
+          - GATEWAY_IPSEC_STATUS_CHANGE
+          - NOTIFICATION_CREATE
+          - NOTIFICATION_UPDATE
+          - NOTIFICATION_DELETE
+          - TASK_CREATE
+          - TASK_UPDATE
+          - TASK_DELETE
+          readOnly: true
+          type: string
+        ipAddress:
+          readOnly: true
+          type: string
+        principal:
+          $ref: '#/components/schemas/Link'
+        request:
+          $ref: '#/components/schemas/AuditEntryRequest'
+        response:
+          $ref: '#/components/schemas/AuditEntryResponse'
+        result:
+          enum:
+          - SUCCESS
+          - FAILURE
+          readOnly: true
+          type: string
+        source:
+          enum:
+          - API
+          - CONSOLE
+          - SYSTEM
+          readOnly: true
+          type: string
+        subject:
+          $ref: '#/components/schemas/Link'
+        subjectType:
+          enum:
+          - ACCOUNT
+          - CONNECTION
+          - NETWORK
+          - USER
+          - USER_DOMAIN
+          - ROLE
+          - API_KEY
+          - GATEWAY
+          - NOTIFICATION
+          - ACCOUNT_INVITE
+          - ACCOUNT_BILLING
+          - PORT
+          - ACCOUNT_MEMBER
+          - TASK
+          readOnly: true
+          type: string
+        timestamp:
+          format: date-time
+          readOnly: true
+          type: string
+        userAgent:
+          readOnly: true
+          type: string
+      type: object
+    AuditEntryRequest:
+      example:
+        method: method
+        queryParameters:
+          key:
+          - queryParameters
+          - queryParameters
+        body: body
+        url: url
+      properties:
+        body:
+          type: string
+        method:
+          type: string
+        queryParameters:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        url:
+          type: string
+      type: object
+    AuditEntryResponse:
+      example:
+        executionTime: 0
+        statusCodeFamily: INFORMATIONAL
+        body: body
+        statusCode: 6
+      properties:
+        body:
+          type: string
+        executionTime:
+          description: Execution time in milliseconds
+          format: int64
+          type: integer
+        statusCode:
+          format: int32
+          type: integer
+        statusCodeFamily:
+          enum:
+          - INFORMATIONAL
+          - SUCCESSFUL
+          - REDIRECTION
+          - CLIENT_ERROR
+          - SERVER_ERROR
+          - OTHER
           type: string
       type: object
     AzureExpressRouteConnection:
@@ -4116,6 +3617,7 @@ components:
       - $ref: '#/components/schemas/AzureExpressRouteConnection_allOf'
       required:
       - billingTerm
+      - highAvailability
       - location
       - name
       - serviceKey
@@ -4164,6 +3666,15 @@ components:
           readOnly: true
           type: string
       type: object
+    BGPPasswordConfiguration:
+      properties:
+        enabled:
+          type: boolean
+        primaryBGPPassword:
+          type: string
+        secondaryBGPPassword:
+          type: string
+      type: object
     BGPRoute:
       example:
         nextHop: nextHop
@@ -4189,49 +3700,60 @@ components:
           title: title
       properties:
         best:
+          readOnly: true
           type: boolean
         internal:
+          readOnly: true
           type: boolean
         locPref:
           format: int32
+          readOnly: true
           type: integer
         metric:
           format: int32
+          readOnly: true
           type: integer
         multiPath:
+          readOnly: true
           type: boolean
         network:
+          readOnly: true
           type: string
         nextHop:
+          readOnly: true
           type: string
         nextHopConnection:
           $ref: '#/components/schemas/Link'
         nextHopGateway:
           $ref: '#/components/schemas/Link'
         origin:
+          readOnly: true
           type: string
         path:
           items:
             format: int32
             type: integer
+          readOnly: true
           type: array
         valid:
+          readOnly: true
           type: boolean
         weight:
           format: int32
+          readOnly: true
           type: integer
       type: object
     BillingPlan:
       example:
-        amount: 0
+        amount: 0.8008281904610115
+        billingLongHaul: NOT_APPLICABLE
         term: HOURLY
         id: id
         billingInterval: ONCE
-        setupAmount: 6
+        setupAmount: 6.027456183070403
       properties:
         amount:
-          format: int64
-          type: integer
+          type: number
         billingInterval:
           enum:
           - ONCE
@@ -4240,11 +3762,17 @@ components:
           - MONTH
           - YEAR
           type: string
+        billingLongHaul:
+          enum:
+          - NOT_APPLICABLE
+          - METRO
+          - USAGE
+          - DEDICATED
+          type: string
         id:
           type: string
         setupAmount:
-          format: int64
-          type: integer
+          type: number
         term:
           enum:
           - HOURLY
@@ -4252,7 +3780,33 @@ components:
           - ONE_YEAR
           - TWO_YEAR
           type: string
-      readOnly: true
+      required:
+      - billingInterval
+      - term
+      type: object
+    ChangeObject:
+      example:
+        current: '{}'
+        previous: '{}'
+        property: property
+      properties:
+        current:
+          type: object
+        previous:
+          type: object
+        property:
+          type: string
+      type: object
+    ClosedRangeInstant:
+      properties:
+        empty:
+          type: boolean
+        endInclusive:
+          format: date-time
+          type: string
+        start:
+          format: date-time
+          type: string
       type: object
     CloudRegion:
       example:
@@ -4270,6 +3824,7 @@ components:
         geoCoordinates:
           $ref: '#/components/schemas/GeoCoordinates'
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -4281,6 +3836,7 @@ components:
           - AZURE
           - GOOGLE_CLOUD
           - ORACLE
+          - PACKET_FABRIC
           type: string
         providerAssignedId:
           type: string
@@ -4293,7 +3849,7 @@ components:
       example:
         ipv4PrefixCount: 0
         provider: AWS
-        ipv6PrefixCount: 0
+        ipv6PrefixCount: 6
         service: service
         cloudRegion:
           href: href
@@ -4303,6 +3859,9 @@ components:
         deactivatedAt: 2000-01-23T04:56:07.000+00:00
         href: href
         id: id
+        ipPrefixes:
+        - ipPrefixes
+        - ipPrefixes
         deactivated: true
       properties:
         cloudRegion:
@@ -4315,19 +3874,24 @@ components:
           readOnly: true
           type: string
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
           minLength: 1
           type: string
+        ipPrefixes:
+          items:
+            type: string
+          readOnly: true
+          type: array
+          uniqueItems: true
         ipv4PrefixCount:
           format: int32
-          minimum: 0
           readOnly: true
           type: integer
         ipv6PrefixCount:
           format: int32
-          minimum: 0
           readOnly: true
           type: integer
         name:
@@ -4338,10 +3902,12 @@ components:
           - AZURE
           - GOOGLE_CLOUD
           - ORACLE
+          - PACKET_FABRIC
           type: string
         service:
           type: string
       required:
+      - cloudRegion
       - deactivated
       - name
       - provider
@@ -4354,13 +3920,35 @@ components:
           AZURE_EXPRESS_ROUTE: '#/components/schemas/AzureExpressRouteConnection'
           COMCAST: '#/components/schemas/GenericConnection'
           COX_COMMUNICATIONS: '#/components/schemas/GenericConnection'
+          ELEMENT_CRITICAL: '#/components/schemas/GenericConnection'
+          EQUINIX_CLOUD_EXCHANGE: '#/components/schemas/EquinixCloudExchangeConnection'
           GOOGLE_CLOUD_INTERCONNECT: '#/components/schemas/GoogleCloudInterconnectConnection'
           ORACLE_FAST_CONNECT: '#/components/schemas/OracleFastConnectConnection'
+          PACKET: '#/components/schemas/GenericConnection'
+          PACKET_FABRIC: '#/components/schemas/PacketFabricConnection'
           PORT: '#/components/schemas/PortConnection'
           SITE_IPSEC_VPN: '#/components/schemas/SiteIPSecVPNConnection'
           ZAYO: '#/components/schemas/GenericConnection'
         propertyName: type
       example:
+        billingTerm: HOURLY
+        description: description
+        errorCode: BAD_REQUEST
+        type: AWS_DIRECT_CONNECT
+        speed: 2
+        highAvailability: true
+        network:
+          href: href
+          id: id
+          title: title
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        activeAt: 2000-01-23T04:56:07.000+00:00
+        advertiseInternalRoutes: true
+        href: href
+        id: id
+        state: INITIALIZING
+        billingProvider: STRIPE
+        customerASN: 1
         nat:
           mappings:
           - natCidr: natCidr
@@ -4383,18 +3971,13 @@ components:
           - blocks
           pnatCidr: pnatCidr
           enabled: true
-        billingTerm: HOURLY
         errorMessage: errorMessage
-        description: description
-        errorCode: BAD_REQUEST
         customerNetworks:
         - address: address
           name: name
         - address: address
           name: name
-        type: AWS_DIRECT_CONNECT
         primaryGateway:
-          linkState: UP
           availabilityDomain: PRIMARY
           bgpConfig:
             peeringSubnet: peeringSubnet
@@ -4405,27 +3988,26 @@ components:
             state: UP
             pureportASN: 5
             customerASN: 5
+          pureportInternalGatewayIP: pureportInternalGatewayIP
           errorMessage: errorMessage
-          name: name
           description: description
           errorCode: BAD_REQUEST
-          id: id
-          state: WAITING_TO_PROVISION
           type: STANDARD
+          version: version
           remoteId: remoteId
-        speed: 2
-        highAvailability: true
-        network:
+          linkState: UP
+          name: name
+          connection:
+            href: href
+            id: id
+            title: title
           href: href
           id: id
-          title: title
+          state: WAITING_TO_PROVISION
         tags:
           key: tags
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        activeAt: 2000-01-23T04:56:07.000+00:00
         deletedAt: 2000-01-23T04:56:07.000+00:00
         secondaryGateway:
-          linkState: UP
           availabilityDomain: PRIMARY
           bgpConfig:
             peeringSubnet: peeringSubnet
@@ -4436,36 +4018,47 @@ components:
             state: UP
             pureportASN: 5
             customerASN: 5
+          pureportInternalGatewayIP: pureportInternalGatewayIP
           errorMessage: errorMessage
-          name: name
           description: description
           errorCode: BAD_REQUEST
+          type: STANDARD
+          version: version
+          remoteId: remoteId
+          linkState: UP
+          name: name
+          connection:
+            href: href
+            id: id
+            title: title
+          href: href
           id: id
           state: WAITING_TO_PROVISION
-          type: STANDARD
-          remoteId: remoteId
         name: name
         billingPlan:
-          amount: 0
+          amount: 0.8008281904610115
+          billingLongHaul: NOT_APPLICABLE
           term: HOURLY
           id: id
           billingInterval: ONCE
-          setupAmount: 6
+          setupAmount: 6.027456183070403
         location:
           href: href
           id: id
           title: title
-        href: href
-        id: id
-        state: INITIALIZING
-        customerASN: 1
       properties:
         activeAt:
           format: date-time
           readOnly: true
           type: string
+        advertiseInternalRoutes:
+          type: boolean
         billingPlan:
           $ref: '#/components/schemas/BillingPlan'
+        billingProvider:
+          enum:
+          - STRIPE
+          type: string
         billingTerm:
           enum:
           - HOURLY
@@ -4517,26 +4110,34 @@ components:
           - ORACLE_OCID_ALREADY_IN_USE
           - ADMIN_ACCESS_MUST_EXIST
           - CONNECTION_UPDATE_STATE_CONFLICT
+          - CONNECTION_RESPAWN_STATE_CONFLICT
           - CONNECTION_DELETE_STATE_CONFLICT
           - NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
           - ACCOUNT_DELETE_NON_DELETED_PORT_STATE_CONFLICT
           - NETWORK_RESPAWN_STATE_CONFLICT
+          - GATEWAY_RESPAWN_STATE_CONFLICT
+          - GATEWAY_STOP_STATE_CONFLICT
+          - GATEWAY_START_STATE_CONFLICT
           - PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
+          - PORT_CHILD_ACCOUNT_FLAG_IN_USE
           - CONSENT_REQUIRED
           - ACCOUNT_ALREADY_CONSENTED
           - ACCOUNT_MEMBER_ALREADY_EXISTS
           - ACCOUNT_HAS_CHILD_ACCOUNTS
           - PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED
+          - ACCESS_SWITCH_PORT_DELETE_STATE_CONFLICT
           - REQUEST_ENTITY_TOO_LARGE
           - REQUEST_URI_TOO_LONG
           - UNSUPPORTED_MEDIA_TYPE
           - UNPROCESSABLE_ENTITY
           - VALIDATION_ERROR
           - INVALID_LINK
+          - INVALID_SORT
           - INVALID_AWS_REGION
           - INVALID_EXPRESS_ROUTE_SERVICE_KEY
           - INVALID_GOOGLE_PAIRING_KEY
           - INVALID_ORACLE_OCID
+          - INVALID_WHITELIST_PREFIXES
           - EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH
           - ORACLE_OCID_BANDWIDTH_MISMATCH
           - MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS
@@ -4544,6 +4145,9 @@ components:
           - SUPPORTED_CONNECTION_IS_PENDING
           - NO_SUPPORTED_PORT_FOR_PORT
           - UNSUPPORTED_RESOURCE_LIMIT
+          - NETWORK_NAME_UNIQUE
+          - BILLING_CONFIGURATION_NOT_PERMITTED
+          - ACCOUNT_VERIFICATION_REQUIRED
           - MODIFICATION_NOT_ALLOWED
           - AWS_CONNECTION_SPEED_IMMUTABLE
           - INVALID_VLAN
@@ -4552,19 +4156,29 @@ components:
           - UNSUPPORTED_TASK_FOR_RESOURCE
           - UNSUPPORTED_TASK_NAME
           - VLAN_IN_USE
+          - SECONDARY_PORT_NOT_IN_SAME_FACILITY_AS_PRIMARY_PORT
+          - CONNECTION_APPROVAL_NOT_REQUIRED
           - INVALID_CUSTOMER_ASN
           - INVALID_NAT_OVERLAPPING_NATIVE_CIDRS
           - INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK
           - CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS
+          - NOTIFICATION_STATE_IS_INVALID
+          - NOTIFICATION_STATE_CHANGE_IS_INVALID
           - PEERING_TYPE_CHANGE_NOT_ALLOWED
           - PORT_BILLING_TERM_CHANGE_NOT_ALLOWED
+          - PORT_SPEED_CHANGE_NOT_ALLOWED
+          - CONNECTION_BILLING_TERM_CHANGE_NOT_ALLOWED
+          - CONNECTION_SPEED_CHANGE_NOT_ALLOWED
+          - CONNECTION_SPEED_GREATER_THAN_PORT_SPEED
+          - MISSING_REQUIRED_QUERY_PARAMETER
+          - INVALID_REQUIRED_QUERY_PARAMETER
           - INVALID_PEERING_STATE_FOR_OPERATION
           - INVALID_PEERING_TYPE_FOR_OPERATION
           - INVALID_PEERING_PNAT_CONFIGURATION
           - INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS
           - INVALID_NAT_CIDR_ALLOCATION
           - INVALID_NAT_OVERLAPPING_NAT_CIDRS
-          - INVALID_STRIPE_CONFIGURATION
+          - INVALID_BILLING_CONFIGURATION
           - INTERNAL_SERVER_ERROR
           - JSON_GENERATION_ERROR
           - NETWORK_PROVISIONING_ERROR
@@ -4575,15 +4189,23 @@ components:
           - GATEWAY_PROVISIONING_ERROR
           - GATEWAY_UPDATE_SPEED_ERROR
           - GATEWAY_UPDATING_ERROR
+          - GATEWAY_STOP_ERROR
+          - GATEWAY_START_ERROR
           - GATEWAY_DELETING_ERROR
           - ECX_GATEWAY_PROVISIONING_ERROR
+          - ECX_GATEWAY_OPERATION_ERROR
+          - INVALID_LONG_HAUL_PUREPORT_CONFIGURATION
+          - INVALID_LONG_HAUL_PACKET_FABRIC_CONFIGURATION
           - PORT_PROVISIONING_ERROR
           - PORT_UPDATING_ERROR
           - PORT_DELETING_ERROR
+          - NO_PORT_FOUND_FOR_CONNECTION
           - AWS_CONNECTION_DELETE_ERROR
           - GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR
           - ECX_CONNECTION_DELETE_ERROR
           - GOOGLE_OPERATION_TIMEOUT
+          - PACKET_FABRIC_VIRTUAL_CIRCUT_UPGRADE_ERROR
+          - MAXIMUM_VRRP_ROUTERS_ALLOCATED
           - INVALID_TASK_CONFIGURATION
           - CURRENTLY_UNSUPPORTED_TASK_TYPE
           - NOT_IMPLEMENTED
@@ -4600,6 +4222,7 @@ components:
         highAvailability:
           type: boolean
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -4620,12 +4243,27 @@ components:
         secondaryGateway:
           $ref: '#/components/schemas/Gateway'
         speed:
+          enum:
+          - 50
+          - 100
+          - 200
+          - 300
+          - 400
+          - 500
+          - 1000
+          - 2000
+          - 3000
+          - 4000
+          - 5000
+          - 10000
           format: int32
           type: integer
         state:
           enum:
           - INITIALIZING
           - WAITING_TO_PROVISION
+          - PENDING_APPROVAL
+          - APPROVED
           - PROVISIONING
           - FAILED_TO_PROVISION
           - ACTIVE
@@ -4645,16 +4283,21 @@ components:
           enum:
           - AWS_DIRECT_CONNECT
           - AZURE_EXPRESS_ROUTE
+          - EQUINIX_CLOUD_EXCHANGE
           - GOOGLE_CLOUD_INTERCONNECT
           - ORACLE_FAST_CONNECT
           - SITE_IPSEC_VPN
           - PORT
+          - PACKET_FABRIC
           - COMCAST
           - COX_COMMUNICATIONS
+          - ELEMENT_CRITICAL
+          - PACKET
           - ZAYO
           type: string
       required:
       - billingTerm
+      - highAvailability
       - location
       - name
       - speed
@@ -4681,6 +4324,45 @@ components:
         time:
           format: date-time
           type: string
+      type: object
+    ConnectivityByGateway:
+      example:
+        average: 0.8008281904610115
+        destinationAddress: destinationAddress
+        min: 5.962133916683182
+        max: 1.4658129805029452
+        lossRate: 6.027456183070403
+        time:
+          start: 2000-01-23T04:56:07.000+00:00
+          endInclusive: 2000-01-23T04:56:07.000+00:00
+          empty: true
+        gateway:
+          href: href
+          id: id
+          title: title
+        standardDeviation: 5.637376656633329
+      properties:
+        average:
+          format: double
+          type: number
+        destinationAddress:
+          type: string
+        gateway:
+          $ref: '#/components/schemas/Link'
+        lossRate:
+          format: double
+          type: number
+        max:
+          format: double
+          type: number
+        min:
+          format: double
+          type: number
+        standardDeviation:
+          format: double
+          type: number
+        time:
+          $ref: '#/components/schemas/InstantRange'
       type: object
     CustomerNetwork:
       example:
@@ -4714,6 +4396,47 @@ components:
           format: date-time
           type: string
       type: object
+    DetailedInvoiceItem:
+      properties:
+        account:
+          $ref: '#/components/schemas/Link'
+        billableObject:
+          $ref: '#/components/schemas/Link'
+        billableObjectType:
+          enum:
+          - PORT
+          - NETWORK
+          - CONNECTION
+          readOnly: true
+          type: string
+        billingPlan:
+          $ref: '#/components/schemas/BillingPlan'
+        description:
+          readOnly: true
+          type: string
+        quantity:
+          readOnly: true
+          type: number
+        timeRanges:
+          items:
+            $ref: '#/components/schemas/ClosedRangeInstant'
+          readOnly: true
+          type: array
+      type: object
+    EquinixCloudExchangeConnection:
+      allOf:
+      - $ref: '#/components/schemas/Connection'
+      - $ref: '#/components/schemas/EquinixCloudExchangeConnection_allOf'
+      required:
+      - billingTerm
+      - customerASN
+      - highAvailability
+      - location
+      - name
+      - serviceUUID
+      - speed
+      - type
+      type: object
     Facility:
       example:
         altIds:
@@ -4741,6 +4464,7 @@ components:
             type: string
           type: object
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -4760,7 +4484,9 @@ components:
           type: string
       required:
       - address
+      - id
       - name
+      - vendor
       type: object
     Gateway:
       discriminator:
@@ -4769,7 +4495,6 @@ components:
           VPN: '#/components/schemas/VPNGateway'
         propertyName: type
       example:
-        linkState: UP
         availabilityDomain: PRIMARY
         bgpConfig:
           peeringSubnet: peeringSubnet
@@ -4780,14 +4505,22 @@ components:
           state: UP
           pureportASN: 5
           customerASN: 5
+        pureportInternalGatewayIP: pureportInternalGatewayIP
         errorMessage: errorMessage
-        name: name
         description: description
         errorCode: BAD_REQUEST
+        type: STANDARD
+        version: version
+        remoteId: remoteId
+        linkState: UP
+        name: name
+        connection:
+          href: href
+          id: id
+          title: title
+        href: href
         id: id
         state: WAITING_TO_PROVISION
-        type: STANDARD
-        remoteId: remoteId
       properties:
         availabilityDomain:
           enum:
@@ -4797,6 +4530,8 @@ components:
           type: string
         bgpConfig:
           $ref: '#/components/schemas/BGPConfig'
+        connection:
+          $ref: '#/components/schemas/Link'
         description:
           readOnly: true
           type: string
@@ -4824,26 +4559,34 @@ components:
           - ORACLE_OCID_ALREADY_IN_USE
           - ADMIN_ACCESS_MUST_EXIST
           - CONNECTION_UPDATE_STATE_CONFLICT
+          - CONNECTION_RESPAWN_STATE_CONFLICT
           - CONNECTION_DELETE_STATE_CONFLICT
           - NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
           - ACCOUNT_DELETE_NON_DELETED_PORT_STATE_CONFLICT
           - NETWORK_RESPAWN_STATE_CONFLICT
+          - GATEWAY_RESPAWN_STATE_CONFLICT
+          - GATEWAY_STOP_STATE_CONFLICT
+          - GATEWAY_START_STATE_CONFLICT
           - PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
+          - PORT_CHILD_ACCOUNT_FLAG_IN_USE
           - CONSENT_REQUIRED
           - ACCOUNT_ALREADY_CONSENTED
           - ACCOUNT_MEMBER_ALREADY_EXISTS
           - ACCOUNT_HAS_CHILD_ACCOUNTS
           - PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED
+          - ACCESS_SWITCH_PORT_DELETE_STATE_CONFLICT
           - REQUEST_ENTITY_TOO_LARGE
           - REQUEST_URI_TOO_LONG
           - UNSUPPORTED_MEDIA_TYPE
           - UNPROCESSABLE_ENTITY
           - VALIDATION_ERROR
           - INVALID_LINK
+          - INVALID_SORT
           - INVALID_AWS_REGION
           - INVALID_EXPRESS_ROUTE_SERVICE_KEY
           - INVALID_GOOGLE_PAIRING_KEY
           - INVALID_ORACLE_OCID
+          - INVALID_WHITELIST_PREFIXES
           - EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH
           - ORACLE_OCID_BANDWIDTH_MISMATCH
           - MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS
@@ -4851,6 +4594,9 @@ components:
           - SUPPORTED_CONNECTION_IS_PENDING
           - NO_SUPPORTED_PORT_FOR_PORT
           - UNSUPPORTED_RESOURCE_LIMIT
+          - NETWORK_NAME_UNIQUE
+          - BILLING_CONFIGURATION_NOT_PERMITTED
+          - ACCOUNT_VERIFICATION_REQUIRED
           - MODIFICATION_NOT_ALLOWED
           - AWS_CONNECTION_SPEED_IMMUTABLE
           - INVALID_VLAN
@@ -4859,19 +4605,29 @@ components:
           - UNSUPPORTED_TASK_FOR_RESOURCE
           - UNSUPPORTED_TASK_NAME
           - VLAN_IN_USE
+          - SECONDARY_PORT_NOT_IN_SAME_FACILITY_AS_PRIMARY_PORT
+          - CONNECTION_APPROVAL_NOT_REQUIRED
           - INVALID_CUSTOMER_ASN
           - INVALID_NAT_OVERLAPPING_NATIVE_CIDRS
           - INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK
           - CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS
+          - NOTIFICATION_STATE_IS_INVALID
+          - NOTIFICATION_STATE_CHANGE_IS_INVALID
           - PEERING_TYPE_CHANGE_NOT_ALLOWED
           - PORT_BILLING_TERM_CHANGE_NOT_ALLOWED
+          - PORT_SPEED_CHANGE_NOT_ALLOWED
+          - CONNECTION_BILLING_TERM_CHANGE_NOT_ALLOWED
+          - CONNECTION_SPEED_CHANGE_NOT_ALLOWED
+          - CONNECTION_SPEED_GREATER_THAN_PORT_SPEED
+          - MISSING_REQUIRED_QUERY_PARAMETER
+          - INVALID_REQUIRED_QUERY_PARAMETER
           - INVALID_PEERING_STATE_FOR_OPERATION
           - INVALID_PEERING_TYPE_FOR_OPERATION
           - INVALID_PEERING_PNAT_CONFIGURATION
           - INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS
           - INVALID_NAT_CIDR_ALLOCATION
           - INVALID_NAT_OVERLAPPING_NAT_CIDRS
-          - INVALID_STRIPE_CONFIGURATION
+          - INVALID_BILLING_CONFIGURATION
           - INTERNAL_SERVER_ERROR
           - JSON_GENERATION_ERROR
           - NETWORK_PROVISIONING_ERROR
@@ -4882,15 +4638,23 @@ components:
           - GATEWAY_PROVISIONING_ERROR
           - GATEWAY_UPDATE_SPEED_ERROR
           - GATEWAY_UPDATING_ERROR
+          - GATEWAY_STOP_ERROR
+          - GATEWAY_START_ERROR
           - GATEWAY_DELETING_ERROR
           - ECX_GATEWAY_PROVISIONING_ERROR
+          - ECX_GATEWAY_OPERATION_ERROR
+          - INVALID_LONG_HAUL_PUREPORT_CONFIGURATION
+          - INVALID_LONG_HAUL_PACKET_FABRIC_CONFIGURATION
           - PORT_PROVISIONING_ERROR
           - PORT_UPDATING_ERROR
           - PORT_DELETING_ERROR
+          - NO_PORT_FOUND_FOR_CONNECTION
           - AWS_CONNECTION_DELETE_ERROR
           - GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR
           - ECX_CONNECTION_DELETE_ERROR
           - GOOGLE_OPERATION_TIMEOUT
+          - PACKET_FABRIC_VIRTUAL_CIRCUT_UPGRADE_ERROR
+          - MAXIMUM_VRRP_ROUTERS_ALLOCATED
           - INVALID_TASK_CONFIGURATION
           - CURRENTLY_UNSUPPORTED_TASK_TYPE
           - NOT_IMPLEMENTED
@@ -4904,6 +4668,9 @@ components:
         errorMessage:
           readOnly: true
           type: string
+        href:
+          readOnly: true
+          type: string
         id:
           readOnly: true
           type: string
@@ -4915,6 +4682,9 @@ components:
           readOnly: true
           type: string
         name:
+          readOnly: true
+          type: string
+        pureportInternalGatewayIP:
           readOnly: true
           type: string
         remoteId:
@@ -4940,7 +4710,9 @@ components:
           - VPN
           readOnly: true
           type: string
-      readOnly: true
+        version:
+          readOnly: true
+          type: string
       type: object
     GenericConnection:
       allOf:
@@ -4948,7 +4720,7 @@ components:
       - $ref: '#/components/schemas/GenericConnection_allOf'
       required:
       - billingTerm
-      - customerASN
+      - highAvailability
       - location
       - name
       - speed
@@ -4973,6 +4745,7 @@ components:
       - $ref: '#/components/schemas/GoogleCloudInterconnectConnection_allOf'
       required:
       - billingTerm
+      - highAvailability
       - location
       - name
       - primaryPairingKey
@@ -5237,6 +5010,79 @@ components:
       - dhGroup
       - encryption
       type: object
+    IPRoute:
+      example:
+        nextHop: nextHop
+        nextHopGateway:
+          href: href
+          id: id
+          title: title
+        protocol: protocol
+        distance: 0
+        metric: 6
+        prefix: prefix
+        interfaceName: interfaceName
+        nextHopConnection:
+          href: href
+          id: id
+          title: title
+        fib: true
+        selected: true
+        directlyConnected: true
+        uptime: uptime
+      properties:
+        directlyConnected:
+          readOnly: true
+          type: boolean
+        distance:
+          format: int64
+          readOnly: true
+          type: integer
+        fib:
+          readOnly: true
+          type: boolean
+        interfaceName:
+          readOnly: true
+          type: string
+        metric:
+          format: int64
+          readOnly: true
+          type: integer
+        nextHop:
+          readOnly: true
+          type: string
+        nextHopConnection:
+          $ref: '#/components/schemas/Link'
+        nextHopGateway:
+          $ref: '#/components/schemas/Link'
+        prefix:
+          readOnly: true
+          type: string
+        protocol:
+          readOnly: true
+          type: string
+        selected:
+          readOnly: true
+          type: boolean
+        uptime:
+          readOnly: true
+          type: string
+      type: object
+    InstantRange:
+      example:
+        start: 2000-01-23T04:56:07.000+00:00
+        endInclusive: 2000-01-23T04:56:07.000+00:00
+        empty: true
+      properties:
+        empty:
+          type: boolean
+        endInclusive:
+          format: date-time
+          type: string
+        start:
+          format: date-time
+          type: string
+      type: object
     Link:
       example:
         href: href
@@ -5277,6 +5123,7 @@ components:
         geoCoordinates:
           $ref: '#/components/schemas/GeoCoordinates'
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -5292,6 +5139,7 @@ components:
           type: string
       required:
       - geoCoordinates
+      - id
       - name
       type: object
     LocationLinkConnection:
@@ -5320,6 +5168,9 @@ components:
           - 10000
           format: int32
           type: integer
+      required:
+      - location
+      - speed
       type: object
     LoginRequest:
       example:
@@ -5353,7 +5204,6 @@ components:
       required:
       - access_token
       - expires_in
-      - refresh_token
       - token_type
       type: object
     LoginWithRefreshTokenRequest:
@@ -5443,6 +5293,7 @@ components:
           minLength: 0
           type: string
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -5457,6 +5308,7 @@ components:
           - PENDING
           - PROVISIONING
           - PENDING_CONTROLLERS
+          - DELETING_CONTROLLERS
           - PROVISIONING_CONTROLLERS
           - ACTIVE
           - DELETING
@@ -5468,6 +5320,8 @@ components:
           additionalProperties:
             type: string
           type: object
+      required:
+      - name
       type: object
     NetworkConnectionEgressIngress:
       example:
@@ -5523,17 +5377,134 @@ components:
           format: int64
           type: integer
       type: object
+    Notification:
+      example:
+        availabilityDomain: PRIMARY
+        impactedServices:
+        - PUREPORT_CONSOLE
+        - PUREPORT_CONSOLE
+        - PUREPORT_CONSOLE
+        - PUREPORT_CONSOLE
+        - PUREPORT_CONSOLE
+        start: 2000-01-23T04:56:07.000+00:00
+        description: description
+        type: INCIDENT
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        end: 2000-01-23T04:56:07.000+00:00
+        locations:
+        - href: href
+          id: id
+          title: title
+        - href: href
+          id: id
+          title: title
+        href: href
+        id: id
+        state: DRAFT
+        connectionTypes:
+        - AWS_DIRECT_CONNECT
+        - AWS_DIRECT_CONNECT
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        availabilityDomain:
+          enum:
+          - PRIMARY
+          - SECONDARY
+          type: string
+        connectionTypes:
+          items:
+            enum:
+            - AWS_DIRECT_CONNECT
+            - AZURE_EXPRESS_ROUTE
+            - EQUINIX_CLOUD_EXCHANGE
+            - GOOGLE_CLOUD_INTERCONNECT
+            - ORACLE_FAST_CONNECT
+            - SITE_IPSEC_VPN
+            - PORT
+            - PACKET_FABRIC
+            - COMCAST
+            - COX_COMMUNICATIONS
+            - ELEMENT_CRITICAL
+            - PACKET
+            - ZAYO
+            type: string
+          type: array
+          uniqueItems: true
+        createdAt:
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          type: string
+        end:
+          format: date-time
+          type: string
+        href:
+          readOnly: true
+          type: string
+        id:
+          maxLength: 255
+          minLength: 1
+          type: string
+        impactedServices:
+          items:
+            enum:
+            - PUREPORT_CONSOLE
+            - PUREPORT_API
+            - PUREPORT_CONNECTIONS
+            - THIRD_PARTY_API
+            - THIRD_PARTY_CONNECTIONS
+            type: string
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+          uniqueItems: true
+        locations:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+          uniqueItems: true
+        start:
+          format: date-time
+          type: string
+        state:
+          enum:
+          - DRAFT
+          - PUBLISHED
+          - CANCELED
+          - DELETED
+          type: string
+        type:
+          enum:
+          - INCIDENT
+          - MAINTENANCE_WINDOW
+          type: string
+        updatedAt:
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - end
+      - impactedServices
+      - start
+      - type
+      type: object
     Option:
       properties:
         aead:
+          readOnly: true
           type: boolean
         default:
+          readOnly: true
           type: boolean
         description:
+          readOnly: true
           type: string
         unsafe:
+          readOnly: true
           type: boolean
         value:
+          readOnly: true
           type: string
       type: object
     OracleFastConnectConnection:
@@ -5543,6 +5514,7 @@ components:
       required:
       - billingTerm
       - cloudRegion
+      - highAvailability
       - location
       - name
       - peering
@@ -5555,6 +5527,140 @@ components:
       allOf:
       - $ref: '#/components/schemas/VPNAuthConfig'
       - $ref: '#/components/schemas/PSKAuthConfig_allOf'
+      type: object
+    PacketFabricConnection:
+      allOf:
+      - $ref: '#/components/schemas/Connection'
+      - $ref: '#/components/schemas/PacketFabricConnection_allOf'
+      required:
+      - billingTerm
+      - cloudRegion
+      - customer
+      - customerPrimaryId
+      - highAvailability
+      - location
+      - name
+      - peering
+      - speed
+      - type
+      type: object
+    PacketFabricCustomer:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      type: object
+    PageAuditEntry:
+      example:
+        pageNumber: 1
+        pageSize: 5
+        sort:
+          property: property
+          direction: ASC
+        content:
+        - request:
+            method: method
+            queryParameters:
+              key:
+              - queryParameters
+              - queryParameters
+            body: body
+            url: url
+          subject:
+            href: href
+            id: id
+            title: title
+          changes:
+          - current: '{}'
+            previous: '{}'
+            property: property
+          - current: '{}'
+            previous: '{}'
+            property: property
+          ipAddress: ipAddress
+          userAgent: userAgent
+          eventType: USER_LOGIN
+          source: API
+          subjectType: ACCOUNT
+          principal:
+            href: href
+            id: id
+            title: title
+          result: SUCCESS
+          response:
+            executionTime: 0
+            statusCodeFamily: INFORMATIONAL
+            body: body
+            statusCode: 6
+          correlationId: correlationId
+          account:
+            href: href
+            id: id
+            title: title
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - request:
+            method: method
+            queryParameters:
+              key:
+              - queryParameters
+              - queryParameters
+            body: body
+            url: url
+          subject:
+            href: href
+            id: id
+            title: title
+          changes:
+          - current: '{}'
+            previous: '{}'
+            property: property
+          - current: '{}'
+            previous: '{}'
+            property: property
+          ipAddress: ipAddress
+          userAgent: userAgent
+          eventType: USER_LOGIN
+          source: API
+          subjectType: ACCOUNT
+          principal:
+            href: href
+            id: id
+            title: title
+          result: SUCCESS
+          response:
+            executionTime: 0
+            statusCodeFamily: INFORMATIONAL
+            body: body
+            statusCode: 6
+          correlationId: correlationId
+          account:
+            href: href
+            id: id
+            title: title
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        totalElements: 5
+      properties:
+        content:
+          items:
+            $ref: '#/components/schemas/AuditEntry'
+          type: array
+        pageNumber:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          format: int32
+          type: integer
       type: object
     PeeringConfiguration:
       properties:
@@ -5570,6 +5676,7 @@ components:
           enum:
           - PUBLIC
           - PRIVATE
+          - TRANSIT
           type: string
       required:
       - type
@@ -5603,16 +5710,11 @@ components:
           type: string
       type: object
     Pod:
-      example:
-        location:
-          href: href
-          id: id
-          title: title
-        href: href
-        id: id
-        status: AVAILABLE
       properties:
+        facility:
+          $ref: '#/components/schemas/Link'
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -5627,6 +5729,8 @@ components:
           type: string
       required:
       - id
+      - location
+      - status
       type: object
     Port:
       example:
@@ -5635,13 +5739,24 @@ components:
         billingTerm: HOURLY
         description: description
         mediaType: mediaType
-        speed: 0
+        deviceId: deviceId
+        speed: 6
         tags:
           key: tags
+        loaCustomerName: loaCustomerName
         provider: PUREPORT
         name: name
+        patchPanelId: patchPanelId
+        billingPlan:
+          amount: 0.8008281904610115
+          billingLongHaul: NOT_APPLICABLE
+          term: HOURLY
+          id: id
+          billingInterval: ONCE
+          setupAmount: 6.027456183070403
         href: href
         id: id
+        interfaceId: interfaceId
         state: REQUESTED
         facility:
           href: href
@@ -5651,6 +5766,9 @@ components:
           href: href
           id: id
           title: title
+        patchPanelPortNumbers:
+        - 0
+        - 0
       properties:
         account:
           $ref: '#/components/schemas/Link'
@@ -5661,6 +5779,8 @@ components:
           type: string
         availableToChildAccounts:
           type: boolean
+        billingPlan:
+          $ref: '#/components/schemas/BillingPlan'
         billingTerm:
           enum:
           - HOURLY
@@ -5672,6 +5792,9 @@ components:
           maxLength: 1024
           minLength: 0
           type: string
+        deviceId:
+          readOnly: true
+          type: string
         facility:
           $ref: '#/components/schemas/Link'
         href:
@@ -5681,12 +5804,29 @@ components:
           maxLength: 64
           minLength: 1
           type: string
+        interfaceId:
+          readOnly: true
+          type: string
+        loaCustomerName:
+          maxLength: 128
+          minLength: 0
+          type: string
         mediaType:
           type: string
         name:
           maxLength: 64
           minLength: 1
           type: string
+        patchPanelId:
+          readOnly: true
+          type: string
+        patchPanelPortNumbers:
+          items:
+            format: int32
+            type: integer
+          readOnly: true
+          type: array
+          uniqueItems: true
         provider:
           enum:
           - PUREPORT
@@ -5726,35 +5866,15 @@ components:
       - $ref: '#/components/schemas/PortConnection_allOf'
       required:
       - billingTerm
-      - customerASN
+      - highAvailability
       - location
       - name
+      - primaryCustomerVlan
       - primaryPort
       - speed
       - type
       type: object
     ProviderLink:
-      example:
-        vlans: vlans
-        maxAvailableBandwidth: 0
-        providerRegion: providerRegion
-        availabilityDomain: PRIMARY
-        pod:
-          href: href
-          id: id
-          title: title
-        supportedConnectionTypes:
-        - AWS_DIRECT_CONNECT
-        - AWS_DIRECT_CONNECT
-        - AWS_DIRECT_CONNECT
-        - AWS_DIRECT_CONNECT
-        - AWS_DIRECT_CONNECT
-        provider: AWS
-        providerId: providerId
-        href: href
-        id: id
-        speed: 6
-        status: AVAILABLE
       properties:
         availabilityDomain:
           enum:
@@ -5762,6 +5882,7 @@ components:
           - SECONDARY
           type: string
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -5781,6 +5902,8 @@ components:
           - PACKET_FABRIC
           - COMCAST
           - COX_COMMUNICATIONS
+          - ELEMENT_CRITICAL
+          - PACKET
           - ZAYO
           type: string
         providerId:
@@ -5800,12 +5923,16 @@ components:
             enum:
             - AWS_DIRECT_CONNECT
             - AZURE_EXPRESS_ROUTE
+            - EQUINIX_CLOUD_EXCHANGE
             - GOOGLE_CLOUD_INTERCONNECT
             - ORACLE_FAST_CONNECT
             - SITE_IPSEC_VPN
             - PORT
+            - PACKET_FABRIC
             - COMCAST
             - COX_COMMUNICATIONS
+            - ELEMENT_CRITICAL
+            - PACKET
             - ZAYO
             type: string
           maxItems: 2147483647
@@ -5816,15 +5943,18 @@ components:
           pattern: \d{1,4}(-\d{1,4})?(,\d{1,4}(-\d{1,4})?)*
           type: string
       required:
+      - availabilityDomain
       - id
+      - maxAvailableBandwidth
+      - pod
+      - provider
+      - providerId
+      - speed
+      - status
+      - supportedConnectionTypes
+      - vlans
       type: object
     ProviderVlan:
-      example:
-        lastAllocatedAt: 2000-01-23T04:56:07.000+00:00
-        vlan: 6
-        lastDeallocatedAt: 2000-01-23T04:56:07.000+00:00
-        speed: 0
-        allocated: true
       properties:
         allocated:
           type: boolean
@@ -5840,14 +5970,11 @@ components:
         vlan:
           format: int32
           type: integer
+      required:
+      - allocated
+      - vlan
       type: object
     PublicPeeringBlock:
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        cidrBlock: cidrBlock
-        href: href
-        id: id
-        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         cidrBlock:
           type: string
@@ -5856,6 +5983,7 @@ components:
           readOnly: true
           type: string
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -5869,14 +5997,6 @@ components:
       - cidrBlock
       type: object
     PublicPeeringPoolStats:
-      example:
-        totalDeletedIps: 1
-        totalSubnets: 2
-        totalAllocatedIps: 0
-        time: 2000-01-23T04:56:07.000+00:00
-        totalFreeIps: 5
-        totalBlocks: 6
-        totalIps: 5
       properties:
         time:
           format: date-time
@@ -5908,12 +6028,6 @@ components:
           type: integer
       type: object
     ResourceLimit:
-      example:
-        parentResourceType: MEMBER
-        childResourceType: MEMBER
-        limit: 0
-        href: href
-        parentResourceId: parentResourceId
       properties:
         childResourceType:
           enum:
@@ -5925,6 +6039,7 @@ components:
           - CLOUD_SERVICE_ROUTE
           type: string
         href:
+          readOnly: true
           type: string
         limit:
           format: int32
@@ -5968,6 +6083,7 @@ components:
           minLength: 0
           type: string
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -5992,6 +6108,7 @@ components:
       required:
       - authType
       - billingTerm
+      - highAvailability
       - ikeVersion
       - location
       - name
@@ -6000,26 +6117,53 @@ components:
       - speed
       - type
       type: object
+    Sort:
+      example:
+        property: property
+        direction: ASC
+      properties:
+        direction:
+          enum:
+          - ASC
+          - DESC
+          type: string
+        property:
+          type: string
+      type: object
     StandardGateway:
       allOf:
       - $ref: '#/components/schemas/Gateway'
       - $ref: '#/components/schemas/StandardGateway_allOf'
       type: object
+    StaticRouteDTO:
+      properties:
+        network:
+          type: string
+        nextHop:
+          type: string
+      required:
+      - network
+      - nextHop
+      type: object
     SupportedConnection:
       example:
         billingPlans:
-        - amount: 0
+        - amount: 0.8008281904610115
+          billingLongHaul: NOT_APPLICABLE
           term: HOURLY
           id: id
           billingInterval: ONCE
-          setupAmount: 6
-        - amount: 0
+          setupAmount: 6.027456183070403
+        - amount: 0.8008281904610115
+          billingLongHaul: NOT_APPLICABLE
           term: HOURLY
           id: id
           billingInterval: ONCE
-          setupAmount: 6
-        billingProductId: billingProductId
+          setupAmount: 6.027456183070403
+        billingProductIds:
+          key: billingProductIds
         pending: true
+        requiresApproval: true
         groups:
         - href: href
           id: id
@@ -6027,12 +6171,6 @@ components:
         - href: href
           id: id
           title: title
-        location:
-          href: href
-          id: id
-          title: title
-        href: href
-        id: id
         reachableCloudRegions:
         - href: href
           id: id
@@ -6041,17 +6179,25 @@ components:
           id: id
           title: title
         type: AWS_DIRECT_CONNECT
-        peeringType: PUBLIC
         speed: 0
         highAvailability: true
+        location:
+          href: href
+          id: id
+          title: title
+        href: href
+        id: id
+        peeringType: PUBLIC
       properties:
         billingPlans:
           items:
             $ref: '#/components/schemas/BillingPlan'
           readOnly: true
           type: array
-        billingProductId:
-          type: string
+        billingProductIds:
+          additionalProperties:
+            type: string
+          type: object
         groups:
           items:
             $ref: '#/components/schemas/Link'
@@ -6060,6 +6206,7 @@ components:
         highAvailability:
           type: boolean
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -6071,6 +6218,7 @@ components:
           enum:
           - PUBLIC
           - PRIVATE
+          - TRANSIT
           type: string
         pending:
           type: boolean
@@ -6079,6 +6227,8 @@ components:
             $ref: '#/components/schemas/Link'
           type: array
           uniqueItems: true
+        requiresApproval:
+          type: boolean
         speed:
           enum:
           - 50
@@ -6099,28 +6249,32 @@ components:
           enum:
           - AWS_DIRECT_CONNECT
           - AZURE_EXPRESS_ROUTE
+          - EQUINIX_CLOUD_EXCHANGE
           - GOOGLE_CLOUD_INTERCONNECT
           - ORACLE_FAST_CONNECT
           - SITE_IPSEC_VPN
           - PORT
+          - PACKET_FABRIC
           - COMCAST
           - COX_COMMUNICATIONS
+          - ELEMENT_CRITICAL
+          - PACKET
           - ZAYO
           type: string
       required:
-      - billingProductId
+      - billingProductIds
+      - highAvailability
       - location
       - peeringType
+      - pending
+      - requiresApproval
       - speed
       - type
       type: object
     SupportedConnectionGroup:
-      example:
-        name: name
-        href: href
-        id: id
       properties:
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -6134,16 +6288,18 @@ components:
     SupportedPort:
       example:
         billingPlans:
-        - amount: 0
+        - amount: 0.8008281904610115
+          billingLongHaul: NOT_APPLICABLE
           term: HOURLY
           id: id
           billingInterval: ONCE
-          setupAmount: 6
-        - amount: 0
+          setupAmount: 6.027456183070403
+        - amount: 0.8008281904610115
+          billingLongHaul: NOT_APPLICABLE
           term: HOURLY
           id: id
           billingInterval: ONCE
-          setupAmount: 6
+          setupAmount: 6.027456183070403
         mediaTypes:
         - mediaTypes
         - mediaTypes
@@ -6162,7 +6318,6 @@ components:
             enum:
             - PRIMARY
             - SECONDARY
-            readOnly: true
             type: string
           readOnly: true
           type: array
@@ -6175,7 +6330,6 @@ components:
           $ref: '#/components/schemas/Link'
         mediaTypes:
           items:
-            readOnly: true
             type: string
           readOnly: true
           type: array
@@ -6186,6 +6340,10 @@ components:
           readOnly: true
           type: string
         speed:
+          enum:
+          - 1000
+          - 10000
+          - 40000
           format: int32
           readOnly: true
           type: integer
@@ -6207,6 +6365,7 @@ components:
           id: id
           title: title
         description: description
+        startedAt: 2000-01-23T04:56:07.000+00:00
         href: href
         id: id
         state: CREATED
@@ -6230,6 +6389,7 @@ components:
           readOnly: true
           type: string
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -6240,6 +6400,10 @@ components:
         result:
           readOnly: true
           type: string
+        startedAt:
+          format: date-time
+          readOnly: true
+          type: string
         state:
           enum:
           - CREATED
@@ -6247,12 +6411,22 @@ components:
           - COMPLETED
           - FAILED
           - DELETED
+          - AGGREGATE
           readOnly: true
           type: string
         type:
           enum:
           - IPSEC_RESTART
           - PING
+          - CHANGE_CONNECTION_SPEED
+          - CREATE_OR_UPDATE_CONNECTION
+          - DELETE_CONNECTION
+          - STOP_GATEWAY
+          - START_GATEWAY
+          - DELETE_GATEWAY
+          - RESPAWN_GATEWAYS
+          - RESPAWN_NETWORK
+          - RESPAWN_WITH_CLOUD_SERVICES
           type: string
         updatedAt:
           format: date-time
@@ -6300,6 +6474,8 @@ components:
           - ALL
           - BACKBONE
           type: string
+      required:
+      - connectionIds
       type: object
     UsageByConnectionOptions:
       example:
@@ -6310,11 +6486,17 @@ components:
           gt: 2000-01-23T04:56:07.000+00:00
         includeChildAccounts: true
         trafficType: ALL
+        timeUnit: HOURS
       properties:
         date:
           $ref: '#/components/schemas/DateFilter'
         includeChildAccounts:
           type: boolean
+        timeUnit:
+          enum:
+          - HOURS
+          - DAYS
+          type: string
         trafficType:
           enum:
           - ALL
@@ -6369,6 +6551,7 @@ components:
           minLength: 1
           type: string
         href:
+          readOnly: true
           type: string
         id:
           maxLength: 64
@@ -6386,11 +6569,36 @@ components:
           maxLength: 128
           minLength: 1
           type: string
+      required:
+      - email
+      - firstName
+      - lastName
+      - username
+      type: object
+    UserDomain:
+      properties:
+        emailDomains:
+          items:
+            type: string
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+          uniqueItems: true
+        href:
+          readOnly: true
+          type: string
+        id:
+          type: string
+        provider:
+          type: string
+      required:
+      - emailDomains
+      - provider
       type: object
     VPNAuthConfig:
       discriminator:
         mapping:
-          psk: '#/components/schemas/PSKAuthConfig'
+          PSK: '#/components/schemas/PSKAuthConfig'
         propertyName: type
       properties:
         type:
@@ -6413,6 +6621,8 @@ components:
           maxLength: 64
           minLength: 1
           type: string
+        bgpPasswordConfiguration:
+          $ref: '#/components/schemas/BGPPasswordConfiguration'
         cloudRegion:
           $ref: '#/components/schemas/Link'
         cloudServices:
@@ -6420,20 +6630,63 @@ components:
             $ref: '#/components/schemas/Link'
           type: array
           uniqueItems: true
+        cloudServicesPrefixWhitelist:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
         peering:
           $ref: '#/components/schemas/PeeringConfiguration'
     AzureExpressRouteConnection_allOf:
       properties:
+        bgpPasswordConfiguration:
+          $ref: '#/components/schemas/BGPPasswordConfiguration'
         peering:
           $ref: '#/components/schemas/PeeringConfiguration'
         serviceKey:
           maxLength: 64
           minLength: 1
           type: string
-    GenericConnection_allOf:
+    EquinixCloudExchangeConnection_allOf:
       properties:
+        bgpPasswordConfiguration:
+          $ref: '#/components/schemas/BGPPasswordConfiguration'
+        metroCode:
+          type: string
         peering:
           $ref: '#/components/schemas/PeeringConfiguration'
+        serviceUUID:
+          type: string
+    GenericConnection_allOf:
+      properties:
+        bgpPasswordConfiguration:
+          $ref: '#/components/schemas/BGPPasswordConfiguration'
+        gatewayCidr:
+          type: string
+        peering:
+          $ref: '#/components/schemas/PeeringConfiguration'
+        primaryGatewayIP:
+          type: string
+        primaryVlan:
+          format: int32
+          type: integer
+        routingType:
+          enum:
+          - STATIC
+          - BGP
+          type: string
+        secondaryGatewayIP:
+          type: string
+        secondaryVlan:
+          format: int32
+          type: integer
+        staticRoutes:
+          items:
+            $ref: '#/components/schemas/StaticRouteDTO'
+          type: array
+          uniqueItems: true
+        virtualGatewayIP:
+          type: string
     GoogleCloudInterconnectConnection_allOf:
       properties:
         primaryPairingKey:
@@ -6461,30 +6714,82 @@ components:
     PSKAuthConfig_allOf:
       properties:
         key:
+          readOnly: true
           type: string
+    PacketFabricConnection_allOf:
+      properties:
+        bgpPasswordConfiguration:
+          $ref: '#/components/schemas/BGPPasswordConfiguration'
+        cloudRegion:
+          $ref: '#/components/schemas/Link'
+        customer:
+          $ref: '#/components/schemas/PacketFabricCustomer'
+        customerPrimaryId:
+          type: string
+        customerSecondaryId:
+          type: string
+        peering:
+          $ref: '#/components/schemas/PeeringConfiguration'
+        primaryVlan:
+          format: int32
+          type: integer
+        secondaryVlan:
+          format: int32
+          type: integer
     PortConnection_allOf:
       properties:
+        bgpPasswordConfiguration:
+          $ref: '#/components/schemas/BGPPasswordConfiguration'
+        billingLongHaul:
+          enum:
+          - NOT_APPLICABLE
+          - METRO
+          - USAGE
+          - DEDICATED
+          readOnly: true
+          type: string
+        gatewayCidr:
+          type: string
         primaryCustomerVlan:
           format: int32
           maximum: 4096
           minimum: 0
           type: integer
+        primaryGatewayIP:
+          type: string
         primaryPort:
           $ref: '#/components/schemas/Link'
+        routingType:
+          enum:
+          - STATIC
+          - BGP
+          type: string
         secondaryCustomerVlan:
           format: int32
           maximum: 4096
           minimum: 0
           type: integer
+        secondaryGatewayIP:
+          type: string
         secondaryPort:
           $ref: '#/components/schemas/Link'
+        staticRoutes:
+          items:
+            $ref: '#/components/schemas/StaticRouteDTO'
+          type: array
+          uniqueItems: true
+        virtualGatewayIP:
+          type: string
     SiteIPSecVPNConnection_allOf:
       properties:
         authType:
           enum:
           - PSK
           type: string
+        bgpPasswordConfiguration:
+          $ref: '#/components/schemas/BGPPasswordConfiguration'
         enableBGPPassword:
+          deprecated: true
           type: boolean
         ikeV1:
           $ref: '#/components/schemas/IKEV1Config'
@@ -6531,15 +6836,19 @@ components:
         auth:
           $ref: '#/components/schemas/VPNAuthConfig'
         customerGatewayIP:
+          readOnly: true
           type: string
         customerVtiIP:
+          readOnly: true
           type: string
         osNetworkId:
           readOnly: true
           type: string
         pureportGatewayIP:
+          readOnly: true
           type: string
         pureportVtiIP:
+          readOnly: true
           type: string
   securitySchemes:
     OAuth2:

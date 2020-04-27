@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**AddNetwork**](NetworksApi.md#AddNetwork) | **Post** /accounts/{accountId}/networks | Add new network
 [**DeleteNetwork**](NetworksApi.md#DeleteNetwork) | **Delete** /networks/{networkId} | Delete network
 [**FindNetworks**](NetworksApi.md#FindNetworks) | **Get** /accounts/{accountId}/networks | List networks
-[**GetInternal1**](NetworksApi.md#GetInternal1) | **Get** /networks/{networkId}/details | Get internal network details
 [**GetNetwork**](NetworksApi.md#GetNetwork) | **Get** /networks/{networkId} | Get network details
 [**Respawn**](NetworksApi.md#Respawn) | **Post** /networks/{networkId}/respawn | Respawn controllers on network
 [**UpdateNetwork**](NetworksApi.md#UpdateNetwork) | **Put** /networks/{networkId} | Update network
@@ -106,38 +105,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]Network**](Network.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetInternal1
-
-> Network GetInternal1(ctx, networkId)
-
-Get internal network details
-
-### Required Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**networkId** | **string**|  | 
-
-### Return type
-
-[**Network**](Network.md)
 
 ### Authorization
 

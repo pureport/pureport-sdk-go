@@ -14,5 +14,6 @@ package client
 type UsageByConnectionOptions struct {
 	Date                 DateFilter `json:"date,omitempty"`
 	IncludeChildAccounts bool       `json:"includeChildAccounts,omitempty"`
+	TimeUnit             string     `json:"timeUnit,omitempty"`
 	TrafficType          string     `json:"trafficType,omitempty"`
 }

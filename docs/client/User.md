@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Company** | **string** |  | [optional] 
-**Email** | **string** |  | [optional] 
-**FirstName** | **string** |  | [optional] 
-**Href** | **string** |  | [optional] 
+**Email** | **string** |  | 
+**FirstName** | **string** |  | 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
-**LastName** | **string** |  | [optional] 
+**LastName** | **string** |  | 
 **PhoneNumber** | **string** |  | [optional] 
-**Username** | **string** |  | [optional] 
+**Username** | **string** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

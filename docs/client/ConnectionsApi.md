@@ -11,8 +11,6 @@ Method | HTTP request | Description
 [**GetConnection**](ConnectionsApi.md#GetConnection) | **Get** /connections/{connectionId} | Get connection details
 [**GetConnectionTasks**](ConnectionsApi.md#GetConnectionTasks) | **Get** /connections/{connectionId}/tasks | List connection tasks
 [**GetConnections**](ConnectionsApi.md#GetConnections) | **Get** /networks/{networkId}/connections | List network connections
-[**GetInternal**](ConnectionsApi.md#GetInternal) | **Get** /connections/{connectionId}/details | Get internal connection details
-[**RespawnConnection**](ConnectionsApi.md#RespawnConnection) | **Post** /connections/{connectionId}/respawn | Respawn connection
 [**UpdateConnection**](ConnectionsApi.md#UpdateConnection) | **Put** /connections/{connectionId} | Update connection
 
 
@@ -248,70 +246,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]Connection**](Connection.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetInternal
-
-> Connection GetInternal(ctx, connectionId)
-
-Get internal connection details
-
-### Required Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**connectionId** | **string**|  | 
-
-### Return type
-
-[**Connection**](Connection.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RespawnConnection
-
-> Connection RespawnConnection(ctx, connectionId)
-
-Respawn connection
-
-### Required Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**connectionId** | **string**|  | 
-
-### Return type
-
-[**Connection**](Connection.md)
 
 ### Authorization
 

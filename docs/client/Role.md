@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Account** | [**Link**](Link.md) |  | 
 **Description** | **string** |  | [optional] 
-**Href** | **string** |  | [optional] 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
 **Name** | **string** |  | 
 **Permissions** | [**map[string]map[string]bool**](map.md) |  | [optional] 
