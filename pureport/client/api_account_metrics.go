@@ -128,20 +128,20 @@ func (a *AccountMetricsApiService) UsageByConnection(ctx _context.Context, accou
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// UsageByConnection1Opts Optional parameters for the method 'UsageByConnection1'
-type UsageByConnection1Opts struct {
+// UsageByConnectionAndTimeOpts Optional parameters for the method 'UsageByConnectionAndTime'
+type UsageByConnectionAndTimeOpts struct {
 	UsageByConnectionAndTimeOptions optional.Interface
 }
 
 /*
-UsageByConnection1 Retrieve usage by connection and time
+UsageByConnectionAndTime Retrieve usage by connection and time
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accountId
- * @param optional nil or *UsageByConnection1Opts - Optional Parameters:
+ * @param optional nil or *UsageByConnectionAndTimeOpts - Optional Parameters:
  * @param "UsageByConnectionAndTimeOptions" (optional.Interface of UsageByConnectionAndTimeOptions) -
 @return []ConnectionTimeEgressIngress
 */
-func (a *AccountMetricsApiService) UsageByConnection1(ctx _context.Context, accountId string, localVarOptionals *UsageByConnection1Opts) ([]ConnectionTimeEgressIngress, *_nethttp.Response, error) {
+func (a *AccountMetricsApiService) UsageByConnectionAndTime(ctx _context.Context, accountId string, localVarOptionals *UsageByConnectionAndTimeOpts) ([]ConnectionTimeEgressIngress, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}

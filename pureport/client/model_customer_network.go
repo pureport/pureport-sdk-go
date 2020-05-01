@@ -10,8 +10,9 @@
 
 package client
 
-// CustomerNetwork struct for CustomerNetwork
+// CustomerNetwork A mapping of a customer side IPAddress with a user friendly name.
 type CustomerNetwork struct {
 	Address string `json:"address"`
-	Name    string `json:"name,omitempty"`
+	// The user provided name for the customer network.
+	Name string `json:"name,omitempty"`
 }

@@ -5,7 +5,7 @@ All URIs are relative to *https://api.pureport.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**UsageByConnection**](AccountMetricsApi.md#UsageByConnection) | **Post** /accounts/{accountId}/metrics/usageByConnection | Retrieve usage by connection
-[**UsageByConnection1**](AccountMetricsApi.md#UsageByConnection1) | **Post** /accounts/{accountId}/metrics/usageByConnectionAndTime | Retrieve usage by connection and time
+[**UsageByConnectionAndTime**](AccountMetricsApi.md#UsageByConnectionAndTime) | **Post** /accounts/{accountId}/metrics/usageByConnectionAndTime | Retrieve usage by connection and time
 [**UsageByNetworkAndTime**](AccountMetricsApi.md#UsageByNetworkAndTime) | **Post** /accounts/{accountId}/metrics/usageByNetworkAndTime | Retrieve usage by network over time
 
 
@@ -53,9 +53,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UsageByConnection1
+## UsageByConnectionAndTime
 
-> []ConnectionTimeEgressIngress UsageByConnection1(ctx, accountId, optional)
+> []ConnectionTimeEgressIngress UsageByConnectionAndTime(ctx, accountId, optional)
 
 Retrieve usage by connection and time
 
@@ -66,11 +66,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string**|  | 
- **optional** | ***UsageByConnection1Opts** | optional parameters | nil if no parameters
+ **optional** | ***UsageByConnectionAndTimeOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
-Optional parameters are passed through a pointer to a UsageByConnection1Opts struct
+Optional parameters are passed through a pointer to a UsageByConnectionAndTimeOpts struct
 
 
 Name | Type | Description  | Notes

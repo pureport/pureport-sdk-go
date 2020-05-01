@@ -13,7 +13,9 @@ package client
 // EquinixCloudExchangeConnectionAllOf struct for EquinixCloudExchangeConnectionAllOf
 type EquinixCloudExchangeConnectionAllOf struct {
 	BgpPasswordConfiguration BgpPasswordConfiguration `json:"bgpPasswordConfiguration,omitempty"`
-	MetroCode                string                   `json:"metroCode,omitempty"`
-	Peering                  PeeringConfiguration     `json:"peering,omitempty"`
-	ServiceUUID              string                   `json:"serviceUUID,omitempty"`
+	// The metro code for the location of the Equinix facility.
+	MetroCode string               `json:"metroCode,omitempty"`
+	Peering   PeeringConfiguration `json:"peering,omitempty"`
+	// The Equinix service UUID for the connection.
+	ServiceUUID string `json:"serviceUUID,omitempty"`
 }

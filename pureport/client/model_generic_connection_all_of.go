@@ -16,10 +16,14 @@ type GenericConnectionAllOf struct {
 	GatewayCidr              string                   `json:"gatewayCidr,omitempty"`
 	Peering                  PeeringConfiguration     `json:"peering,omitempty"`
 	PrimaryGatewayIP         string                   `json:"primaryGatewayIP,omitempty"`
-	PrimaryVlan              int32                    `json:"primaryVlan,omitempty"`
-	RoutingType              string                   `json:"routingType,omitempty"`
-	SecondaryGatewayIP       string                   `json:"secondaryGatewayIP,omitempty"`
-	SecondaryVlan            int32                    `json:"secondaryVlan,omitempty"`
-	StaticRoutes             []StaticRouteDto         `json:"staticRoutes,omitempty"`
-	VirtualGatewayIP         string                   `json:"virtualGatewayIP,omitempty"`
+	// The primary VLAN ID.
+	PrimaryVlan int32 `json:"primaryVlan,omitempty"`
+	// The method to use for determining network routes.
+	RoutingType        string `json:"routingType,omitempty"`
+	SecondaryGatewayIP string `json:"secondaryGatewayIP,omitempty"`
+	// The secondary VLAN ID if this is an HA connection.
+	SecondaryVlan int32 `json:"secondaryVlan,omitempty"`
+	// The user configured static routes.
+	StaticRoutes     []StaticRoute `json:"staticRoutes,omitempty"`
+	VirtualGatewayIP string        `json:"virtualGatewayIP,omitempty"`
 }

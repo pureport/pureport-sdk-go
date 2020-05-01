@@ -4,12 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Account** | [**Link**](Link.md) |  | [optional] 
 **Children** | [**[]Link**](Link.md) |  | [optional] [readonly] 
 **CompletedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
+**Connection** | [**Link**](Link.md) |  | [optional] 
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **Description** | **string** |  | [optional] [readonly] 
+**Gateway** | [**Link**](Link.md) |  | [optional] 
 **Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
+**Network** | [**Link**](Link.md) |  | [optional] 
 **Parent** | [**Link**](Link.md) |  | [optional] 
 **Result** | **string** |  | [optional] [readonly] 
 **StartedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 

@@ -1130,7 +1130,7 @@ paths:
       - account metrics
   /accounts/{accountId}/metrics/usageByConnectionAndTime:
     post:
-      operationId: usageByConnection_1
+      operationId: usageByConnectionAndTime
       parameters:
       - explode: false
         in: path
@@ -2957,6 +2957,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/Connection'
       - $ref: '#/components/schemas/AWSDirectConnectConnection_allOf'
+      description: Connection using AWS Direct Connect.
       required:
       - awsAccountId
       - billingTerm
@@ -3041,9 +3042,9 @@ components:
     Account:
       example:
         parent:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         showChildAccountPricing: true
         hasChildren: true
         verified: true
@@ -3062,12 +3063,12 @@ components:
         href: href
         id: id
         supportedConnectionGroups:
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
       properties:
         demo:
           type: boolean
@@ -3136,9 +3137,9 @@ components:
         stripeExpiry: stripeExpiry
         stripeLastFour: stripeLastFour
         account:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         email: email
       properties:
         account:
@@ -3209,22 +3210,22 @@ components:
       example:
         expired: true
         invitedBy:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         roles:
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         href: href
         id: id
         account:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         email: email
         invitedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -3268,21 +3269,21 @@ components:
     AccountMember:
       example:
         roles:
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         href: href
         user:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         account:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
       properties:
         account:
           $ref: '#/components/schemas/Link'
@@ -3316,12 +3317,12 @@ components:
           createdAt: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00
           locations:
-          - href: href
-            id: id
-            title: title
-          - href: href
-            id: id
-            title: title
+          - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           href: href
           id: id
           state: DRAFT
@@ -3330,12 +3331,12 @@ components:
           - AWS_DIRECT_CONNECT
           updatedAt: 2000-01-23T04:56:07.000+00:00
         connections:
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
       properties:
         connections:
           items:
@@ -3349,29 +3350,29 @@ components:
     ApiKey:
       example:
         roles:
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         name: name
         description: description
         href: href
         secret: secret
         account:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         key: key
       properties:
         account:
@@ -3415,9 +3416,9 @@ components:
           body: body
           url: url
         subject:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         changes:
         - current: '{}'
           previous: '{}'
@@ -3431,9 +3432,9 @@ components:
         source: API
         subjectType: ACCOUNT
         principal:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         result: SUCCESS
         response:
           executionTime: 0
@@ -3442,9 +3443,9 @@ components:
           statusCode: 6
         correlationId: correlationId
         account:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         account:
@@ -3615,6 +3616,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/Connection'
       - $ref: '#/components/schemas/AzureExpressRouteConnection_allOf'
+      description: Connection using an Azure Express Route.
       required:
       - billingTerm
       - highAvailability
@@ -3633,7 +3635,7 @@ components:
         publicNatIp: publicNatIp
         state: UP
         pureportASN: 5
-        customerASN: 5
+        customerASN: 1
       properties:
         customerASN:
           format: int64
@@ -3667,6 +3669,9 @@ components:
           type: string
       type: object
     BGPPasswordConfiguration:
+      description: The set of configuration options for enabling & managing BGP passwords.
+        If a password is not provided during the connection creation, a password will
+        be automatically generated for you.
       properties:
         enabled:
           type: boolean
@@ -3679,9 +3684,9 @@ components:
       example:
         nextHop: nextHop
         nextHopGateway:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         internal: true
         locPref: 0
         origin: origin
@@ -3695,9 +3700,9 @@ components:
         multiPath: true
         metric: 6
         nextHopConnection:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
       properties:
         best:
           readOnly: true
@@ -3852,9 +3857,9 @@ components:
         ipv6PrefixCount: 6
         service: service
         cloudRegion:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         name: name
         deactivatedAt: 2000-01-23T04:56:07.000+00:00
         href: href
@@ -3914,6 +3919,7 @@ components:
       - service
       type: object
     Connection:
+      description: Base for all Pureport Connections.
       discriminator:
         mapping:
           AWS_DIRECT_CONNECT: '#/components/schemas/AWSDirectConnectConnection'
@@ -3932,23 +3938,23 @@ components:
         propertyName: type
       example:
         billingTerm: HOURLY
-        description: description
+        description: 50Mbps VPN connection with High Availability enabled.
         errorCode: BAD_REQUEST
         type: AWS_DIRECT_CONNECT
-        speed: 2
+        speed: 5
         highAvailability: true
         network:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         createdAt: 2000-01-23T04:56:07.000+00:00
         activeAt: 2000-01-23T04:56:07.000+00:00
         advertiseInternalRoutes: true
         href: href
-        id: id
+        id: conn-T8E8JE6I7anrhXtxrkXPlw
         state: INITIALIZING
         billingProvider: STRIPE
-        customerASN: 1
+        customerASN: 65222
         nat:
           mappings:
           - natCidr: natCidr
@@ -3967,16 +3973,15 @@ components:
             nativeCidr: nativeCidr
             block: block
           blocks:
-          - blocks
-          - blocks
+          - 100.64.0.0/16
           pnatCidr: pnatCidr
           enabled: true
         errorMessage: errorMessage
         customerNetworks:
         - address: address
-          name: name
+          name: Some network name
         - address: address
-          name: name
+          name: Some network name
         primaryGateway:
           availabilityDomain: PRIMARY
           bgpConfig:
@@ -3987,7 +3992,7 @@ components:
             publicNatIp: publicNatIp
             state: UP
             pureportASN: 5
-            customerASN: 5
+            customerASN: 1
           pureportInternalGatewayIP: pureportInternalGatewayIP
           errorMessage: errorMessage
           description: description
@@ -3998,9 +4003,9 @@ components:
           linkState: UP
           name: name
           connection:
-            href: href
-            id: id
-            title: title
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           href: href
           id: id
           state: WAITING_TO_PROVISION
@@ -4017,7 +4022,7 @@ components:
             publicNatIp: publicNatIp
             state: UP
             pureportASN: 5
-            customerASN: 5
+            customerASN: 1
           pureportInternalGatewayIP: pureportInternalGatewayIP
           errorMessage: errorMessage
           description: description
@@ -4028,13 +4033,13 @@ components:
           linkState: UP
           name: name
           connection:
-            href: href
-            id: id
-            title: title
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           href: href
           id: id
           state: WAITING_TO_PROVISION
-        name: name
+        name: VPN - North Hills, NC - 50Mbps - HA
         billingPlan:
           amount: 0.8008281904610115
           billingLongHaul: NOT_APPLICABLE
@@ -4043,23 +4048,28 @@ components:
           billingInterval: ONCE
           setupAmount: 6.027456183070403
         location:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
       properties:
         activeAt:
           format: date-time
           readOnly: true
           type: string
         advertiseInternalRoutes:
+          description: If the connection is advertising internal routes, which allows
+            the customer the option of probing and tracing these routes.
           type: boolean
         billingPlan:
           $ref: '#/components/schemas/BillingPlan'
         billingProvider:
+          description: The provider used for billing this connection.
           enum:
           - STRIPE
+          readOnly: true
           type: string
         billingTerm:
+          description: The licensed billing term for the connection.
           enum:
           - HOURLY
           - MONTHLY
@@ -4071,9 +4081,13 @@ components:
           readOnly: true
           type: string
         customerASN:
+          description: The customer side ASN. This can either be a public or private
+            ASN. If this is a public ASN, you must own it to prevent conflicts.
+          example: 65222
           format: int64
           type: integer
         customerNetworks:
+          description: Set of customer Networks for this connection.
           items:
             $ref: '#/components/schemas/CustomerNetwork'
           type: array
@@ -4083,10 +4097,13 @@ components:
           readOnly: true
           type: string
         description:
+          description: The user defined description for the connection.
+          example: 50Mbps VPN connection with High Availability enabled.
           maxLength: 1024
           minLength: 0
           type: string
         errorCode:
+          description: Error Code assigned to the connection if it is an error state.
           enum:
           - BAD_REQUEST
           - RESOURCE_LIMITATION_EXCEEDED
@@ -4156,6 +4173,7 @@ components:
           - UNSUPPORTED_TASK_FOR_RESOURCE
           - UNSUPPORTED_TASK_NAME
           - VLAN_IN_USE
+          - PORT_CONNECTION_LOCATION_MISMATCH
           - SECONDARY_PORT_NOT_IN_SAME_FACILITY_AS_PRIMARY_PORT
           - CONNECTION_APPROVAL_NOT_REQUIRED
           - INVALID_CUSTOMER_ASN
@@ -4217,20 +4235,28 @@ components:
           readOnly: true
           type: string
         errorMessage:
+          description: Error message assigned to the connection if it is an error
+            state.
           readOnly: true
           type: string
         highAvailability:
+          description: Whether this connection has redundant gateways for failover.
           type: boolean
         href:
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the connection.
+            This can be provided during creation, but if left empty, will be generated.
+          example: conn-T8E8JE6I7anrhXtxrkXPlw
           maxLength: 64
           minLength: 1
           type: string
         location:
           $ref: '#/components/schemas/Link'
         name:
+          description: The user specified name for the connection.
+          example: VPN - North Hills, NC - 50Mbps - HA
           maxLength: 64
           minLength: 1
           type: string
@@ -4243,6 +4269,7 @@ components:
         secondaryGateway:
           $ref: '#/components/schemas/Gateway'
         speed:
+          description: The connection speed in Mbps.
           enum:
           - 50
           - 100
@@ -4259,6 +4286,7 @@ components:
           format: int32
           type: integer
         state:
+          description: The current state of the connection.
           enum:
           - INITIALIZING
           - WAITING_TO_PROVISION
@@ -4280,6 +4308,7 @@ components:
             type: string
           type: object
         type:
+          description: The connection type.
           enum:
           - AWS_DIRECT_CONNECT
           - AZURE_EXPRESS_ROUTE
@@ -4307,9 +4336,9 @@ components:
       example:
         ingress: 6
         connection:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         time: 2000-01-23T04:56:07.000+00:00
         egress: 0
       properties:
@@ -4337,9 +4366,9 @@ components:
           endInclusive: 2000-01-23T04:56:07.000+00:00
           empty: true
         gateway:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         standardDeviation: 5.637376656633329
       properties:
         average:
@@ -4365,13 +4394,16 @@ components:
           $ref: '#/components/schemas/InstantRange'
       type: object
     CustomerNetwork:
+      description: A mapping of a customer side IPAddress with a user friendly name.
       example:
         address: address
-        name: name
+        name: Some network name
       properties:
         address:
           type: string
         name:
+          description: The user provided name for the customer network.
+          example: Some network name
           type: string
       required:
       - address
@@ -4427,6 +4459,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/Connection'
       - $ref: '#/components/schemas/EquinixCloudExchangeConnection_allOf'
+      description: Connection using Equinix Cloud Exchange.
       required:
       - billingTerm
       - customerASN
@@ -4489,6 +4522,8 @@ components:
       - vendor
       type: object
     Gateway:
+      description: The secondary gateway for the connection if this connection has
+        high availability enabled.
       discriminator:
         mapping:
           STANDARD: '#/components/schemas/StandardGateway'
@@ -4504,7 +4539,7 @@ components:
           publicNatIp: publicNatIp
           state: UP
           pureportASN: 5
-          customerASN: 5
+          customerASN: 1
         pureportInternalGatewayIP: pureportInternalGatewayIP
         errorMessage: errorMessage
         description: description
@@ -4515,9 +4550,9 @@ components:
         linkState: UP
         name: name
         connection:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         href: href
         id: id
         state: WAITING_TO_PROVISION
@@ -4605,6 +4640,7 @@ components:
           - UNSUPPORTED_TASK_FOR_RESOURCE
           - UNSUPPORTED_TASK_NAME
           - VLAN_IN_USE
+          - PORT_CONNECTION_LOCATION_MISMATCH
           - SECONDARY_PORT_NOT_IN_SAME_FACILITY_AS_PRIMARY_PORT
           - CONNECTION_APPROVAL_NOT_REQUIRED
           - INVALID_CUSTOMER_ASN
@@ -4718,6 +4754,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/Connection'
       - $ref: '#/components/schemas/GenericConnection_allOf'
+      description: Connection using a generic NNI as a provider.
       required:
       - billingTerm
       - highAvailability
@@ -4727,6 +4764,7 @@ components:
       - type
       type: object
     GeoCoordinates:
+      description: The latitude and longitude.
       example:
         latitude: 0.8008281904610115
         longitude: 6.027456183070403
@@ -4743,6 +4781,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/Connection'
       - $ref: '#/components/schemas/GoogleCloudInterconnectConnection_allOf'
+      description: Connection using Google Cloud Interconnect.
       required:
       - billingTerm
       - highAvailability
@@ -4753,6 +4792,7 @@ components:
       - type
       type: object
     IKEV1Config:
+      description: IKE Version 1 configuration
       properties:
         esp:
           $ref: '#/components/schemas/IKEV1ESPConfig'
@@ -4763,8 +4803,10 @@ components:
       - ike
       type: object
     IKEV1ESPConfig:
+      description: IKE Version 1 Encapsulating Security Payload configuration.
       properties:
         dhGroup:
+          description: The Diffie-Hellman Group.
           enum:
           - MODP_1024
           - MODP_1536
@@ -4778,8 +4820,10 @@ components:
           - ECP_256
           - ECP_384
           - ECP_521
+          example: MODP_2048
           type: string
         encryption:
+          description: The encryption algorithm.
           enum:
           - NULL
           - AES_128
@@ -4800,8 +4844,10 @@ components:
           - AES_128_GMAC
           - AES_192_GMAC
           - AES_256_GMAC
+          example: AES_128
           type: string
         integrity:
+          description: The integrity algorithm.
           enum:
           - MD5_HMAC
           - SHA1_HMAC
@@ -4809,8 +4855,11 @@ components:
           - SHA384_HMAC
           - SHA512_HMAC
           - AES_XCBC
+          example: SHA256_HMAC
           type: string
         lifetime:
+          description: The lifetime of the Security Association (SA).
+          example: 3600
           format: int32
           maximum: 28800
           minimum: 900
@@ -4820,8 +4869,10 @@ components:
       - encryption
       type: object
     IKEV1IKEConfig:
+      description: IKE Version 1 Internet Key Exchange configuration.
       properties:
         dhGroup:
+          description: The Diffie-Hellman Group.
           enum:
           - MODP_1024
           - MODP_1536
@@ -4835,32 +4886,43 @@ components:
           - ECP_256
           - ECP_384
           - ECP_521
+          example: MODP_2048
           type: string
         dpdDelay:
+          description: The Dead Peering Detection (DPD) retry interval.
+          example: 30
           format: int32
           maximum: 900
           minimum: 0
           type: integer
         dpdTimeout:
+          description: The Dead Peering Detection (DPD) interval.
+          example: 150
           format: int32
           maximum: 1000
           minimum: 0
           type: integer
         encryption:
+          description: The encryption algorithm.
           enum:
           - AES_128
           - AES_192
           - AES_256
+          example: AES_128
           type: string
         integrity:
+          description: The integrity algorithm.
           enum:
           - MD5_HMAC
           - SHA1_HMAC
           - SHA256_HMAC
           - SHA384_HMAC
           - SHA512_HMAC
+          example: SHA256_HMAC
           type: string
         lifetime:
+          description: The lifetime of the SA.
+          example: 10800
           format: int32
           maximum: 86400
           minimum: 3600
@@ -4871,6 +4933,7 @@ components:
       - integrity
       type: object
     IKEV2Config:
+      description: IKE Version 2 configuration
       properties:
         esp:
           $ref: '#/components/schemas/IKEV2ESPConfig'
@@ -4881,8 +4944,10 @@ components:
       - ike
       type: object
     IKEV2ESPConfig:
+      description: IKE Version 2 Encapsulating Security Payload configuration.
       properties:
         dhGroup:
+          description: The Diffie-Hellman Group.
           enum:
           - MODP_1024
           - MODP_1536
@@ -4896,8 +4961,10 @@ components:
           - ECP_256
           - ECP_384
           - ECP_521
+          example: MODP_2048
           type: string
         encryption:
+          description: The encryption algorithm.
           enum:
           - NULL
           - AES_128
@@ -4918,8 +4985,10 @@ components:
           - AES_128_GMAC
           - AES_192_GMAC
           - AES_256_GMAC
+          example: AES_128
           type: string
         integrity:
+          description: The integrity algorithm.
           enum:
           - MD5_HMAC
           - SHA1_HMAC
@@ -4927,8 +4996,11 @@ components:
           - SHA384_HMAC
           - SHA512_HMAC
           - AES_XCBC
+          example: SHA256_HMAC
           type: string
         lifetime:
+          description: The lifetime of the Security Association (SA).
+          example: 3600
           format: int32
           maximum: 28800
           minimum: 900
@@ -4938,8 +5010,10 @@ components:
       - encryption
       type: object
     IKEV2IKEConfig:
+      description: IKE Version 2 Internet Key Exchange configuration.
       properties:
         dhGroup:
+          description: The Diffie-Hellman Group.
           enum:
           - MODP_1024
           - MODP_1536
@@ -4955,16 +5029,21 @@ components:
           - ECP_521
           type: string
         dpdDelay:
+          description: The Dead Peering Detection (DPD) retry interval.
+          example: 30
           format: int32
           maximum: 900
           minimum: 0
           type: integer
         dpdTimeout:
+          description: The Dead Peering Detection (DPD) interval.
+          example: 150
           format: int32
           maximum: 1000
           minimum: 0
           type: integer
         encryption:
+          description: The encryption algorithm.
           enum:
           - NULL
           - AES_128
@@ -4982,8 +5061,10 @@ components:
           - AES_128_GCM_128
           - AES_192_GCM_128
           - AES_256_GCM_128
+          example: AES_128
           type: string
         integrity:
+          description: The integrity algorithm.
           enum:
           - MD5_HMAC
           - SHA1_HMAC
@@ -4991,8 +5072,11 @@ components:
           - SHA384_HMAC
           - SHA512_HMAC
           - AES_XCBC
+          example: SHA256_HMAC
           type: string
         lifetime:
+          description: The lifetime of the SA.
+          example: 10800
           format: int32
           maximum: 86400
           minimum: 3600
@@ -5014,18 +5098,18 @@ components:
       example:
         nextHop: nextHop
         nextHopGateway:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         protocol: protocol
         distance: 0
         metric: 6
         prefix: prefix
         interfaceName: interfaceName
         nextHopConnection:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         fib: true
         selected: true
         directlyConnected: true
@@ -5084,10 +5168,11 @@ components:
           type: string
       type: object
     Link:
+      description: Information for the specified Pureport asset.
       example:
-        href: href
-        id: id
-        title: title
+        href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+        id: network-IQ_fTVDErgXvaf6KeWzIVg
+        title: Raleigh Network
       properties:
         href:
           type: string
@@ -5110,14 +5195,14 @@ components:
         id: id
         locationLinks:
         - location:
-            href: href
-            id: id
-            title: title
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           speed: 0
         - location:
-            href: href
-            id: id
-            title: title
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           speed: 0
       properties:
         geoCoordinates:
@@ -5145,9 +5230,9 @@ components:
     LocationLinkConnection:
       example:
         location:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         speed: 0
       properties:
         location:
@@ -5216,6 +5301,7 @@ components:
       - refreshToken
       type: object
     NATConfig:
+      description: Network Address Translation configuration.
       example:
         mappings:
         - natCidr: natCidr
@@ -5234,12 +5320,14 @@ components:
           nativeCidr: nativeCidr
           block: block
         blocks:
-        - blocks
-        - blocks
+        - 100.64.0.0/16
         pnatCidr: pnatCidr
         enabled: true
       properties:
         blocks:
+          description: The reserved CIDR blocks for allocation of customer NAT mappings.
+          example:
+          - 100.64.0.0/16
           items:
             type: string
           readOnly: true
@@ -5247,6 +5335,7 @@ components:
         enabled:
           type: boolean
         mappings:
+          description: The customer NAT mappings.
           items:
             $ref: '#/components/schemas/NATMapping'
           maxItems: 1000
@@ -5257,6 +5346,8 @@ components:
           type: string
       type: object
     NATMapping:
+      description: Network Address Translation Mapping between a customer subnet and
+        a subnet used for SNAT/DNAT.
       example:
         natCidr: natCidr
         nativeCidr: nativeCidr
@@ -5280,9 +5371,9 @@ components:
         id: id
         state: PENDING
         account:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         tags:
           key: tags
       properties:
@@ -5327,18 +5418,18 @@ components:
       example:
         ingress: 6
         connection:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         account:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         egress: 0
         network:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
       properties:
         account:
           $ref: '#/components/schemas/Link'
@@ -5358,13 +5449,13 @@ components:
         usage: 0
         time: 2000-01-23T04:56:07.000+00:00
         account:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         network:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
       properties:
         account:
           $ref: '#/components/schemas/Link'
@@ -5392,12 +5483,12 @@ components:
         createdAt: 2000-01-23T04:56:07.000+00:00
         end: 2000-01-23T04:56:07.000+00:00
         locations:
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         href: href
         id: id
         state: DRAFT
@@ -5511,6 +5602,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/Connection'
       - $ref: '#/components/schemas/OracleFastConnectConnection_allOf'
+      description: Connection using Oracle Fast Connect.
       required:
       - billingTerm
       - cloudRegion
@@ -5532,6 +5624,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/Connection'
       - $ref: '#/components/schemas/PacketFabricConnection_allOf'
+      description: Connection using Packet Fabric as an access point provider.
       required:
       - billingTerm
       - cloudRegion
@@ -5545,6 +5638,7 @@ components:
       - type
       type: object
     PacketFabricCustomer:
+      description: The Packet Fabric customer information.
       example:
         name: name
         id: id
@@ -5573,9 +5667,9 @@ components:
             body: body
             url: url
           subject:
-            href: href
-            id: id
-            title: title
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           changes:
           - current: '{}'
             previous: '{}'
@@ -5589,9 +5683,9 @@ components:
           source: API
           subjectType: ACCOUNT
           principal:
-            href: href
-            id: id
-            title: title
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           result: SUCCESS
           response:
             executionTime: 0
@@ -5600,9 +5694,9 @@ components:
             statusCode: 6
           correlationId: correlationId
           account:
-            href: href
-            id: id
-            title: title
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           timestamp: 2000-01-23T04:56:07.000+00:00
         - request:
             method: method
@@ -5613,9 +5707,9 @@ components:
             body: body
             url: url
           subject:
-            href: href
-            id: id
-            title: title
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           changes:
           - current: '{}'
             previous: '{}'
@@ -5629,9 +5723,9 @@ components:
           source: API
           subjectType: ACCOUNT
           principal:
-            href: href
-            id: id
-            title: title
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           result: SUCCESS
           response:
             executionTime: 0
@@ -5640,9 +5734,9 @@ components:
             statusCode: 6
           correlationId: correlationId
           account:
-            href: href
-            id: id
-            title: title
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
           timestamp: 2000-01-23T04:56:07.000+00:00
         totalElements: 5
       properties:
@@ -5682,6 +5776,7 @@ components:
       - type
       type: object
     PhysicalAddress:
+      description: The street address and geolocation
       example:
         country: country
         city: city
@@ -5694,8 +5789,10 @@ components:
         state: state
       properties:
         city:
+          description: The city name.
           type: string
         country:
+          description: The country name.
           type: string
         geoCoordinates:
           $ref: '#/components/schemas/GeoCoordinates'
@@ -5703,10 +5800,13 @@ components:
           description: A valid Google Place ID
           type: string
         postalCode:
+          description: The postal code.
           type: string
         state:
+          description: The state or locality name.
           type: string
         street:
+          description: The street name.
           type: string
       type: object
     Pod:
@@ -5759,13 +5859,13 @@ components:
         interfaceId: interfaceId
         state: REQUESTED
         facility:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         account:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         patchPanelPortNumbers:
         - 0
         - 0
@@ -5864,6 +5964,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/Connection'
       - $ref: '#/components/schemas/PortConnection_allOf'
+      description: Connection using a Pureport Access Port or Packet Fabric Port.
       required:
       - billingTerm
       - highAvailability
@@ -6072,9 +6173,9 @@ components:
         href: href
         id: id
         account:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
       properties:
         account:
           $ref: '#/components/schemas/Link'
@@ -6105,6 +6206,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/Connection'
       - $ref: '#/components/schemas/SiteIPSecVPNConnection_allOf'
+      description: Connection using VPN over IPSec
       required:
       - authType
       - billingTerm
@@ -6135,7 +6237,18 @@ components:
       - $ref: '#/components/schemas/Gateway'
       - $ref: '#/components/schemas/StandardGateway_allOf'
       type: object
-    StaticRouteDTO:
+    StaticRoute:
+      description: The IKE Phase configuration.
+      example: |-
+        {
+           {
+               "network": "192.168.24.0/24",
+               "nextHop": "10.0.0.4"
+           },{
+               "network": "192.168.25.0/24",
+               "nextHop": "10.0.0.5"
+           }
+        }
       properties:
         network:
           type: string
@@ -6165,26 +6278,26 @@ components:
         pending: true
         requiresApproval: true
         groups:
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         reachableCloudRegions:
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         type: AWS_DIRECT_CONNECT
         speed: 0
         highAvailability: true
         location:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         href: href
         id: id
         peeringType: PUBLIC
@@ -6308,9 +6421,9 @@ components:
         - PRIMARY
         - PRIMARY
         facility:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         speed: 0
       properties:
         availabilityDomains:
@@ -6350,28 +6463,46 @@ components:
       type: object
     Task:
       example:
-        result: result
-        createdAt: 2000-01-23T04:56:07.000+00:00
         parent:
-          href: href
-          id: id
-          title: title
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         completedAt: 2000-01-23T04:56:07.000+00:00
-        children:
-        - href: href
-          id: id
-          title: title
-        - href: href
-          id: id
-          title: title
         description: description
         startedAt: 2000-01-23T04:56:07.000+00:00
+        type: IPSEC_RESTART
+        network:
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        result: result
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        children:
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        connection:
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         href: href
         id: id
         state: CREATED
-        type: IPSEC_RESTART
+        account:
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
+        gateway:
+          href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+          id: network-IQ_fTVDErgXvaf6KeWzIVg
+          title: Raleigh Network
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
+        account:
+          $ref: '#/components/schemas/Link'
         children:
           items:
             $ref: '#/components/schemas/Link'
@@ -6381,6 +6512,8 @@ components:
           format: date-time
           readOnly: true
           type: string
+        connection:
+          $ref: '#/components/schemas/Link'
         createdAt:
           format: date-time
           readOnly: true
@@ -6388,6 +6521,8 @@ components:
         description:
           readOnly: true
           type: string
+        gateway:
+          $ref: '#/components/schemas/Link'
         href:
           readOnly: true
           type: string
@@ -6395,6 +6530,8 @@ components:
           maxLength: 64
           minLength: 1
           type: string
+        network:
+          $ref: '#/components/schemas/Link'
         parent:
           $ref: '#/components/schemas/Link'
         result:
@@ -6436,6 +6573,14 @@ components:
       - type
       type: object
     TrafficSelectorMapping:
+      description: A pair of local and remote addresses for use in VPN Traffic Selectors.
+      example:
+      - customerSide: 20.2.1.0/24
+        pureportSide: 52.92.32.0/22
+      - customerSide: 20.2.1.0/24
+        pureportSide: 20.1.0.0/16
+      - customerSide: 20.2.1.0/24
+        pureportSide: 100.64.0.0/10
       properties:
         customerSide:
           type: string
@@ -6615,9 +6760,15 @@ components:
     AWSDirectConnectConnection_allOf:
       properties:
         awsAccountId:
+          description: The AWS Account ID, a 12-digit number that you use to construct
+            Amazon Resource Names (ARNs).
+          example: "248422234000"
           pattern: ^\d{12}$
           type: string
         awsRegion:
+          description: The AWS Region for the connection. This has been deprecated
+            in favor of cloudRegion.
+          example: us-west-2
           maxLength: 64
           minLength: 1
           type: string
@@ -6626,11 +6777,41 @@ components:
         cloudRegion:
           $ref: '#/components/schemas/Link'
         cloudServices:
+          description: The asset link for the clouds services associated with this
+            connection.
+          example:
+          - href: /cloudServices/aws-s3-us-east-2
+            id: aws-s3-us-east-2
+            title: AWS S3 us-east-2
+          - href: /cloudServices/aws-s3-us-west-1
+            id: aws-s3-us-west-1
+            title: AWS S3 us-west-1
+          - href: /cloudServices/aws-s3-us-west-2
+            id: aws-s3-us-west-2
+            title: AWS S3 us-west-2
+          - href: /cloudServices/aws-s3-us-east-1
+            id: aws-s3-us-east-1
+            title: AWS S3 us-east-1
+          - href: /cloudServices/aws-s3-us-gov-west-1
+            id: aws-s3-us-gov-west-1
+            title: AWS S3 us-gov-west-1
+          - href: /cloudServices/aws-s3-us-gov-east-1
+            id: aws-s3-us-gov-east-1
+            title: AWS S3 us-gov-east-1
+          externalDocs:
+            description: Cloud Services
+            url: TBD
           items:
             $ref: '#/components/schemas/Link'
           type: array
           uniqueItems: true
         cloudServicesPrefixWhitelist:
+          description: The whitelisted cloud services CIDR blocks.
+          example:
+          - 15.193.7.0/24
+          - 15.254.0.0/16
+          - 15.177.80.0/24
+          - 100.20.0.0/14
           items:
             type: string
           type: array
@@ -6644,6 +6825,9 @@ components:
         peering:
           $ref: '#/components/schemas/PeeringConfiguration'
         serviceKey:
+          description: The Azure ExpressRoute service key, a public and unique standard
+            GUID representing identifying the ExpressRoute circuit.
+          example: e28cea0c-de25-4dce-b7d7-d4776d523d4b
           maxLength: 64
           minLength: 1
           type: string
@@ -6652,10 +6836,14 @@ components:
         bgpPasswordConfiguration:
           $ref: '#/components/schemas/BGPPasswordConfiguration'
         metroCode:
+          description: The metro code for the location of the Equinix facility.
+          example: AT
           type: string
         peering:
           $ref: '#/components/schemas/PeeringConfiguration'
         serviceUUID:
+          description: The Equinix service UUID for the connection.
+          example: a1390b22-bbe0-4e93-ad37-85beef00984d
           type: string
     GenericConnection_allOf:
       properties:
@@ -6668,9 +6856,12 @@ components:
         primaryGatewayIP:
           type: string
         primaryVlan:
+          description: The primary VLAN ID.
+          example: 800
           format: int32
           type: integer
         routingType:
+          description: The method to use for determining network routes.
           enum:
           - STATIC
           - BGP
@@ -6678,11 +6869,24 @@ components:
         secondaryGatewayIP:
           type: string
         secondaryVlan:
+          description: The secondary VLAN ID if this is an HA connection.
+          example: 840
           format: int32
           type: integer
         staticRoutes:
+          description: The user configured static routes.
+          example: |-
+            {
+               {
+                   "network": "192.168.24.0/24",
+                   "nextHop": "10.0.0.4"
+               },{
+                   "network": "192.168.25.0/24",
+                   "nextHop": "10.0.0.5"
+               }
+            }
           items:
-            $ref: '#/components/schemas/StaticRouteDTO'
+            $ref: '#/components/schemas/StaticRoute'
           type: array
           uniqueItems: true
         virtualGatewayIP:
@@ -6690,10 +6894,16 @@ components:
     GoogleCloudInterconnectConnection_allOf:
       properties:
         primaryPairingKey:
+          description: The Pairing Key for the primary gateway of the Google Cloud
+            Interconnect.
+          example: 99e0cc93-8b32-4d7e-8b6b-0cd5f1af6e88/us-west1/1
           maxLength: 64
           minLength: 1
           type: string
         secondaryPairingKey:
+          description: The Pairing Key for the secondary gateway of the Google Cloud
+            Interconnect.
+          example: dc2b2c89-b19a-40b5-8af3-a3d5c8b37c5a/us-west2/2
           maxLength: 64
           minLength: 1
           type: string
@@ -6704,10 +6914,20 @@ components:
         peering:
           $ref: '#/components/schemas/PeeringConfiguration'
         primaryOcid:
+          description: The primary Oracle Cloud ID (OCID) for the Oracle Fast Connect.
+          example: ocid1.instance.oc1.phx.abuw4ljrlsfiqw6vzzxb4300000000000000000000000000000000000001
+          externalDocs:
+            description: Oracle Cloud Documentation
+            url: https://docs.cloud.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm
           maxLength: 256
           minLength: 1
           type: string
         secondaryOcid:
+          description: The secondary Oracle Cloud ID (OCID) for the Oracle Fast Connect.
+          example: ocid1.instance.oc1.phx.abuw4ljrlsfiqw6vzzxb4300000000000000000000000000000000000002
+          externalDocs:
+            description: Oracle Cloud Documentation
+            url: https://docs.cloud.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm
           maxLength: 256
           minLength: 1
           type: string
@@ -6725,15 +6945,25 @@ components:
         customer:
           $ref: '#/components/schemas/PacketFabricCustomer'
         customerPrimaryId:
+          description: An ID representing the primary connection with the 3rd party
+            provider selected in the “customer” field.
+          example: ocid1.virtualcircuit.oc1.iad.aaaaaaaak346j4rsngu5cuh4z30000000000000000000000000000000001
           type: string
         customerSecondaryId:
+          description: An ID representing the secondary connection with the 3rd party
+            provider selected in the “customer” field.
+          example: ocid1.virtualcircuit.oc1.iad.aaaaaaaak346j4rsngu5cuh4z30000000000000000000000000000000002
           type: string
         peering:
           $ref: '#/components/schemas/PeeringConfiguration'
         primaryVlan:
+          description: The primary VLAN ID.
+          example: 800
           format: int32
           type: integer
         secondaryVlan:
+          description: The secondary VLAN ID if this is an HA connection.
+          example: 840
           format: int32
           type: integer
     PortConnection_allOf:
@@ -6741,16 +6971,22 @@ components:
         bgpPasswordConfiguration:
           $ref: '#/components/schemas/BGPPasswordConfiguration'
         billingLongHaul:
+          description: The long haul billing configuration for this connection.
           enum:
           - NOT_APPLICABLE
           - METRO
           - USAGE
           - DEDICATED
+          externalDocs:
+            description: Long Haul Billing
+            url: TBD
           readOnly: true
           type: string
         gatewayCidr:
           type: string
         primaryCustomerVlan:
+          description: The VLAN ID of the primary gateway.
+          example: 800
           format: int32
           maximum: 4096
           minimum: 0
@@ -6760,11 +6996,14 @@ components:
         primaryPort:
           $ref: '#/components/schemas/Link'
         routingType:
+          description: The method to use for determining network routes.
           enum:
           - STATIC
           - BGP
           type: string
         secondaryCustomerVlan:
+          description: The VLAN ID of the secondary gateway if this is an HA connection.
+          example: 840
           format: int32
           maximum: 4096
           minimum: 0
@@ -6774,8 +7013,19 @@ components:
         secondaryPort:
           $ref: '#/components/schemas/Link'
         staticRoutes:
+          description: The user configured static routes.
+          example: |-
+            {
+               {
+                   "network": "192.168.24.0/24",
+                   "nextHop": "10.0.0.4"
+               },{
+                   "network": "192.168.25.0/24",
+                   "nextHop": "10.0.0.5"
+               }
+            }
           items:
-            $ref: '#/components/schemas/StaticRouteDTO'
+            $ref: '#/components/schemas/StaticRoute'
           type: array
           uniqueItems: true
         virtualGatewayIP:
@@ -6783,6 +7033,7 @@ components:
     SiteIPSecVPNConnection_allOf:
       properties:
         authType:
+          description: The authentication type.
           enum:
           - PSK
           type: string
@@ -6796,6 +7047,7 @@ components:
         ikeV2:
           $ref: '#/components/schemas/IKEV2Config'
         ikeVersion:
+          description: The IKE version.
           enum:
           - V1
           - V2
@@ -6805,9 +7057,11 @@ components:
         primaryCustomerRouterIP:
           type: string
         primaryKey:
-          description: IPsec pre-shared key override for the primary gateway
+          description: IPsec pre-shared key (PSK) override for the primary gateway
+          example: hEwHpLc3yFHWkTzDUiipEP7LMGtgn7aTA
           type: string
         routingType:
+          description: The VPN Routing Type.
           enum:
           - POLICY_BASED
           - ROUTE_BASED_STATIC
@@ -6816,9 +7070,18 @@ components:
         secondaryCustomerRouterIP:
           type: string
         secondaryKey:
-          description: IPsec pre-shared key override for the secondary gateway
+          description: IPsec pre-shared key (PSK) override for the secondary gateway
+          example: zi15cDfVLVEgxLN0q3w17ydAvPzaQNriB
           type: string
         trafficSelectors:
+          description: The traffic selectors to apply for routing.
+          example:
+          - customerSide: 20.2.1.0/24
+            pureportSide: 52.92.32.0/22
+          - customerSide: 20.2.1.0/24
+            pureportSide: 20.1.0.0/16
+          - customerSide: 20.2.1.0/24
+            pureportSide: 100.64.0.0/10
           items:
             $ref: '#/components/schemas/TrafficSelectorMapping'
           maxItems: 100

@@ -10,7 +10,7 @@
 
 package client
 
-// Gateway struct for Gateway
+// Gateway The secondary gateway for the connection if this connection has high availability enabled.
 type Gateway struct {
 	AvailabilityDomain        string    `json:"availabilityDomain,omitempty"`
 	BgpConfig                 BgpConfig `json:"bgpConfig,omitempty"`

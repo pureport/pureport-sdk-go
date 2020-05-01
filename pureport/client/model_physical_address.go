@@ -10,14 +10,19 @@
 
 package client
 
-// PhysicalAddress struct for PhysicalAddress
+// PhysicalAddress The street address and geolocation
 type PhysicalAddress struct {
-	City           string         `json:"city,omitempty"`
+	// The city name.
+	City string `json:"city,omitempty"`
+	// The country name.
 	Country        string         `json:"country,omitempty"`
 	GeoCoordinates GeoCoordinates `json:"geoCoordinates,omitempty"`
 	// A valid Google Place ID
-	PlaceId    string `json:"placeId,omitempty"`
+	PlaceId string `json:"placeId,omitempty"`
+	// The postal code.
 	PostalCode string `json:"postalCode,omitempty"`
-	State      string `json:"state,omitempty"`
-	Street     string `json:"street,omitempty"`
+	// The state or locality name.
+	State string `json:"state,omitempty"`
+	// The street name.
+	Street string `json:"street,omitempty"`
 }

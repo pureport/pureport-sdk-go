@@ -10,7 +10,7 @@
 
 package client
 
-// Ikev2Config struct for Ikev2Config
+// Ikev2Config IKE Version 2 configuration
 type Ikev2Config struct {
 	Esp Ikev2EspConfig `json:"esp"`
 	Ike Ikev2IkeConfig `json:"ike"`
