@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ConnectionIds** | **[]string** |  | [optional] 
+**ConnectionIds** | **[]string** |  | 
 **Date** | [**DateFilter**](DateFilter.md) |  | [optional] 
 **TimeUnit** | **string** |  | [optional] 
 **TrafficType** | **string** |  | [optional] 

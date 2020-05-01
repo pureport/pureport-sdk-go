@@ -12,16 +12,16 @@ package client
 
 // ProviderLink struct for ProviderLink
 type ProviderLink struct {
-	AvailabilityDomain       string   `json:"availabilityDomain,omitempty"`
+	AvailabilityDomain       string   `json:"availabilityDomain"`
 	Href                     string   `json:"href,omitempty"`
 	Id                       string   `json:"id"`
-	MaxAvailableBandwidth    int32    `json:"maxAvailableBandwidth,omitempty"`
-	Pod                      Link     `json:"pod,omitempty"`
-	Provider                 string   `json:"provider,omitempty"`
-	ProviderId               string   `json:"providerId,omitempty"`
+	MaxAvailableBandwidth    int32    `json:"maxAvailableBandwidth"`
+	Pod                      Link     `json:"pod"`
+	Provider                 string   `json:"provider"`
+	ProviderId               string   `json:"providerId"`
 	ProviderRegion           string   `json:"providerRegion,omitempty"`
-	Speed                    int32    `json:"speed,omitempty"`
-	Status                   string   `json:"status,omitempty"`
-	SupportedConnectionTypes []string `json:"supportedConnectionTypes,omitempty"`
-	Vlans                    string   `json:"vlans,omitempty"`
+	Speed                    int32    `json:"speed"`
+	Status                   string   `json:"status"`
+	SupportedConnectionTypes []string `json:"supportedConnectionTypes"`
+	Vlans                    string   `json:"vlans"`
 }

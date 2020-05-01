@@ -14,43 +14,64 @@ import (
 	"time"
 )
 
-// SiteIpSecVpnConnection struct for SiteIpSecVpnConnection
+// SiteIpSecVpnConnection Connection using VPN over IPSec
 type SiteIpSecVpnConnection struct {
-	ActiveAt                time.Time         `json:"activeAt,omitempty"`
-	BillingPlan             *BillingPlan      `json:"billingPlan,omitempty"`
-	BillingTerm             string            `json:"billingTerm"`
-	CreatedAt               time.Time         `json:"createdAt,omitempty"`
-	CustomerASN             int64             `json:"customerASN,omitempty"`
-	CustomerNetworks        []CustomerNetwork `json:"customerNetworks,omitempty"`
-	DeletedAt               time.Time         `json:"deletedAt,omitempty"`
-	Description             string            `json:"description,omitempty"`
-	ErrorCode               string            `json:"errorCode,omitempty"`
-	ErrorMessage            string            `json:"errorMessage,omitempty"`
-	HighAvailability        bool              `json:"highAvailability,omitempty"`
-	Href                    string            `json:"href,omitempty"`
-	Id                      string            `json:"id,omitempty"`
-	Location                Link              `json:"location"`
-	Name                    string            `json:"name"`
-	Nat                     *NatConfig        `json:"nat,omitempty"`
-	Network                 Link              `json:"network,omitempty"`
-	PrimaryGateway          *VpnGateway       `json:"primaryGateway,omitempty"`
-	SecondaryGateway        *VpnGateway       `json:"secondaryGateway,omitempty"`
-	Speed                   int32             `json:"speed"`
-	State                   string            `json:"state,omitempty"`
-	Tags                    map[string]string `json:"tags,omitempty"`
-	Type                    string            `json:"type"`
-	AuthType                string            `json:"authType"`
-	EnableBGPPassword       bool              `json:"enableBGPPassword,omitempty"`
-	IkeV1                   *Ikev1Config      `json:"ikeV1,omitempty"`
-	IkeV2                   *Ikev2Config      `json:"ikeV2,omitempty"`
-	IkeVersion              string            `json:"ikeVersion"`
-	PhysicalAddress         PhysicalAddress   `json:"physicalAddress,omitempty"`
-	PrimaryCustomerRouterIP string            `json:"primaryCustomerRouterIP"`
-	// IPsec pre-shared key override for the primary gateway
-	PrimaryKey                string `json:"primaryKey,omitempty"`
+	ActiveAt time.Time `json:"activeAt,omitempty"`
+	// If the connection is advertising internal routes, which allows the customer the option of probing and tracing these routes.
+	AdvertiseInternalRoutes bool         `json:"advertiseInternalRoutes,omitempty"`
+	BillingPlan             *BillingPlan `json:"billingPlan,omitempty"`
+	// The provider used for billing this connection.
+	BillingProvider string `json:"billingProvider,omitempty"`
+	// The licensed billing term for the connection.
+	BillingTerm string    `json:"billingTerm"`
+	CreatedAt   time.Time `json:"createdAt,omitempty"`
+	// The customer side ASN. This can either be a public or private ASN. If this is a public ASN, you must own it to prevent conflicts.
+	CustomerASN int64 `json:"customerASN,omitempty"`
+	// Set of customer Networks for this connection.
+	CustomerNetworks []CustomerNetwork `json:"customerNetworks,omitempty"`
+	DeletedAt        time.Time         `json:"deletedAt,omitempty"`
+	// The user defined description for the connection.
+	Description string `json:"description,omitempty"`
+	// Error Code assigned to the connection if it is an error state.
+	ErrorCode string `json:"errorCode,omitempty"`
+	// Error message assigned to the connection if it is an error state.
+	ErrorMessage string `json:"errorMessage,omitempty"`
+	// Whether this connection has redundant gateways for failover.
+	HighAvailability bool   `json:"highAvailability"`
+	Href             string `json:"href,omitempty"`
+	// The id is a unique identifier representing the connection. This can be provided during creation, but if left empty, will be generated.
+	Id       string `json:"id,omitempty"`
+	Location Link   `json:"location"`
+	// The user specified name for the connection.
+	Name             string      `json:"name"`
+	Nat              *NatConfig  `json:"nat,omitempty"`
+	Network          Link        `json:"network,omitempty"`
+	PrimaryGateway   *VpnGateway `json:"primaryGateway,omitempty"`
+	SecondaryGateway *VpnGateway `json:"secondaryGateway,omitempty"`
+	// The connection speed in Mbps.
+	Speed int32 `json:"speed"`
+	// The current state of the connection.
+	State string            `json:"state,omitempty"`
+	Tags  map[string]string `json:"tags,omitempty"`
+	// The connection type.
+	Type string `json:"type"`
+	// The authentication type.
+	AuthType                 string                    `json:"authType"`
+	BgpPasswordConfiguration *BgpPasswordConfiguration `json:"bgpPasswordConfiguration,omitempty"`
+	EnableBGPPassword        bool                      `json:"enableBGPPassword,omitempty"`
+	IkeV1                    *Ikev1Config              `json:"ikeV1,omitempty"`
+	IkeV2                    *Ikev2Config              `json:"ikeV2,omitempty"`
+	// The IKE version.
+	IkeVersion              string          `json:"ikeVersion"`
+	PhysicalAddress         PhysicalAddress `json:"physicalAddress,omitempty"`
+	PrimaryCustomerRouterIP string          `json:"primaryCustomerRouterIP"`
+	// IPsec pre-shared key (PSK) override for the primary gateway
+	PrimaryKey string `json:"primaryKey,omitempty"`
+	// The VPN Routing Type.
 	RoutingType               string `json:"routingType"`
 	SecondaryCustomerRouterIP string `json:"secondaryCustomerRouterIP,omitempty"`
-	// IPsec pre-shared key override for the secondary gateway
-	SecondaryKey     string                   `json:"secondaryKey,omitempty"`
+	// IPsec pre-shared key (PSK) override for the secondary gateway
+	SecondaryKey string `json:"secondaryKey,omitempty"`
+	// The traffic selectors to apply for routing.
 	TrafficSelectors []TrafficSelectorMapping `json:"trafficSelectors,omitempty"`
 }

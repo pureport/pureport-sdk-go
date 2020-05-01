@@ -12,9 +12,15 @@ package client
 
 // AwsDirectConnectConnectionAllOf struct for AwsDirectConnectConnectionAllOf
 type AwsDirectConnectConnectionAllOf struct {
-	AwsAccountId  string               `json:"awsAccountId,omitempty"`
-	AwsRegion     string               `json:"awsRegion,omitempty"`
-	CloudRegion   *Link                `json:"cloudRegion,omitempty"`
-	CloudServices []Link               `json:"cloudServices,omitempty"`
-	Peering       PeeringConfiguration `json:"peering,omitempty"`
+	// The AWS Account ID, a 12-digit number that you use to construct Amazon Resource Names (ARNs).
+	AwsAccountId string `json:"awsAccountId,omitempty"`
+	// The AWS Region for the connection. This has been deprecated in favor of cloudRegion.
+	AwsRegion                string                    `json:"awsRegion,omitempty"`
+	BgpPasswordConfiguration *BgpPasswordConfiguration `json:"bgpPasswordConfiguration,omitempty"`
+	CloudRegion              *Link                     `json:"cloudRegion,omitempty"`
+	// The asset link for the clouds services associated with this connection.
+	CloudServices []Link `json:"cloudServices,omitempty"`
+	// The whitelisted cloud services CIDR blocks.
+	CloudServicesPrefixWhitelist []string              `json:"cloudServicesPrefixWhitelist,omitempty"`
+	Peering                      *PeeringConfiguration `json:"peering,omitempty"`
 }

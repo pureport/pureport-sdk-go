@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Href** | **string** |  | [optional] 
+**Href** | **string** |  | [optional] [readonly] 
 **Id** | **string** |  | [optional] 
 **Name** | **string** |  | 
 

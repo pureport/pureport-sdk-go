@@ -12,6 +12,8 @@ package client
 
 // GoogleCloudInterconnectConnectionAllOf struct for GoogleCloudInterconnectConnectionAllOf
 type GoogleCloudInterconnectConnectionAllOf struct {
-	PrimaryPairingKey   string `json:"primaryPairingKey,omitempty"`
+	// The Pairing Key for the primary gateway of the Google Cloud Interconnect.
+	PrimaryPairingKey string `json:"primaryPairingKey,omitempty"`
+	// The Pairing Key for the secondary gateway of the Google Cloud Interconnect.
 	SecondaryPairingKey string `json:"secondaryPairingKey,omitempty"`
 }

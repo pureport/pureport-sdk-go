@@ -16,14 +16,19 @@ import (
 
 // Task struct for Task
 type Task struct {
+	Account     Link      `json:"account,omitempty"`
 	Children    []Link    `json:"children,omitempty"`
 	CompletedAt time.Time `json:"completedAt,omitempty"`
+	Connection  Link      `json:"connection,omitempty"`
 	CreatedAt   time.Time `json:"createdAt,omitempty"`
 	Description string    `json:"description,omitempty"`
+	Gateway     Link      `json:"gateway,omitempty"`
 	Href        string    `json:"href,omitempty"`
 	Id          string    `json:"id,omitempty"`
+	Network     Link      `json:"network,omitempty"`
 	Parent      Link      `json:"parent,omitempty"`
 	Result      string    `json:"result,omitempty"`
+	StartedAt   time.Time `json:"startedAt,omitempty"`
 	State       string    `json:"state,omitempty"`
 	Type        string    `json:"type"`
 	UpdatedAt   time.Time `json:"updatedAt,omitempty"`

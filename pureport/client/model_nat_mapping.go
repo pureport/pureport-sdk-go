@@ -10,7 +10,7 @@
 
 package client
 
-// NatMapping struct for NatMapping
+// NatMapping Network Address Translation Mapping between a customer subnet and a subnet used for SNAT/DNAT.
 type NatMapping struct {
 	Block      string `json:"block,omitempty"`
 	NatCidr    string `json:"natCidr,omitempty"`

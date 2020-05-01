@@ -16,7 +16,7 @@ type ApiKey struct {
 	Description string `json:"description,omitempty"`
 	Href        string `json:"href,omitempty"`
 	Key         string `json:"key,omitempty"`
-	Name        string `json:"name,omitempty"`
-	Roles       []Link `json:"roles,omitempty"`
+	Name        string `json:"name"`
+	Roles       []Link `json:"roles"`
 	Secret      string `json:"secret,omitempty"`
 }

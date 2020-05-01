@@ -10,7 +10,7 @@
 
 package client
 
-// TrafficSelectorMapping struct for TrafficSelectorMapping
+// TrafficSelectorMapping A pair of local and remote addresses for use in VPN Traffic Selectors.
 type TrafficSelectorMapping struct {
 	CustomerSide string `json:"customerSide"`
 	PureportSide string `json:"pureportSide"`

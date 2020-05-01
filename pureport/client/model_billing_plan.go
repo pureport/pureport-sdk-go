@@ -13,8 +13,8 @@ package client
 // BillingPlan struct for BillingPlan
 type BillingPlan struct {
 	Amount          float64 `json:"amount,omitempty"`
-	BillingInterval string  `json:"billingInterval,omitempty"`
+	BillingInterval string  `json:"billingInterval"`
 	Id              string  `json:"id,omitempty"`
 	SetupAmount     int64   `json:"setupAmount,omitempty"`
-	Term            string  `json:"term,omitempty"`
+	Term            string  `json:"term"`
 }

@@ -16,9 +16,9 @@ import (
 
 // ProviderVlan struct for ProviderVlan
 type ProviderVlan struct {
-	Allocated         bool      `json:"allocated,omitempty"`
+	Allocated         bool      `json:"allocated"`
 	LastAllocatedAt   time.Time `json:"lastAllocatedAt,omitempty"`
 	LastDeallocatedAt time.Time `json:"lastDeallocatedAt,omitempty"`
 	Speed             int32     `json:"speed,omitempty"`
-	Vlan              int32     `json:"vlan,omitempty"`
+	Vlan              int32     `json:"vlan"`
 }

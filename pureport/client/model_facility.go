@@ -15,8 +15,8 @@ type Facility struct {
 	Address PhysicalAddress   `json:"address"`
 	AltIds  map[string]string `json:"altIds,omitempty"`
 	Href    string            `json:"href,omitempty"`
-	Id      string            `json:"id,omitempty"`
+	Id      string            `json:"id"`
 	Name    string            `json:"name"`
 	State   string            `json:"state,omitempty"`
-	Vendor  string            `json:"vendor,omitempty"`
+	Vendor  string            `json:"vendor"`
 }

@@ -10,7 +10,7 @@
 
 package client
 
-// GeoCoordinates struct for GeoCoordinates
+// GeoCoordinates The latitude and longitude.
 type GeoCoordinates struct {
 	Latitude  float32 `json:"latitude"`
 	Longitude float32 `json:"longitude"`

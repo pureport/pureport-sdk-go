@@ -46,8 +46,10 @@ Class | Method | HTTP request | Description
 *AccountMembersApi* | [**GetAccountMember**](docs/AccountMembersApi.md#getaccountmember) | **Get** /accounts/{accountId}/members/{userId} | Get account member
 *AccountMembersApi* | [**UpdateAccountMember**](docs/AccountMembersApi.md#updateaccountmember) | **Put** /accounts/{accountId}/members/{userId} | Update account member
 *AccountMetricsApi* | [**UsageByConnection**](docs/AccountMetricsApi.md#usagebyconnection) | **Post** /accounts/{accountId}/metrics/usageByConnection | Retrieve usage by connection
-*AccountMetricsApi* | [**UsageByConnection1**](docs/AccountMetricsApi.md#usagebyconnection1) | **Post** /accounts/{accountId}/metrics/usageByConnectionAndTime | Retrieve usage by connection and time
+*AccountMetricsApi* | [**UsageByConnectionAndTime**](docs/AccountMetricsApi.md#usagebyconnectionandtime) | **Post** /accounts/{accountId}/metrics/usageByConnectionAndTime | Retrieve usage by connection and time
 *AccountMetricsApi* | [**UsageByNetworkAndTime**](docs/AccountMetricsApi.md#usagebynetworkandtime) | **Post** /accounts/{accountId}/metrics/usageByNetworkAndTime | Retrieve usage by network over time
+*AccountNotificationsApi* | [**FindAccountNotifications**](docs/AccountNotificationsApi.md#findaccountnotifications) | **Get** /accounts/{accountId}/notifications | Retrieve all notifications for this account
+*AccountNotificationsApi* | [**UpdateAccountNotificationsStatus**](docs/AccountNotificationsApi.md#updateaccountnotificationsstatus) | **Post** /accounts/{accountId}/notifications | Update an authenticated user&#39;s read status for account notifications
 *AccountRolesApi* | [**CreateRole**](docs/AccountRolesApi.md#createrole) | **Post** /accounts/{accountId}/roles | Add account role
 *AccountRolesApi* | [**DeleteRole**](docs/AccountRolesApi.md#deleterole) | **Delete** /accounts/{accountId}/roles/{roleId} | Delete role
 *AccountRolesApi* | [**FindAllRoles**](docs/AccountRolesApi.md#findallroles) | **Get** /accounts/{accountId}/roles | List account roles
@@ -64,6 +66,7 @@ Class | Method | HTTP request | Description
 *ApikeysApi* | [**FindApiKeys**](docs/ApikeysApi.md#findapikeys) | **Get** /accounts/{accountId}/apikeys | List API keys for an account
 *ApikeysApi* | [**GetApiKey**](docs/ApikeysApi.md#getapikey) | **Get** /accounts/{accountId}/apikeys/{key} | Get API Key details
 *ApikeysApi* | [**UpdateApiKey**](docs/ApikeysApi.md#updateapikey) | **Put** /accounts/{accountId}/apikeys/{key} | Update API Key
+*AuditApi* | [**FindAuditLogs**](docs/AuditApi.md#findauditlogs) | **Get** /accounts/{accountId}/auditLog | 
 *AuthApi* | [**Login**](docs/AuthApi.md#login) | **Post** /login | Login with an API Key
 *AuthApi* | [**LoginWithRefreshToken**](docs/AuthApi.md#loginwithrefreshtoken) | **Post** /login/refresh | Login with a refresh token
 *BillingApi* | [**AddPaymentInformation**](docs/BillingApi.md#addpaymentinformation) | **Post** /accounts/{accountId}/billing | Add payment method
@@ -71,11 +74,8 @@ Class | Method | HTTP request | Description
 *BillingApi* | [**FindBillingForAccount**](docs/BillingApi.md#findbillingforaccount) | **Get** /accounts/{accountId}/billing | Payment method for account
 *BillingApi* | [**IsBillingConfiguredForAccount**](docs/BillingApi.md#isbillingconfiguredforaccount) | **Get** /accounts/{accountId}/billing/configured | Payment method configured for account
 *BillingApi* | [**UpdatePaymentInformation**](docs/BillingApi.md#updatepaymentinformation) | **Put** /accounts/{accountId}/billing | Update payment method
-*CloudRegionsApi* | [**CreateCloudRegion**](docs/CloudRegionsApi.md#createcloudregion) | **Post** /cloudRegions | Add cloud region
-*CloudRegionsApi* | [**DeleteCloudRegion**](docs/CloudRegionsApi.md#deletecloudregion) | **Delete** /cloudRegions/{cloudRegionId} | Delete cloud region
 *CloudRegionsApi* | [**GetCloudRegion**](docs/CloudRegionsApi.md#getcloudregion) | **Get** /cloudRegions/{cloudRegionId} | Get cloud region details
 *CloudRegionsApi* | [**GetCloudRegions**](docs/CloudRegionsApi.md#getcloudregions) | **Get** /cloudRegions | List cloud regions
-*CloudRegionsApi* | [**UpdateCloudRegion**](docs/CloudRegionsApi.md#updatecloudregion) | **Put** /cloudRegions/{cloudRegionId} | Update cloud region
 *CloudServicesApi* | [**GetCloudService**](docs/CloudServicesApi.md#getcloudservice) | **Get** /cloudServices/{cloudServiceId} | Get cloud service details
 *CloudServicesApi* | [**GetCloudServices**](docs/CloudServicesApi.md#getcloudservices) | **Get** /cloudServices | List cloud services
 *ConnectionsApi* | [**AddConnection**](docs/ConnectionsApi.md#addconnection) | **Post** /networks/{networkId}/connections | Add new connection
@@ -85,50 +85,33 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**GetConnection**](docs/ConnectionsApi.md#getconnection) | **Get** /connections/{connectionId} | Get connection details
 *ConnectionsApi* | [**GetConnectionTasks**](docs/ConnectionsApi.md#getconnectiontasks) | **Get** /connections/{connectionId}/tasks | List connection tasks
 *ConnectionsApi* | [**GetConnections**](docs/ConnectionsApi.md#getconnections) | **Get** /networks/{networkId}/connections | List network connections
-*ConnectionsApi* | [**GetInternal**](docs/ConnectionsApi.md#getinternal) | **Get** /connections/{connectionId}/details | Get internal connection details
-*ConnectionsApi* | [**RespawnConnection**](docs/ConnectionsApi.md#respawnconnection) | **Post** /connections/{connectionId}/respawn | Respawn connection
 *ConnectionsApi* | [**UpdateConnection**](docs/ConnectionsApi.md#updateconnection) | **Put** /connections/{connectionId} | Update connection
-*FacilitiesApi* | [**CreateFacility**](docs/FacilitiesApi.md#createfacility) | **Post** /facilities | Add new facility
-*FacilitiesApi* | [**DeleteFacility**](docs/FacilitiesApi.md#deletefacility) | **Delete** /facilities/{facilityId} | Delete facility
 *FacilitiesApi* | [**FindFacilities**](docs/FacilitiesApi.md#findfacilities) | **Get** /facilities | List facilities
 *FacilitiesApi* | [**GetFacility**](docs/FacilitiesApi.md#getfacility) | **Get** /facilities/{facilityId} | Get facility details
 *FacilitiesApi* | [**ListFacilitiesAsKml**](docs/FacilitiesApi.md#listfacilitiesaskml) | **Get** /facilities/kml | List facilities (as KML)
-*FacilitiesApi* | [**UpdateFacility**](docs/FacilitiesApi.md#updatefacility) | **Put** /facilities/{facilityId} | Update facility
+*GatewayMetricsApi* | [**ConnectivityOverTime**](docs/GatewayMetricsApi.md#connectivityovertime) | **Post** /gateways/{gatewayId}/metrics/connectivity | Retrieve connectivity details over time for gateway
+*GatewayMetricsApi* | [**CurrentConnectivity**](docs/GatewayMetricsApi.md#currentconnectivity) | **Get** /gateways/{gatewayId}/metrics/connectivity/current | Retrieve latest connectivity details for gateway
+*GatewaysApi* | [**ConnectivityOverTime**](docs/GatewaysApi.md#connectivityovertime) | **Post** /gateways/{gatewayId}/metrics/connectivity | Retrieve connectivity details over time for gateway
 *GatewaysApi* | [**CreateGatewayTask**](docs/GatewaysApi.md#creategatewaytask) | **Post** /gateways/{gatewayId}/tasks | Add a new task
+*GatewaysApi* | [**CurrentConnectivity**](docs/GatewaysApi.md#currentconnectivity) | **Get** /gateways/{gatewayId}/metrics/connectivity/current | Retrieve latest connectivity details for gateway
+*GatewaysApi* | [**GetGateway**](docs/GatewaysApi.md#getgateway) | **Get** /gateways/{gatewayId} | Get gateway details
 *GatewaysApi* | [**GetGatewayBGPRoutes**](docs/GatewaysApi.md#getgatewaybgproutes) | **Get** /gateways/{gatewayId}/bgpRoutes | Get gateway bgp routes
+*GatewaysApi* | [**GetGatewayIPRoutes**](docs/GatewaysApi.md#getgatewayiproutes) | **Get** /gateways/{gatewayId}/ipRoutes | Get gateway ip routes
 *GatewaysApi* | [**GetGatewayTasks**](docs/GatewaysApi.md#getgatewaytasks) | **Get** /gateways/{gatewayId}/tasks | List connection tasks
+*GatewaysApi* | [**RespawnGateway**](docs/GatewaysApi.md#respawngateway) | **Post** /gateways/{gatewayId}/respawn | Respawn gateway
+*GatewaysApi* | [**StartGateway**](docs/GatewaysApi.md#startgateway) | **Post** /gateways/{gatewayId}/start | Start gateway
+*GatewaysApi* | [**StopGateway**](docs/GatewaysApi.md#stopgateway) | **Post** /gateways/{gatewayId}/stop | Stop gateway
 *HelpApi* | [**GetHelpUrl**](docs/HelpApi.md#gethelpurl) | **Get** /help | Retrieve the URL for the help portal using an SSO login
-*InvoicesApi* | [**ListInvoicesForAccount**](docs/InvoicesApi.md#listinvoicesforaccount) | **Post** /accounts/{accountId}/invoices | List invoices
-*InvoicesApi* | [**ListUpcomingInvoicesForAccount**](docs/InvoicesApi.md#listupcominginvoicesforaccount) | **Get** /accounts/{accountId}/invoices/upcoming | List upcoming invoices
-*LimitsApi* | [**CreateResourceLimit**](docs/LimitsApi.md#createresourcelimit) | **Post** /accounts/{accountId}/limits/{childResourceType} | Create a resource limit override
-*LimitsApi* | [**CreateResourceLimit1**](docs/LimitsApi.md#createresourcelimit1) | **Post** /networks/{networkId}/limits/{childResourceType} | Create a resource limit override
-*LimitsApi* | [**DeleteResourceLimit**](docs/LimitsApi.md#deleteresourcelimit) | **Delete** /accounts/{accountId}/limits/{childResourceType} | Delete a resource limit override
-*LimitsApi* | [**DeleteResourceLimit1**](docs/LimitsApi.md#deleteresourcelimit1) | **Delete** /networks/{networkId}/limits/{childResourceType} | Delete a resource limit override
-*LimitsApi* | [**GetResourceLimit**](docs/LimitsApi.md#getresourcelimit) | **Get** /accounts/{accountId}/limits | Get resource limits including default values
-*LimitsApi* | [**GetResourceLimit1**](docs/LimitsApi.md#getresourcelimit1) | **Get** /accounts/{accountId}/limits/{childResourceType} | Get resource limit override. Does not return default.
-*LimitsApi* | [**GetResourceLimit2**](docs/LimitsApi.md#getresourcelimit2) | **Get** /networks/{networkId}/limits | Get resource limits including default values
-*LimitsApi* | [**GetResourceLimit3**](docs/LimitsApi.md#getresourcelimit3) | **Get** /networks/{networkId}/limits/{childResourceType} | Get resource limit override. Does not return default.
-*LimitsApi* | [**UpdateResourceLimit**](docs/LimitsApi.md#updateresourcelimit) | **Put** /accounts/{accountId}/limits/{childResourceType} | Update a resource limit override
-*LimitsApi* | [**UpdateResourceLimit1**](docs/LimitsApi.md#updateresourcelimit1) | **Put** /networks/{networkId}/limits/{childResourceType} | Update a resource limit override
-*LocationsApi* | [**CreateLocation**](docs/LocationsApi.md#createlocation) | **Post** /locations | Add new location
-*LocationsApi* | [**DeleteLocation**](docs/LocationsApi.md#deletelocation) | **Delete** /locations/{locationId} | Delete location
 *LocationsApi* | [**FindLocations**](docs/LocationsApi.md#findlocations) | **Get** /locations | List locations
 *LocationsApi* | [**GetLocation**](docs/LocationsApi.md#getlocation) | **Get** /locations/{locationId} | Get location details
-*LocationsApi* | [**ListPods**](docs/LocationsApi.md#listpods) | **Get** /locations/{locationId}/pods | List pods for a location
-*LocationsApi* | [**UpdateLocation**](docs/LocationsApi.md#updatelocation) | **Put** /locations/{locationId} | Update location
 *NetworksApi* | [**AddNetwork**](docs/NetworksApi.md#addnetwork) | **Post** /accounts/{accountId}/networks | Add new network
 *NetworksApi* | [**DeleteNetwork**](docs/NetworksApi.md#deletenetwork) | **Delete** /networks/{networkId} | Delete network
 *NetworksApi* | [**FindNetworks**](docs/NetworksApi.md#findnetworks) | **Get** /accounts/{accountId}/networks | List networks
-*NetworksApi* | [**GetInternal1**](docs/NetworksApi.md#getinternal1) | **Get** /networks/{networkId}/details | Get internal network details
 *NetworksApi* | [**GetNetwork**](docs/NetworksApi.md#getnetwork) | **Get** /networks/{networkId} | Get network details
 *NetworksApi* | [**Respawn**](docs/NetworksApi.md#respawn) | **Post** /networks/{networkId}/respawn | Respawn controllers on network
 *NetworksApi* | [**UpdateNetwork**](docs/NetworksApi.md#updatenetwork) | **Put** /networks/{networkId} | Update network
 *OptionsApi* | [**GetOptions**](docs/OptionsApi.md#getoptions) | **Get** /options | Get available options
-*PodsApi* | [**CreatePod**](docs/PodsApi.md#createpod) | **Post** /pods | Add new pod
-*PodsApi* | [**DeletePodResource**](docs/PodsApi.md#deletepodresource) | **Delete** /pods/{podId} | Delete pod
-*PodsApi* | [**FindPods**](docs/PodsApi.md#findpods) | **Get** /pods | List all pods
-*PodsApi* | [**GetPodResource**](docs/PodsApi.md#getpodresource) | **Get** /pods/{podId} | Get pod details
-*PodsApi* | [**UpdatePodResource**](docs/PodsApi.md#updatepodresource) | **Put** /pods/{podId} | Update pod
+*OptionsApi* | [**IsBackbone**](docs/OptionsApi.md#isbackbone) | **Get** /options/isBackbone | Get whether this configuration will have longHaul related charges.
 *PortsApi* | [**AddPort**](docs/PortsApi.md#addport) | **Post** /accounts/{accountId}/ports | Add new port
 *PortsApi* | [**DeletePort**](docs/PortsApi.md#deleteport) | **Delete** /ports/{portId} | Delete port
 *PortsApi* | [**FindPorts**](docs/PortsApi.md#findports) | **Get** /accounts/{accountId}/ports | List ports
@@ -136,71 +119,57 @@ Class | Method | HTTP request | Description
 *PortsApi* | [**GetPort**](docs/PortsApi.md#getport) | **Get** /ports/{portId} | Get port details
 *PortsApi* | [**GetPortLOA**](docs/PortsApi.md#getportloa) | **Get** /ports/{portId}/loa | Get port letter of authorization
 *PortsApi* | [**UpdatePort**](docs/PortsApi.md#updateport) | **Put** /ports/{portId} | Update port
-*ProviderLinksApi* | [**CreateLink**](docs/ProviderLinksApi.md#createlink) | **Post** /providerLinks | Add new provider link
-*ProviderLinksApi* | [**DeleteProviderLink**](docs/ProviderLinksApi.md#deleteproviderlink) | **Delete** /providerLinks/{linkId} | Delete provider link
-*ProviderLinksApi* | [**FindAllProviderLinks**](docs/ProviderLinksApi.md#findallproviderlinks) | **Get** /providerLinks | List all provider links
-*ProviderLinksApi* | [**GetProviderLink**](docs/ProviderLinksApi.md#getproviderlink) | **Get** /providerLinks/{linkId} | Get provider link details
-*ProviderLinksApi* | [**GetVlans**](docs/ProviderLinksApi.md#getvlans) | **Get** /providerLinks/{linkId}/vlans | Get provider link VLANs
-*ProviderLinksApi* | [**UpdateProviderLink**](docs/ProviderLinksApi.md#updateproviderlink) | **Put** /providerLinks/{linkId} | Update provider link
-*PublicPeeringBlocksApi* | [**CreatePublicPeeringBlock**](docs/PublicPeeringBlocksApi.md#createpublicpeeringblock) | **Post** /publicPeeringBlocks | Add Public Peering CIDR Blocks
-*PublicPeeringBlocksApi* | [**DeletePublicPeeringBlock**](docs/PublicPeeringBlocksApi.md#deletepublicpeeringblock) | **Delete** /publicPeeringBlocks/{publicPeeringBlockId} | Delete Public Peering CIDR
-*PublicPeeringBlocksApi* | [**GetPublicPeeringBlock**](docs/PublicPeeringBlocksApi.md#getpublicpeeringblock) | **Get** /publicPeeringBlocks/{publicPeeringBlockId} | Get Public Peering CIDR details
-*PublicPeeringBlocksApi* | [**GetPublicPeeringBlocks**](docs/PublicPeeringBlocksApi.md#getpublicpeeringblocks) | **Get** /publicPeeringBlocks | List Public Peering CIDR Blocks
-*PublicPeeringBlocksApi* | [**UpdatePublicPeeringBlock**](docs/PublicPeeringBlocksApi.md#updatepublicpeeringblock) | **Put** /publicPeeringBlocks/{publicPeeringBlockId} | Update Public Peering CIDR
-*PublicPeeringStatsApi* | [**GetPublicPeeringPoolStats**](docs/PublicPeeringStatsApi.md#getpublicpeeringpoolstats) | **Get** /publicPeeringPoolStats | Get Public Peering Pool Statistics details
-*SupportedConnectionsApi* | [**CreateSupportedConnection**](docs/SupportedConnectionsApi.md#createsupportedconnection) | **Post** /supportedConnections | Add supported connection
-*SupportedConnectionsApi* | [**CreateSupportedConnectionGroup**](docs/SupportedConnectionsApi.md#createsupportedconnectiongroup) | **Post** /supportedConnections/groups | Add supported connection group
-*SupportedConnectionsApi* | [**DeleteSupportedConnection**](docs/SupportedConnectionsApi.md#deletesupportedconnection) | **Delete** /supportedConnections/{supportedConnectionId} | Delete supported connection
-*SupportedConnectionsApi* | [**DeleteSupportedConnectionGroup**](docs/SupportedConnectionsApi.md#deletesupportedconnectiongroup) | **Delete** /supportedConnections/groups/{supportedConnectionGroupId} | Delete supported connection group
 *SupportedConnectionsApi* | [**GetAccountSupportedConnections**](docs/SupportedConnectionsApi.md#getaccountsupportedconnections) | **Get** /accounts/{accountId}/supportedConnections | List supported connections
 *SupportedConnectionsApi* | [**GetSupportedConnection**](docs/SupportedConnectionsApi.md#getsupportedconnection) | **Get** /supportedConnections/{supportedConnectionId} | Get supported connection details
-*SupportedConnectionsApi* | [**GetSupportedConnectionGroup**](docs/SupportedConnectionsApi.md#getsupportedconnectiongroup) | **Get** /supportedConnections/groups/{supportedConnectionGroupId} | Get supported connection group details
-*SupportedConnectionsApi* | [**GetSupportedConnectionGroups**](docs/SupportedConnectionsApi.md#getsupportedconnectiongroups) | **Get** /supportedConnections/groups | List supported connections groups
-*SupportedConnectionsApi* | [**GetSupportedConnections**](docs/SupportedConnectionsApi.md#getsupportedconnections) | **Get** /supportedConnections | List supported connections
-*SupportedConnectionsApi* | [**UpdateSupportedConnection**](docs/SupportedConnectionsApi.md#updatesupportedconnection) | **Put** /supportedConnections/{supportedConnectionId} | Update supported connection
-*SupportedConnectionsApi* | [**UpdateSupportedConnectionGroup**](docs/SupportedConnectionsApi.md#updatesupportedconnectiongroup) | **Put** /supportedConnections/groups/{supportedConnectionGroupId} | Update supported connection group
-*SupportedConnectionsGroupsApi* | [**CreateSupportedConnectionGroup**](docs/SupportedConnectionsGroupsApi.md#createsupportedconnectiongroup) | **Post** /supportedConnections/groups | Add supported connection group
-*SupportedConnectionsGroupsApi* | [**DeleteSupportedConnectionGroup**](docs/SupportedConnectionsGroupsApi.md#deletesupportedconnectiongroup) | **Delete** /supportedConnections/groups/{supportedConnectionGroupId} | Delete supported connection group
-*SupportedConnectionsGroupsApi* | [**GetSupportedConnectionGroup**](docs/SupportedConnectionsGroupsApi.md#getsupportedconnectiongroup) | **Get** /supportedConnections/groups/{supportedConnectionGroupId} | Get supported connection group details
-*SupportedConnectionsGroupsApi* | [**GetSupportedConnectionGroups**](docs/SupportedConnectionsGroupsApi.md#getsupportedconnectiongroups) | **Get** /supportedConnections/groups | List supported connections groups
-*SupportedConnectionsGroupsApi* | [**UpdateSupportedConnectionGroup**](docs/SupportedConnectionsGroupsApi.md#updatesupportedconnectiongroup) | **Put** /supportedConnections/groups/{supportedConnectionGroupId} | Update supported connection group
 *SupportedPortsApi* | [**GetSupportedPorts**](docs/SupportedPortsApi.md#getsupportedports) | **Get** /accounts/{accountId}/supportedPorts | List supported ports
 *TasksApi* | [**CreateConnectionTask**](docs/TasksApi.md#createconnectiontask) | **Post** /connections/{connectionId}/tasks | Add a new task
 *TasksApi* | [**CreateGatewayTask**](docs/TasksApi.md#creategatewaytask) | **Post** /gateways/{gatewayId}/tasks | Add a new task
-*TasksApi* | [**DeleteTask**](docs/TasksApi.md#deletetask) | **Delete** /tasks/{taskId} | Delete Task
 *TasksApi* | [**GetConnectionTasks**](docs/TasksApi.md#getconnectiontasks) | **Get** /connections/{connectionId}/tasks | List connection tasks
 *TasksApi* | [**GetGatewayTasks**](docs/TasksApi.md#getgatewaytasks) | **Get** /gateways/{gatewayId}/tasks | List connection tasks
 *TasksApi* | [**GetTask**](docs/TasksApi.md#gettask) | **Get** /tasks/{taskId} | Get Task details
 *TasksApi* | [**GetTasks**](docs/TasksApi.md#gettasks) | **Get** /tasks | List Tasks
-*UsersApi* | [**CreateUser**](docs/UsersApi.md#createuser) | **Post** /users | Add new user
-*UsersApi* | [**DeleteUser**](docs/UsersApi.md#deleteuser) | **Delete** /users/{userId} | Delete user
-*UsersApi* | [**FindAllUsers**](docs/UsersApi.md#findallusers) | **Get** /users | List users
+*ThirdPartyApi* | [**GetPacketFabric**](docs/ThirdPartyApi.md#getpacketfabric) | **Get** /thirdParty/packetFabric/customers/{marketCode} | 
+*UserDomainsApi* | [**GetUserDomain1**](docs/UserDomainsApi.md#getuserdomain1) | **Get** /userDomainProvider | Find a user domain provider given an email address
 *UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Get user details
 *UsersApi* | [**UpdateUser**](docs/UsersApi.md#updateuser) | **Put** /users/{userId} | Update user
 
 
 ## Documentation For Models
 
+ - [AccessSwitch](docs/AccessSwitch.md)
+ - [AccessSwitchPort](docs/AccessSwitchPort.md)
  - [Account](docs/Account.md)
  - [AccountBilling](docs/AccountBilling.md)
  - [AccountConsent](docs/AccountConsent.md)
+ - [AccountDetailedInvoice](docs/AccountDetailedInvoice.md)
  - [AccountInvite](docs/AccountInvite.md)
  - [AccountInvoice](docs/AccountInvoice.md)
  - [AccountMember](docs/AccountMember.md)
+ - [AccountNotification](docs/AccountNotification.md)
  - [ApiKey](docs/ApiKey.md)
+ - [AuditEntry](docs/AuditEntry.md)
+ - [AuditEntryRequest](docs/AuditEntryRequest.md)
+ - [AuditEntryResponse](docs/AuditEntryResponse.md)
  - [AwsDirectConnectConnection](docs/AwsDirectConnectConnection.md)
  - [AwsDirectConnectConnectionAllOf](docs/AwsDirectConnectConnectionAllOf.md)
  - [AzureExpressRouteConnection](docs/AzureExpressRouteConnection.md)
  - [AzureExpressRouteConnectionAllOf](docs/AzureExpressRouteConnectionAllOf.md)
  - [BgpConfig](docs/BgpConfig.md)
+ - [BgpPasswordConfiguration](docs/BgpPasswordConfiguration.md)
  - [BgpRoute](docs/BgpRoute.md)
  - [BillingPlan](docs/BillingPlan.md)
+ - [ChangeObject](docs/ChangeObject.md)
+ - [ClosedRangeInstant](docs/ClosedRangeInstant.md)
  - [CloudRegion](docs/CloudRegion.md)
  - [CloudService](docs/CloudService.md)
  - [Connection](docs/Connection.md)
  - [ConnectionTimeEgressIngress](docs/ConnectionTimeEgressIngress.md)
+ - [ConnectivityByGateway](docs/ConnectivityByGateway.md)
  - [CustomerNetwork](docs/CustomerNetwork.md)
  - [DateFilter](docs/DateFilter.md)
+ - [DetailedInvoiceItem](docs/DetailedInvoiceItem.md)
+ - [EquinixCloudExchangeConnection](docs/EquinixCloudExchangeConnection.md)
+ - [EquinixCloudExchangeConnectionAllOf](docs/EquinixCloudExchangeConnectionAllOf.md)
  - [Facility](docs/Facility.md)
  - [Gateway](docs/Gateway.md)
  - [GenericConnection](docs/GenericConnection.md)
@@ -214,6 +183,8 @@ Class | Method | HTTP request | Description
  - [Ikev2Config](docs/Ikev2Config.md)
  - [Ikev2EspConfig](docs/Ikev2EspConfig.md)
  - [Ikev2IkeConfig](docs/Ikev2IkeConfig.md)
+ - [InstantRange](docs/InstantRange.md)
+ - [IpRoute](docs/IpRoute.md)
  - [Link](docs/Link.md)
  - [Location](docs/Location.md)
  - [LocationLinkConnection](docs/LocationLinkConnection.md)
@@ -225,9 +196,14 @@ Class | Method | HTTP request | Description
  - [Network](docs/Network.md)
  - [NetworkConnectionEgressIngress](docs/NetworkConnectionEgressIngress.md)
  - [NetworkTimeUsage](docs/NetworkTimeUsage.md)
+ - [Notification](docs/Notification.md)
  - [Option](docs/Option.md)
  - [OracleFastConnectConnection](docs/OracleFastConnectConnection.md)
  - [OracleFastConnectConnectionAllOf](docs/OracleFastConnectConnectionAllOf.md)
+ - [PacketFabricConnection](docs/PacketFabricConnection.md)
+ - [PacketFabricConnectionAllOf](docs/PacketFabricConnectionAllOf.md)
+ - [PacketFabricCustomer](docs/PacketFabricCustomer.md)
+ - [PageAuditEntry](docs/PageAuditEntry.md)
  - [PeeringConfiguration](docs/PeeringConfiguration.md)
  - [PhysicalAddress](docs/PhysicalAddress.md)
  - [Pod](docs/Pod.md)
@@ -244,8 +220,10 @@ Class | Method | HTTP request | Description
  - [Role](docs/Role.md)
  - [SiteIpSecVpnConnection](docs/SiteIpSecVpnConnection.md)
  - [SiteIpSecVpnConnectionAllOf](docs/SiteIpSecVpnConnectionAllOf.md)
+ - [Sort](docs/Sort.md)
  - [StandardGateway](docs/StandardGateway.md)
  - [StandardGatewayAllOf](docs/StandardGatewayAllOf.md)
+ - [StaticRoute](docs/StaticRoute.md)
  - [SupportedConnection](docs/SupportedConnection.md)
  - [SupportedConnectionGroup](docs/SupportedConnectionGroup.md)
  - [SupportedPort](docs/SupportedPort.md)
@@ -255,6 +233,7 @@ Class | Method | HTTP request | Description
  - [UsageByConnectionOptions](docs/UsageByConnectionOptions.md)
  - [UsageByNetworkAndTimeOptions](docs/UsageByNetworkAndTimeOptions.md)
  - [User](docs/User.md)
+ - [UserDomain](docs/UserDomain.md)
  - [VpnAuthConfig](docs/VpnAuthConfig.md)
  - [VpnGateway](docs/VpnGateway.md)
  - [VpnGatewayAllOf](docs/VpnGatewayAllOf.md)

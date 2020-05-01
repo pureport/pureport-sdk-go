@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateConnectionTask**](TasksApi.md#CreateConnectionTask) | **Post** /connections/{connectionId}/tasks | Add a new task
 [**CreateGatewayTask**](TasksApi.md#CreateGatewayTask) | **Post** /gateways/{gatewayId}/tasks | Add a new task
-[**DeleteTask**](TasksApi.md#DeleteTask) | **Delete** /tasks/{taskId} | Delete Task
 [**GetConnectionTasks**](TasksApi.md#GetConnectionTasks) | **Get** /connections/{connectionId}/tasks | List connection tasks
 [**GetGatewayTasks**](TasksApi.md#GetGatewayTasks) | **Get** /gateways/{gatewayId}/tasks | List connection tasks
 [**GetTask**](TasksApi.md#GetTask) | **Get** /tasks/{taskId} | Get Task details
@@ -93,38 +92,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteTask
-
-> DeleteTask(ctx, taskId)
-
-Delete Task
-
-### Required Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**taskId** | **string**|  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -230,13 +197,26 @@ Name | Type | Description  | Notes
 
 ## GetTasks
 
-> []Task GetTasks(ctx, )
+> []Task GetTasks(ctx, optional)
 
 List Tasks
 
 ### Required Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***GetTasksOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetTasksOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **state** | **optional.String**|  | 
 
 ### Return type
 

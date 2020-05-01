@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **GeoCoordinates** | [**GeoCoordinates**](GeoCoordinates.md) |  | 
-**Href** | **string** |  | [optional] 
-**Id** | **string** |  | [optional] 
+**Href** | **string** |  | [optional] [readonly] 
+**Id** | **string** |  | 
 **LocationLinks** | [**[]LocationLinkConnection**](LocationLinkConnection.md) |  | [optional] 
 **Name** | **string** |  | 
 

@@ -16,7 +16,7 @@ type Network struct {
 	Description string            `json:"description,omitempty"`
 	Href        string            `json:"href,omitempty"`
 	Id          string            `json:"id,omitempty"`
-	Name        string            `json:"name,omitempty"`
+	Name        string            `json:"name"`
 	State       string            `json:"state,omitempty"`
 	Tags        map[string]string `json:"tags,omitempty"`
 }

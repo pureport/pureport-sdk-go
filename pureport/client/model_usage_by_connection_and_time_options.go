@@ -12,7 +12,7 @@ package client
 
 // UsageByConnectionAndTimeOptions struct for UsageByConnectionAndTimeOptions
 type UsageByConnectionAndTimeOptions struct {
-	ConnectionIds []string   `json:"connectionIds,omitempty"`
+	ConnectionIds []string   `json:"connectionIds"`
 	Date          DateFilter `json:"date,omitempty"`
 	TimeUnit      string     `json:"timeUnit,omitempty"`
 	TrafficType   string     `json:"trafficType,omitempty"`

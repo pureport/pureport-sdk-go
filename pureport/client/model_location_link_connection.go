@@ -12,6 +12,6 @@ package client
 
 // LocationLinkConnection struct for LocationLinkConnection
 type LocationLinkConnection struct {
-	Location Link  `json:"location,omitempty"`
-	Speed    int32 `json:"speed,omitempty"`
+	Location Link  `json:"location"`
+	Speed    int32 `json:"speed"`
 }
