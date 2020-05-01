@@ -8,15 +8,17 @@ import (
 	"strings"
 )
 
-const logReqMsg = `Pureport API Request Details:
+const (
+	logReqMsg = `Pureport API Request Details:
 ---[ REQUEST ]---------------------------------------
 %s
 -----------------------------------------------------`
 
-const logRespMsg = `Pureport API Response Details:
+	logRespMsg = `Pureport API Response Details:
 ---[ RESPONSE ]--------------------------------------
 %s
 -----------------------------------------------------`
+)
 
 // ValidateConnection validates the content is a valid connection type
 // and returns the content if it is valid, otherwise error
@@ -25,8 +27,13 @@ func ValidateConnection(content interface{}) (interface{}, error) {
 	switch content.(type) {
 	case AwsDirectConnectConnection,
 		AzureExpressRouteConnection,
-		GoogleCloudInterconnectConnection,
 		DummyConnection,
+		EquinixCloudExchangeConnection,
+		GenericConnection,
+		GoogleCloudInterconnectConnection,
+		OracleFastConnectConnection,
+		PacketFabricConnection,
+		PortConnection,
 		SiteIpSecVpnConnection:
 		return content, nil
 
@@ -48,10 +55,10 @@ func DecodeConnectionData(cli *APIClient, b []byte, contentType string) (interfa
 	if err != nil {
 		return decodedConnection, err
 	}
+
 	// Check the Connection type and decode as sub type
 	switch base.Type {
 	case "AWS_DIRECT_CONNECT":
-
 		var c = AwsDirectConnectConnection{}
 		err = cli.decode(&c, b, contentType)
 		decodedConnection = c
@@ -61,8 +68,37 @@ func DecodeConnectionData(cli *APIClient, b []byte, contentType string) (interfa
 		err = cli.decode(&c, b, contentType)
 		decodedConnection = c
 
+	case "EQUINIX_CLOUD_EXCHANGE":
+		var c = EquinixCloudExchangeConnection{}
+		err = cli.decode(&c, b, contentType)
+		decodedConnection = c
+
 	case "GOOGLE_CLOUD_INTERCONNECT":
 		var c = GoogleCloudInterconnectConnection{}
+		err = cli.decode(&c, b, contentType)
+		decodedConnection = c
+
+	case "ORACLE_FAST_CONNECT":
+		var c = OracleFastConnectConnection{}
+		err = cli.decode(&c, b, contentType)
+		decodedConnection = c
+
+	case "PACKET_FABRIC":
+		var c = PacketFabricConnection{}
+		err = cli.decode(&c, b, contentType)
+		decodedConnection = c
+
+	case "PORT":
+		var c = PortConnection{}
+		err = cli.decode(&c, b, contentType)
+		decodedConnection = c
+
+	case "COMCAST",
+		"COX_COMMUNICATIONS",
+		"ELEMENT_CRITICAL",
+		"PACKET",
+		"ZAYO":
+		var c = GenericConnection{}
 		err = cli.decode(&c, b, contentType)
 		decodedConnection = c
 
