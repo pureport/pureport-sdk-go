@@ -12,12 +12,16 @@ package client
 
 // PacketFabricConnectionAllOf struct for PacketFabricConnectionAllOf
 type PacketFabricConnectionAllOf struct {
-	BgpPasswordConfiguration BgpPasswordConfiguration `json:"bgpPasswordConfiguration,omitempty"`
-	CloudRegion              Link                     `json:"cloudRegion,omitempty"`
-	Customer                 PacketFabricCustomer     `json:"customer,omitempty"`
-	CustomerPrimaryId        string                   `json:"customerPrimaryId,omitempty"`
-	CustomerSecondaryId      string                   `json:"customerSecondaryId,omitempty"`
-	Peering                  PeeringConfiguration     `json:"peering,omitempty"`
-	PrimaryVlan              int32                    `json:"primaryVlan,omitempty"`
-	SecondaryVlan            int32                    `json:"secondaryVlan,omitempty"`
+	BgpPasswordConfiguration *BgpPasswordConfiguration `json:"bgpPasswordConfiguration,omitempty"`
+	CloudRegion              Link                      `json:"cloudRegion,omitempty"`
+	Customer                 PacketFabricCustomer      `json:"customer,omitempty"`
+	// An ID representing the primary connection with the 3rd party provider selected in the “customer” field.
+	CustomerPrimaryId string `json:"customerPrimaryId,omitempty"`
+	// An ID representing the secondary connection with the 3rd party provider selected in the “customer” field.
+	CustomerSecondaryId string                `json:"customerSecondaryId,omitempty"`
+	Peering             *PeeringConfiguration `json:"peering,omitempty"`
+	// The primary VLAN ID.
+	PrimaryVlan int32 `json:"primaryVlan,omitempty"`
+	// The secondary VLAN ID if this is an HA connection.
+	SecondaryVlan int32 `json:"secondaryVlan,omitempty"`
 }

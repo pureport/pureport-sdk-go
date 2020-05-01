@@ -10,7 +10,7 @@
 
 package client
 
-// BgpPasswordConfiguration struct for BgpPasswordConfiguration
+// BgpPasswordConfiguration The set of configuration options for enabling & managing BGP passwords. If a password is not provided during the connection creation, a password will be automatically generated for you.
 type BgpPasswordConfiguration struct {
 	Enabled              bool   `json:"enabled,omitempty"`
 	PrimaryBGPPassword   string `json:"primaryBGPPassword,omitempty"`

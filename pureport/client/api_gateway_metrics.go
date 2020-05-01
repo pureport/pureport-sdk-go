@@ -13,7 +13,6 @@ package client
 import (
 	_context "context"
 	"fmt"
-	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
@@ -29,9 +28,9 @@ var (
 type GatewayMetricsApiService service
 
 // ConnectivityOverTimeOpts Optional parameters for the method 'ConnectivityOverTime'
-type ConnectivityOverTimeOpts struct {
-	DateFilter optional.Interface
-}
+// type ConnectivityOverTimeOpts struct {
+// 	DateFilter optional.Interface
+// }
 
 /*
 ConnectivityOverTime Retrieve connectivity details over time for gateway

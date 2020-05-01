@@ -10,10 +10,14 @@
 
 package client
 
-// Ikev2EspConfig struct for Ikev2EspConfig
+// Ikev2EspConfig IKE Version 2 Encapsulating Security Payload configuration.
 type Ikev2EspConfig struct {
-	DhGroup    string `json:"dhGroup"`
+	// The Diffie-Hellman Group.
+	DhGroup string `json:"dhGroup"`
+	// The encryption algorithm.
 	Encryption string `json:"encryption"`
-	Integrity  string `json:"integrity,omitempty"`
-	Lifetime   int32  `json:"lifetime,omitempty"`
+	// The integrity algorithm.
+	Integrity string `json:"integrity,omitempty"`
+	// The lifetime of the Security Association (SA).
+	Lifetime int32 `json:"lifetime,omitempty"`
 }

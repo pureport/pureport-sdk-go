@@ -10,7 +10,7 @@
 
 package client
 
-// Link struct for Link
+// Link Information for the specified Pureport asset.
 type Link struct {
 	Href  string `json:"href"`
 	Id    string `json:"id,omitempty"`

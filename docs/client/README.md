@@ -46,7 +46,7 @@ Class | Method | HTTP request | Description
 *AccountMembersApi* | [**GetAccountMember**](docs/AccountMembersApi.md#getaccountmember) | **Get** /accounts/{accountId}/members/{userId} | Get account member
 *AccountMembersApi* | [**UpdateAccountMember**](docs/AccountMembersApi.md#updateaccountmember) | **Put** /accounts/{accountId}/members/{userId} | Update account member
 *AccountMetricsApi* | [**UsageByConnection**](docs/AccountMetricsApi.md#usagebyconnection) | **Post** /accounts/{accountId}/metrics/usageByConnection | Retrieve usage by connection
-*AccountMetricsApi* | [**UsageByConnection1**](docs/AccountMetricsApi.md#usagebyconnection1) | **Post** /accounts/{accountId}/metrics/usageByConnectionAndTime | Retrieve usage by connection and time
+*AccountMetricsApi* | [**UsageByConnectionAndTime**](docs/AccountMetricsApi.md#usagebyconnectionandtime) | **Post** /accounts/{accountId}/metrics/usageByConnectionAndTime | Retrieve usage by connection and time
 *AccountMetricsApi* | [**UsageByNetworkAndTime**](docs/AccountMetricsApi.md#usagebynetworkandtime) | **Post** /accounts/{accountId}/metrics/usageByNetworkAndTime | Retrieve usage by network over time
 *AccountNotificationsApi* | [**FindAccountNotifications**](docs/AccountNotificationsApi.md#findaccountnotifications) | **Get** /accounts/{accountId}/notifications | Retrieve all notifications for this account
 *AccountNotificationsApi* | [**UpdateAccountNotificationsStatus**](docs/AccountNotificationsApi.md#updateaccountnotificationsstatus) | **Post** /accounts/{accountId}/notifications | Update an authenticated user&#39;s read status for account notifications
@@ -223,7 +223,7 @@ Class | Method | HTTP request | Description
  - [Sort](docs/Sort.md)
  - [StandardGateway](docs/StandardGateway.md)
  - [StandardGatewayAllOf](docs/StandardGatewayAllOf.md)
- - [StaticRouteDto](docs/StaticRouteDto.md)
+ - [StaticRoute](docs/StaticRoute.md)
  - [SupportedConnection](docs/SupportedConnection.md)
  - [SupportedConnectionGroup](docs/SupportedConnectionGroup.md)
  - [SupportedPort](docs/SupportedPort.md)

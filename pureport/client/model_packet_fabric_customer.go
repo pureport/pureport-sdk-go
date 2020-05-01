@@ -10,7 +10,7 @@
 
 package client
 
-// PacketFabricCustomer struct for PacketFabricCustomer
+// PacketFabricCustomer The Packet Fabric customer information.
 type PacketFabricCustomer struct {
 	Id   string `json:"id"`
 	Name string `json:"name,omitempty"`

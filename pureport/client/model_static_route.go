@@ -10,8 +10,8 @@
 
 package client
 
-// GeoCoordinates The latitude and longitude.
-type GeoCoordinates struct {
-	Latitude  float32 `json:"latitude"`
-	Longitude float32 `json:"longitude"`
+// StaticRoute The IKE Phase configuration.
+type StaticRoute struct {
+	Network string `json:"network"`
+	NextHop string `json:"nextHop"`
 }

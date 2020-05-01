@@ -1,4 +1,4 @@
-# StaticRouteDto
+# StaticRoute
 
 ## Properties
 

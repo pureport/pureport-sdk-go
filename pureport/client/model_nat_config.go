@@ -10,10 +10,12 @@
 
 package client
 
-// NatConfig struct for NatConfig
+// NatConfig Network Address Translation configuration.
 type NatConfig struct {
-	Blocks   []string     `json:"blocks,omitempty"`
-	Enabled  bool         `json:"enabled,omitempty"`
+	// The reserved CIDR blocks for allocation of customer NAT mappings.
+	Blocks  []string `json:"blocks,omitempty"`
+	Enabled bool     `json:"enabled,omitempty"`
+	// The customer NAT mappings.
 	Mappings []NatMapping `json:"mappings,omitempty"`
 	PnatCidr string       `json:"pnatCidr,omitempty"`
 }
