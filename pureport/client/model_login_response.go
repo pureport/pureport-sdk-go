@@ -10,10 +10,14 @@
 
 package client
 
-// LoginResponse struct for LoginResponse
+// LoginResponse Response for an authentication request.
 type LoginResponse struct {
-	AccessToken  string `json:"access_token"`
-	ExpiresIn    int32  `json:"expires_in"`
+	// A token to use for requests to the Pureport API.
+	AccessToken string `json:"access_token"`
+	// Length of time in seconds before token expiration.
+	ExpiresIn int32 `json:"expires_in"`
+	// A token to use for refresh the authentication to the Pureport API.
 	RefreshToken string `json:"refresh_token,omitempty"`
-	TokenType    string `json:"token_type"`
+	// The type of accessToken returned.
+	TokenType string `json:"token_type"`
 }

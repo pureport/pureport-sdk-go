@@ -10,13 +10,19 @@
 
 package client
 
-// Facility struct for Facility
+// Facility A data center facility.
 type Facility struct {
-	Address PhysicalAddress   `json:"address"`
-	AltIds  map[string]string `json:"altIds,omitempty"`
-	Href    string            `json:"href,omitempty"`
-	Id      string            `json:"id"`
-	Name    string            `json:"name"`
-	State   string            `json:"state,omitempty"`
-	Vendor  string            `json:"vendor"`
+	Address PhysicalAddress `json:"address"`
+	// A mapping of alternate identifiers associated with the facility.
+	AltIds map[string]string `json:"altIds,omitempty"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the facility.
+	Id string `json:"id"`
+	// The name of the facility.
+	Name string `json:"name"`
+	// The current state of the facility.
+	State string `json:"state,omitempty"`
+	// The vendor of the facility.
+	Vendor string `json:"vendor"`
 }

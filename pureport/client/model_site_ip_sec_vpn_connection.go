@@ -37,8 +37,9 @@ type SiteIpSecVpnConnection struct {
 	// Error message assigned to the connection if it is an error state.
 	ErrorMessage string `json:"errorMessage,omitempty"`
 	// Whether this connection has redundant gateways for failover.
-	HighAvailability bool   `json:"highAvailability"`
-	Href             string `json:"href,omitempty"`
+	HighAvailability bool `json:"highAvailability"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
 	// The id is a unique identifier representing the connection. This can be provided during creation, but if left empty, will be generated.
 	Id       string `json:"id,omitempty"`
 	Location Link   `json:"location"`
@@ -51,8 +52,9 @@ type SiteIpSecVpnConnection struct {
 	// The connection speed in Mbps.
 	Speed int32 `json:"speed"`
 	// The current state of the connection.
-	State string            `json:"state,omitempty"`
-	Tags  map[string]string `json:"tags,omitempty"`
+	State string `json:"state,omitempty"`
+	// Key-value pairs to associate with the Pureport asset.
+	Tags map[string]string `json:"tags,omitempty"`
 	// The connection type.
 	Type string `json:"type"`
 	// The authentication type.
@@ -65,12 +67,12 @@ type SiteIpSecVpnConnection struct {
 	IkeVersion              string          `json:"ikeVersion"`
 	PhysicalAddress         PhysicalAddress `json:"physicalAddress,omitempty"`
 	PrimaryCustomerRouterIP string          `json:"primaryCustomerRouterIP"`
-	// IPsec pre-shared key (PSK) override for the primary gateway
+	// IPsec pre-shared key (PSK) override for the primary gateway.
 	PrimaryKey string `json:"primaryKey,omitempty"`
 	// The VPN Routing Type.
 	RoutingType               string `json:"routingType"`
 	SecondaryCustomerRouterIP string `json:"secondaryCustomerRouterIP,omitempty"`
-	// IPsec pre-shared key (PSK) override for the secondary gateway
+	// IPsec pre-shared key (PSK) override for the secondary gateway.
 	SecondaryKey string `json:"secondaryKey,omitempty"`
 	// The traffic selectors to apply for routing.
 	TrafficSelectors []TrafficSelectorMapping `json:"trafficSelectors,omitempty"`

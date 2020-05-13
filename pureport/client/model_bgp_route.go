@@ -10,19 +10,28 @@
 
 package client
 
-// BgpRoute struct for BgpRoute
+// BgpRoute BGP Route information
 type BgpRoute struct {
-	Best              bool    `json:"best,omitempty"`
-	Internal          bool    `json:"internal,omitempty"`
-	LocPref           int32   `json:"locPref,omitempty"`
-	Metric            int32   `json:"metric,omitempty"`
-	MultiPath         bool    `json:"multiPath,omitempty"`
-	Network           string  `json:"network,omitempty"`
-	NextHop           string  `json:"nextHop,omitempty"`
-	NextHopConnection Link    `json:"nextHopConnection,omitempty"`
-	NextHopGateway    Link    `json:"nextHopGateway,omitempty"`
-	Origin            string  `json:"origin,omitempty"`
-	Path              []int32 `json:"path,omitempty"`
-	Valid             bool    `json:"valid,omitempty"`
-	Weight            int32   `json:"weight,omitempty"`
+	// Whether the route has been designated as the best route.
+	Best bool `json:"best,omitempty"`
+	// Whether the route path origin is internal.
+	Internal bool `json:"internal,omitempty"`
+	// The local preference assigned to the route.
+	LocPref int32 `json:"locPref,omitempty"`
+	// The metric for the route.
+	Metric int32 `json:"metric,omitempty"`
+	// Whether the route is a multipath route.
+	MultiPath         bool   `json:"multiPath,omitempty"`
+	Network           string `json:"network,omitempty"`
+	NextHop           string `json:"nextHop,omitempty"`
+	NextHopConnection Link   `json:"nextHopConnection,omitempty"`
+	NextHopGateway    Link   `json:"nextHopGateway,omitempty"`
+	// The BGP origin code for the route.
+	Origin string `json:"origin,omitempty"`
+	// List of AS paths for this route.
+	Path []int32 `json:"path,omitempty"`
+	// Whether the route is valid.
+	Valid bool `json:"valid,omitempty"`
+	// The weight assigned to the route.
+	Weight int32 `json:"weight,omitempty"`
 }

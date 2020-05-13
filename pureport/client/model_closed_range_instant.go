@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-// ClosedRangeInstant struct for ClosedRangeInstant
+// ClosedRangeInstant The time ranges billed for this Pureport entity.
 type ClosedRangeInstant struct {
 	Empty        bool      `json:"empty,omitempty"`
 	EndInclusive time.Time `json:"endInclusive,omitempty"`

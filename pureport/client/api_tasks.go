@@ -482,24 +482,28 @@ func (a *TasksApiService) GetTask(ctx _context.Context, taskId string) (Task, *_
 
 // GetTasksOpts Optional parameters for the method 'GetTasks'
 type GetTasksOpts struct {
-	State optional.String
+	PageNumber optional.Int32
+	PageSize   optional.Int32
+	State      optional.String
 }
 
 /*
 GetTasks List Tasks
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *GetTasksOpts - Optional Parameters:
+ * @param "PageNumber" (optional.Int32) -
+ * @param "PageSize" (optional.Int32) -
  * @param "State" (optional.String) -
-@return []Task
+@return PageTask
 */
-func (a *TasksApiService) GetTasks(ctx _context.Context, localVarOptionals *GetTasksOpts) ([]Task, *_nethttp.Response, error) {
+func (a *TasksApiService) GetTasks(ctx _context.Context, localVarOptionals *GetTasksOpts) (PageTask, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Task
+		localVarReturnValue  PageTask
 	)
 
 	// create path and map variables
@@ -509,6 +513,12 @@ func (a *TasksApiService) GetTasks(ctx _context.Context, localVarOptionals *GetT
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.PageNumber.IsSet() {
+		localVarQueryParams.Add("pageNumber", parameterToString(localVarOptionals.PageNumber.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
+		localVarQueryParams.Add("pageSize", parameterToString(localVarOptionals.PageSize.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.State.IsSet() {
 		localVarQueryParams.Add("state", parameterToString(localVarOptionals.State.Value(), ""))
 	}
@@ -550,7 +560,7 @@ func (a *TasksApiService) GetTasks(ctx _context.Context, localVarOptionals *GetT
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		var v []Task
+		var v PageTask
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()

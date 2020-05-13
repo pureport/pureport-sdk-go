@@ -14,11 +14,13 @@ import (
 	"time"
 )
 
-// PublicPeeringBlock struct for PublicPeeringBlock
+// PublicPeeringBlock CIDR blocks for Public Peering.
 type PublicPeeringBlock struct {
 	CidrBlock string    `json:"cidrBlock"`
 	CreatedAt time.Time `json:"createdAt,omitempty"`
-	Href      string    `json:"href,omitempty"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the public peering block.
 	Id        string    `json:"id,omitempty"`
 	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 }

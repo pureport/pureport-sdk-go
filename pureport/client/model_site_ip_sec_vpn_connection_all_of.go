@@ -22,12 +22,12 @@ type SiteIpSecVpnConnectionAllOf struct {
 	IkeVersion              string          `json:"ikeVersion,omitempty"`
 	PhysicalAddress         PhysicalAddress `json:"physicalAddress,omitempty"`
 	PrimaryCustomerRouterIP string          `json:"primaryCustomerRouterIP,omitempty"`
-	// IPsec pre-shared key (PSK) override for the primary gateway
+	// IPsec pre-shared key (PSK) override for the primary gateway.
 	PrimaryKey string `json:"primaryKey,omitempty"`
 	// The VPN Routing Type.
 	RoutingType               string `json:"routingType,omitempty"`
 	SecondaryCustomerRouterIP string `json:"secondaryCustomerRouterIP,omitempty"`
-	// IPsec pre-shared key (PSK) override for the secondary gateway
+	// IPsec pre-shared key (PSK) override for the secondary gateway.
 	SecondaryKey string `json:"secondaryKey,omitempty"`
 	// The traffic selectors to apply for routing.
 	TrafficSelectors []TrafficSelectorMapping `json:"trafficSelectors,omitempty"`

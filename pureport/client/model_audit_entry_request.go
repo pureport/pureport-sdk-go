@@ -10,10 +10,14 @@
 
 package client
 
-// AuditEntryRequest struct for AuditEntryRequest
+// AuditEntryRequest The request that triggered this entry.
 type AuditEntryRequest struct {
-	Body            string              `json:"body,omitempty"`
-	Method          string              `json:"method,omitempty"`
+	// The body of the request.
+	Body string `json:"body,omitempty"`
+	// The HTTP method of the request.
+	Method string `json:"method,omitempty"`
+	// The query parameters passed with the request.
 	QueryParameters map[string][]string `json:"queryParameters,omitempty"`
-	Url             string              `json:"url,omitempty"`
+	// The url of the request.
+	Url string `json:"url,omitempty"`
 }

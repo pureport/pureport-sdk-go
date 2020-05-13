@@ -10,12 +10,17 @@
 
 package client
 
-// SupportedPort struct for SupportedPort
+// SupportedPort Port configuration currently supported by Pureport
 type SupportedPort struct {
-	AvailabilityDomains []string      `json:"availabilityDomains,omitempty"`
-	BillingPlans        []BillingPlan `json:"billingPlans,omitempty"`
-	Facility            Link          `json:"facility,omitempty"`
-	MediaTypes          []string      `json:"mediaTypes,omitempty"`
-	Provider            string        `json:"provider,omitempty"`
-	Speed               int32         `json:"speed,omitempty"`
+	// The availability domains supported by this configuration.
+	AvailabilityDomains []string `json:"availabilityDomains,omitempty"`
+	// The billing plans supported by this configuration.
+	BillingPlans []BillingPlan `json:"billingPlans,omitempty"`
+	Facility     Link          `json:"facility,omitempty"`
+	// The media types supported by this configuration.
+	MediaTypes []string `json:"mediaTypes,omitempty"`
+	// The provider for this configuration.
+	Provider string `json:"provider,omitempty"`
+	// The speed of this configuration in Mbps.
+	Speed int32 `json:"speed,omitempty"`
 }

@@ -204,6 +204,7 @@ Class | Method | HTTP request | Description
  - [PacketFabricConnectionAllOf](docs/PacketFabricConnectionAllOf.md)
  - [PacketFabricCustomer](docs/PacketFabricCustomer.md)
  - [PageAuditEntry](docs/PageAuditEntry.md)
+ - [PageTask](docs/PageTask.md)
  - [PeeringConfiguration](docs/PeeringConfiguration.md)
  - [PhysicalAddress](docs/PhysicalAddress.md)
  - [Pod](docs/Pod.md)

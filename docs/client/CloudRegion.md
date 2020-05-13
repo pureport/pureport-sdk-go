@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | **string** |  | 
+**DisplayName** | **string** | The name of this cloud region. | 
 **GeoCoordinates** | [**GeoCoordinates**](GeoCoordinates.md) |  | [optional] 
-**Href** | **string** |  | [optional] [readonly] 
-**Id** | **string** |  | [optional] 
-**Provider** | **string** |  | 
-**ProviderAssignedId** | **string** |  | 
+**Href** | **string** | The URI of the Pureport asset. | [optional] [readonly] 
+**Id** | **string** | The id is a unique identifier representing the cloud region. | [optional] 
+**Provider** | **string** | The provider for this region. | 
+**ProviderAssignedId** | **string** | The provider-assigned identifier of the region. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

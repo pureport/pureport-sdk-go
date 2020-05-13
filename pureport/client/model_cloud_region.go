@@ -10,12 +10,17 @@
 
 package client
 
-// CloudRegion struct for CloudRegion
+// CloudRegion Cloud provided infrastructure region.
 type CloudRegion struct {
-	DisplayName        string         `json:"displayName"`
-	GeoCoordinates     GeoCoordinates `json:"geoCoordinates,omitempty"`
-	Href               string         `json:"href,omitempty"`
-	Id                 string         `json:"id,omitempty"`
-	Provider           string         `json:"provider"`
-	ProviderAssignedId string         `json:"providerAssignedId"`
+	// The name of this cloud region.
+	DisplayName    string         `json:"displayName"`
+	GeoCoordinates GeoCoordinates `json:"geoCoordinates,omitempty"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the cloud region.
+	Id string `json:"id,omitempty"`
+	// The provider for this region.
+	Provider string `json:"provider"`
+	// The provider-assigned identifier of the region.
+	ProviderAssignedId string `json:"providerAssignedId"`
 }

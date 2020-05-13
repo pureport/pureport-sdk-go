@@ -37,8 +37,9 @@ type OracleFastConnectConnection struct {
 	// Error message assigned to the connection if it is an error state.
 	ErrorMessage string `json:"errorMessage,omitempty"`
 	// Whether this connection has redundant gateways for failover.
-	HighAvailability bool   `json:"highAvailability"`
-	Href             string `json:"href,omitempty"`
+	HighAvailability bool `json:"highAvailability"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
 	// The id is a unique identifier representing the connection. This can be provided during creation, but if left empty, will be generated.
 	Id       string `json:"id,omitempty"`
 	Location Link   `json:"location"`
@@ -51,8 +52,9 @@ type OracleFastConnectConnection struct {
 	// The connection speed in Mbps.
 	Speed int32 `json:"speed"`
 	// The current state of the connection.
-	State string            `json:"state,omitempty"`
-	Tags  map[string]string `json:"tags,omitempty"`
+	State string `json:"state,omitempty"`
+	// Key-value pairs to associate with the Pureport asset.
+	Tags map[string]string `json:"tags,omitempty"`
 	// The connection type.
 	Type        string               `json:"type"`
 	CloudRegion Link                 `json:"cloudRegion"`

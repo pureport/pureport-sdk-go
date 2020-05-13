@@ -14,19 +14,28 @@ import (
 	"time"
 )
 
-// Notification struct for Notification
+// Notification An informational message for Pureport users.
 type Notification struct {
-	AvailabilityDomain string    `json:"availabilityDomain,omitempty"`
-	ConnectionTypes    []string  `json:"connectionTypes,omitempty"`
-	CreatedAt          time.Time `json:"createdAt,omitempty"`
-	Description        string    `json:"description,omitempty"`
-	End                time.Time `json:"end"`
-	Href               string    `json:"href,omitempty"`
-	Id                 string    `json:"id,omitempty"`
-	ImpactedServices   []string  `json:"impactedServices"`
-	Locations          []Link    `json:"locations,omitempty"`
-	Start              time.Time `json:"start"`
-	State              string    `json:"state,omitempty"`
-	Type               string    `json:"type"`
-	UpdatedAt          time.Time `json:"updatedAt,omitempty"`
+	// The availability domain to be affected.
+	AvailabilityDomain string `json:"availabilityDomain,omitempty"`
+	// A list of connection types to be affected.
+	ConnectionTypes []string  `json:"connectionTypes,omitempty"`
+	CreatedAt       time.Time `json:"createdAt,omitempty"`
+	// The description.
+	Description string    `json:"description,omitempty"`
+	End         time.Time `json:"end"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the notification.
+	Id string `json:"id,omitempty"`
+	// The list of Pureport services to be affected.
+	ImpactedServices []string `json:"impactedServices"`
+	// A list of asset links of Pureport locations to be affected.
+	Locations []Link    `json:"locations,omitempty"`
+	Start     time.Time `json:"start"`
+	// The current state.
+	State string `json:"state,omitempty"`
+	// The type.
+	Type      string    `json:"type"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 }

@@ -10,18 +10,26 @@
 
 package client
 
-// IpRoute struct for IpRoute
+// IpRoute IP Route information
 type IpRoute struct {
-	DirectlyConnected bool   `json:"directlyConnected,omitempty"`
-	Distance          int64  `json:"distance,omitempty"`
-	Fib               bool   `json:"fib,omitempty"`
-	InterfaceName     string `json:"interfaceName,omitempty"`
+	// Whether this route is directly connected.
+	DirectlyConnected bool `json:"directlyConnected,omitempty"`
+	// The route distance.
+	Distance int64 `json:"distance,omitempty"`
+	// Whether this route is a part of the FIB (Forwarding) table.
+	Fib bool `json:"fib,omitempty"`
+	// The interface name.
+	InterfaceName string `json:"interfaceName,omitempty"`
+	// The metric for the route.
 	Metric            int64  `json:"metric,omitempty"`
 	NextHop           string `json:"nextHop,omitempty"`
 	NextHopConnection Link   `json:"nextHopConnection,omitempty"`
 	NextHopGateway    Link   `json:"nextHopGateway,omitempty"`
 	Prefix            string `json:"prefix,omitempty"`
-	Protocol          string `json:"protocol,omitempty"`
-	Selected          bool   `json:"selected,omitempty"`
-	Uptime            string `json:"uptime,omitempty"`
+	// The protocol for the route.
+	Protocol string `json:"protocol,omitempty"`
+	// Whether this route is marked as selected.
+	Selected bool `json:"selected,omitempty"`
+	// The uptime for this route in hours:minutes:seconds.
+	Uptime string `json:"uptime,omitempty"`
 }

@@ -10,11 +10,16 @@
 
 package client
 
-// Option struct for Option
+// Option IPsec security association configurations
 type Option struct {
-	Aead        bool   `json:"aead,omitempty"`
-	Default     bool   `json:"default,omitempty"`
+	// Whether AEAD (Authenticated Encryption with Associated Data) is supported.
+	Aead bool `json:"aead,omitempty"`
+	// Whether the option is a default configuration.
+	Default bool `json:"default,omitempty"`
+	// The description.
 	Description string `json:"description,omitempty"`
-	Unsafe      bool   `json:"unsafe,omitempty"`
-	Value       string `json:"value,omitempty"`
+	// Whether the option is considered unsafe.
+	Unsafe bool `json:"unsafe,omitempty"`
+	// The name.
+	Value string `json:"value,omitempty"`
 }

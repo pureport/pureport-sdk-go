@@ -10,7 +10,8 @@
 
 package client
 
-// LoginWithRefreshTokenRequest struct for LoginWithRefreshTokenRequest
+// LoginWithRefreshTokenRequest Authenticate using a refresh token.
 type LoginWithRefreshTokenRequest struct {
+	// The refresh token to authenticate with.
 	RefreshToken string `json:"refreshToken"`
 }

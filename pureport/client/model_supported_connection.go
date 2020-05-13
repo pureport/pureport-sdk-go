@@ -10,19 +10,31 @@
 
 package client
 
-// SupportedConnection struct for SupportedConnection
+// SupportedConnection Connection configuration currently supported by Pureport
 type SupportedConnection struct {
-	BillingPlans          []BillingPlan     `json:"billingPlans,omitempty"`
-	BillingProductIds     map[string]string `json:"billingProductIds"`
-	Groups                []Link            `json:"groups,omitempty"`
-	HighAvailability      bool              `json:"highAvailability"`
-	Href                  string            `json:"href,omitempty"`
-	Id                    string            `json:"id,omitempty"`
-	Location              Link              `json:"location"`
-	PeeringType           string            `json:"peeringType"`
-	Pending               bool              `json:"pending"`
-	ReachableCloudRegions []Link            `json:"reachableCloudRegions,omitempty"`
-	RequiresApproval      bool              `json:"requiresApproval"`
-	Speed                 int32             `json:"speed"`
-	Type                  string            `json:"type"`
+	// Billing plans available for this configuration.
+	BillingPlans []BillingPlan `json:"billingPlans,omitempty"`
+	// Association between billing providers and the product to bill under for this configuration.
+	BillingProductIds map[string]string `json:"billingProductIds"`
+	// The groups this connection configuration belongs to.
+	Groups []Link `json:"groups,omitempty"`
+	// Whether connections using this configuration have redundant gateways for failover.
+	HighAvailability bool `json:"highAvailability"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the supported connection configuration.
+	Id       string `json:"id,omitempty"`
+	Location Link   `json:"location"`
+	// The peering type of this configuration.
+	PeeringType string `json:"peeringType"`
+	// Whether this configuration is currently available or requires additional steps from Pureport.
+	Pending bool `json:"pending"`
+	// The cloud regions this configuration allows.
+	ReachableCloudRegions []Link `json:"reachableCloudRegions,omitempty"`
+	// Whether connections using this configuration require approval from Pureport to provision.
+	RequiresApproval bool `json:"requiresApproval"`
+	// The connection speed in Mbps of this configuration.
+	Speed int32 `json:"speed"`
+	// The connection type of this configuration.
+	Type string `json:"type"`
 }

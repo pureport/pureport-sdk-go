@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Location** | [**Link**](Link.md) |  | 
-**Speed** | **int32** |  | 
+**Speed** | **int32** | The speed between locations in Mbps. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

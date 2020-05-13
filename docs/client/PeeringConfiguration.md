@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **PrimaryRemoteBgpIP** | **string** |  | [optional] 
 **SecondaryPureportBgpIP** | **string** |  | [optional] 
 **SecondaryRemoteBgpIP** | **string** |  | [optional] 
-**Type** | **string** |  | 
+**Type** | **string** | The peering type. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

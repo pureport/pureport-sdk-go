@@ -10,10 +10,14 @@
 
 package client
 
-// UserDomain struct for UserDomain
+// UserDomain Configuration for SAML provider email domains
 type UserDomain struct {
+	// The email domains associated with the provider.
 	EmailDomains []string `json:"emailDomains"`
-	Href         string   `json:"href,omitempty"`
-	Id           string   `json:"id,omitempty"`
-	Provider     string   `json:"provider"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the configuration.
+	Id string `json:"id,omitempty"`
+	// The name of the SAML provider.
+	Provider string `json:"provider"`
 }

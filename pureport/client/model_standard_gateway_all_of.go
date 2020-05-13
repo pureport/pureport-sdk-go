@@ -12,5 +12,6 @@ package client
 
 // StandardGatewayAllOf struct for StandardGatewayAllOf
 type StandardGatewayAllOf struct {
+	// The vlan number.
 	Vlan int32 `json:"vlan,omitempty"`
 }

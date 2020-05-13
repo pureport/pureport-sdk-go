@@ -10,13 +10,19 @@
 
 package client
 
-// Network struct for Network
+// Network Pureport mesh network
 type Network struct {
-	Account     Link              `json:"account,omitempty"`
-	Description string            `json:"description,omitempty"`
-	Href        string            `json:"href,omitempty"`
-	Id          string            `json:"id,omitempty"`
-	Name        string            `json:"name"`
-	State       string            `json:"state,omitempty"`
-	Tags        map[string]string `json:"tags,omitempty"`
+	Account Link `json:"account,omitempty"`
+	// The description.
+	Description string `json:"description,omitempty"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the network.
+	Id string `json:"id,omitempty"`
+	// The name.
+	Name string `json:"name"`
+	// The current state.
+	State string `json:"state,omitempty"`
+	// Key-value pairs to associate with the Pureport asset.
+	Tags map[string]string `json:"tags,omitempty"`
 }

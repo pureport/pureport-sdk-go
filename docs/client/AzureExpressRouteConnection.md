@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **ErrorCode** | **string** | Error Code assigned to the connection if it is an error state. | [optional] [readonly] 
 **ErrorMessage** | **string** | Error message assigned to the connection if it is an error state. | [optional] [readonly] 
 **HighAvailability** | **bool** | Whether this connection has redundant gateways for failover. | 
-**Href** | **string** |  | [optional] [readonly] 
+**Href** | **string** | The URI of the Pureport asset. | [optional] [readonly] 
 **Id** | **string** | The id is a unique identifier representing the connection. This can be provided during creation, but if left empty, will be generated. | [optional] 
 **Location** | [**Link**](Link.md) |  | 
 **Name** | **string** | The user specified name for the connection. | 
@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **SecondaryGateway** | [**Gateway**](Gateway.md) |  | [optional] 
 **Speed** | **int32** | The connection speed in Mbps. | 
 **State** | **string** | The current state of the connection. | [optional] [readonly] 
-**Tags** | **map[string]string** |  | [optional] 
+**Tags** | **map[string]string** | Key-value pairs to associate with the Pureport asset. | [optional] 
 **Type** | **string** | The connection type. | 
 **BgpPasswordConfiguration** | [**BgpPasswordConfiguration**](BGPPasswordConfiguration.md) |  | [optional] 
 **Peering** | [**PeeringConfiguration**](PeeringConfiguration.md) |  | [optional] 

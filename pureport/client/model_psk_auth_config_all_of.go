@@ -12,5 +12,6 @@ package client
 
 // PskAuthConfigAllOf struct for PskAuthConfigAllOf
 type PskAuthConfigAllOf struct {
+	// The Pre-Shared Key.
 	Key string `json:"key,omitempty"`
 }

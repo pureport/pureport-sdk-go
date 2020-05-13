@@ -10,8 +10,9 @@
 
 package client
 
-// LocationLinkConnection struct for LocationLinkConnection
+// LocationLinkConnection Link between Pureport Locations across the Pureport backbone.
 type LocationLinkConnection struct {
-	Location Link  `json:"location"`
-	Speed    int32 `json:"speed"`
+	Location Link `json:"location"`
+	// The speed between locations in Mbps.
+	Speed int32 `json:"speed"`
 }
