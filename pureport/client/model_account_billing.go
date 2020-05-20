@@ -12,10 +12,9 @@ package client
 
 // AccountBilling Billing information for a Pureport account.
 type AccountBilling struct {
-	Account Link            `json:"account"`
-	Address PhysicalAddress `json:"address"`
-	// The collection method.
-	CollectionMethod string `json:"collectionMethod"`
+	Account          Link                    `json:"account"`
+	Address          PhysicalAddress         `json:"address"`
+	CollectionMethod BillingCollectionMethod `json:"collectionMethod"`
 	// The email address invoices should be sent to.
 	Email string `json:"email"`
 	// The URI of the Pureport asset.

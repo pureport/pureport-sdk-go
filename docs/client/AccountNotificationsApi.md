@@ -34,7 +34,7 @@ Name | Type | Description  | Notes
 
  **startTime** | **optional.Time**|  | 
  **endTime** | **optional.Time**|  | 
- **status** | **optional.String**|  | 
+ **status** | [**optional.Interface of AccountNotificationStatus**](.md)|  | 
 
 ### Return type
 
@@ -77,7 +77,7 @@ Optional parameters are passed through a pointer to a UpdateAccountNotifications
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **requestBody** | [**optional.Interface of map[string]string**](string.md)|  | 
+ **requestBody** | [**optional.Interface of map[string]AccountNotificationStatus**](AccountNotificationStatus.md)|  | 
 
 ### Return type
 

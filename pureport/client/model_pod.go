@@ -16,8 +16,7 @@ type Pod struct {
 	// The URI of the Pureport asset.
 	Href string `json:"href,omitempty"`
 	// The id is a unique identifier representing the pod.
-	Id       string `json:"id"`
-	Location Link   `json:"location"`
-	// The current status of the pod.
-	Status string `json:"status"`
+	Id       string    `json:"id"`
+	Location Link      `json:"location"`
+	Status   PodStatus `json:"status"`
 }

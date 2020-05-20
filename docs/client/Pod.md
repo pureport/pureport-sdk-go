@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Href** | **string** | The URI of the Pureport asset. | [optional] [readonly] 
 **Id** | **string** | The id is a unique identifier representing the pod. | 
 **Location** | [**Link**](Link.md) |  | 
-**Status** | **string** | The current status of the pod. | 
+**Status** | [**PodStatus**](PodStatus.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

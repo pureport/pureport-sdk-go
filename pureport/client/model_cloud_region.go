@@ -18,9 +18,8 @@ type CloudRegion struct {
 	// The URI of the Pureport asset.
 	Href string `json:"href,omitempty"`
 	// The id is a unique identifier representing the cloud region.
-	Id string `json:"id,omitempty"`
-	// The provider for this region.
-	Provider string `json:"provider"`
+	Id       string        `json:"id,omitempty"`
+	Provider CloudProvider `json:"provider"`
 	// The provider-assigned identifier of the region.
 	ProviderAssignedId string `json:"providerAssignedId"`
 }

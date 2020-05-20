@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 Get permissions for account
 
-Returns the effective set of permissions that the current subject has for the given account             based on the roles they have been granted.
+Returns the effective set of permissions that the current subject has for the given account based on the roles they have been granted.
 
 ### Required Parameters
 

@@ -20,9 +20,8 @@ type Facility struct {
 	// The id is a unique identifier representing the facility.
 	Id string `json:"id"`
 	// The name of the facility.
-	Name string `json:"name"`
-	// The current state of the facility.
-	State string `json:"state,omitempty"`
+	Name  string        `json:"name"`
+	State FacilityState `json:"state,omitempty"`
 	// The vendor of the facility.
 	Vendor string `json:"vendor"`
 }

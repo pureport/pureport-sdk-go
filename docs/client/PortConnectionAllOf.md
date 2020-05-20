@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BgpPasswordConfiguration** | [**BgpPasswordConfiguration**](BGPPasswordConfiguration.md) |  | [optional] 
-**BillingLongHaul** | **string** | The long haul billing configuration for this connection. | [optional] [readonly] 
+**BillingLongHaul** | [**BillingLongHaul**](BillingLongHaul.md) |  | [optional] 
 **GatewayCidr** | **string** |  | [optional] 
 **PrimaryCustomerVlan** | **int32** | The VLAN ID of the primary gateway. | [optional] 
 **PrimaryGatewayIP** | **string** |  | [optional] 
 **PrimaryPort** | [**Link**](Link.md) |  | [optional] 
-**RoutingType** | **string** | The method to use for determining network routes. | [optional] 
+**RoutingType** | [**RoutingType**](RoutingType.md) |  | [optional] 
 **SecondaryCustomerVlan** | **int32** | The VLAN ID of the secondary gateway if this is an HA connection. | [optional] 
 **SecondaryGatewayIP** | **string** |  | [optional] 
 **SecondaryPort** | [**Link**](Link.md) |  | [optional] 

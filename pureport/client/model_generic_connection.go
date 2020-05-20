@@ -18,22 +18,19 @@ import (
 type GenericConnection struct {
 	ActiveAt time.Time `json:"activeAt,omitempty"`
 	// If the connection is advertising internal routes, which allows the customer the option of probing and tracing these routes.
-	AdvertiseInternalRoutes bool        `json:"advertiseInternalRoutes,omitempty"`
-	BillingPlan             BillingPlan `json:"billingPlan,omitempty"`
-	// The provider used for billing this connection.
-	BillingProvider string `json:"billingProvider,omitempty"`
-	// The licensed billing term for the connection.
-	BillingTerm string    `json:"billingTerm"`
-	CreatedAt   time.Time `json:"createdAt,omitempty"`
+	AdvertiseInternalRoutes bool            `json:"advertiseInternalRoutes,omitempty"`
+	BillingPlan             BillingPlan     `json:"billingPlan,omitempty"`
+	BillingProvider         BillingProvider `json:"billingProvider,omitempty"`
+	BillingTerm             BillingTerm     `json:"billingTerm"`
+	CreatedAt               time.Time       `json:"createdAt,omitempty"`
 	// The customer side ASN. This can either be a public or private ASN. If this is a public ASN, you must own it to prevent conflicts.
 	CustomerASN int64 `json:"customerASN,omitempty"`
 	// Set of customer Networks for this connection.
 	CustomerNetworks []CustomerNetwork `json:"customerNetworks,omitempty"`
 	DeletedAt        time.Time         `json:"deletedAt,omitempty"`
 	// The user defined description for the connection.
-	Description string `json:"description,omitempty"`
-	// Error Code assigned to the connection if it is an error state.
-	ErrorCode string `json:"errorCode,omitempty"`
+	Description string    `json:"description,omitempty"`
+	ErrorCode   ErrorCode `json:"errorCode,omitempty"`
 	// Error message assigned to the connection if it is an error state.
 	ErrorMessage string `json:"errorMessage,omitempty"`
 	// Whether this connection has redundant gateways for failover.
@@ -44,28 +41,24 @@ type GenericConnection struct {
 	Id       string `json:"id,omitempty"`
 	Location Link   `json:"location"`
 	// The user specified name for the connection.
-	Name             string    `json:"name"`
-	Nat              NatConfig `json:"nat,omitempty"`
-	Network          Link      `json:"network,omitempty"`
-	PrimaryGateway   Gateway   `json:"primaryGateway,omitempty"`
-	SecondaryGateway Gateway   `json:"secondaryGateway,omitempty"`
-	// The connection speed in Mbps.
-	Speed int32 `json:"speed"`
-	// The current state of the connection.
-	State string `json:"state,omitempty"`
+	Name             string          `json:"name"`
+	Nat              NatConfig       `json:"nat,omitempty"`
+	Network          Link            `json:"network,omitempty"`
+	PrimaryGateway   Gateway         `json:"primaryGateway,omitempty"`
+	SecondaryGateway Gateway         `json:"secondaryGateway,omitempty"`
+	Speed            ConnectionSpeed `json:"speed"`
+	State            ConnectionState `json:"state,omitempty"`
 	// Key-value pairs to associate with the Pureport asset.
-	Tags map[string]string `json:"tags,omitempty"`
-	// The connection type.
-	Type                     string                   `json:"type"`
+	Tags                     map[string]string        `json:"tags,omitempty"`
+	Type                     ConnectionType           `json:"type"`
 	BgpPasswordConfiguration BgpPasswordConfiguration `json:"bgpPasswordConfiguration,omitempty"`
 	GatewayCidr              string                   `json:"gatewayCidr,omitempty"`
 	Peering                  PeeringConfiguration     `json:"peering,omitempty"`
 	PrimaryGatewayIP         string                   `json:"primaryGatewayIP,omitempty"`
 	// The primary VLAN ID.
-	PrimaryVlan int32 `json:"primaryVlan,omitempty"`
-	// The method to use for determining network routes.
-	RoutingType        string `json:"routingType,omitempty"`
-	SecondaryGatewayIP string `json:"secondaryGatewayIP,omitempty"`
+	PrimaryVlan        int32       `json:"primaryVlan,omitempty"`
+	RoutingType        RoutingType `json:"routingType,omitempty"`
+	SecondaryGatewayIP string      `json:"secondaryGatewayIP,omitempty"`
 	// The secondary VLAN ID if this is an HA connection.
 	SecondaryVlan int32 `json:"secondaryVlan,omitempty"`
 	// The user configured static routes.

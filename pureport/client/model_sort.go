@@ -12,6 +12,6 @@ package client
 
 // Sort struct for Sort
 type Sort struct {
-	Direction string `json:"direction,omitempty"`
-	Property  string `json:"property,omitempty"`
+	Direction SortDirection `json:"direction,omitempty"`
+	Property  string        `json:"property,omitempty"`
 }

@@ -20,21 +20,17 @@ type AuditEntry struct {
 	// The changes to the Pureport entity.
 	Changes []ChangeObject `json:"changes,omitempty"`
 	// An identifier to group multiple related audit entries.
-	CorrelationId string `json:"correlationId,omitempty"`
-	// The type of event for this entry.
-	EventType string             `json:"eventType,omitempty"`
-	IpAddress string             `json:"ipAddress,omitempty"`
-	Principal Link               `json:"principal,omitempty"`
-	Request   AuditEntryRequest  `json:"request,omitempty"`
-	Response  AuditEntryResponse `json:"response,omitempty"`
-	// The result of the request that triggered this entry.
-	Result string `json:"result,omitempty"`
-	// The source of the request that triggered this entry.
-	Source  string `json:"source,omitempty"`
-	Subject Link   `json:"subject,omitempty"`
-	// The type of the Pureport entity associated with this entry.
-	SubjectType string    `json:"subjectType,omitempty"`
-	Timestamp   time.Time `json:"timestamp,omitempty"`
+	CorrelationId string                `json:"correlationId,omitempty"`
+	EventType     AuditEntryEventType   `json:"eventType,omitempty"`
+	IpAddress     string                `json:"ipAddress,omitempty"`
+	Principal     Link                  `json:"principal,omitempty"`
+	Request       AuditEntryRequest     `json:"request,omitempty"`
+	Response      AuditEntryResponse    `json:"response,omitempty"`
+	Result        AuditEntryResult      `json:"result,omitempty"`
+	Source        AuditEntrySource      `json:"source,omitempty"`
+	Subject       Link                  `json:"subject,omitempty"`
+	SubjectType   AuditEntrySubjectType `json:"subjectType,omitempty"`
+	Timestamp     time.Time             `json:"timestamp,omitempty"`
 	// The User-Agent of the request that triggered this entry.
 	UserAgent string `json:"userAgent,omitempty"`
 }

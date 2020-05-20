@@ -16,11 +16,10 @@ import (
 
 // Notification An informational message for Pureport users.
 type Notification struct {
-	// The availability domain to be affected.
-	AvailabilityDomain string `json:"availabilityDomain,omitempty"`
+	AvailabilityDomain AvailabilityDomain `json:"availabilityDomain,omitempty"`
 	// A list of connection types to be affected.
-	ConnectionTypes []string  `json:"connectionTypes,omitempty"`
-	CreatedAt       time.Time `json:"createdAt,omitempty"`
+	ConnectionTypes []ConnectionType `json:"connectionTypes,omitempty"`
+	CreatedAt       time.Time        `json:"createdAt,omitempty"`
 	// The description.
 	Description string    `json:"description,omitempty"`
 	End         time.Time `json:"end"`
@@ -29,13 +28,11 @@ type Notification struct {
 	// The id is a unique identifier representing the notification.
 	Id string `json:"id,omitempty"`
 	// The list of Pureport services to be affected.
-	ImpactedServices []string `json:"impactedServices"`
+	ImpactedServices []NotificationImpactedService `json:"impactedServices"`
 	// A list of asset links of Pureport locations to be affected.
-	Locations []Link    `json:"locations,omitempty"`
-	Start     time.Time `json:"start"`
-	// The current state.
-	State string `json:"state,omitempty"`
-	// The type.
-	Type      string    `json:"type"`
-	UpdatedAt time.Time `json:"updatedAt,omitempty"`
+	Locations []Link            `json:"locations,omitempty"`
+	Start     time.Time         `json:"start"`
+	State     NotificationState `json:"state,omitempty"`
+	Type      NotificationType  `json:"type"`
+	UpdatedAt time.Time         `json:"updatedAt,omitempty"`
 }

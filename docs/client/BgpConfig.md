@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **PublicNatIp** | **string** |  | [optional] [readonly] 
 **PureportASN** | **int64** | The ASN of the Pureport side of the BGP peering. | [optional] [readonly] 
 **PureportIP** | **string** |  | [optional] [readonly] 
-**State** | **string** | The current BGP state. | [optional] [readonly] 
+**State** | [**BgpState**](BGPState.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

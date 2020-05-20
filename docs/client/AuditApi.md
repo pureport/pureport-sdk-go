@@ -34,18 +34,18 @@ Name | Type | Description  | Notes
  **pageNumber** | **optional.Int32**|  | [default to 0]
  **pageSize** | **optional.Int32**|  | [default to 100]
  **sort** | **optional.String**|  | 
- **sortDirection** | **optional.String**|  | 
+ **sortDirection** | [**optional.Interface of SortDirection**](.md)|  | 
  **startTime** | **optional.Time**|  | 
  **endTime** | **optional.Time**|  | 
  **includeChildAccounts** | **optional.Bool**|  | [default to false]
  **includeChildSubjects** | **optional.Bool**| include child object records if specified subject is of type NETWORK or CONNECTION | [default to false]
- **eventTypes** | [**optional.Interface of []string**](string.md)|  | 
- **result** | **optional.String**|  | 
+ **eventTypes** | [**optional.Interface of []AuditEntryEventType**](AuditEntryEventType.md)|  | 
+ **result** | [**optional.Interface of AuditEntryResult**](.md)|  | 
  **principalId** | **optional.String**|  | 
  **ipAddress** | **optional.String**|  | 
  **correlationId** | **optional.String**|  | 
  **subjectId** | **optional.String**|  | 
- **subjectType** | **optional.String**|  | 
+ **subjectType** | [**optional.Interface of AuditEntrySubjectType**](.md)|  | 
 
 ### Return type
 

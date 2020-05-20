@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
  **portId** | **optional.String**|  | 
  **locationId** | **optional.String**|  | 
  **speed** | **optional.Int32**|  | 
- **billingTerm** | **optional.String**|  | [default to HOURLY]
+ **billingTerm** | [**optional.Interface of BillingTerm**](.md)|  | 
 
 ### Return type
 

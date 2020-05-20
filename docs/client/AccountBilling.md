@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Account** | [**Link**](Link.md) |  | 
 **Address** | [**PhysicalAddress**](PhysicalAddress.md) |  | 
-**CollectionMethod** | **string** | The collection method. | 
+**CollectionMethod** | [**BillingCollectionMethod**](BillingCollectionMethod.md) |  | 
 **Email** | **string** | The email address invoices should be sent to. | 
 **Href** | **string** | The URI of the Pureport asset. | [optional] [readonly] 
 **Name** | **string** | The name of the credit card user. | 

@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AuthType** | **string** | The authentication type. | [optional] 
+**AuthType** | [**IpSecAuthenticationType**](IPSecAuthenticationType.md) |  | [optional] 
 **BgpPasswordConfiguration** | [**BgpPasswordConfiguration**](BGPPasswordConfiguration.md) |  | [optional] 
 **EnableBGPPassword** | **bool** |  | [optional] 
 **IkeV1** | [**Ikev1Config**](IKEV1Config.md) |  | [optional] 
 **IkeV2** | [**Ikev2Config**](IKEV2Config.md) |  | [optional] 
-**IkeVersion** | **string** | The IKE version. | [optional] 
+**IkeVersion** | [**IkeVersion**](IKEVersion.md) |  | [optional] 
 **PhysicalAddress** | [**PhysicalAddress**](PhysicalAddress.md) |  | [optional] 
 **PrimaryCustomerRouterIP** | **string** |  | [optional] 
 **PrimaryKey** | **string** | IPsec pre-shared key (PSK) override for the primary gateway. | [optional] 
-**RoutingType** | **string** | The VPN Routing Type. | [optional] 
+**RoutingType** | [**VpnRoutingType**](VPNRoutingType.md) |  | [optional] 
 **SecondaryCustomerRouterIP** | **string** |  | [optional] 
 **SecondaryKey** | **string** | IPsec pre-shared key (PSK) override for the secondary gateway. | [optional] 
 **TrafficSelectors** | [**[]TrafficSelectorMapping**](TrafficSelectorMapping.md) | The traffic selectors to apply for routing. | [optional] 

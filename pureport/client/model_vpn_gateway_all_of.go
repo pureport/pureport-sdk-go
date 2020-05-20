@@ -15,7 +15,7 @@ type VpnGatewayAllOf struct {
 	Auth              VpnAuthConfig `json:"auth,omitempty"`
 	CustomerGatewayIP string        `json:"customerGatewayIP,omitempty"`
 	CustomerVtiIP     string        `json:"customerVtiIP,omitempty"`
-	OsNetworkId       string        `json:"osNetworkId,omitempty"`
+	IpsecStatus       IkeState      `json:"ipsecStatus,omitempty"`
 	PureportGatewayIP string        `json:"pureportGatewayIP,omitempty"`
 	PureportVtiIP     string        `json:"pureportVtiIP,omitempty"`
 }

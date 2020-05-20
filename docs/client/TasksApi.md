@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pageNumber** | **optional.Int32**|  | [default to 0]
  **pageSize** | **optional.Int32**|  | [default to 100]
- **state** | **optional.String**|  | 
+ **state** | [**optional.Interface of TaskState**](.md)|  | 
 
 ### Return type
 

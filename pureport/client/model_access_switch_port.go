@@ -12,9 +12,8 @@ package client
 
 // AccessSwitchPort A port provided on a Pureport Access Switch
 type AccessSwitchPort struct {
-	AccessSwitch Link `json:"accessSwitch"`
-	// The connector type.
-	ConnectorType string `json:"connectorType"`
+	AccessSwitch  Link                          `json:"accessSwitch"`
+	ConnectorType AccessSwitchPortConnectorType `json:"connectorType"`
 	// The URI of the Pureport asset.
 	Href string `json:"href,omitempty"`
 	// The id is a unique identifier representing the access switch port.
@@ -26,7 +25,6 @@ type AccessSwitchPort struct {
 	// The patch panel identifier.
 	PatchPanelId string `json:"patchPanelId"`
 	// The list of port numbers on the patch panel.
-	PatchPanelPortNumbers []int32 `json:"patchPanelPortNumbers"`
-	// The speed of the port in Mbps.
-	Speed int32 `json:"speed"`
+	PatchPanelPortNumbers []int32   `json:"patchPanelPortNumbers"`
+	Speed                 PortSpeed `json:"speed"`
 }

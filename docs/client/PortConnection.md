@@ -7,14 +7,14 @@ Name | Type | Description | Notes
 **ActiveAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **AdvertiseInternalRoutes** | **bool** | If the connection is advertising internal routes, which allows the customer the option of probing and tracing these routes. | [optional] 
 **BillingPlan** | [**BillingPlan**](BillingPlan.md) |  | [optional] 
-**BillingProvider** | **string** | The provider used for billing this connection. | [optional] [readonly] 
-**BillingTerm** | **string** | The licensed billing term for the connection. | 
+**BillingProvider** | [**BillingProvider**](BillingProvider.md) |  | [optional] 
+**BillingTerm** | [**BillingTerm**](BillingTerm.md) |  | 
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **CustomerASN** | **int64** | The customer side ASN. This can either be a public or private ASN. If this is a public ASN, you must own it to prevent conflicts. | [optional] 
 **CustomerNetworks** | [**[]CustomerNetwork**](CustomerNetwork.md) | Set of customer Networks for this connection. | [optional] 
 **DeletedAt** | [**time.Time**](time.Time.md) |  | [optional] [readonly] 
 **Description** | **string** | The user defined description for the connection. | [optional] 
-**ErrorCode** | **string** | Error Code assigned to the connection if it is an error state. | [optional] [readonly] 
+**ErrorCode** | [**ErrorCode**](ErrorCode.md) |  | [optional] 
 **ErrorMessage** | **string** | Error message assigned to the connection if it is an error state. | [optional] [readonly] 
 **HighAvailability** | **bool** | Whether this connection has redundant gateways for failover. | 
 **Href** | **string** | The URI of the Pureport asset. | [optional] [readonly] 
@@ -25,17 +25,17 @@ Name | Type | Description | Notes
 **Network** | [**Link**](Link.md) |  | [optional] 
 **PrimaryGateway** | [**Gateway**](Gateway.md) |  | [optional] 
 **SecondaryGateway** | [**Gateway**](Gateway.md) |  | [optional] 
-**Speed** | **int32** | The connection speed in Mbps. | 
-**State** | **string** | The current state of the connection. | [optional] [readonly] 
+**Speed** | [**ConnectionSpeed**](ConnectionSpeed.md) |  | 
+**State** | [**ConnectionState**](ConnectionState.md) |  | [optional] 
 **Tags** | **map[string]string** | Key-value pairs to associate with the Pureport asset. | [optional] 
-**Type** | **string** | The connection type. | 
+**Type** | [**ConnectionType**](ConnectionType.md) |  | 
 **BgpPasswordConfiguration** | [**BgpPasswordConfiguration**](BGPPasswordConfiguration.md) |  | [optional] 
-**BillingLongHaul** | **string** | The long haul billing configuration for this connection. | [optional] [readonly] 
+**BillingLongHaul** | [**BillingLongHaul**](BillingLongHaul.md) |  | [optional] 
 **GatewayCidr** | **string** |  | [optional] 
 **PrimaryCustomerVlan** | **int32** | The VLAN ID of the primary gateway. | 
 **PrimaryGatewayIP** | **string** |  | [optional] 
 **PrimaryPort** | [**Link**](Link.md) |  | 
-**RoutingType** | **string** | The method to use for determining network routes. | [optional] 
+**RoutingType** | [**RoutingType**](RoutingType.md) |  | [optional] 
 **SecondaryCustomerVlan** | **int32** | The VLAN ID of the secondary gateway if this is an HA connection. | [optional] 
 **SecondaryGatewayIP** | **string** |  | [optional] 
 **SecondaryPort** | [**Link**](Link.md) |  | [optional] 

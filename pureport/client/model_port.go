@@ -12,14 +12,12 @@ package client
 
 // Port Networking port
 type Port struct {
-	Account Link `json:"account"`
-	// The availability domain designated for this port.
-	AvailabilityDomain string `json:"availabilityDomain"`
+	Account            Link               `json:"account"`
+	AvailabilityDomain AvailabilityDomain `json:"availabilityDomain"`
 	// Whether this port is available for use in child accounts.
 	AvailableToChildAccounts bool        `json:"availableToChildAccounts,omitempty"`
 	BillingPlan              BillingPlan `json:"billingPlan,omitempty"`
-	// The period of time this port is licensed for.
-	BillingTerm string `json:"billingTerm"`
+	BillingTerm              BillingTerm `json:"billingTerm"`
 	// The description.
 	Description string `json:"description,omitempty"`
 	// The id of the device hosting this port.
@@ -40,13 +38,10 @@ type Port struct {
 	// The id of the patch panel the port is using.
 	PatchPanelId string `json:"patchPanelId,omitempty"`
 	// The ports on the patch panel the port is using.
-	PatchPanelPortNumbers []int32 `json:"patchPanelPortNumbers,omitempty"`
-	// The provider for this port.
-	Provider string `json:"provider"`
-	// The speed for this port in Mbps.
-	Speed int32 `json:"speed"`
-	// The current state of the port.
-	State string `json:"state,omitempty"`
+	PatchPanelPortNumbers []int32      `json:"patchPanelPortNumbers,omitempty"`
+	Provider              PortProvider `json:"provider"`
+	Speed                 PortSpeed    `json:"speed"`
+	State                 PortState    `json:"state,omitempty"`
 	// Key-value pairs to associate with the Pureport asset.
 	Tags map[string]string `json:"tags,omitempty"`
 }

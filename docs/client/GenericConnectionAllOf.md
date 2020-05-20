@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Peering** | [**PeeringConfiguration**](PeeringConfiguration.md) |  | [optional] 
 **PrimaryGatewayIP** | **string** |  | [optional] 
 **PrimaryVlan** | **int32** | The primary VLAN ID. | [optional] 
-**RoutingType** | **string** | The method to use for determining network routes. | [optional] 
+**RoutingType** | [**RoutingType**](RoutingType.md) |  | [optional] 
 **SecondaryGatewayIP** | **string** |  | [optional] 
 **SecondaryVlan** | **int32** | The secondary VLAN ID if this is an HA connection. | [optional] 
 **StaticRoutes** | [**[]StaticRoute**](StaticRoute.md) | The user configured static routes. | [optional] 

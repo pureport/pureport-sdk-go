@@ -20,8 +20,7 @@ type BgpConfig struct {
 	PeeringSubnet string `json:"peeringSubnet,omitempty"`
 	PublicNatIp   string `json:"publicNatIp,omitempty"`
 	// The ASN of the Pureport side of the BGP peering.
-	PureportASN int64  `json:"pureportASN,omitempty"`
-	PureportIP  string `json:"pureportIP,omitempty"`
-	// The current BGP state.
-	State string `json:"state,omitempty"`
+	PureportASN int64    `json:"pureportASN,omitempty"`
+	PureportIP  string   `json:"pureportIP,omitempty"`
+	State       BgpState `json:"state,omitempty"`
 }

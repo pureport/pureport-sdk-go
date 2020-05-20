@@ -394,7 +394,7 @@ func (a *AccountsApiService) GetAccount(ctx _context.Context, accountId string) 
 
 /*
 GetAccountPermissions Get permissions for account
-Returns the effective set of permissions that the current subject has for the given account             based on the roles they have been granted.
+Returns the effective set of permissions that the current subject has for the given account based on the roles they have been granted.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accountId
 @return map[string]map[string]bool

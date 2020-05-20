@@ -31,9 +31,8 @@ type CloudService struct {
 	// The count of IPv6 CIDRs associated with this cloud service configuration.
 	Ipv6PrefixCount int32 `json:"ipv6PrefixCount,omitempty"`
 	// The name of the cloud service configuration.
-	Name string `json:"name"`
-	// The provider of the cloud service.
-	Provider string `json:"provider"`
+	Name     string        `json:"name"`
+	Provider CloudProvider `json:"provider"`
 	// The service name.
 	Service string `json:"service"`
 }

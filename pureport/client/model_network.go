@@ -20,9 +20,8 @@ type Network struct {
 	// The id is a unique identifier representing the network.
 	Id string `json:"id,omitempty"`
 	// The name.
-	Name string `json:"name"`
-	// The current state.
-	State string `json:"state,omitempty"`
+	Name  string       `json:"name"`
+	State NetworkState `json:"state,omitempty"`
 	// Key-value pairs to associate with the Pureport asset.
 	Tags map[string]string `json:"tags,omitempty"`
 }

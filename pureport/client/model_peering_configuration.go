@@ -12,10 +12,9 @@ package client
 
 // PeeringConfiguration Peering configuration.
 type PeeringConfiguration struct {
-	PrimaryPureportBgpIP   string `json:"primaryPureportBgpIP,omitempty"`
-	PrimaryRemoteBgpIP     string `json:"primaryRemoteBgpIP,omitempty"`
-	SecondaryPureportBgpIP string `json:"secondaryPureportBgpIP,omitempty"`
-	SecondaryRemoteBgpIP   string `json:"secondaryRemoteBgpIP,omitempty"`
-	// The peering type.
-	Type string `json:"type"`
+	PrimaryPureportBgpIP   string      `json:"primaryPureportBgpIP,omitempty"`
+	PrimaryRemoteBgpIP     string      `json:"primaryRemoteBgpIP,omitempty"`
+	SecondaryPureportBgpIP string      `json:"secondaryPureportBgpIP,omitempty"`
+	SecondaryRemoteBgpIP   string      `json:"secondaryRemoteBgpIP,omitempty"`
+	Type                   PeeringType `json:"type"`
 }

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Ipv4PrefixCount** | **int32** | The count of IPv4 CIDRs associated with this cloud service configuration. | [optional] [readonly] 
 **Ipv6PrefixCount** | **int32** | The count of IPv6 CIDRs associated with this cloud service configuration. | [optional] [readonly] 
 **Name** | **string** | The name of the cloud service configuration. | 
-**Provider** | **string** | The provider of the cloud service. | 
+**Provider** | [**CloudProvider**](CloudProvider.md) |  | 
 **Service** | **string** | The service name. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

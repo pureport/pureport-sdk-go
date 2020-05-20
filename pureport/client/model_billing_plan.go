@@ -13,15 +13,12 @@ package client
 // BillingPlan A billing plan for a Pureport asset
 type BillingPlan struct {
 	// The recurring amount in cents that will be charged on the billing interval.
-	Amount float32 `json:"amount,omitempty"`
-	// The interval on which recurring charges will be charged.
-	BillingInterval string `json:"billingInterval"`
-	// The long haul configuration for this billing plan.
-	BillingLongHaul string `json:"billingLongHaul,omitempty"`
+	Amount          float32         `json:"amount,omitempty"`
+	BillingInterval BillingInterval `json:"billingInterval"`
+	BillingLongHaul BillingLongHaul `json:"billingLongHaul,omitempty"`
 	// The id is a unique identifier representing the billing plan.
 	Id string `json:"id,omitempty"`
 	// The nonrecurring amount in cents that will be charged on activation of the Pureport asset.
-	SetupAmount float32 `json:"setupAmount,omitempty"`
-	// The minimum length of time a Pureport asset is licensed for at the specified amount.
-	Term string `json:"term"`
+	SetupAmount float32     `json:"setupAmount,omitempty"`
+	Term        BillingTerm `json:"term"`
 }

@@ -12,31 +12,26 @@ package client
 
 // Gateway A network gateway.
 type Gateway struct {
-	// The availability domain assigned to the gateway.
-	AvailabilityDomain string    `json:"availabilityDomain,omitempty"`
-	BgpConfig          BgpConfig `json:"bgpConfig,omitempty"`
-	Connection         Link      `json:"connection,omitempty"`
+	AvailabilityDomain AvailabilityDomain `json:"availabilityDomain,omitempty"`
+	BgpConfig          BgpConfig          `json:"bgpConfig,omitempty"`
+	Connection         Link               `json:"connection,omitempty"`
 	// The description.
-	Description string `json:"description,omitempty"`
-	// The HTTP error code if the gateway is in an error state.
-	ErrorCode string `json:"errorCode,omitempty"`
+	Description string    `json:"description,omitempty"`
+	ErrorCode   ErrorCode `json:"errorCode,omitempty"`
 	// The error message if the gateway is in an error state.
 	ErrorMessage string `json:"errorMessage,omitempty"`
 	// The URI of the Pureport asset.
 	Href string `json:"href,omitempty"`
 	// The id is a unique identifier representing the gateway.
-	Id string `json:"id,omitempty"`
-	// The link state.
-	LinkState string `json:"linkState,omitempty"`
+	Id        string    `json:"id,omitempty"`
+	LinkState LinkState `json:"linkState,omitempty"`
 	// The name.
 	Name                      string `json:"name,omitempty"`
 	PureportInternalGatewayIP string `json:"pureportInternalGatewayIP,omitempty"`
 	// The ID of any resources attached to the gateway.
-	RemoteId string `json:"remoteId,omitempty"`
-	// The current state of the gateway.
-	State string `json:"state,omitempty"`
-	// The type.
-	Type string `json:"type,omitempty"`
+	RemoteId string       `json:"remoteId,omitempty"`
+	State    GatewayState `json:"state,omitempty"`
+	Type     GatewayType  `json:"type,omitempty"`
 	// The version of the gateway container.
 	Version string `json:"version,omitempty"`
 }

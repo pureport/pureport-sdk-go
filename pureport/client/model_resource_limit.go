@@ -12,14 +12,12 @@ package client
 
 // ResourceLimit A representation of limitations between two Pureport resources.
 type ResourceLimit struct {
-	// The type of the child resource to limit.
-	ChildResourceType string `json:"childResourceType"`
+	ChildResourceType ResourceType `json:"childResourceType"`
 	// The URI of the Pureport asset.
 	Href string `json:"href,omitempty"`
 	// The number of child resources to limit to for the specified parent.
 	Limit int32 `json:"limit"`
 	// The unique identifier of the parent resource.
-	ParentResourceId string `json:"parentResourceId,omitempty"`
-	// The type of the parent resource.
-	ParentResourceType string `json:"parentResourceType,omitempty"`
+	ParentResourceId   string       `json:"parentResourceId,omitempty"`
+	ParentResourceType ResourceType `json:"parentResourceType,omitempty"`
 }

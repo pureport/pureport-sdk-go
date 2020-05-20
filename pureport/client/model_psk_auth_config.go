@@ -12,8 +12,7 @@ package client
 
 // PskAuthConfig PSK authentication configuration
 type PskAuthConfig struct {
-	// The type of authentication for IPsec.
-	Type string `json:"type,omitempty"`
+	Type IpSecAuthenticationType `json:"type,omitempty"`
 	// The Pre-Shared Key.
 	Key string `json:"key,omitempty"`
 }

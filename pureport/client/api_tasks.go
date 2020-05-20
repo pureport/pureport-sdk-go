@@ -484,7 +484,7 @@ func (a *TasksApiService) GetTask(ctx _context.Context, taskId string) (Task, *_
 type GetTasksOpts struct {
 	PageNumber optional.Int32
 	PageSize   optional.Int32
-	State      optional.String
+	State      optional.Interface
 }
 
 /*
@@ -493,7 +493,7 @@ GetTasks List Tasks
  * @param optional nil or *GetTasksOpts - Optional Parameters:
  * @param "PageNumber" (optional.Int32) -
  * @param "PageSize" (optional.Int32) -
- * @param "State" (optional.String) -
+ * @param "State" (optional.Interface of TaskState) -
 @return PageTask
 */
 func (a *TasksApiService) GetTasks(ctx _context.Context, localVarOptionals *GetTasksOpts) (PageTask, *_nethttp.Response, error) {

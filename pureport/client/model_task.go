@@ -34,9 +34,7 @@ type Task struct {
 	// The result of the task.
 	Result    string    `json:"result,omitempty"`
 	StartedAt time.Time `json:"startedAt,omitempty"`
-	// The current state of the task.
-	State string `json:"state,omitempty"`
-	// The type.
-	Type      string    `json:"type"`
+	State     TaskState `json:"state,omitempty"`
+	Type      TaskType  `json:"type"`
 	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 }

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DhGroup** | **string** | The Diffie-Hellman Group. | 
+**DhGroup** | [**Ikev2DiffieHellmanGroup**](IKEV2DiffieHellmanGroup.md) |  | 
 **DpdDelay** | **int32** | The Dead Peering Detection (DPD) retry interval. | [optional] 
 **DpdTimeout** | **int32** | The Dead Peering Detection (DPD) interval. | [optional] 
-**Encryption** | **string** | The encryption algorithm. | 
-**Integrity** | **string** | The integrity algorithm. | [optional] 
+**Encryption** | [**Ikev2IkeEncryptionAlgorithm**](IKEV2IKEEncryptionAlgorithm.md) |  | 
+**Integrity** | [**Ikev2IkeIntegrityAlgorithm**](IKEV2IKEIntegrityAlgorithm.md) |  | [optional] 
 **Lifetime** | **int32** | The lifetime of the SA. | [optional] 
-**Prf** | **string** |  | [optional] 
+**Prf** | [**Ikev2PseudoRandomFunction**](IKEV2PseudoRandomFunction.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Auth** | [**VpnAuthConfig**](VPNAuthConfig.md) |  | [optional] 
 **CustomerGatewayIP** | **string** |  | [optional] [readonly] 
 **CustomerVtiIP** | **string** |  | [optional] [readonly] 
-**OsNetworkId** | **string** |  | [optional] [readonly] 
+**IpsecStatus** | [**IkeState**](IKEState.md) |  | [optional] 
 **PureportGatewayIP** | **string** |  | [optional] [readonly] 
 **PureportVtiIP** | **string** |  | [optional] [readonly] 
 

@@ -108,12 +108,7 @@
                 "description": "Access switch installed in a Pureport pod.",
                 "properties": {
                     "availabilityDomain": {
-                        "description": "The availability domain of the access switch.",
-                        "enum": [
-                            "PRIMARY",
-                            "SECONDARY"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/AvailabilityDomain"
                     },
                     "href": {
                         "description": "The URI of the Pureport asset.",
@@ -131,12 +126,7 @@
                         "$ref": "#/components/schemas/Link"
                     },
                     "status": {
-                        "description": "The current status of the access switch.",
-                        "enum": [
-                            "AVAILABLE",
-                            "UNAVAILABLE"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/AccessSwitchStatus"
                     }
                 },
                 "required": [
@@ -154,13 +144,7 @@
                         "$ref": "#/components/schemas/Link"
                     },
                     "connectorType": {
-                        "description": "The connector type.",
-                        "enum": [
-                            "SC",
-                            "LC"
-                        ],
-                        "example": "LC",
-                        "type": "string"
+                        "$ref": "#/components/schemas/AccessSwitchPortConnectorType"
                     },
                     "href": {
                         "description": "The URI of the Pureport asset.",
@@ -203,15 +187,7 @@
                         "uniqueItems": true
                     },
                     "speed": {
-                        "description": "The speed of the port in Mbps.",
-                        "enum": [
-                            1000,
-                            10000,
-                            40000
-                        ],
-                        "example": 1000,
-                        "format": "int32",
-                        "type": "integer"
+                        "$ref": "#/components/schemas/PortSpeed"
                     }
                 },
                 "required": [
@@ -225,6 +201,22 @@
                     "speed"
                 ],
                 "type": "object"
+            },
+            "AccessSwitchPortConnectorType": {
+                "description": "The connector type.",
+                "enum": [
+                    "SC",
+                    "LC"
+                ],
+                "example": "LC",
+                "type": "string"
+            },
+            "AccessSwitchStatus": {
+                "enum": [
+                    "AVAILABLE",
+                    "UNAVAILABLE"
+                ],
+                "type": "string"
             },
             "Account": {
                 "description": "A Pureport Account",
@@ -335,12 +327,7 @@
                         "$ref": "#/components/schemas/PhysicalAddress"
                     },
                     "collectionMethod": {
-                        "description": "The collection method.",
-                        "enum": [
-                            "CREDIT_CARD",
-                            "NET_30"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/BillingCollectionMethod"
                     },
                     "email": {
                         "description": "The email address invoices should be sent to.",
@@ -572,6 +559,13 @@
                 },
                 "type": "object"
             },
+            "AccountNotificationStatus": {
+                "enum": [
+                    "READ",
+                    "UNREAD"
+                ],
+                "type": "string"
+            },
             "ApiKey": {
                 "description": "Key for authenticating with the Pureport API",
                 "properties": {
@@ -660,61 +654,7 @@
                         "type": "string"
                     },
                     "eventType": {
-                        "description": "The type of event for this entry.",
-                        "enum": [
-                            "USER_LOGIN",
-                            "USER_FORGOT_PASSWORD",
-                            "API_LOGIN",
-                            "ACCOUNT_CREATE",
-                            "ACCOUNT_UPDATE",
-                            "ACCOUNT_DELETE",
-                            "ACCOUNT_BILLING_CREATE",
-                            "ACCOUNT_BILLING_UPDATE",
-                            "ACCOUNT_BILLING_DELETE",
-                            "NETWORK_CREATE",
-                            "NETWORK_UPDATE",
-                            "NETWORK_DELETE",
-                            "CONNECTION_CREATE",
-                            "CONNECTION_UPDATE",
-                            "CONNECTION_DELETE",
-                            "GATEWAY_CREATE",
-                            "GATEWAY_UPDATE",
-                            "GATEWAY_DELETE",
-                            "API_KEY_CREATE",
-                            "API_KEY_UPDATE",
-                            "API_KEY_DELETE",
-                            "ROLE_CREATE",
-                            "ROLE_UPDATE",
-                            "ROLE_DELETE",
-                            "USER_CREATE",
-                            "USER_UPDATE",
-                            "USER_DELETE",
-                            "USER_DOMAIN_CREATE",
-                            "USER_DOMAIN_UPDATE",
-                            "USER_DOMAIN_DELETE",
-                            "PORT_CREATE",
-                            "PORT_UPDATE",
-                            "PORT_DELETE",
-                            "MEMBER_INVITE_CREATE",
-                            "MEMBER_INVITE_ACCEPT",
-                            "MEMBER_INVITE_UPDATE",
-                            "MEMBER_INVITE_DELETE",
-                            "ACCOUNT_MEMBER_CREATE",
-                            "ACCOUNT_MEMBER_UPDATE",
-                            "ACCOUNT_MEMBER_DELETE",
-                            "CONNECTION_STATE_CHANGE",
-                            "GATEWAY_STATE_CHANGE",
-                            "GATEWAY_BGP_STATUS_CHANGE",
-                            "GATEWAY_IPSEC_STATUS_CHANGE",
-                            "NOTIFICATION_CREATE",
-                            "NOTIFICATION_UPDATE",
-                            "NOTIFICATION_DELETE",
-                            "TASK_CREATE",
-                            "TASK_UPDATE",
-                            "TASK_DELETE"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/AuditEntryEventType"
                     },
                     "ipAddress": {
                         "readOnly": true,
@@ -730,47 +670,16 @@
                         "$ref": "#/components/schemas/AuditEntryResponse"
                     },
                     "result": {
-                        "description": "The result of the request that triggered this entry.",
-                        "enum": [
-                            "SUCCESS",
-                            "FAILURE"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/AuditEntryResult"
                     },
                     "source": {
-                        "description": "The source of the request that triggered this entry.",
-                        "enum": [
-                            "API",
-                            "CONSOLE",
-                            "SYSTEM"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/AuditEntrySource"
                     },
                     "subject": {
                         "$ref": "#/components/schemas/Link"
                     },
                     "subjectType": {
-                        "description": "The type of the Pureport entity associated with this entry.",
-                        "enum": [
-                            "ACCOUNT",
-                            "CONNECTION",
-                            "NETWORK",
-                            "USER",
-                            "USER_DOMAIN",
-                            "ROLE",
-                            "API_KEY",
-                            "GATEWAY",
-                            "NOTIFICATION",
-                            "ACCOUNT_INVITE",
-                            "ACCOUNT_BILLING",
-                            "PORT",
-                            "ACCOUNT_MEMBER",
-                            "TASK"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/AuditEntrySubjectType"
                     },
                     "timestamp": {
                         "format": "date-time",
@@ -784,6 +693,61 @@
                     }
                 },
                 "type": "object"
+            },
+            "AuditEntryEventType": {
+                "enum": [
+                    "USER_LOGIN",
+                    "USER_FORGOT_PASSWORD",
+                    "API_LOGIN",
+                    "ACCOUNT_CREATE",
+                    "ACCOUNT_UPDATE",
+                    "ACCOUNT_DELETE",
+                    "ACCOUNT_BILLING_CREATE",
+                    "ACCOUNT_BILLING_UPDATE",
+                    "ACCOUNT_BILLING_DELETE",
+                    "NETWORK_CREATE",
+                    "NETWORK_UPDATE",
+                    "NETWORK_DELETE",
+                    "CONNECTION_CREATE",
+                    "CONNECTION_UPDATE",
+                    "CONNECTION_DELETE",
+                    "GATEWAY_CREATE",
+                    "GATEWAY_UPDATE",
+                    "GATEWAY_DELETE",
+                    "API_KEY_CREATE",
+                    "API_KEY_UPDATE",
+                    "API_KEY_DELETE",
+                    "ROLE_CREATE",
+                    "ROLE_UPDATE",
+                    "ROLE_DELETE",
+                    "USER_CREATE",
+                    "USER_UPDATE",
+                    "USER_DELETE",
+                    "USER_DOMAIN_CREATE",
+                    "USER_DOMAIN_UPDATE",
+                    "USER_DOMAIN_DELETE",
+                    "PORT_CREATE",
+                    "PORT_UPDATE",
+                    "PORT_DELETE",
+                    "MEMBER_INVITE_CREATE",
+                    "MEMBER_INVITE_ACCEPT",
+                    "MEMBER_INVITE_UPDATE",
+                    "MEMBER_INVITE_DELETE",
+                    "ACCOUNT_MEMBER_CREATE",
+                    "ACCOUNT_MEMBER_UPDATE",
+                    "ACCOUNT_MEMBER_DELETE",
+                    "CONNECTION_STATE_CHANGE",
+                    "GATEWAY_STATE_CHANGE",
+                    "GATEWAY_BGP_STATUS_CHANGE",
+                    "GATEWAY_IPSEC_STATUS_CHANGE",
+                    "NOTIFICATION_CREATE",
+                    "NOTIFICATION_UPDATE",
+                    "NOTIFICATION_DELETE",
+                    "TASK_CREATE",
+                    "TASK_UPDATE",
+                    "TASK_DELETE"
+                ],
+                "type": "string"
             },
             "AuditEntryRequest": {
                 "description": "The request that triggered this entry.",
@@ -846,6 +810,49 @@
                     }
                 },
                 "type": "object"
+            },
+            "AuditEntryResult": {
+                "enum": [
+                    "SUCCESS",
+                    "FAILURE"
+                ],
+                "type": "string"
+            },
+            "AuditEntrySource": {
+                "description": "The source of the request that triggered this entry.",
+                "enum": [
+                    "API",
+                    "CONSOLE",
+                    "SYSTEM"
+                ],
+                "type": "string"
+            },
+            "AuditEntrySubjectType": {
+                "enum": [
+                    "ACCOUNT",
+                    "CONNECTION",
+                    "NETWORK",
+                    "USER",
+                    "USER_DOMAIN",
+                    "ROLE",
+                    "API_KEY",
+                    "GATEWAY",
+                    "NOTIFICATION",
+                    "ACCOUNT_INVITE",
+                    "ACCOUNT_BILLING",
+                    "PORT",
+                    "ACCOUNT_MEMBER",
+                    "TASK"
+                ],
+                "type": "string"
+            },
+            "AvailabilityDomain": {
+                "description": "The availability domain designated for this port.",
+                "enum": [
+                    "PRIMARY",
+                    "SECONDARY"
+                ],
+                "type": "string"
             },
             "AzureExpressRouteConnection": {
                 "allOf": [
@@ -923,14 +930,7 @@
                         "type": "string"
                     },
                     "state": {
-                        "description": "The current BGP state.",
-                        "enum": [
-                            "UP",
-                            "DOWN",
-                            "PENDING"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/BGPState"
                     }
                 },
                 "type": "object"
@@ -1028,6 +1028,44 @@
                 },
                 "type": "object"
             },
+            "BGPState": {
+                "description": "The current BGP state.",
+                "enum": [
+                    "UP",
+                    "DOWN",
+                    "PENDING"
+                ],
+                "type": "string"
+            },
+            "BillingCollectionMethod": {
+                "description": "The collection method.",
+                "enum": [
+                    "CREDIT_CARD",
+                    "NET_30"
+                ],
+                "type": "string"
+            },
+            "BillingInterval": {
+                "description": "The interval on which recurring charges will be charged.",
+                "enum": [
+                    "ONCE",
+                    "DAY",
+                    "WEEK",
+                    "MONTH",
+                    "YEAR"
+                ],
+                "type": "string"
+            },
+            "BillingLongHaul": {
+                "description": "The long haul configuration for this billing plan.",
+                "enum": [
+                    "NOT_APPLICABLE",
+                    "METRO",
+                    "USAGE",
+                    "DEDICATED"
+                ],
+                "type": "string"
+            },
             "BillingPlan": {
                 "description": "A billing plan for a Pureport asset",
                 "properties": {
@@ -1036,25 +1074,10 @@
                         "type": "number"
                     },
                     "billingInterval": {
-                        "description": "The interval on which recurring charges will be charged.",
-                        "enum": [
-                            "ONCE",
-                            "DAY",
-                            "WEEK",
-                            "MONTH",
-                            "YEAR"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/BillingInterval"
                     },
                     "billingLongHaul": {
-                        "description": "The long haul configuration for this billing plan.",
-                        "enum": [
-                            "NOT_APPLICABLE",
-                            "METRO",
-                            "USAGE",
-                            "DEDICATED"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/BillingLongHaul"
                     },
                     "id": {
                         "description": "The id is a unique identifier representing the billing plan.",
@@ -1065,14 +1088,7 @@
                         "type": "number"
                     },
                     "term": {
-                        "description": "The minimum length of time a Pureport asset is licensed for at the specified amount.",
-                        "enum": [
-                            "HOURLY",
-                            "MONTHLY",
-                            "ONE_YEAR",
-                            "TWO_YEAR"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/BillingTerm"
                     }
                 },
                 "required": [
@@ -1080,6 +1096,23 @@
                     "term"
                 ],
                 "type": "object"
+            },
+            "BillingProvider": {
+                "description": "The provider used for billing this connection.",
+                "enum": [
+                    "STRIPE"
+                ],
+                "type": "string"
+            },
+            "BillingTerm": {
+                "description": "The minimum length of time a Pureport asset is licensed for at the specified amount.",
+                "enum": [
+                    "HOURLY",
+                    "MONTHLY",
+                    "ONE_YEAR",
+                    "TWO_YEAR"
+                ],
+                "type": "string"
             },
             "ChangeObject": {
                 "description": "The changes to the Pureport entity.",
@@ -1127,6 +1160,17 @@
                 },
                 "type": "object"
             },
+            "CloudProvider": {
+                "description": "The provider of the cloud service.",
+                "enum": [
+                    "AWS",
+                    "AZURE",
+                    "GOOGLE_CLOUD",
+                    "ORACLE",
+                    "PACKET_FABRIC"
+                ],
+                "type": "string"
+            },
             "CloudRegion": {
                 "description": "Cloud provided infrastructure region.",
                 "properties": {
@@ -1151,15 +1195,7 @@
                         "type": "string"
                     },
                     "provider": {
-                        "description": "The provider for this region.",
-                        "enum": [
-                            "AWS",
-                            "AZURE",
-                            "GOOGLE_CLOUD",
-                            "ORACLE",
-                            "PACKET_FABRIC"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/CloudProvider"
                     },
                     "providerAssignedId": {
                         "description": "The provider-assigned identifier of the region.",
@@ -1229,15 +1265,7 @@
                         "type": "string"
                     },
                     "provider": {
-                        "description": "The provider of the cloud service.",
-                        "enum": [
-                            "AWS",
-                            "AZURE",
-                            "GOOGLE_CLOUD",
-                            "ORACLE",
-                            "PACKET_FABRIC"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/CloudProvider"
                     },
                     "service": {
                         "description": "The service name.",
@@ -1288,22 +1316,10 @@
                         "$ref": "#/components/schemas/BillingPlan"
                     },
                     "billingProvider": {
-                        "description": "The provider used for billing this connection.",
-                        "enum": [
-                            "STRIPE"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/BillingProvider"
                     },
                     "billingTerm": {
-                        "description": "The licensed billing term for the connection.",
-                        "enum": [
-                            "HOURLY",
-                            "MONTHLY",
-                            "ONE_YEAR",
-                            "TWO_YEAR"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/BillingTerm"
                     },
                     "createdAt": {
                         "format": "date-time",
@@ -1337,138 +1353,7 @@
                         "type": "string"
                     },
                     "errorCode": {
-                        "description": "Error Code assigned to the connection if it is an error state.",
-                        "enum": [
-                            "BAD_REQUEST",
-                            "RESOURCE_LIMITATION_EXCEEDED",
-                            "JSON_PROCESSING_ERROR",
-                            "UNAUTHORIZED",
-                            "ACCESS_TOKEN_GENERAL",
-                            "ACCESS_TOKEN_MISSING",
-                            "ACCESS_TOKEN_EXPIRED",
-                            "ACCESS_TOKEN_ALGORITHM_MISMATCH",
-                            "ACCESS_TOKEN_INVALID_SIGNATURE",
-                            "ACCESS_TOKEN_DECODE_ERROR",
-                            "API_KEY_NOT_FOUND",
-                            "PAYMENT_REQUIRED",
-                            "FORBIDDEN",
-                            "NOT_FOUND",
-                            "METHOD_NOT_ALLOWED",
-                            "REQUEST_TIMEOUT",
-                            "CONFLICT",
-                            "AWS_CONNECTION_HAS_ACTIVE_VIFS",
-                            "EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE",
-                            "ORACLE_OCID_ALREADY_IN_USE",
-                            "ADMIN_ACCESS_MUST_EXIST",
-                            "CONNECTION_UPDATE_STATE_CONFLICT",
-                            "CONNECTION_RESPAWN_STATE_CONFLICT",
-                            "CONNECTION_DELETE_STATE_CONFLICT",
-                            "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
-                            "ACCOUNT_DELETE_NON_DELETED_PORT_STATE_CONFLICT",
-                            "NETWORK_RESPAWN_STATE_CONFLICT",
-                            "GATEWAY_RESPAWN_STATE_CONFLICT",
-                            "GATEWAY_STOP_STATE_CONFLICT",
-                            "GATEWAY_START_STATE_CONFLICT",
-                            "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
-                            "PORT_CHILD_ACCOUNT_FLAG_IN_USE",
-                            "CONSENT_REQUIRED",
-                            "ACCOUNT_ALREADY_CONSENTED",
-                            "ACCOUNT_MEMBER_ALREADY_EXISTS",
-                            "ACCOUNT_HAS_CHILD_ACCOUNTS",
-                            "PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED",
-                            "ACCESS_SWITCH_PORT_DELETE_STATE_CONFLICT",
-                            "REQUEST_ENTITY_TOO_LARGE",
-                            "REQUEST_URI_TOO_LONG",
-                            "UNSUPPORTED_MEDIA_TYPE",
-                            "UNPROCESSABLE_ENTITY",
-                            "VALIDATION_ERROR",
-                            "INVALID_LINK",
-                            "INVALID_SORT",
-                            "INVALID_AWS_REGION",
-                            "INVALID_EXPRESS_ROUTE_SERVICE_KEY",
-                            "INVALID_GOOGLE_PAIRING_KEY",
-                            "INVALID_ORACLE_OCID",
-                            "INVALID_WHITELIST_PREFIXES",
-                            "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH",
-                            "ORACLE_OCID_BANDWIDTH_MISMATCH",
-                            "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
-                            "CONNECTION_CONFIGURATION_NOT_SUPPORTED",
-                            "SUPPORTED_CONNECTION_IS_PENDING",
-                            "NO_SUPPORTED_PORT_FOR_PORT",
-                            "UNSUPPORTED_RESOURCE_LIMIT",
-                            "NETWORK_NAME_UNIQUE",
-                            "BILLING_CONFIGURATION_NOT_PERMITTED",
-                            "ACCOUNT_VERIFICATION_REQUIRED",
-                            "MODIFICATION_NOT_ALLOWED",
-                            "AWS_CONNECTION_SPEED_IMMUTABLE",
-                            "INVALID_VLAN",
-                            "INVALID_VLAN_RANGE",
-                            "INVALID_VLAN_FOR_CONNECTION",
-                            "UNSUPPORTED_TASK_FOR_RESOURCE",
-                            "UNSUPPORTED_TASK_NAME",
-                            "VLAN_IN_USE",
-                            "PORT_CONNECTION_LOCATION_MISMATCH",
-                            "SECONDARY_PORT_NOT_IN_SAME_FACILITY_AS_PRIMARY_PORT",
-                            "CONNECTION_APPROVAL_NOT_REQUIRED",
-                            "INVALID_CUSTOMER_ASN",
-                            "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS",
-                            "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK",
-                            "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS",
-                            "NOTIFICATION_STATE_IS_INVALID",
-                            "NOTIFICATION_STATE_CHANGE_IS_INVALID",
-                            "PEERING_TYPE_CHANGE_NOT_ALLOWED",
-                            "PORT_BILLING_TERM_CHANGE_NOT_ALLOWED",
-                            "PORT_SPEED_CHANGE_NOT_ALLOWED",
-                            "CONNECTION_BILLING_TERM_CHANGE_NOT_ALLOWED",
-                            "CONNECTION_SPEED_CHANGE_NOT_ALLOWED",
-                            "CONNECTION_SPEED_GREATER_THAN_PORT_SPEED",
-                            "MISSING_REQUIRED_QUERY_PARAMETER",
-                            "INVALID_REQUIRED_QUERY_PARAMETER",
-                            "INVALID_PEERING_STATE_FOR_OPERATION",
-                            "INVALID_PEERING_TYPE_FOR_OPERATION",
-                            "INVALID_PEERING_PNAT_CONFIGURATION",
-                            "INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS",
-                            "INVALID_NAT_CIDR_ALLOCATION",
-                            "INVALID_NAT_OVERLAPPING_NAT_CIDRS",
-                            "INVALID_BILLING_CONFIGURATION",
-                            "INTERNAL_SERVER_ERROR",
-                            "JSON_GENERATION_ERROR",
-                            "NETWORK_PROVISIONING_ERROR",
-                            "CONNECTION_PROVISIONING_ERROR",
-                            "CONNECTION_UPDATE_SPEED_ERROR",
-                            "CONNECTION_DELETING_ERROR",
-                            "CONNECTION_UPDATING_ERROR",
-                            "GATEWAY_PROVISIONING_ERROR",
-                            "GATEWAY_UPDATE_SPEED_ERROR",
-                            "GATEWAY_UPDATING_ERROR",
-                            "GATEWAY_STOP_ERROR",
-                            "GATEWAY_START_ERROR",
-                            "GATEWAY_DELETING_ERROR",
-                            "ECX_GATEWAY_PROVISIONING_ERROR",
-                            "ECX_GATEWAY_OPERATION_ERROR",
-                            "INVALID_LONG_HAUL_PUREPORT_CONFIGURATION",
-                            "INVALID_LONG_HAUL_PACKET_FABRIC_CONFIGURATION",
-                            "PORT_PROVISIONING_ERROR",
-                            "PORT_UPDATING_ERROR",
-                            "PORT_DELETING_ERROR",
-                            "NO_PORT_FOUND_FOR_CONNECTION",
-                            "AWS_CONNECTION_DELETE_ERROR",
-                            "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR",
-                            "ECX_CONNECTION_DELETE_ERROR",
-                            "GOOGLE_OPERATION_TIMEOUT",
-                            "PACKET_FABRIC_VIRTUAL_CIRCUT_UPGRADE_ERROR",
-                            "MAXIMUM_VRRP_ROUTERS_ALLOCATED",
-                            "INVALID_TASK_CONFIGURATION",
-                            "CURRENTLY_UNSUPPORTED_TASK_TYPE",
-                            "NOT_IMPLEMENTED",
-                            "SERVICE_UNAVAILABLE",
-                            "EXPRESS_ROUTE_SERVICE_UNAVAILABLE",
-                            "ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE",
-                            "INSUFFICIENT_CAPACITY",
-                            "NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/ErrorCode"
                     },
                     "errorMessage": {
                         "description": "Error message assigned to the connection if it is an error state.",
@@ -1514,43 +1399,10 @@
                         "$ref": "#/components/schemas/Gateway"
                     },
                     "speed": {
-                        "description": "The connection speed in Mbps.",
-                        "enum": [
-                            50,
-                            100,
-                            200,
-                            300,
-                            400,
-                            500,
-                            1000,
-                            2000,
-                            3000,
-                            4000,
-                            5000,
-                            10000
-                        ],
-                        "format": "int32",
-                        "type": "integer"
+                        "$ref": "#/components/schemas/ConnectionSpeed"
                     },
                     "state": {
-                        "description": "The current state of the connection.",
-                        "enum": [
-                            "INITIALIZING",
-                            "WAITING_TO_PROVISION",
-                            "PENDING_APPROVAL",
-                            "APPROVED",
-                            "PROVISIONING",
-                            "FAILED_TO_PROVISION",
-                            "ACTIVE",
-                            "DOWN",
-                            "UPDATING",
-                            "FAILED_TO_UPDATE",
-                            "DELETING",
-                            "FAILED_TO_DELETE",
-                            "DELETED"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/ConnectionState"
                     },
                     "tags": {
                         "additionalProperties": {
@@ -1561,23 +1413,7 @@
                         "type": "object"
                     },
                     "type": {
-                        "description": "The connection type.",
-                        "enum": [
-                            "AWS_DIRECT_CONNECT",
-                            "AZURE_EXPRESS_ROUTE",
-                            "EQUINIX_CLOUD_EXCHANGE",
-                            "GOOGLE_CLOUD_INTERCONNECT",
-                            "ORACLE_FAST_CONNECT",
-                            "SITE_IPSEC_VPN",
-                            "PORT",
-                            "PACKET_FABRIC",
-                            "COMCAST",
-                            "COX_COMMUNICATIONS",
-                            "ELEMENT_CRITICAL",
-                            "PACKET",
-                            "ZAYO"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/ConnectionType"
                     }
                 },
                 "required": [
@@ -1589,6 +1425,60 @@
                     "type"
                 ],
                 "type": "object"
+            },
+            "ConnectionProvider": {
+                "description": "The provider of connections using this link.",
+                "enum": [
+                    "AWS",
+                    "GOOGLE_CLOUD",
+                    "EQUINIX_CLOUD_EXCHANGE",
+                    "PUREPORT",
+                    "PACKET_FABRIC",
+                    "COMCAST",
+                    "COX_COMMUNICATIONS",
+                    "ELEMENT_CRITICAL",
+                    "PACKET",
+                    "ZAYO"
+                ],
+                "type": "string"
+            },
+            "ConnectionSpeed": {
+                "description": "The speed between locations in Mbps.",
+                "enum": [
+                    50,
+                    100,
+                    200,
+                    300,
+                    400,
+                    500,
+                    1000,
+                    2000,
+                    3000,
+                    4000,
+                    5000,
+                    10000
+                ],
+                "format": "int32",
+                "type": "integer"
+            },
+            "ConnectionState": {
+                "description": "The current state of the connection.",
+                "enum": [
+                    "INITIALIZING",
+                    "WAITING_TO_PROVISION",
+                    "PENDING_APPROVAL",
+                    "APPROVED",
+                    "PROVISIONING",
+                    "FAILED_TO_PROVISION",
+                    "ACTIVE",
+                    "DOWN",
+                    "UPDATING",
+                    "FAILED_TO_UPDATE",
+                    "DELETING",
+                    "FAILED_TO_DELETE",
+                    "DELETED"
+                ],
+                "type": "string"
             },
             "ConnectionTimeEgressIngress": {
                 "properties": {
@@ -1609,6 +1499,25 @@
                     }
                 },
                 "type": "object"
+            },
+            "ConnectionType": {
+                "description": "The connection type of this configuration.",
+                "enum": [
+                    "AWS_DIRECT_CONNECT",
+                    "AZURE_EXPRESS_ROUTE",
+                    "EQUINIX_CLOUD_EXCHANGE",
+                    "GOOGLE_CLOUD_INTERCONNECT",
+                    "ORACLE_FAST_CONNECT",
+                    "SITE_IPSEC_VPN",
+                    "PORT",
+                    "PACKET_FABRIC",
+                    "COMCAST",
+                    "COX_COMMUNICATIONS",
+                    "ELEMENT_CRITICAL",
+                    "PACKET",
+                    "ZAYO"
+                ],
+                "type": "string"
             },
             "ConnectivityByGateway": {
                 "properties": {
@@ -1765,6 +1674,139 @@
                 ],
                 "type": "object"
             },
+            "ErrorCode": {
+                "description": "Error Code assigned to the connection if it is an error state.",
+                "enum": [
+                    "BAD_REQUEST",
+                    "RESOURCE_LIMITATION_EXCEEDED",
+                    "JSON_PROCESSING_ERROR",
+                    "UNAUTHORIZED",
+                    "ACCESS_TOKEN_GENERAL",
+                    "ACCESS_TOKEN_MISSING",
+                    "ACCESS_TOKEN_EXPIRED",
+                    "ACCESS_TOKEN_ALGORITHM_MISMATCH",
+                    "ACCESS_TOKEN_INVALID_SIGNATURE",
+                    "ACCESS_TOKEN_DECODE_ERROR",
+                    "API_KEY_NOT_FOUND",
+                    "PAYMENT_REQUIRED",
+                    "FORBIDDEN",
+                    "NOT_FOUND",
+                    "METHOD_NOT_ALLOWED",
+                    "REQUEST_TIMEOUT",
+                    "CONFLICT",
+                    "AWS_CONNECTION_HAS_ACTIVE_VIFS",
+                    "EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE",
+                    "ORACLE_OCID_ALREADY_IN_USE",
+                    "ADMIN_ACCESS_MUST_EXIST",
+                    "CONNECTION_UPDATE_STATE_CONFLICT",
+                    "CONNECTION_RESPAWN_STATE_CONFLICT",
+                    "CONNECTION_DELETE_STATE_CONFLICT",
+                    "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
+                    "ACCOUNT_DELETE_NON_DELETED_PORT_STATE_CONFLICT",
+                    "NETWORK_RESPAWN_STATE_CONFLICT",
+                    "GATEWAY_RESPAWN_STATE_CONFLICT",
+                    "GATEWAY_STOP_STATE_CONFLICT",
+                    "GATEWAY_START_STATE_CONFLICT",
+                    "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
+                    "PORT_CHILD_ACCOUNT_FLAG_IN_USE",
+                    "CONSENT_REQUIRED",
+                    "ACCOUNT_ALREADY_CONSENTED",
+                    "ACCOUNT_MEMBER_ALREADY_EXISTS",
+                    "ACCOUNT_HAS_CHILD_ACCOUNTS",
+                    "PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED",
+                    "ACCESS_SWITCH_PORT_DELETE_STATE_CONFLICT",
+                    "REQUEST_ENTITY_TOO_LARGE",
+                    "REQUEST_URI_TOO_LONG",
+                    "UNSUPPORTED_MEDIA_TYPE",
+                    "UNPROCESSABLE_ENTITY",
+                    "VALIDATION_ERROR",
+                    "INVALID_LINK",
+                    "INVALID_SORT",
+                    "INVALID_AWS_REGION",
+                    "INVALID_EXPRESS_ROUTE_SERVICE_KEY",
+                    "INVALID_GOOGLE_PAIRING_KEY",
+                    "INVALID_ORACLE_OCID",
+                    "INVALID_WHITELIST_PREFIXES",
+                    "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH",
+                    "ORACLE_OCID_BANDWIDTH_MISMATCH",
+                    "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
+                    "CONNECTION_CONFIGURATION_NOT_SUPPORTED",
+                    "SUPPORTED_CONNECTION_IS_PENDING",
+                    "NO_SUPPORTED_PORT_FOR_PORT",
+                    "UNSUPPORTED_RESOURCE_LIMIT",
+                    "NETWORK_NAME_UNIQUE",
+                    "BILLING_CONFIGURATION_NOT_PERMITTED",
+                    "ACCOUNT_VERIFICATION_REQUIRED",
+                    "MODIFICATION_NOT_ALLOWED",
+                    "AWS_CONNECTION_SPEED_IMMUTABLE",
+                    "INVALID_VLAN",
+                    "INVALID_VLAN_RANGE",
+                    "INVALID_VLAN_FOR_CONNECTION",
+                    "UNSUPPORTED_TASK_FOR_RESOURCE",
+                    "UNSUPPORTED_TASK_NAME",
+                    "VLAN_IN_USE",
+                    "PORT_CONNECTION_LOCATION_MISMATCH",
+                    "SECONDARY_PORT_NOT_IN_SAME_FACILITY_AS_PRIMARY_PORT",
+                    "CONNECTION_APPROVAL_NOT_REQUIRED",
+                    "INVALID_CUSTOMER_ASN",
+                    "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS",
+                    "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK",
+                    "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS",
+                    "NOTIFICATION_STATE_IS_INVALID",
+                    "NOTIFICATION_STATE_CHANGE_IS_INVALID",
+                    "PEERING_TYPE_CHANGE_NOT_ALLOWED",
+                    "PORT_BILLING_TERM_CHANGE_NOT_ALLOWED",
+                    "PORT_SPEED_CHANGE_NOT_ALLOWED",
+                    "CONNECTION_BILLING_TERM_CHANGE_NOT_ALLOWED",
+                    "CONNECTION_SPEED_CHANGE_NOT_ALLOWED",
+                    "CONNECTION_SPEED_GREATER_THAN_PORT_SPEED",
+                    "MISSING_REQUIRED_QUERY_PARAMETER",
+                    "INVALID_REQUIRED_QUERY_PARAMETER",
+                    "INVALID_PEERING_STATE_FOR_OPERATION",
+                    "INVALID_PEERING_TYPE_FOR_OPERATION",
+                    "INVALID_PEERING_PNAT_CONFIGURATION",
+                    "INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS",
+                    "INVALID_NAT_CIDR_ALLOCATION",
+                    "INVALID_NAT_OVERLAPPING_NAT_CIDRS",
+                    "INVALID_BILLING_CONFIGURATION",
+                    "INTERNAL_SERVER_ERROR",
+                    "JSON_GENERATION_ERROR",
+                    "NETWORK_PROVISIONING_ERROR",
+                    "CONNECTION_PROVISIONING_ERROR",
+                    "CONNECTION_UPDATE_SPEED_ERROR",
+                    "CONNECTION_DELETING_ERROR",
+                    "CONNECTION_UPDATING_ERROR",
+                    "GATEWAY_PROVISIONING_ERROR",
+                    "GATEWAY_UPDATE_SPEED_ERROR",
+                    "GATEWAY_UPDATING_ERROR",
+                    "GATEWAY_STOP_ERROR",
+                    "GATEWAY_START_ERROR",
+                    "GATEWAY_DELETING_ERROR",
+                    "ECX_GATEWAY_PROVISIONING_ERROR",
+                    "ECX_GATEWAY_OPERATION_ERROR",
+                    "INVALID_LONG_HAUL_PUREPORT_CONFIGURATION",
+                    "INVALID_LONG_HAUL_PACKET_FABRIC_CONFIGURATION",
+                    "PORT_PROVISIONING_ERROR",
+                    "PORT_UPDATING_ERROR",
+                    "PORT_DELETING_ERROR",
+                    "NO_PORT_FOUND_FOR_CONNECTION",
+                    "AWS_CONNECTION_DELETE_ERROR",
+                    "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR",
+                    "ECX_CONNECTION_DELETE_ERROR",
+                    "GOOGLE_OPERATION_TIMEOUT",
+                    "PACKET_FABRIC_VIRTUAL_CIRCUT_UPGRADE_ERROR",
+                    "MAXIMUM_VRRP_ROUTERS_ALLOCATED",
+                    "INVALID_TASK_CONFIGURATION",
+                    "CURRENTLY_UNSUPPORTED_TASK_TYPE",
+                    "NOT_IMPLEMENTED",
+                    "SERVICE_UNAVAILABLE",
+                    "EXPRESS_ROUTE_SERVICE_UNAVAILABLE",
+                    "ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE",
+                    "INSUFFICIENT_CAPACITY",
+                    "NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE"
+                ],
+                "type": "string"
+            },
             "Facility": {
                 "description": "A data center facility.",
                 "properties": {
@@ -1799,13 +1841,7 @@
                         "type": "string"
                     },
                     "state": {
-                        "description": "The current state of the facility.",
-                        "enum": [
-                            "ACTIVE",
-                            "UNAVAILABLE",
-                            "DELETED"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/FacilityState"
                     },
                     "vendor": {
                         "description": "The vendor of the facility.",
@@ -1821,6 +1857,15 @@
                 ],
                 "type": "object"
             },
+            "FacilityState": {
+                "description": "The current state of the facility.",
+                "enum": [
+                    "ACTIVE",
+                    "UNAVAILABLE",
+                    "DELETED"
+                ],
+                "type": "string"
+            },
             "Gateway": {
                 "description": "A network gateway.",
                 "discriminator": {
@@ -1832,13 +1877,7 @@
                 },
                 "properties": {
                     "availabilityDomain": {
-                        "description": "The availability domain assigned to the gateway.",
-                        "enum": [
-                            "PRIMARY",
-                            "SECONDARY"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/AvailabilityDomain"
                     },
                     "bgpConfig": {
                         "$ref": "#/components/schemas/BGPConfig"
@@ -1852,138 +1891,7 @@
                         "type": "string"
                     },
                     "errorCode": {
-                        "description": "The HTTP error code if the gateway is in an error state.",
-                        "enum": [
-                            "BAD_REQUEST",
-                            "RESOURCE_LIMITATION_EXCEEDED",
-                            "JSON_PROCESSING_ERROR",
-                            "UNAUTHORIZED",
-                            "ACCESS_TOKEN_GENERAL",
-                            "ACCESS_TOKEN_MISSING",
-                            "ACCESS_TOKEN_EXPIRED",
-                            "ACCESS_TOKEN_ALGORITHM_MISMATCH",
-                            "ACCESS_TOKEN_INVALID_SIGNATURE",
-                            "ACCESS_TOKEN_DECODE_ERROR",
-                            "API_KEY_NOT_FOUND",
-                            "PAYMENT_REQUIRED",
-                            "FORBIDDEN",
-                            "NOT_FOUND",
-                            "METHOD_NOT_ALLOWED",
-                            "REQUEST_TIMEOUT",
-                            "CONFLICT",
-                            "AWS_CONNECTION_HAS_ACTIVE_VIFS",
-                            "EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE",
-                            "ORACLE_OCID_ALREADY_IN_USE",
-                            "ADMIN_ACCESS_MUST_EXIST",
-                            "CONNECTION_UPDATE_STATE_CONFLICT",
-                            "CONNECTION_RESPAWN_STATE_CONFLICT",
-                            "CONNECTION_DELETE_STATE_CONFLICT",
-                            "NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
-                            "ACCOUNT_DELETE_NON_DELETED_PORT_STATE_CONFLICT",
-                            "NETWORK_RESPAWN_STATE_CONFLICT",
-                            "GATEWAY_RESPAWN_STATE_CONFLICT",
-                            "GATEWAY_STOP_STATE_CONFLICT",
-                            "GATEWAY_START_STATE_CONFLICT",
-                            "PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT",
-                            "PORT_CHILD_ACCOUNT_FLAG_IN_USE",
-                            "CONSENT_REQUIRED",
-                            "ACCOUNT_ALREADY_CONSENTED",
-                            "ACCOUNT_MEMBER_ALREADY_EXISTS",
-                            "ACCOUNT_HAS_CHILD_ACCOUNTS",
-                            "PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED",
-                            "ACCESS_SWITCH_PORT_DELETE_STATE_CONFLICT",
-                            "REQUEST_ENTITY_TOO_LARGE",
-                            "REQUEST_URI_TOO_LONG",
-                            "UNSUPPORTED_MEDIA_TYPE",
-                            "UNPROCESSABLE_ENTITY",
-                            "VALIDATION_ERROR",
-                            "INVALID_LINK",
-                            "INVALID_SORT",
-                            "INVALID_AWS_REGION",
-                            "INVALID_EXPRESS_ROUTE_SERVICE_KEY",
-                            "INVALID_GOOGLE_PAIRING_KEY",
-                            "INVALID_ORACLE_OCID",
-                            "INVALID_WHITELIST_PREFIXES",
-                            "EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH",
-                            "ORACLE_OCID_BANDWIDTH_MISMATCH",
-                            "MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS",
-                            "CONNECTION_CONFIGURATION_NOT_SUPPORTED",
-                            "SUPPORTED_CONNECTION_IS_PENDING",
-                            "NO_SUPPORTED_PORT_FOR_PORT",
-                            "UNSUPPORTED_RESOURCE_LIMIT",
-                            "NETWORK_NAME_UNIQUE",
-                            "BILLING_CONFIGURATION_NOT_PERMITTED",
-                            "ACCOUNT_VERIFICATION_REQUIRED",
-                            "MODIFICATION_NOT_ALLOWED",
-                            "AWS_CONNECTION_SPEED_IMMUTABLE",
-                            "INVALID_VLAN",
-                            "INVALID_VLAN_RANGE",
-                            "INVALID_VLAN_FOR_CONNECTION",
-                            "UNSUPPORTED_TASK_FOR_RESOURCE",
-                            "UNSUPPORTED_TASK_NAME",
-                            "VLAN_IN_USE",
-                            "PORT_CONNECTION_LOCATION_MISMATCH",
-                            "SECONDARY_PORT_NOT_IN_SAME_FACILITY_AS_PRIMARY_PORT",
-                            "CONNECTION_APPROVAL_NOT_REQUIRED",
-                            "INVALID_CUSTOMER_ASN",
-                            "INVALID_NAT_OVERLAPPING_NATIVE_CIDRS",
-                            "INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK",
-                            "CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS",
-                            "NOTIFICATION_STATE_IS_INVALID",
-                            "NOTIFICATION_STATE_CHANGE_IS_INVALID",
-                            "PEERING_TYPE_CHANGE_NOT_ALLOWED",
-                            "PORT_BILLING_TERM_CHANGE_NOT_ALLOWED",
-                            "PORT_SPEED_CHANGE_NOT_ALLOWED",
-                            "CONNECTION_BILLING_TERM_CHANGE_NOT_ALLOWED",
-                            "CONNECTION_SPEED_CHANGE_NOT_ALLOWED",
-                            "CONNECTION_SPEED_GREATER_THAN_PORT_SPEED",
-                            "MISSING_REQUIRED_QUERY_PARAMETER",
-                            "INVALID_REQUIRED_QUERY_PARAMETER",
-                            "INVALID_PEERING_STATE_FOR_OPERATION",
-                            "INVALID_PEERING_TYPE_FOR_OPERATION",
-                            "INVALID_PEERING_PNAT_CONFIGURATION",
-                            "INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS",
-                            "INVALID_NAT_CIDR_ALLOCATION",
-                            "INVALID_NAT_OVERLAPPING_NAT_CIDRS",
-                            "INVALID_BILLING_CONFIGURATION",
-                            "INTERNAL_SERVER_ERROR",
-                            "JSON_GENERATION_ERROR",
-                            "NETWORK_PROVISIONING_ERROR",
-                            "CONNECTION_PROVISIONING_ERROR",
-                            "CONNECTION_UPDATE_SPEED_ERROR",
-                            "CONNECTION_DELETING_ERROR",
-                            "CONNECTION_UPDATING_ERROR",
-                            "GATEWAY_PROVISIONING_ERROR",
-                            "GATEWAY_UPDATE_SPEED_ERROR",
-                            "GATEWAY_UPDATING_ERROR",
-                            "GATEWAY_STOP_ERROR",
-                            "GATEWAY_START_ERROR",
-                            "GATEWAY_DELETING_ERROR",
-                            "ECX_GATEWAY_PROVISIONING_ERROR",
-                            "ECX_GATEWAY_OPERATION_ERROR",
-                            "INVALID_LONG_HAUL_PUREPORT_CONFIGURATION",
-                            "INVALID_LONG_HAUL_PACKET_FABRIC_CONFIGURATION",
-                            "PORT_PROVISIONING_ERROR",
-                            "PORT_UPDATING_ERROR",
-                            "PORT_DELETING_ERROR",
-                            "NO_PORT_FOUND_FOR_CONNECTION",
-                            "AWS_CONNECTION_DELETE_ERROR",
-                            "GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR",
-                            "ECX_CONNECTION_DELETE_ERROR",
-                            "GOOGLE_OPERATION_TIMEOUT",
-                            "PACKET_FABRIC_VIRTUAL_CIRCUT_UPGRADE_ERROR",
-                            "MAXIMUM_VRRP_ROUTERS_ALLOCATED",
-                            "INVALID_TASK_CONFIGURATION",
-                            "CURRENTLY_UNSUPPORTED_TASK_TYPE",
-                            "NOT_IMPLEMENTED",
-                            "SERVICE_UNAVAILABLE",
-                            "EXPRESS_ROUTE_SERVICE_UNAVAILABLE",
-                            "ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE",
-                            "INSUFFICIENT_CAPACITY",
-                            "NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/ErrorCode"
                     },
                     "errorMessage": {
                         "description": "The error message if the gateway is in an error state.",
@@ -2002,14 +1910,7 @@
                         "type": "string"
                     },
                     "linkState": {
-                        "description": "The link state.",
-                        "enum": [
-                            "UP",
-                            "DOWN",
-                            "PENDING"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/LinkState"
                     },
                     "name": {
                         "description": "The name.",
@@ -2026,30 +1927,10 @@
                         "type": "string"
                     },
                     "state": {
-                        "description": "The current state of the gateway.",
-                        "enum": [
-                            "WAITING_TO_PROVISION",
-                            "PROVISIONING",
-                            "FAILED_TO_PROVISION",
-                            "ACTIVE",
-                            "DOWN",
-                            "UPDATING",
-                            "FAILED_TO_UPDATE",
-                            "DELETING",
-                            "FAILED_TO_DELETE",
-                            "DELETED"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/GatewayState"
                     },
                     "type": {
-                        "description": "The type.",
-                        "enum": [
-                            "STANDARD",
-                            "VPN"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/GatewayType"
                     },
                     "version": {
                         "description": "The version of the gateway container.",
@@ -2058,6 +1939,30 @@
                     }
                 },
                 "type": "object"
+            },
+            "GatewayState": {
+                "description": "The current state of the gateway.",
+                "enum": [
+                    "WAITING_TO_PROVISION",
+                    "PROVISIONING",
+                    "FAILED_TO_PROVISION",
+                    "ACTIVE",
+                    "DOWN",
+                    "UPDATING",
+                    "FAILED_TO_UPDATE",
+                    "DELETING",
+                    "FAILED_TO_DELETE",
+                    "DELETED"
+                ],
+                "type": "string"
+            },
+            "GatewayType": {
+                "description": "The type.",
+                "enum": [
+                    "STANDARD",
+                    "VPN"
+                ],
+                "type": "string"
             },
             "GenericConnection": {
                 "allOf": [
@@ -2085,12 +1990,7 @@
                                 "type": "integer"
                             },
                             "routingType": {
-                                "description": "The method to use for determining network routes.",
-                                "enum": [
-                                    "STATIC",
-                                    "BGP"
-                                ],
-                                "type": "string"
+                                "$ref": "#/components/schemas/RoutingType"
                             },
                             "secondaryGatewayIP": {
                                 "type": "string"
@@ -2103,7 +2003,16 @@
                             },
                             "staticRoutes": {
                                 "description": "The user configured static routes.",
-                                "example": "{\n   {\n       \"network\": \"192.168.24.0/24\",\n       \"nextHop\": \"10.0.0.4\"\n   },{\n       \"network\": \"192.168.25.0/24\",\n       \"nextHop\": \"10.0.0.5\"\n   }\n}",
+                                "example": [
+                                    {
+                                        "network": "192.168.24.0/24",
+                                        "nextHop": "10.0.0.4"
+                                    },
+                                    {
+                                        "network": "192.168.25.0/24",
+                                        "nextHop": "10.0.0.5"
+                                    }
+                                ],
                                 "items": {
                                     "$ref": "#/components/schemas/StaticRoute"
                                 },
@@ -2181,6 +2090,20 @@
                 ],
                 "type": "object"
             },
+            "IKEState": {
+                "enum": [
+                    "CREATED",
+                    "CONNECTING",
+                    "ESTABLISHED",
+                    "PASSIVE",
+                    "REKEYING",
+                    "REKEYED",
+                    "DELETING",
+                    "DESTROYING",
+                    "DOWN"
+                ],
+                "type": "string"
+            },
             "IKEV1Config": {
                 "description": "IKE Version 1 configuration",
                 "properties": {
@@ -2197,66 +2120,36 @@
                 ],
                 "type": "object"
             },
+            "IKEV1DiffieHellmanGroup": {
+                "description": "The Diffie-Hellman Group.",
+                "enum": [
+                    "MODP_1024",
+                    "MODP_1536",
+                    "MODP_2048",
+                    "MODP_3072",
+                    "MODP_4096",
+                    "MODP_6144",
+                    "MODP_8192",
+                    "ECP_192",
+                    "ECP_224",
+                    "ECP_256",
+                    "ECP_384",
+                    "ECP_521"
+                ],
+                "example": "MODP_2048",
+                "type": "string"
+            },
             "IKEV1ESPConfig": {
                 "description": "IKE Version 1 Encapsulating Security Payload configuration.",
                 "properties": {
                     "dhGroup": {
-                        "description": "The Diffie-Hellman Group.",
-                        "enum": [
-                            "MODP_1024",
-                            "MODP_1536",
-                            "MODP_2048",
-                            "MODP_3072",
-                            "MODP_4096",
-                            "MODP_6144",
-                            "MODP_8192",
-                            "ECP_192",
-                            "ECP_224",
-                            "ECP_256",
-                            "ECP_384",
-                            "ECP_521"
-                        ],
-                        "example": "MODP_2048",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV1DiffieHellmanGroup"
                     },
                     "encryption": {
-                        "description": "The encryption algorithm.",
-                        "enum": [
-                            "NULL",
-                            "AES_128",
-                            "AES_192",
-                            "AES_256",
-                            "AES_128_CTR",
-                            "AES_192_CTR",
-                            "AES_256_CTR",
-                            "AES_128_GCM_64",
-                            "AES_192_GCM_64",
-                            "AES_256_GCM_64",
-                            "AES_128_GCM_96",
-                            "AES_192_GCM_96",
-                            "AES_256_GCM_96",
-                            "AES_128_GCM_128",
-                            "AES_192_GCM_128",
-                            "AES_256_GCM_128",
-                            "AES_128_GMAC",
-                            "AES_192_GMAC",
-                            "AES_256_GMAC"
-                        ],
-                        "example": "AES_128",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV1ESPEncryptionAlgorithm"
                     },
                     "integrity": {
-                        "description": "The integrity algorithm.",
-                        "enum": [
-                            "MD5_HMAC",
-                            "SHA1_HMAC",
-                            "SHA256_HMAC",
-                            "SHA384_HMAC",
-                            "SHA512_HMAC",
-                            "AES_XCBC"
-                        ],
-                        "example": "SHA256_HMAC",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV1ESPIntegrityAlgorithm"
                     },
                     "lifetime": {
                         "description": "The lifetime of the Security Association (SA).",
@@ -2273,27 +2166,50 @@
                 ],
                 "type": "object"
             },
+            "IKEV1ESPEncryptionAlgorithm": {
+                "description": "The encryption algorithm.",
+                "enum": [
+                    "NULL",
+                    "AES_128",
+                    "AES_192",
+                    "AES_256",
+                    "AES_128_CTR",
+                    "AES_192_CTR",
+                    "AES_256_CTR",
+                    "AES_128_GCM_64",
+                    "AES_192_GCM_64",
+                    "AES_256_GCM_64",
+                    "AES_128_GCM_96",
+                    "AES_192_GCM_96",
+                    "AES_256_GCM_96",
+                    "AES_128_GCM_128",
+                    "AES_192_GCM_128",
+                    "AES_256_GCM_128",
+                    "AES_128_GMAC",
+                    "AES_192_GMAC",
+                    "AES_256_GMAC"
+                ],
+                "example": "AES_128",
+                "type": "string"
+            },
+            "IKEV1ESPIntegrityAlgorithm": {
+                "description": "The integrity algorithm.",
+                "enum": [
+                    "MD5_HMAC",
+                    "SHA1_HMAC",
+                    "SHA256_HMAC",
+                    "SHA384_HMAC",
+                    "SHA512_HMAC",
+                    "AES_XCBC"
+                ],
+                "example": "SHA256_HMAC",
+                "type": "string"
+            },
             "IKEV1IKEConfig": {
                 "description": "IKE Version 1 Internet Key Exchange configuration.",
                 "properties": {
                     "dhGroup": {
-                        "description": "The Diffie-Hellman Group.",
-                        "enum": [
-                            "MODP_1024",
-                            "MODP_1536",
-                            "MODP_2048",
-                            "MODP_3072",
-                            "MODP_4096",
-                            "MODP_6144",
-                            "MODP_8192",
-                            "ECP_192",
-                            "ECP_224",
-                            "ECP_256",
-                            "ECP_384",
-                            "ECP_521"
-                        ],
-                        "example": "MODP_2048",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV1DiffieHellmanGroup"
                     },
                     "dpdDelay": {
                         "description": "The Dead Peering Detection (DPD) retry interval.",
@@ -2312,26 +2228,10 @@
                         "type": "integer"
                     },
                     "encryption": {
-                        "description": "The encryption algorithm.",
-                        "enum": [
-                            "AES_128",
-                            "AES_192",
-                            "AES_256"
-                        ],
-                        "example": "AES_128",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV1IKEEncryptionAlgorithm"
                     },
                     "integrity": {
-                        "description": "The integrity algorithm.",
-                        "enum": [
-                            "MD5_HMAC",
-                            "SHA1_HMAC",
-                            "SHA256_HMAC",
-                            "SHA384_HMAC",
-                            "SHA512_HMAC"
-                        ],
-                        "example": "SHA256_HMAC",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV1IKEIntegrityAlgorithm"
                     },
                     "lifetime": {
                         "description": "The lifetime of the SA.",
@@ -2349,6 +2249,28 @@
                 ],
                 "type": "object"
             },
+            "IKEV1IKEEncryptionAlgorithm": {
+                "description": "The encryption algorithm.",
+                "enum": [
+                    "AES_128",
+                    "AES_192",
+                    "AES_256"
+                ],
+                "example": "AES_128",
+                "type": "string"
+            },
+            "IKEV1IKEIntegrityAlgorithm": {
+                "description": "The integrity algorithm.",
+                "enum": [
+                    "MD5_HMAC",
+                    "SHA1_HMAC",
+                    "SHA256_HMAC",
+                    "SHA384_HMAC",
+                    "SHA512_HMAC"
+                ],
+                "example": "SHA256_HMAC",
+                "type": "string"
+            },
             "IKEV2Config": {
                 "description": "IKE Version 2 configuration",
                 "properties": {
@@ -2365,66 +2287,36 @@
                 ],
                 "type": "object"
             },
+            "IKEV2DiffieHellmanGroup": {
+                "description": "The Diffie-Hellman Group.",
+                "enum": [
+                    "MODP_1024",
+                    "MODP_1536",
+                    "MODP_2048",
+                    "MODP_3072",
+                    "MODP_4096",
+                    "MODP_6144",
+                    "MODP_8192",
+                    "ECP_192",
+                    "ECP_224",
+                    "ECP_256",
+                    "ECP_384",
+                    "ECP_521"
+                ],
+                "example": "MODP_2048",
+                "type": "string"
+            },
             "IKEV2ESPConfig": {
                 "description": "IKE Version 2 Encapsulating Security Payload configuration.",
                 "properties": {
                     "dhGroup": {
-                        "description": "The Diffie-Hellman Group.",
-                        "enum": [
-                            "MODP_1024",
-                            "MODP_1536",
-                            "MODP_2048",
-                            "MODP_3072",
-                            "MODP_4096",
-                            "MODP_6144",
-                            "MODP_8192",
-                            "ECP_192",
-                            "ECP_224",
-                            "ECP_256",
-                            "ECP_384",
-                            "ECP_521"
-                        ],
-                        "example": "MODP_2048",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV2DiffieHellmanGroup"
                     },
                     "encryption": {
-                        "description": "The encryption algorithm.",
-                        "enum": [
-                            "NULL",
-                            "AES_128",
-                            "AES_192",
-                            "AES_256",
-                            "AES_128_CTR",
-                            "AES_192_CTR",
-                            "AES_256_CTR",
-                            "AES_128_GCM_64",
-                            "AES_192_GCM_64",
-                            "AES_256_GCM_64",
-                            "AES_128_GCM_96",
-                            "AES_192_GCM_96",
-                            "AES_256_GCM_96",
-                            "AES_128_GCM_128",
-                            "AES_192_GCM_128",
-                            "AES_256_GCM_128",
-                            "AES_128_GMAC",
-                            "AES_192_GMAC",
-                            "AES_256_GMAC"
-                        ],
-                        "example": "AES_128",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV2ESPEncryptionAlgorithm"
                     },
                     "integrity": {
-                        "description": "The integrity algorithm.",
-                        "enum": [
-                            "MD5_HMAC",
-                            "SHA1_HMAC",
-                            "SHA256_HMAC",
-                            "SHA384_HMAC",
-                            "SHA512_HMAC",
-                            "AES_XCBC"
-                        ],
-                        "example": "SHA256_HMAC",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV2ESPIntegrityAlgorithm"
                     },
                     "lifetime": {
                         "description": "The lifetime of the Security Association (SA).",
@@ -2441,26 +2333,50 @@
                 ],
                 "type": "object"
             },
+            "IKEV2ESPEncryptionAlgorithm": {
+                "description": "The encryption algorithm.",
+                "enum": [
+                    "NULL",
+                    "AES_128",
+                    "AES_192",
+                    "AES_256",
+                    "AES_128_CTR",
+                    "AES_192_CTR",
+                    "AES_256_CTR",
+                    "AES_128_GCM_64",
+                    "AES_192_GCM_64",
+                    "AES_256_GCM_64",
+                    "AES_128_GCM_96",
+                    "AES_192_GCM_96",
+                    "AES_256_GCM_96",
+                    "AES_128_GCM_128",
+                    "AES_192_GCM_128",
+                    "AES_256_GCM_128",
+                    "AES_128_GMAC",
+                    "AES_192_GMAC",
+                    "AES_256_GMAC"
+                ],
+                "example": "AES_128",
+                "type": "string"
+            },
+            "IKEV2ESPIntegrityAlgorithm": {
+                "description": "The integrity algorithm.",
+                "enum": [
+                    "MD5_HMAC",
+                    "SHA1_HMAC",
+                    "SHA256_HMAC",
+                    "SHA384_HMAC",
+                    "SHA512_HMAC",
+                    "AES_XCBC"
+                ],
+                "example": "SHA256_HMAC",
+                "type": "string"
+            },
             "IKEV2IKEConfig": {
                 "description": "IKE Version 2 Internet Key Exchange configuration.",
                 "properties": {
                     "dhGroup": {
-                        "description": "The Diffie-Hellman Group.",
-                        "enum": [
-                            "MODP_1024",
-                            "MODP_1536",
-                            "MODP_2048",
-                            "MODP_3072",
-                            "MODP_4096",
-                            "MODP_6144",
-                            "MODP_8192",
-                            "ECP_192",
-                            "ECP_224",
-                            "ECP_256",
-                            "ECP_384",
-                            "ECP_521"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV2DiffieHellmanGroup"
                     },
                     "dpdDelay": {
                         "description": "The Dead Peering Detection (DPD) retry interval.",
@@ -2479,40 +2395,10 @@
                         "type": "integer"
                     },
                     "encryption": {
-                        "description": "The encryption algorithm.",
-                        "enum": [
-                            "NULL",
-                            "AES_128",
-                            "AES_192",
-                            "AES_256",
-                            "AES_128_CTR",
-                            "AES_192_CTR",
-                            "AES_256_CTR",
-                            "AES_128_GCM_64",
-                            "AES_192_GCM_64",
-                            "AES_256_GCM_64",
-                            "AES_128_GCM_96",
-                            "AES_192_GCM_96",
-                            "AES_256_GCM_96",
-                            "AES_128_GCM_128",
-                            "AES_192_GCM_128",
-                            "AES_256_GCM_128"
-                        ],
-                        "example": "AES_128",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV2IKEEncryptionAlgorithm"
                     },
                     "integrity": {
-                        "description": "The integrity algorithm.",
-                        "enum": [
-                            "MD5_HMAC",
-                            "SHA1_HMAC",
-                            "SHA256_HMAC",
-                            "SHA384_HMAC",
-                            "SHA512_HMAC",
-                            "AES_XCBC"
-                        ],
-                        "example": "SHA256_HMAC",
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV2IKEIntegrityAlgorithm"
                     },
                     "lifetime": {
                         "description": "The lifetime of the SA.",
@@ -2523,15 +2409,7 @@
                         "type": "integer"
                     },
                     "prf": {
-                        "enum": [
-                            "MD5",
-                            "SHA_1",
-                            "AES_XCBC",
-                            "SHA_256",
-                            "SHA_384",
-                            "SHA_512"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/IKEV2PseudoRandomFunction"
                     }
                 },
                 "required": [
@@ -2539,6 +2417,61 @@
                     "encryption"
                 ],
                 "type": "object"
+            },
+            "IKEV2IKEEncryptionAlgorithm": {
+                "description": "The encryption algorithm.",
+                "enum": [
+                    "NULL",
+                    "AES_128",
+                    "AES_192",
+                    "AES_256",
+                    "AES_128_CTR",
+                    "AES_192_CTR",
+                    "AES_256_CTR",
+                    "AES_128_GCM_64",
+                    "AES_192_GCM_64",
+                    "AES_256_GCM_64",
+                    "AES_128_GCM_96",
+                    "AES_192_GCM_96",
+                    "AES_256_GCM_96",
+                    "AES_128_GCM_128",
+                    "AES_192_GCM_128",
+                    "AES_256_GCM_128"
+                ],
+                "example": "AES_128",
+                "type": "string"
+            },
+            "IKEV2IKEIntegrityAlgorithm": {
+                "description": "The integrity algorithm.",
+                "enum": [
+                    "MD5_HMAC",
+                    "SHA1_HMAC",
+                    "SHA256_HMAC",
+                    "SHA384_HMAC",
+                    "SHA512_HMAC",
+                    "AES_XCBC"
+                ],
+                "example": "SHA256_HMAC",
+                "type": "string"
+            },
+            "IKEV2PseudoRandomFunction": {
+                "enum": [
+                    "MD5",
+                    "SHA_1",
+                    "AES_XCBC",
+                    "SHA_256",
+                    "SHA_384",
+                    "SHA_512"
+                ],
+                "type": "string"
+            },
+            "IKEVersion": {
+                "description": "The IKE version.",
+                "enum": [
+                    "V1",
+                    "V2"
+                ],
+                "type": "string"
             },
             "IPRoute": {
                 "description": "IP Route information",
@@ -2607,6 +2540,13 @@
                 },
                 "type": "object"
             },
+            "IPSecAuthenticationType": {
+                "description": "The authentication type.",
+                "enum": [
+                    "PSK"
+                ],
+                "type": "string"
+            },
             "InstantRange": {
                 "properties": {
                     "empty": {
@@ -2650,6 +2590,15 @@
                     "href"
                 ],
                 "type": "object"
+            },
+            "LinkState": {
+                "description": "The link state.",
+                "enum": [
+                    "UP",
+                    "DOWN",
+                    "PENDING"
+                ],
+                "type": "string"
             },
             "Location": {
                 "description": "A geographic location.",
@@ -2698,23 +2647,7 @@
                         "$ref": "#/components/schemas/Link"
                     },
                     "speed": {
-                        "description": "The speed between locations in Mbps.",
-                        "enum": [
-                            50,
-                            100,
-                            200,
-                            300,
-                            400,
-                            500,
-                            1000,
-                            2000,
-                            3000,
-                            4000,
-                            5000,
-                            10000
-                        ],
-                        "format": "int32",
-                        "type": "integer"
+                        "$ref": "#/components/schemas/ConnectionSpeed"
                     }
                 },
                 "required": [
@@ -2881,20 +2814,7 @@
                         "type": "string"
                     },
                     "state": {
-                        "description": "The current state.",
-                        "enum": [
-                            "PENDING",
-                            "PROVISIONING",
-                            "PENDING_CONTROLLERS",
-                            "DELETING_CONTROLLERS",
-                            "PROVISIONING_CONTROLLERS",
-                            "ACTIVE",
-                            "DELETING",
-                            "DELETED",
-                            "ERROR"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/NetworkState"
                     },
                     "tags": {
                         "additionalProperties": {
@@ -2932,6 +2852,21 @@
                 },
                 "type": "object"
             },
+            "NetworkState": {
+                "description": "The current state.",
+                "enum": [
+                    "PENDING",
+                    "PROVISIONING",
+                    "PENDING_CONTROLLERS",
+                    "DELETING_CONTROLLERS",
+                    "PROVISIONING_CONTROLLERS",
+                    "ACTIVE",
+                    "DELETING",
+                    "DELETED",
+                    "ERROR"
+                ],
+                "type": "string"
+            },
             "NetworkTimeUsage": {
                 "properties": {
                     "account": {
@@ -2955,33 +2890,12 @@
                 "description": "An informational message for Pureport users.",
                 "properties": {
                     "availabilityDomain": {
-                        "description": "The availability domain to be affected.",
-                        "enum": [
-                            "PRIMARY",
-                            "SECONDARY"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/AvailabilityDomain"
                     },
                     "connectionTypes": {
                         "description": "A list of connection types to be affected.",
                         "items": {
-                            "description": "A list of connection types to be affected.",
-                            "enum": [
-                                "AWS_DIRECT_CONNECT",
-                                "AZURE_EXPRESS_ROUTE",
-                                "EQUINIX_CLOUD_EXCHANGE",
-                                "GOOGLE_CLOUD_INTERCONNECT",
-                                "ORACLE_FAST_CONNECT",
-                                "SITE_IPSEC_VPN",
-                                "PORT",
-                                "PACKET_FABRIC",
-                                "COMCAST",
-                                "COX_COMMUNICATIONS",
-                                "ELEMENT_CRITICAL",
-                                "PACKET",
-                                "ZAYO"
-                            ],
-                            "type": "string"
+                            "$ref": "#/components/schemas/ConnectionType"
                         },
                         "type": "array",
                         "uniqueItems": true
@@ -3015,15 +2929,7 @@
                     "impactedServices": {
                         "description": "The list of Pureport services to be affected.",
                         "items": {
-                            "description": "The list of Pureport services to be affected.",
-                            "enum": [
-                                "PUREPORT_CONSOLE",
-                                "PUREPORT_API",
-                                "PUREPORT_CONNECTIONS",
-                                "THIRD_PARTY_API",
-                                "THIRD_PARTY_CONNECTIONS"
-                            ],
-                            "type": "string"
+                            "$ref": "#/components/schemas/NotificationImpactedService"
                         },
                         "maxItems": 2147483647,
                         "minItems": 1,
@@ -3048,22 +2954,10 @@
                         "type": "string"
                     },
                     "state": {
-                        "description": "The current state.",
-                        "enum": [
-                            "DRAFT",
-                            "PUBLISHED",
-                            "CANCELED",
-                            "DELETED"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/NotificationState"
                     },
                     "type": {
-                        "description": "The type.",
-                        "enum": [
-                            "INCIDENT",
-                            "MAINTENANCE_WINDOW"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/NotificationType"
                     },
                     "updatedAt": {
                         "format": "date-time",
@@ -3078,6 +2972,35 @@
                     "type"
                 ],
                 "type": "object"
+            },
+            "NotificationImpactedService": {
+                "description": "The list of Pureport services to be affected.",
+                "enum": [
+                    "PUREPORT_CONSOLE",
+                    "PUREPORT_API",
+                    "PUREPORT_CONNECTIONS",
+                    "THIRD_PARTY_API",
+                    "THIRD_PARTY_CONNECTIONS"
+                ],
+                "type": "string"
+            },
+            "NotificationState": {
+                "description": "The current state.",
+                "enum": [
+                    "DRAFT",
+                    "PUBLISHED",
+                    "CANCELED",
+                    "DELETED"
+                ],
+                "type": "string"
+            },
+            "NotificationType": {
+                "description": "The type.",
+                "enum": [
+                    "INCIDENT",
+                    "MAINTENANCE_WINDOW"
+                ],
+                "type": "string"
             },
             "Option": {
                 "description": "IPsec security association configurations",
@@ -3327,19 +3250,22 @@
                         "type": "string"
                     },
                     "type": {
-                        "description": "The peering type.",
-                        "enum": [
-                            "PUBLIC",
-                            "PRIVATE",
-                            "TRANSIT"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/PeeringType"
                     }
                 },
                 "required": [
                     "type"
                 ],
                 "type": "object"
+            },
+            "PeeringType": {
+                "description": "The peering type of this configuration.",
+                "enum": [
+                    "PUBLIC",
+                    "PRIVATE",
+                    "TRANSIT"
+                ],
+                "type": "string"
             },
             "PhysicalAddress": {
                 "description": "The street address and geolocation",
@@ -3411,12 +3337,7 @@
                         "$ref": "#/components/schemas/Link"
                     },
                     "status": {
-                        "description": "The current status of the pod.",
-                        "enum": [
-                            "AVAILABLE",
-                            "UNAVAILABLE"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/PodStatus"
                     }
                 },
                 "required": [
@@ -3426,6 +3347,14 @@
                 ],
                 "type": "object"
             },
+            "PodStatus": {
+                "description": "The current status of the pod.",
+                "enum": [
+                    "AVAILABLE",
+                    "UNAVAILABLE"
+                ],
+                "type": "string"
+            },
             "Port": {
                 "description": "Networking port",
                 "properties": {
@@ -3433,12 +3362,7 @@
                         "$ref": "#/components/schemas/Link"
                     },
                     "availabilityDomain": {
-                        "description": "The availability domain designated for this port.",
-                        "enum": [
-                            "PRIMARY",
-                            "SECONDARY"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/AvailabilityDomain"
                     },
                     "availableToChildAccounts": {
                         "description": "Whether this port is available for use in child accounts.",
@@ -3448,14 +3372,7 @@
                         "$ref": "#/components/schemas/BillingPlan"
                     },
                     "billingTerm": {
-                        "description": "The period of time this port is licensed for.",
-                        "enum": [
-                            "HOURLY",
-                            "MONTHLY",
-                            "ONE_YEAR",
-                            "TWO_YEAR"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/BillingTerm"
                     },
                     "description": {
                         "description": "The description.",
@@ -3529,33 +3446,13 @@
                         "uniqueItems": true
                     },
                     "provider": {
-                        "description": "The provider for this port.",
-                        "enum": [
-                            "PUREPORT",
-                            "PACKET_FABRIC"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/PortProvider"
                     },
                     "speed": {
-                        "description": "The speed for this port in Mbps.",
-                        "enum": [
-                            1000,
-                            10000,
-                            40000
-                        ],
-                        "example": 10000,
-                        "format": "int32",
-                        "type": "integer"
+                        "$ref": "#/components/schemas/PortSpeed"
                     },
                     "state": {
-                        "description": "The current state of the port.",
-                        "enum": [
-                            "REQUESTED",
-                            "ACTIVE",
-                            "DELETED"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/PortState"
                     },
                     "tags": {
                         "additionalProperties": {
@@ -3589,19 +3486,7 @@
                                 "$ref": "#/components/schemas/BGPPasswordConfiguration"
                             },
                             "billingLongHaul": {
-                                "description": "The long haul billing configuration for this connection.",
-                                "enum": [
-                                    "NOT_APPLICABLE",
-                                    "METRO",
-                                    "USAGE",
-                                    "DEDICATED"
-                                ],
-                                "externalDocs": {
-                                    "description": "Long Haul Billing",
-                                    "url": "TBD"
-                                },
-                                "readOnly": true,
-                                "type": "string"
+                                "$ref": "#/components/schemas/BillingLongHaul"
                             },
                             "gatewayCidr": {
                                 "type": "string"
@@ -3621,12 +3506,7 @@
                                 "$ref": "#/components/schemas/Link"
                             },
                             "routingType": {
-                                "description": "The method to use for determining network routes.",
-                                "enum": [
-                                    "STATIC",
-                                    "BGP"
-                                ],
-                                "type": "string"
+                                "$ref": "#/components/schemas/RoutingType"
                             },
                             "secondaryCustomerVlan": {
                                 "description": "The VLAN ID of the secondary gateway if this is an HA connection.",
@@ -3644,7 +3524,16 @@
                             },
                             "staticRoutes": {
                                 "description": "The user configured static routes.",
-                                "example": "{\n   {\n       \"network\": \"192.168.24.0/24\",\n       \"nextHop\": \"10.0.0.4\"\n   },{\n       \"network\": \"192.168.25.0/24\",\n       \"nextHop\": \"10.0.0.5\"\n   }\n}",
+                                "example": [
+                                    {
+                                        "network": "192.168.24.0/24",
+                                        "nextHop": "10.0.0.4"
+                                    },
+                                    {
+                                        "network": "192.168.25.0/24",
+                                        "nextHop": "10.0.0.5"
+                                    }
+                                ],
                                 "items": {
                                     "$ref": "#/components/schemas/StaticRoute"
                                 },
@@ -3671,6 +3560,34 @@
                 ],
                 "type": "object"
             },
+            "PortProvider": {
+                "description": "The provider for this port.",
+                "enum": [
+                    "PUREPORT",
+                    "PACKET_FABRIC"
+                ],
+                "type": "string"
+            },
+            "PortSpeed": {
+                "description": "The speed for this port in Mbps.",
+                "enum": [
+                    1000,
+                    10000,
+                    40000
+                ],
+                "example": 10000,
+                "format": "int32",
+                "type": "integer"
+            },
+            "PortState": {
+                "description": "The current state of the port.",
+                "enum": [
+                    "REQUESTED",
+                    "ACTIVE",
+                    "DELETED"
+                ],
+                "type": "string"
+            },
             "ProviderLink": {
                 "description": "Link between Pureport infrastructure and an external connection provider.",
                 "example": {
@@ -3695,12 +3612,7 @@
                 },
                 "properties": {
                     "availabilityDomain": {
-                        "description": "The availability domain.",
-                        "enum": [
-                            "PRIMARY",
-                            "SECONDARY"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/AvailabilityDomain"
                     },
                     "href": {
                         "description": "The URI of the Pureport asset.",
@@ -3723,20 +3635,7 @@
                         "$ref": "#/components/schemas/Link"
                     },
                     "provider": {
-                        "description": "The provider of connections using this link.",
-                        "enum": [
-                            "AWS",
-                            "GOOGLE_CLOUD",
-                            "EQUINIX_CLOUD_EXCHANGE",
-                            "PUREPORT",
-                            "PACKET_FABRIC",
-                            "COMCAST",
-                            "COX_COMMUNICATIONS",
-                            "ELEMENT_CRITICAL",
-                            "PACKET",
-                            "ZAYO"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/ConnectionProvider"
                     },
                     "providerId": {
                         "description": "The id of the provider side resource.",
@@ -3754,12 +3653,7 @@
                         "type": "integer"
                     },
                     "status": {
-                        "description": "The current status of this link.",
-                        "enum": [
-                            "AVAILABLE",
-                            "UNAVAILABLE"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/ProviderLinkStatus"
                     },
                     "supportedConnectionTypes": {
                         "description": "The types of connection this provider link will be used for.",
@@ -3767,24 +3661,7 @@
                             "AWS_DIRECT_CONNECT"
                         ],
                         "items": {
-                            "description": "The types of connection this provider link will be used for.",
-                            "enum": [
-                                "AWS_DIRECT_CONNECT",
-                                "AZURE_EXPRESS_ROUTE",
-                                "EQUINIX_CLOUD_EXCHANGE",
-                                "GOOGLE_CLOUD_INTERCONNECT",
-                                "ORACLE_FAST_CONNECT",
-                                "SITE_IPSEC_VPN",
-                                "PORT",
-                                "PACKET_FABRIC",
-                                "COMCAST",
-                                "COX_COMMUNICATIONS",
-                                "ELEMENT_CRITICAL",
-                                "PACKET",
-                                "ZAYO"
-                            ],
-                            "example": "[\"AWS_DIRECT_CONNECT\"]",
-                            "type": "string"
+                            "$ref": "#/components/schemas/ConnectionType"
                         },
                         "maxItems": 2147483647,
                         "minItems": 1,
@@ -3811,6 +3688,14 @@
                     "vlans"
                 ],
                 "type": "object"
+            },
+            "ProviderLinkStatus": {
+                "description": "The current status of this link.",
+                "enum": [
+                    "AVAILABLE",
+                    "UNAVAILABLE"
+                ],
+                "type": "string"
             },
             "ProviderVlan": {
                 "description": "A Virtual LAN",
@@ -3942,16 +3827,7 @@
                 },
                 "properties": {
                     "childResourceType": {
-                        "description": "The type of the child resource to limit.",
-                        "enum": [
-                            "MEMBER",
-                            "ROLE",
-                            "CONNECTION",
-                            "NETWORK",
-                            "ACCOUNT",
-                            "CLOUD_SERVICE_ROUTE"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/ResourceType"
                     },
                     "href": {
                         "description": "The URI of the Pureport asset.",
@@ -3971,16 +3847,7 @@
                         "type": "string"
                     },
                     "parentResourceType": {
-                        "description": "The type of the parent resource.",
-                        "enum": [
-                            "MEMBER",
-                            "ROLE",
-                            "CONNECTION",
-                            "NETWORK",
-                            "ACCOUNT",
-                            "CLOUD_SERVICE_ROUTE"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/ResourceType"
                     }
                 },
                 "required": [
@@ -3988,6 +3855,17 @@
                     "limit"
                 ],
                 "type": "object"
+            },
+            "ResourceType": {
+                "enum": [
+                    "MEMBER",
+                    "ROLE",
+                    "CONNECTION",
+                    "NETWORK",
+                    "ACCOUNT",
+                    "CLOUD_SERVICE_ROUTE"
+                ],
+                "type": "string"
             },
             "Role": {
                 "description": "A named set of permissions for an account.",
@@ -4169,6 +4047,14 @@
                 ],
                 "type": "object"
             },
+            "RoutingType": {
+                "description": "The method to use for determining network routes.",
+                "enum": [
+                    "STATIC",
+                    "BGP"
+                ],
+                "type": "string"
+            },
             "SiteIPSecVPNConnection": {
                 "allOf": [
                     {
@@ -4177,11 +4063,7 @@
                     {
                         "properties": {
                             "authType": {
-                                "description": "The authentication type.",
-                                "enum": [
-                                    "PSK"
-                                ],
-                                "type": "string"
+                                "$ref": "#/components/schemas/IPSecAuthenticationType"
                             },
                             "bgpPasswordConfiguration": {
                                 "$ref": "#/components/schemas/BGPPasswordConfiguration"
@@ -4197,12 +4079,7 @@
                                 "$ref": "#/components/schemas/IKEV2Config"
                             },
                             "ikeVersion": {
-                                "description": "The IKE version.",
-                                "enum": [
-                                    "V1",
-                                    "V2"
-                                ],
-                                "type": "string"
+                                "$ref": "#/components/schemas/IKEVersion"
                             },
                             "physicalAddress": {
                                 "$ref": "#/components/schemas/PhysicalAddress"
@@ -4216,13 +4093,7 @@
                                 "type": "string"
                             },
                             "routingType": {
-                                "description": "The VPN Routing Type.",
-                                "enum": [
-                                    "POLICY_BASED",
-                                    "ROUTE_BASED_STATIC",
-                                    "ROUTE_BASED_BGP"
-                                ],
-                                "type": "string"
+                                "$ref": "#/components/schemas/VPNRoutingType"
                             },
                             "secondaryCustomerRouterIP": {
                                 "type": "string"
@@ -4278,17 +4149,20 @@
             "Sort": {
                 "properties": {
                     "direction": {
-                        "enum": [
-                            "ASC",
-                            "DESC"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/SortDirection"
                     },
                     "property": {
                         "type": "string"
                     }
                 },
                 "type": "object"
+            },
+            "SortDirection": {
+                "enum": [
+                    "ASC",
+                    "DESC"
+                ],
+                "type": "string"
             },
             "StandardGateway": {
                 "allOf": [
@@ -4312,7 +4186,16 @@
             },
             "StaticRoute": {
                 "description": "The IKE Phase configuration.",
-                "example": "{\n   {\n       \"network\": \"192.168.24.0/24\",\n       \"nextHop\": \"10.0.0.4\"\n   },{\n       \"network\": \"192.168.25.0/24\",\n       \"nextHop\": \"10.0.0.5\"\n   }\n}",
+                "example": [
+                    {
+                        "network": "192.168.24.0/24",
+                        "nextHop": "10.0.0.4"
+                    },
+                    {
+                        "network": "192.168.25.0/24",
+                        "nextHop": "10.0.0.5"
+                    }
+                ],
                 "properties": {
                     "network": {
                         "type": "string"
@@ -4380,13 +4263,7 @@
                         "$ref": "#/components/schemas/Link"
                     },
                     "peeringType": {
-                        "description": "The peering type of this configuration.",
-                        "enum": [
-                            "PUBLIC",
-                            "PRIVATE",
-                            "TRANSIT"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/PeeringType"
                     },
                     "pending": {
                         "description": "Whether this configuration is currently available or requires additional steps from Pureport.",
@@ -4412,42 +4289,10 @@
                         "type": "boolean"
                     },
                     "speed": {
-                        "description": "The connection speed in Mbps of this configuration.",
-                        "enum": [
-                            50,
-                            100,
-                            200,
-                            300,
-                            400,
-                            500,
-                            1000,
-                            2000,
-                            3000,
-                            4000,
-                            5000,
-                            10000
-                        ],
-                        "format": "int32",
-                        "type": "integer"
+                        "$ref": "#/components/schemas/ConnectionSpeed"
                     },
                     "type": {
-                        "description": "The connection type of this configuration.",
-                        "enum": [
-                            "AWS_DIRECT_CONNECT",
-                            "AZURE_EXPRESS_ROUTE",
-                            "EQUINIX_CLOUD_EXCHANGE",
-                            "GOOGLE_CLOUD_INTERCONNECT",
-                            "ORACLE_FAST_CONNECT",
-                            "SITE_IPSEC_VPN",
-                            "PORT",
-                            "PACKET_FABRIC",
-                            "COMCAST",
-                            "COX_COMMUNICATIONS",
-                            "ELEMENT_CRITICAL",
-                            "PACKET",
-                            "ZAYO"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/ConnectionType"
                     }
                 },
                 "required": [
@@ -4497,13 +4342,7 @@
                             "SECONDARY"
                         ],
                         "items": {
-                            "description": "The availability domains supported by this configuration.",
-                            "enum": [
-                                "PRIMARY",
-                                "SECONDARY"
-                            ],
-                            "example": "[\"PRIMARY\",\"SECONDARY\"]",
-                            "type": "string"
+                            "$ref": "#/components/schemas/AvailabilityDomain"
                         },
                         "readOnly": true,
                         "type": "array"
@@ -4534,24 +4373,10 @@
                         "type": "array"
                     },
                     "provider": {
-                        "description": "The provider for this configuration.",
-                        "enum": [
-                            "PUREPORT",
-                            "PACKET_FABRIC"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/PortProvider"
                     },
                     "speed": {
-                        "description": "The speed of this configuration in Mbps.",
-                        "enum": [
-                            1000,
-                            10000,
-                            40000
-                        ],
-                        "format": "int32",
-                        "readOnly": true,
-                        "type": "integer"
+                        "$ref": "#/components/schemas/PortSpeed"
                     }
                 },
                 "type": "object"
@@ -4620,34 +4445,10 @@
                         "type": "string"
                     },
                     "state": {
-                        "description": "The current state of the task.",
-                        "enum": [
-                            "CREATED",
-                            "RUNNING",
-                            "COMPLETED",
-                            "FAILED",
-                            "DELETED",
-                            "AGGREGATE"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/TaskState"
                     },
                     "type": {
-                        "description": "The type.",
-                        "enum": [
-                            "IPSEC_RESTART",
-                            "PING",
-                            "CHANGE_CONNECTION_SPEED",
-                            "CREATE_OR_UPDATE_CONNECTION",
-                            "DELETE_CONNECTION",
-                            "STOP_GATEWAY",
-                            "START_GATEWAY",
-                            "DELETE_GATEWAY",
-                            "RESPAWN_GATEWAYS",
-                            "RESPAWN_NETWORK",
-                            "RESPAWN_WITH_CLOUD_SERVICES"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/TaskType"
                     },
                     "updatedAt": {
                         "format": "date-time",
@@ -4659,6 +4460,41 @@
                     "type"
                 ],
                 "type": "object"
+            },
+            "TaskState": {
+                "enum": [
+                    "CREATED",
+                    "RUNNING",
+                    "COMPLETED",
+                    "FAILED",
+                    "DELETED",
+                    "AGGREGATE"
+                ],
+                "type": "string"
+            },
+            "TaskType": {
+                "description": "The type.",
+                "enum": [
+                    "IPSEC_RESTART",
+                    "PING",
+                    "CHANGE_CONNECTION_SPEED",
+                    "CREATE_OR_UPDATE_CONNECTION",
+                    "DELETE_CONNECTION",
+                    "STOP_GATEWAY",
+                    "START_GATEWAY",
+                    "DELETE_GATEWAY",
+                    "RESPAWN_GATEWAYS",
+                    "RESPAWN_NETWORK",
+                    "RESPAWN_WITH_CLOUD_SERVICES"
+                ],
+                "type": "string"
+            },
+            "TimeUnit": {
+                "enum": [
+                    "HOURS",
+                    "DAYS"
+                ],
+                "type": "string"
             },
             "TrafficSelectorMapping": {
                 "description": "A pair of local and remote addresses for use in VPN Traffic Selectors.",
@@ -4690,6 +4526,13 @@
                 ],
                 "type": "object"
             },
+            "TrafficType": {
+                "enum": [
+                    "ALL",
+                    "BACKBONE"
+                ],
+                "type": "string"
+            },
             "UsageByConnectionAndTimeOptions": {
                 "properties": {
                     "connectionIds": {
@@ -4702,18 +4545,10 @@
                         "$ref": "#/components/schemas/DateFilter"
                     },
                     "timeUnit": {
-                        "enum": [
-                            "HOURS",
-                            "DAYS"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/TimeUnit"
                     },
                     "trafficType": {
-                        "enum": [
-                            "ALL",
-                            "BACKBONE"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/TrafficType"
                     }
                 },
                 "required": [
@@ -4730,18 +4565,10 @@
                         "type": "boolean"
                     },
                     "timeUnit": {
-                        "enum": [
-                            "HOURS",
-                            "DAYS"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/TimeUnit"
                     },
                     "trafficType": {
-                        "enum": [
-                            "ALL",
-                            "BACKBONE"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/TrafficType"
                     }
                 },
                 "type": "object"
@@ -4755,18 +4582,10 @@
                         "type": "boolean"
                     },
                     "timeUnit": {
-                        "enum": [
-                            "HOURS",
-                            "DAYS"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/TimeUnit"
                     },
                     "trafficType": {
-                        "enum": [
-                            "ALL",
-                            "BACKBONE"
-                        ],
-                        "type": "string"
+                        "$ref": "#/components/schemas/TrafficType"
                     }
                 },
                 "type": "object"
@@ -4885,12 +4704,7 @@
                 },
                 "properties": {
                     "type": {
-                        "description": "The type of authentication for IPsec.",
-                        "enum": [
-                            "PSK"
-                        ],
-                        "readOnly": true,
-                        "type": "string"
+                        "$ref": "#/components/schemas/IPSecAuthenticationType"
                     }
                 },
                 "type": "object"
@@ -4913,9 +4727,8 @@
                                 "readOnly": true,
                                 "type": "string"
                             },
-                            "osNetworkId": {
-                                "readOnly": true,
-                                "type": "string"
+                            "ipsecStatus": {
+                                "$ref": "#/components/schemas/IKEState"
                             },
                             "pureportGatewayIP": {
                                 "readOnly": true,
@@ -4931,6 +4744,15 @@
                 ],
                 "description": "Pureport network gateway for VPN connections.",
                 "type": "object"
+            },
+            "VPNRoutingType": {
+                "description": "The VPN Routing Type.",
+                "enum": [
+                    "POLICY_BASED",
+                    "ROUTE_BASED_STATIC",
+                    "ROUTE_BASED_BGP"
+                ],
+                "type": "string"
             }
         },
         "securitySchemes": {
@@ -5459,11 +5281,7 @@
                         "in": "query",
                         "name": "sortDirection",
                         "schema": {
-                            "enum": [
-                                "ASC",
-                                "DESC"
-                            ],
-                            "type": "string"
+                            "$ref": "#/components/schemas/SortDirection"
                         }
                     },
                     {
@@ -5504,59 +5322,7 @@
                         "name": "eventTypes",
                         "schema": {
                             "items": {
-                                "enum": [
-                                    "USER_LOGIN",
-                                    "USER_FORGOT_PASSWORD",
-                                    "API_LOGIN",
-                                    "ACCOUNT_CREATE",
-                                    "ACCOUNT_UPDATE",
-                                    "ACCOUNT_DELETE",
-                                    "ACCOUNT_BILLING_CREATE",
-                                    "ACCOUNT_BILLING_UPDATE",
-                                    "ACCOUNT_BILLING_DELETE",
-                                    "NETWORK_CREATE",
-                                    "NETWORK_UPDATE",
-                                    "NETWORK_DELETE",
-                                    "CONNECTION_CREATE",
-                                    "CONNECTION_UPDATE",
-                                    "CONNECTION_DELETE",
-                                    "GATEWAY_CREATE",
-                                    "GATEWAY_UPDATE",
-                                    "GATEWAY_DELETE",
-                                    "API_KEY_CREATE",
-                                    "API_KEY_UPDATE",
-                                    "API_KEY_DELETE",
-                                    "ROLE_CREATE",
-                                    "ROLE_UPDATE",
-                                    "ROLE_DELETE",
-                                    "USER_CREATE",
-                                    "USER_UPDATE",
-                                    "USER_DELETE",
-                                    "USER_DOMAIN_CREATE",
-                                    "USER_DOMAIN_UPDATE",
-                                    "USER_DOMAIN_DELETE",
-                                    "PORT_CREATE",
-                                    "PORT_UPDATE",
-                                    "PORT_DELETE",
-                                    "MEMBER_INVITE_CREATE",
-                                    "MEMBER_INVITE_ACCEPT",
-                                    "MEMBER_INVITE_UPDATE",
-                                    "MEMBER_INVITE_DELETE",
-                                    "ACCOUNT_MEMBER_CREATE",
-                                    "ACCOUNT_MEMBER_UPDATE",
-                                    "ACCOUNT_MEMBER_DELETE",
-                                    "CONNECTION_STATE_CHANGE",
-                                    "GATEWAY_STATE_CHANGE",
-                                    "GATEWAY_BGP_STATUS_CHANGE",
-                                    "GATEWAY_IPSEC_STATUS_CHANGE",
-                                    "NOTIFICATION_CREATE",
-                                    "NOTIFICATION_UPDATE",
-                                    "NOTIFICATION_DELETE",
-                                    "TASK_CREATE",
-                                    "TASK_UPDATE",
-                                    "TASK_DELETE"
-                                ],
-                                "type": "string"
+                                "$ref": "#/components/schemas/AuditEntryEventType"
                             },
                             "type": "array"
                         }
@@ -5565,11 +5331,7 @@
                         "in": "query",
                         "name": "result",
                         "schema": {
-                            "enum": [
-                                "SUCCESS",
-                                "FAILURE"
-                            ],
-                            "type": "string"
+                            "$ref": "#/components/schemas/AuditEntryResult"
                         }
                     },
                     {
@@ -5604,23 +5366,7 @@
                         "in": "query",
                         "name": "subjectType",
                         "schema": {
-                            "enum": [
-                                "ACCOUNT",
-                                "CONNECTION",
-                                "NETWORK",
-                                "USER",
-                                "USER_DOMAIN",
-                                "ROLE",
-                                "API_KEY",
-                                "GATEWAY",
-                                "NOTIFICATION",
-                                "ACCOUNT_INVITE",
-                                "ACCOUNT_BILLING",
-                                "PORT",
-                                "ACCOUNT_MEMBER",
-                                "TASK"
-                            ],
-                            "type": "string"
+                            "$ref": "#/components/schemas/AuditEntrySubjectType"
                         }
                     },
                     {
@@ -6789,11 +6535,7 @@
                         "in": "query",
                         "name": "status",
                         "schema": {
-                            "enum": [
-                                "READ",
-                                "UNREAD"
-                            ],
-                            "type": "string"
+                            "$ref": "#/components/schemas/AccountNotificationStatus"
                         }
                     },
                     {
@@ -6850,11 +6592,7 @@
                         "*/*": {
                             "schema": {
                                 "additionalProperties": {
-                                    "enum": [
-                                        "READ",
-                                        "UNREAD"
-                                    ],
-                                    "type": "string"
+                                    "$ref": "#/components/schemas/AccountNotificationStatus"
                                 },
                                 "type": "object"
                             }
@@ -6885,7 +6623,7 @@
         },
         "/accounts/{accountId}/permissions": {
             "get": {
-                "description": "Returns the effective set of permissions that the current subject has for the given account\n            based on the roles they have been granted.",
+                "description": "Returns the effective set of permissions that the current subject has for the given account based on the roles they have been granted.",
                 "operationId": "getAccountPermissions",
                 "parameters": [
                     {
@@ -8820,14 +8558,7 @@
                         "in": "query",
                         "name": "billingTerm",
                         "schema": {
-                            "default": "HOURLY",
-                            "enum": [
-                                "HOURLY",
-                                "MONTHLY",
-                                "ONE_YEAR",
-                                "TWO_YEAR"
-                            ],
-                            "type": "string"
+                            "$ref": "#/components/schemas/BillingTerm"
                         }
                     }
                 ],
@@ -9124,15 +8855,7 @@
                         "in": "query",
                         "name": "state",
                         "schema": {
-                            "enum": [
-                                "CREATED",
-                                "RUNNING",
-                                "COMPLETED",
-                                "FAILED",
-                                "DELETED",
-                                "AGGREGATE"
-                            ],
-                            "type": "string"
+                            "$ref": "#/components/schemas/TaskState"
                         }
                     }
                 ],
