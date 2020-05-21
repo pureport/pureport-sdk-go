@@ -15,9 +15,9 @@ type BillingInterval string
 
 // List of BillingInterval
 const (
-	ONCE  BillingInterval = "ONCE"
-	DAY   BillingInterval = "DAY"
-	WEEK  BillingInterval = "WEEK"
-	MONTH BillingInterval = "MONTH"
-	YEAR  BillingInterval = "YEAR"
+	BILLING_INTERVAL__ONCE  BillingInterval = "ONCE"
+	BILLING_INTERVAL__DAY   BillingInterval = "DAY"
+	BILLING_INTERVAL__WEEK  BillingInterval = "WEEK"
+	BILLING_INTERVAL__MONTH BillingInterval = "MONTH"
+	BILLING_INTERVAL__YEAR  BillingInterval = "YEAR"
 )

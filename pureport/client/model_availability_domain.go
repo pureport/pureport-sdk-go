@@ -15,6 +15,6 @@ type AvailabilityDomain string
 
 // List of AvailabilityDomain
 const (
-	PRIMARY   AvailabilityDomain = "PRIMARY"
-	SECONDARY AvailabilityDomain = "SECONDARY"
+	AVAILABILITY_DOMAIN__PRIMARY   AvailabilityDomain = "PRIMARY"
+	AVAILABILITY_DOMAIN__SECONDARY AvailabilityDomain = "SECONDARY"
 )

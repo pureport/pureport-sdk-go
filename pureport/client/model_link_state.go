@@ -15,7 +15,7 @@ type LinkState string
 
 // List of LinkState
 const (
-	UP      LinkState = "UP"
-	DOWN    LinkState = "DOWN"
-	PENDING LinkState = "PENDING"
+	LINK_STATE__UP      LinkState = "UP"
+	LINK_STATE__DOWN    LinkState = "DOWN"
+	LINK_STATE__PENDING LinkState = "PENDING"
 )

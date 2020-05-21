@@ -15,6 +15,6 @@ type RoutingType string
 
 // List of RoutingType
 const (
-	STATIC RoutingType = "STATIC"
-	BGP    RoutingType = "BGP"
+	ROUTING_TYPE__STATIC RoutingType = "STATIC"
+	ROUTING_TYPE__BGP    RoutingType = "BGP"
 )

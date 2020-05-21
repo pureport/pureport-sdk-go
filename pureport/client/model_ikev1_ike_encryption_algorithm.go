@@ -15,7 +15,7 @@ type Ikev1IkeEncryptionAlgorithm string
 
 // List of IKEV1IKEEncryptionAlgorithm
 const (
-	_128 Ikev1IkeEncryptionAlgorithm = "AES_128"
-	_192 Ikev1IkeEncryptionAlgorithm = "AES_192"
-	_256 Ikev1IkeEncryptionAlgorithm = "AES_256"
+	IKEV1_IKE__128 Ikev1IkeEncryptionAlgorithm = "AES_128"
+	IKEV1_IKE__192 Ikev1IkeEncryptionAlgorithm = "AES_192"
+	IKEV1_IKE__256 Ikev1IkeEncryptionAlgorithm = "AES_256"
 )

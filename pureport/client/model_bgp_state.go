@@ -15,7 +15,7 @@ type BgpState string
 
 // List of BGPState
 const (
-	UP      BgpState = "UP"
-	DOWN    BgpState = "DOWN"
-	PENDING BgpState = "PENDING"
+	BGP_STATE__UP      BgpState = "UP"
+	BGP_STATE__DOWN    BgpState = "DOWN"
+	BGP_STATE__PENDING BgpState = "PENDING"
 )

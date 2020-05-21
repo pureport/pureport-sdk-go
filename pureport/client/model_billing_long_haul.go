@@ -15,8 +15,8 @@ type BillingLongHaul string
 
 // List of BillingLongHaul
 const (
-	NOT_APPLICABLE BillingLongHaul = "NOT_APPLICABLE"
-	METRO          BillingLongHaul = "METRO"
-	USAGE          BillingLongHaul = "USAGE"
-	DEDICATED      BillingLongHaul = "DEDICATED"
+	BILLING_LONG_HAUL__NOT_APPLICABLE BillingLongHaul = "NOT_APPLICABLE"
+	BILLING_LONG_HAUL__METRO          BillingLongHaul = "METRO"
+	BILLING_LONG_HAUL__USAGE          BillingLongHaul = "USAGE"
+	BILLING_LONG_HAUL__DEDICATED      BillingLongHaul = "DEDICATED"
 )

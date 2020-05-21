@@ -15,7 +15,7 @@ type PortSpeed int32
 
 // List of PortSpeed
 const (
-	_1000  PortSpeed = 1000
-	_10000 PortSpeed = 10000
-	_40000 PortSpeed = 40000
+	PORT_SPEED__1000  PortSpeed = 1000
+	PORT_SPEED__10000 PortSpeed = 10000
+	PORT_SPEED__40000 PortSpeed = 40000
 )

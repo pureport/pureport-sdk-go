@@ -15,5 +15,5 @@ type BillingProvider string
 
 // List of BillingProvider
 const (
-	STRIPE BillingProvider = "STRIPE"
+	BILLING_PROVIDER__STRIPE BillingProvider = "STRIPE"
 )

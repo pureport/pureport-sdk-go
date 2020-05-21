@@ -15,13 +15,13 @@ type NetworkState string
 
 // List of NetworkState
 const (
-	PENDING                  NetworkState = "PENDING"
-	PROVISIONING             NetworkState = "PROVISIONING"
-	PENDING_CONTROLLERS      NetworkState = "PENDING_CONTROLLERS"
-	DELETING_CONTROLLERS     NetworkState = "DELETING_CONTROLLERS"
-	PROVISIONING_CONTROLLERS NetworkState = "PROVISIONING_CONTROLLERS"
-	ACTIVE                   NetworkState = "ACTIVE"
-	DELETING                 NetworkState = "DELETING"
-	DELETED                  NetworkState = "DELETED"
-	ERROR                    NetworkState = "ERROR"
+	NETWORK_STATE__PENDING                  NetworkState = "PENDING"
+	NETWORK_STATE__PROVISIONING             NetworkState = "PROVISIONING"
+	NETWORK_STATE__PENDING_CONTROLLERS      NetworkState = "PENDING_CONTROLLERS"
+	NETWORK_STATE__DELETING_CONTROLLERS     NetworkState = "DELETING_CONTROLLERS"
+	NETWORK_STATE__PROVISIONING_CONTROLLERS NetworkState = "PROVISIONING_CONTROLLERS"
+	NETWORK_STATE__ACTIVE                   NetworkState = "ACTIVE"
+	NETWORK_STATE__DELETING                 NetworkState = "DELETING"
+	NETWORK_STATE__DELETED                  NetworkState = "DELETED"
+	NETWORK_STATE__ERROR                    NetworkState = "ERROR"
 )

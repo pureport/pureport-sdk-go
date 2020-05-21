@@ -15,16 +15,16 @@ type Ikev2DiffieHellmanGroup string
 
 // List of IKEV2DiffieHellmanGroup
 const (
-	MODP_1024 Ikev2DiffieHellmanGroup = "MODP_1024"
-	MODP_1536 Ikev2DiffieHellmanGroup = "MODP_1536"
-	MODP_2048 Ikev2DiffieHellmanGroup = "MODP_2048"
-	MODP_3072 Ikev2DiffieHellmanGroup = "MODP_3072"
-	MODP_4096 Ikev2DiffieHellmanGroup = "MODP_4096"
-	MODP_6144 Ikev2DiffieHellmanGroup = "MODP_6144"
-	MODP_8192 Ikev2DiffieHellmanGroup = "MODP_8192"
-	ECP_192   Ikev2DiffieHellmanGroup = "ECP_192"
-	ECP_224   Ikev2DiffieHellmanGroup = "ECP_224"
-	ECP_256   Ikev2DiffieHellmanGroup = "ECP_256"
-	ECP_384   Ikev2DiffieHellmanGroup = "ECP_384"
-	ECP_521   Ikev2DiffieHellmanGroup = "ECP_521"
+	IKEV2_DHG__MODP_1024 Ikev2DiffieHellmanGroup = "MODP_1024"
+	IKEV2_DHG__MODP_1536 Ikev2DiffieHellmanGroup = "MODP_1536"
+	IKEV2_DHG__MODP_2048 Ikev2DiffieHellmanGroup = "MODP_2048"
+	IKEV2_DHG__MODP_3072 Ikev2DiffieHellmanGroup = "MODP_3072"
+	IKEV2_DHG__MODP_4096 Ikev2DiffieHellmanGroup = "MODP_4096"
+	IKEV2_DHG__MODP_6144 Ikev2DiffieHellmanGroup = "MODP_6144"
+	IKEV2_DHG__MODP_8192 Ikev2DiffieHellmanGroup = "MODP_8192"
+	IKEV2_DHG__ECP_192   Ikev2DiffieHellmanGroup = "ECP_192"
+	IKEV2_DHG__ECP_224   Ikev2DiffieHellmanGroup = "ECP_224"
+	IKEV2_DHG__ECP_256   Ikev2DiffieHellmanGroup = "ECP_256"
+	IKEV2_DHG__ECP_384   Ikev2DiffieHellmanGroup = "ECP_384"
+	IKEV2_DHG__ECP_521   Ikev2DiffieHellmanGroup = "ECP_521"
 )

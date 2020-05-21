@@ -15,13 +15,13 @@ type IkeState string
 
 // List of IKEState
 const (
-	CREATED     IkeState = "CREATED"
-	CONNECTING  IkeState = "CONNECTING"
-	ESTABLISHED IkeState = "ESTABLISHED"
-	PASSIVE     IkeState = "PASSIVE"
-	REKEYING    IkeState = "REKEYING"
-	REKEYED     IkeState = "REKEYED"
-	DELETING    IkeState = "DELETING"
-	DESTROYING  IkeState = "DESTROYING"
-	DOWN        IkeState = "DOWN"
+	IKE_STATE__CREATED     IkeState = "CREATED"
+	IKE_STATE__CONNECTING  IkeState = "CONNECTING"
+	IKE_STATE__ESTABLISHED IkeState = "ESTABLISHED"
+	IKE_STATE__PASSIVE     IkeState = "PASSIVE"
+	IKE_STATE__REKEYING    IkeState = "REKEYING"
+	IKE_STATE__REKEYED     IkeState = "REKEYED"
+	IKE_STATE__DELETING    IkeState = "DELETING"
+	IKE_STATE__DESTROYING  IkeState = "DESTROYING"
+	IKE_STATE__DOWN        IkeState = "DOWN"
 )

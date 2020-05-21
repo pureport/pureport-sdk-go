@@ -15,6 +15,6 @@ type NotificationType string
 
 // List of NotificationType
 const (
-	INCIDENT           NotificationType = "INCIDENT"
-	MAINTENANCE_WINDOW NotificationType = "MAINTENANCE_WINDOW"
+	NOTIFICATION_TYPE__INCIDENT           NotificationType = "INCIDENT"
+	NOTIFICATION_TYPE__MAINTENANCE_WINDOW NotificationType = "MAINTENANCE_WINDOW"
 )

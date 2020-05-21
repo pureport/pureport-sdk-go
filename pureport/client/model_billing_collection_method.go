@@ -15,6 +15,6 @@ type BillingCollectionMethod string
 
 // List of BillingCollectionMethod
 const (
-	CREDIT_CARD BillingCollectionMethod = "CREDIT_CARD"
-	NET_30      BillingCollectionMethod = "NET_30"
+	BILLING_COLLECTION_METHOD__CREDIT_CARD BillingCollectionMethod = "CREDIT_CARD"
+	BILLING_COLLECTION_METHOD__NET_30      BillingCollectionMethod = "NET_30"
 )

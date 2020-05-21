@@ -15,6 +15,6 @@ type AccessSwitchPortConnectorType string
 
 // List of AccessSwitchPortConnectorType
 const (
-	SC AccessSwitchPortConnectorType = "SC"
-	LC AccessSwitchPortConnectorType = "LC"
+	ACCESS_SWITCH_PORT_CONNECTOR_TYPE__SC AccessSwitchPortConnectorType = "SC"
+	ACCESS_SWITCH_PORT_CONNECTOR_TYPE__LC AccessSwitchPortConnectorType = "LC"
 )

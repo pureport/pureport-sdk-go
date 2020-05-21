@@ -15,8 +15,8 @@ type NotificationState string
 
 // List of NotificationState
 const (
-	DRAFT     NotificationState = "DRAFT"
-	PUBLISHED NotificationState = "PUBLISHED"
-	CANCELED  NotificationState = "CANCELED"
-	DELETED   NotificationState = "DELETED"
+	NOTIFICATION_STATE__DRAFT     NotificationState = "DRAFT"
+	NOTIFICATION_STATE__PUBLISHED NotificationState = "PUBLISHED"
+	NOTIFICATION_STATE__CANCELED  NotificationState = "CANCELED"
+	NOTIFICATION_STATE__DELETED   NotificationState = "DELETED"
 )

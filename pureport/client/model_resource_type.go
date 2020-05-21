@@ -15,10 +15,10 @@ type ResourceType string
 
 // List of ResourceType
 const (
-	MEMBER              ResourceType = "MEMBER"
-	ROLE                ResourceType = "ROLE"
-	CONNECTION          ResourceType = "CONNECTION"
-	NETWORK             ResourceType = "NETWORK"
-	ACCOUNT             ResourceType = "ACCOUNT"
-	CLOUD_SERVICE_ROUTE ResourceType = "CLOUD_SERVICE_ROUTE"
+	RESOURCE_TYPE__MEMBER              ResourceType = "MEMBER"
+	RESOURCE_TYPE__ROLE                ResourceType = "ROLE"
+	RESOURCE_TYPE__CONNECTION          ResourceType = "CONNECTION"
+	RESOURCE_TYPE__NETWORK             ResourceType = "NETWORK"
+	RESOURCE_TYPE__ACCOUNT             ResourceType = "ACCOUNT"
+	RESOURCE_TYPE__CLOUD_SERVICE_ROUTE ResourceType = "CLOUD_SERVICE_ROUTE"
 )

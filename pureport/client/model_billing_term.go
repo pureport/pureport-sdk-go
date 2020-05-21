@@ -15,8 +15,8 @@ type BillingTerm string
 
 // List of BillingTerm
 const (
-	HOURLY   BillingTerm = "HOURLY"
-	MONTHLY  BillingTerm = "MONTHLY"
-	ONE_YEAR BillingTerm = "ONE_YEAR"
-	TWO_YEAR BillingTerm = "TWO_YEAR"
+	BILLING_TERM__HOURLY   BillingTerm = "HOURLY"
+	BILLING_TERM__MONTHLY  BillingTerm = "MONTHLY"
+	BILLING_TERM__ONE_YEAR BillingTerm = "ONE_YEAR"
+	BILLING_TERM__TWO_YEAR BillingTerm = "TWO_YEAR"
 )

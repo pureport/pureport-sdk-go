@@ -15,6 +15,6 @@ type PodStatus string
 
 // List of PodStatus
 const (
-	AVAILABLE   PodStatus = "AVAILABLE"
-	UNAVAILABLE PodStatus = "UNAVAILABLE"
+	POD_STATUS__AVAILABLE   PodStatus = "AVAILABLE"
+	POD_STATUS__UNAVAILABLE PodStatus = "UNAVAILABLE"
 )

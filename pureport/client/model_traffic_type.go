@@ -15,6 +15,6 @@ type TrafficType string
 
 // List of TrafficType
 const (
-	ALL      TrafficType = "ALL"
-	BACKBONE TrafficType = "BACKBONE"
+	TRAFFIC_TYPE__ALL      TrafficType = "ALL"
+	TRAFFIC_TYPE__BACKBONE TrafficType = "BACKBONE"
 )

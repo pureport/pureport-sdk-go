@@ -15,5 +15,5 @@ type IpSecAuthenticationType string
 
 // List of IPSecAuthenticationType
 const (
-	PSK IpSecAuthenticationType = "PSK"
+	IPSEC_AUTHENTICATION_TYPE__PSK IpSecAuthenticationType = "PSK"
 )

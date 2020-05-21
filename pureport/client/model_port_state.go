@@ -15,7 +15,7 @@ type PortState string
 
 // List of PortState
 const (
-	REQUESTED PortState = "REQUESTED"
-	ACTIVE    PortState = "ACTIVE"
-	DELETED   PortState = "DELETED"
+	PORT_STATE__REQUESTED PortState = "REQUESTED"
+	PORT_STATE__ACTIVE    PortState = "ACTIVE"
+	PORT_STATE__DELETED   PortState = "DELETED"
 )

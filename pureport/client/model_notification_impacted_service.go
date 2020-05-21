@@ -15,9 +15,9 @@ type NotificationImpactedService string
 
 // List of NotificationImpactedService
 const (
-	PUREPORT_CONSOLE        NotificationImpactedService = "PUREPORT_CONSOLE"
-	PUREPORT_API            NotificationImpactedService = "PUREPORT_API"
-	PUREPORT_CONNECTIONS    NotificationImpactedService = "PUREPORT_CONNECTIONS"
-	THIRD_PARTY_API         NotificationImpactedService = "THIRD_PARTY_API"
-	THIRD_PARTY_CONNECTIONS NotificationImpactedService = "THIRD_PARTY_CONNECTIONS"
+	NOTIFICATION_IMPACTED_SERVICE__PUREPORT_CONSOLE        NotificationImpactedService = "PUREPORT_CONSOLE"
+	NOTIFICATION_IMPACTED_SERVICE__PUREPORT_API            NotificationImpactedService = "PUREPORT_API"
+	NOTIFICATION_IMPACTED_SERVICE__PUREPORT_CONNECTIONS    NotificationImpactedService = "PUREPORT_CONNECTIONS"
+	NOTIFICATION_IMPACTED_SERVICE__THIRD_PARTY_API         NotificationImpactedService = "THIRD_PARTY_API"
+	NOTIFICATION_IMPACTED_SERVICE__THIRD_PARTY_CONNECTIONS NotificationImpactedService = "THIRD_PARTY_CONNECTIONS"
 )

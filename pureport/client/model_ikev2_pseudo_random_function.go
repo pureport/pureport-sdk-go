@@ -15,10 +15,10 @@ type Ikev2PseudoRandomFunction string
 
 // List of IKEV2PseudoRandomFunction
 const (
-	MD5      Ikev2PseudoRandomFunction = "MD5"
-	SHA_1    Ikev2PseudoRandomFunction = "SHA_1"
-	AES_XCBC Ikev2PseudoRandomFunction = "AES_XCBC"
-	SHA_256  Ikev2PseudoRandomFunction = "SHA_256"
-	SHA_384  Ikev2PseudoRandomFunction = "SHA_384"
-	SHA_512  Ikev2PseudoRandomFunction = "SHA_512"
+	IKEV2_PSEUDO_RANDOM_FUNCTION__MD5      Ikev2PseudoRandomFunction = "MD5"
+	IKEV2_PSEUDO_RANDOM_FUNCTION__SHA_1    Ikev2PseudoRandomFunction = "SHA_1"
+	IKEV2_PSEUDO_RANDOM_FUNCTION__AES_XCBC Ikev2PseudoRandomFunction = "AES_XCBC"
+	IKEV2_PSEUDO_RANDOM_FUNCTION__SHA_256  Ikev2PseudoRandomFunction = "SHA_256"
+	IKEV2_PSEUDO_RANDOM_FUNCTION__SHA_384  Ikev2PseudoRandomFunction = "SHA_384"
+	IKEV2_PSEUDO_RANDOM_FUNCTION__SHA_512  Ikev2PseudoRandomFunction = "SHA_512"
 )

@@ -15,6 +15,6 @@ type ProviderLinkStatus string
 
 // List of ProviderLinkStatus
 const (
-	AVAILABLE   ProviderLinkStatus = "AVAILABLE"
-	UNAVAILABLE ProviderLinkStatus = "UNAVAILABLE"
+	PROVIDER_LINK_STATUS__AVAILABLE   ProviderLinkStatus = "AVAILABLE"
+	PROVIDER_LINK_STATUS__UNAVAILABLE ProviderLinkStatus = "UNAVAILABLE"
 )

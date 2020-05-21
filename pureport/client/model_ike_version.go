@@ -15,6 +15,6 @@ type IkeVersion string
 
 // List of IKEVersion
 const (
-	V1 IkeVersion = "V1"
-	V2 IkeVersion = "V2"
+	IKE_VERSION__V1 IkeVersion = "V1"
+	IKE_VERSION__V2 IkeVersion = "V2"
 )

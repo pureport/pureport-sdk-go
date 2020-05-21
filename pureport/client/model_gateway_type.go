@@ -15,6 +15,6 @@ type GatewayType string
 
 // List of GatewayType
 const (
-	STANDARD GatewayType = "STANDARD"
-	VPN      GatewayType = "VPN"
+	GATEWAY_TYPE__STANDARD GatewayType = "STANDARD"
+	GATEWAY_TYPE__VPN      GatewayType = "VPN"
 )

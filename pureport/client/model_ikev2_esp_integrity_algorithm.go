@@ -15,10 +15,10 @@ type Ikev2EspIntegrityAlgorithm string
 
 // List of IKEV2ESPIntegrityAlgorithm
 const (
-	MD5_HMAC    Ikev2EspIntegrityAlgorithm = "MD5_HMAC"
-	SHA1_HMAC   Ikev2EspIntegrityAlgorithm = "SHA1_HMAC"
-	SHA256_HMAC Ikev2EspIntegrityAlgorithm = "SHA256_HMAC"
-	SHA384_HMAC Ikev2EspIntegrityAlgorithm = "SHA384_HMAC"
-	SHA512_HMAC Ikev2EspIntegrityAlgorithm = "SHA512_HMAC"
-	AES_XCBC    Ikev2EspIntegrityAlgorithm = "AES_XCBC"
+	IKEV2_ESP__MD5_HMAC    Ikev2EspIntegrityAlgorithm = "MD5_HMAC"
+	IKEV2_ESP__SHA1_HMAC   Ikev2EspIntegrityAlgorithm = "SHA1_HMAC"
+	IKEV2_ESP__SHA256_HMAC Ikev2EspIntegrityAlgorithm = "SHA256_HMAC"
+	IKEV2_ESP__SHA384_HMAC Ikev2EspIntegrityAlgorithm = "SHA384_HMAC"
+	IKEV2_ESP__SHA512_HMAC Ikev2EspIntegrityAlgorithm = "SHA512_HMAC"
+	IKEV2_ESP__AES_XCBC    Ikev2EspIntegrityAlgorithm = "AES_XCBC"
 )

@@ -15,6 +15,6 @@ type PortProvider string
 
 // List of PortProvider
 const (
-	PUREPORT      PortProvider = "PUREPORT"
-	PACKET_FABRIC PortProvider = "PACKET_FABRIC"
+	PORT_PROVIDER__PUREPORT      PortProvider = "PUREPORT"
+	PORT_PROVIDER__PACKET_FABRIC PortProvider = "PACKET_FABRIC"
 )

@@ -15,6 +15,6 @@ type AccessSwitchStatus string
 
 // List of AccessSwitchStatus
 const (
-	AVAILABLE   AccessSwitchStatus = "AVAILABLE"
-	UNAVAILABLE AccessSwitchStatus = "UNAVAILABLE"
+	ACCESS_SWITCH_STATUS__AVAILABLE   AccessSwitchStatus = "AVAILABLE"
+	ACCESS_SWITCH_STATUS__UNAVAILABLE AccessSwitchStatus = "UNAVAILABLE"
 )

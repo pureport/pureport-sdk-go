@@ -15,7 +15,7 @@ type FacilityState string
 
 // List of FacilityState
 const (
-	ACTIVE      FacilityState = "ACTIVE"
-	UNAVAILABLE FacilityState = "UNAVAILABLE"
-	DELETED     FacilityState = "DELETED"
+	FACITILITY_STATE__ACTIVE      FacilityState = "ACTIVE"
+	FACITILITY_STATE__UNAVAILABLE FacilityState = "UNAVAILABLE"
+	FACITILITY_STATE__DELETED     FacilityState = "DELETED"
 )

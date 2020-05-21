@@ -15,7 +15,7 @@ type AuditEntrySource string
 
 // List of AuditEntrySource
 const (
-	API     AuditEntrySource = "API"
-	CONSOLE AuditEntrySource = "CONSOLE"
-	SYSTEM  AuditEntrySource = "SYSTEM"
+	AUDIT_ENTRY_SOURCE__API     AuditEntrySource = "API"
+	AUDIT_ENTRY_SOURCE__CONSOLE AuditEntrySource = "CONSOLE"
+	AUDIT_ENTRY_SOURCE__SYSTEM  AuditEntrySource = "SYSTEM"
 )

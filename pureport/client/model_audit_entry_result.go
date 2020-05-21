@@ -15,6 +15,6 @@ type AuditEntryResult string
 
 // List of AuditEntryResult
 const (
-	SUCCESS AuditEntryResult = "SUCCESS"
-	FAILURE AuditEntryResult = "FAILURE"
+	AUDIT_ENTRY_RESULT__SUCCESS AuditEntryResult = "SUCCESS"
+	AUDIT_ENTRY_RESULT__FAILURE AuditEntryResult = "FAILURE"
 )

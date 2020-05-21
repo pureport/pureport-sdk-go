@@ -15,7 +15,7 @@ type VpnRoutingType string
 
 // List of VPNRoutingType
 const (
-	POLICY_BASED       VpnRoutingType = "POLICY_BASED"
-	ROUTE_BASED_STATIC VpnRoutingType = "ROUTE_BASED_STATIC"
-	ROUTE_BASED_BGP    VpnRoutingType = "ROUTE_BASED_BGP"
+	VPN_ROUTING_TYPE__POLICY_BASED       VpnRoutingType = "POLICY_BASED"
+	VPN_ROUTING_TYPE__ROUTE_BASED_STATIC VpnRoutingType = "ROUTE_BASED_STATIC"
+	VPN_ROUTING_TYPE__ROUTE_BASED_BGP    VpnRoutingType = "ROUTE_BASED_BGP"
 )

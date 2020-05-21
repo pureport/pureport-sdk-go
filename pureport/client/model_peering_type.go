@@ -15,7 +15,7 @@ type PeeringType string
 
 // List of PeeringType
 const (
-	PUBLIC  PeeringType = "PUBLIC"
-	PRIVATE PeeringType = "PRIVATE"
-	TRANSIT PeeringType = "TRANSIT"
+	PEERING_TYPE__PUBLIC  PeeringType = "PUBLIC"
+	PEERING_TYPE__PRIVATE PeeringType = "PRIVATE"
+	PEERING_TYPE__TRANSIT PeeringType = "TRANSIT"
 )

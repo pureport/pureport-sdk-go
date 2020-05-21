@@ -15,10 +15,10 @@ type TaskState string
 
 // List of TaskState
 const (
-	CREATED   TaskState = "CREATED"
-	RUNNING   TaskState = "RUNNING"
-	COMPLETED TaskState = "COMPLETED"
-	FAILED    TaskState = "FAILED"
-	DELETED   TaskState = "DELETED"
-	AGGREGATE TaskState = "AGGREGATE"
+	TASK_STATE__CREATED   TaskState = "CREATED"
+	TASK_STATE__RUNNING   TaskState = "RUNNING"
+	TASK_STATE__COMPLETED TaskState = "COMPLETED"
+	TASK_STATE__FAILED    TaskState = "FAILED"
+	TASK_STATE__DELETED   TaskState = "DELETED"
+	TASK_STATE__AGGREGATE TaskState = "AGGREGATE"
 )

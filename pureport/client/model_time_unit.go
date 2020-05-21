@@ -15,6 +15,6 @@ type TimeUnit string
 
 // List of TimeUnit
 const (
-	HOURS TimeUnit = "HOURS"
-	DAYS  TimeUnit = "DAYS"
+	TIME_UNIT__HOURS TimeUnit = "HOURS"
+	TIME_UNIT__DAYS  TimeUnit = "DAYS"
 )

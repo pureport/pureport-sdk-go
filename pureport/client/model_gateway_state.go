@@ -15,14 +15,14 @@ type GatewayState string
 
 // List of GatewayState
 const (
-	WAITING_TO_PROVISION GatewayState = "WAITING_TO_PROVISION"
-	PROVISIONING         GatewayState = "PROVISIONING"
-	FAILED_TO_PROVISION  GatewayState = "FAILED_TO_PROVISION"
-	ACTIVE               GatewayState = "ACTIVE"
-	DOWN                 GatewayState = "DOWN"
-	UPDATING             GatewayState = "UPDATING"
-	FAILED_TO_UPDATE     GatewayState = "FAILED_TO_UPDATE"
-	DELETING             GatewayState = "DELETING"
-	FAILED_TO_DELETE     GatewayState = "FAILED_TO_DELETE"
-	DELETED              GatewayState = "DELETED"
+	GATEWAY_STATE__WAITING_TO_PROVISION GatewayState = "WAITING_TO_PROVISION"
+	GATEWAY_STATE__PROVISIONING         GatewayState = "PROVISIONING"
+	GATEWAY_STATE__FAILED_TO_PROVISION  GatewayState = "FAILED_TO_PROVISION"
+	GATEWAY_STATE__ACTIVE               GatewayState = "ACTIVE"
+	GATEWAY_STATE__DOWN                 GatewayState = "DOWN"
+	GATEWAY_STATE__UPDATING             GatewayState = "UPDATING"
+	GATEWAY_STATE__FAILED_TO_UPDATE     GatewayState = "FAILED_TO_UPDATE"
+	GATEWAY_STATE__DELETING             GatewayState = "DELETING"
+	GATEWAY_STATE__FAILED_TO_DELETE     GatewayState = "FAILED_TO_DELETE"
+	GATEWAY_STATE__DELETED              GatewayState = "DELETED"
 )

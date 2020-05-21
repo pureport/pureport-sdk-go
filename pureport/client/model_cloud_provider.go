@@ -15,9 +15,9 @@ type CloudProvider string
 
 // List of CloudProvider
 const (
-	AWS           CloudProvider = "AWS"
-	AZURE         CloudProvider = "AZURE"
-	GOOGLE_CLOUD  CloudProvider = "GOOGLE_CLOUD"
-	ORACLE        CloudProvider = "ORACLE"
-	PACKET_FABRIC CloudProvider = "PACKET_FABRIC"
+	CLOUD_PROVIDER__AWS           CloudProvider = "AWS"
+	CLOUD_PROVIDER__AZURE         CloudProvider = "AZURE"
+	CLOUD_PROVIDER__GOOGLE_CLOUD  CloudProvider = "GOOGLE_CLOUD"
+	CLOUD_PROVIDER__ORACLE        CloudProvider = "ORACLE"
+	CLOUD_PROVIDER__PACKET_FABRIC CloudProvider = "PACKET_FABRIC"
 )

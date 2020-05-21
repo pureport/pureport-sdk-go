@@ -15,6 +15,6 @@ type AccountNotificationStatus string
 
 // List of AccountNotificationStatus
 const (
-	READ   AccountNotificationStatus = "READ"
-	UNREAD AccountNotificationStatus = "UNREAD"
+	ACCOUNT_NOTIFICATION_STATUS__READ   AccountNotificationStatus = "READ"
+	ACCOUNT_NOTIFICATION_STATUS__UNREAD AccountNotificationStatus = "UNREAD"
 )

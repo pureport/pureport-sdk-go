@@ -15,14 +15,14 @@ type ConnectionProvider string
 
 // List of ConnectionProvider
 const (
-	AWS                    ConnectionProvider = "AWS"
-	GOOGLE_CLOUD           ConnectionProvider = "GOOGLE_CLOUD"
-	EQUINIX_CLOUD_EXCHANGE ConnectionProvider = "EQUINIX_CLOUD_EXCHANGE"
-	PUREPORT               ConnectionProvider = "PUREPORT"
-	PACKET_FABRIC          ConnectionProvider = "PACKET_FABRIC"
-	COMCAST                ConnectionProvider = "COMCAST"
-	COX_COMMUNICATIONS     ConnectionProvider = "COX_COMMUNICATIONS"
-	ELEMENT_CRITICAL       ConnectionProvider = "ELEMENT_CRITICAL"
-	PACKET                 ConnectionProvider = "PACKET"
-	ZAYO                   ConnectionProvider = "ZAYO"
+	CONNECTION_PROVIDER__AWS                    ConnectionProvider = "AWS"
+	CONNECTION_PROVIDER__GOOGLE_CLOUD           ConnectionProvider = "GOOGLE_CLOUD"
+	CONNECTION_PROVIDER__EQUINIX_CLOUD_EXCHANGE ConnectionProvider = "EQUINIX_CLOUD_EXCHANGE"
+	CONNECTION_PROVIDER__PUREPORT               ConnectionProvider = "PUREPORT"
+	CONNECTION_PROVIDER__PACKET_FABRIC          ConnectionProvider = "PACKET_FABRIC"
+	CONNECTION_PROVIDER__COMCAST                ConnectionProvider = "COMCAST"
+	CONNECTION_PROVIDER__COX_COMMUNICATIONS     ConnectionProvider = "COX_COMMUNICATIONS"
+	CONNECTION_PROVIDER__ELEMENT_CRITICAL       ConnectionProvider = "ELEMENT_CRITICAL"
+	CONNECTION_PROVIDER__PACKET                 ConnectionProvider = "PACKET"
+	CONNECTION_PROVIDER__ZAYO                   ConnectionProvider = "ZAYO"
 )
