@@ -10,10 +10,12 @@
 
 package client
 
-// AccountMember struct for AccountMember
+// AccountMember Details of a user's membership to a particular account.
 type AccountMember struct {
-	Account Link   `json:"account"`
-	Href    string `json:"href,omitempty"`
-	Roles   []Link `json:"roles"`
-	User    Link   `json:"user"`
+	Account Link `json:"account"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The asset links for the roles this user has permissions for in this account.
+	Roles []Link `json:"roles"`
+	User  Link   `json:"user"`
 }

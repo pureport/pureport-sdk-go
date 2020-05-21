@@ -10,14 +10,22 @@
 
 package client
 
-// User struct for User
+// User A User of the Pureport console.
 type User struct {
-	Company     string `json:"company,omitempty"`
-	Email       string `json:"email"`
-	FirstName   string `json:"firstName"`
-	Href        string `json:"href,omitempty"`
-	Id          string `json:"id,omitempty"`
-	LastName    string `json:"lastName"`
+	// The company name.
+	Company string `json:"company,omitempty"`
+	// The email address.
+	Email string `json:"email"`
+	// The first name.
+	FirstName string `json:"firstName"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the user.
+	Id string `json:"id,omitempty"`
+	// The last name.
+	LastName string `json:"lastName"`
+	// The phone number.
 	PhoneNumber string `json:"phoneNumber,omitempty"`
-	Username    string `json:"username"`
+	// The assigned username.
+	Username string `json:"username"`
 }

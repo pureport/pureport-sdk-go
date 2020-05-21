@@ -10,8 +10,10 @@
 
 package client
 
-// LoginRequest struct for LoginRequest
+// LoginRequest Authenticate to the Pureport API
 type LoginRequest struct {
-	Key    string `json:"key"`
+	// The key to authenticate with.
+	Key string `json:"key"`
+	// The secret for the key to authenticate with.
 	Secret string `json:"secret"`
 }

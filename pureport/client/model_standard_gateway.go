@@ -10,22 +10,30 @@
 
 package client
 
-// StandardGateway struct for StandardGateway
+// StandardGateway Pureport network gateway.
 type StandardGateway struct {
-	AvailabilityDomain        string     `json:"availabilityDomain,omitempty"`
-	BgpConfig                 *BgpConfig `json:"bgpConfig,omitempty"`
-	Connection                *Link      `json:"connection,omitempty"`
-	Description               string     `json:"description,omitempty"`
-	ErrorCode                 string     `json:"errorCode,omitempty"`
-	ErrorMessage              string     `json:"errorMessage,omitempty"`
-	Href                      string     `json:"href,omitempty"`
-	Id                        string     `json:"id,omitempty"`
-	LinkState                 string     `json:"linkState,omitempty"`
-	Name                      string     `json:"name,omitempty"`
-	PureportInternalGatewayIP string     `json:"pureportInternalGatewayIP,omitempty"`
-	RemoteId                  string     `json:"remoteId,omitempty"`
-	State                     string     `json:"state,omitempty"`
-	Type                      string     `json:"type,omitempty"`
-	Version                   string     `json:"version,omitempty"`
-	Vlan                      int32      `json:"vlan,omitempty"`
+	AvailabilityDomain AvailabilityDomain `json:"availabilityDomain,omitempty"`
+	BgpConfig          *BgpConfig         `json:"bgpConfig,omitempty"`
+	Connection         *Link              `json:"connection,omitempty"`
+	// The description.
+	Description string    `json:"description,omitempty"`
+	ErrorCode   ErrorCode `json:"errorCode,omitempty"`
+	// The error message if the gateway is in an error state.
+	ErrorMessage string `json:"errorMessage,omitempty"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the gateway.
+	Id        string    `json:"id,omitempty"`
+	LinkState LinkState `json:"linkState,omitempty"`
+	// The name.
+	Name                      string `json:"name,omitempty"`
+	PureportInternalGatewayIP string `json:"pureportInternalGatewayIP,omitempty"`
+	// The ID of any resources attached to the gateway.
+	RemoteId string       `json:"remoteId,omitempty"`
+	State    GatewayState `json:"state,omitempty"`
+	Type     GatewayType  `json:"type,omitempty"`
+	// The version of the gateway container.
+	Version string `json:"version,omitempty"`
+	// The vlan number.
+	Vlan int32 `json:"vlan,omitempty"`
 }

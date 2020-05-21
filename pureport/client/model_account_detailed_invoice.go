@@ -10,9 +10,11 @@
 
 package client
 
-// AccountDetailedInvoice struct for AccountDetailedInvoice
+// AccountDetailedInvoice Detailed breakdown of line items for an invoice.
 type AccountDetailedInvoice struct {
-	Account   Link                  `json:"account,omitempty"`
-	InvoiceId string                `json:"invoiceId,omitempty"`
-	Items     []DetailedInvoiceItem `json:"items,omitempty"`
+	Account Link `json:"account,omitempty"`
+	// The invoice id.
+	InvoiceId string `json:"invoiceId,omitempty"`
+	// The line items for this invoice.
+	Items []DetailedInvoiceItem `json:"items,omitempty"`
 }

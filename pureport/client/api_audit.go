@@ -34,18 +34,18 @@ type FindAuditLogsOpts struct {
 	PageNumber           optional.Int32
 	PageSize             optional.Int32
 	Sort                 optional.String
-	SortDirection        optional.String
+	SortDirection        optional.Interface
 	StartTime            optional.Time
 	EndTime              optional.Time
 	IncludeChildAccounts optional.Bool
 	IncludeChildSubjects optional.Bool
 	EventTypes           optional.Interface
-	Result               optional.String
+	Result               optional.Interface
 	PrincipalId          optional.String
 	IpAddress            optional.String
 	CorrelationId        optional.String
 	SubjectId            optional.String
-	SubjectType          optional.String
+	SubjectType          optional.Interface
 }
 
 /*
@@ -56,18 +56,18 @@ FindAuditLogs Method for FindAuditLogs
  * @param "PageNumber" (optional.Int32) -
  * @param "PageSize" (optional.Int32) -
  * @param "Sort" (optional.String) -
- * @param "SortDirection" (optional.String) -
+ * @param "SortDirection" (optional.Interface of SortDirection) -
  * @param "StartTime" (optional.Time) -
  * @param "EndTime" (optional.Time) -
  * @param "IncludeChildAccounts" (optional.Bool) -
  * @param "IncludeChildSubjects" (optional.Bool) -  include child object records if specified subject is of type NETWORK or CONNECTION
- * @param "EventTypes" (optional.Interface of []string) -
- * @param "Result" (optional.String) -
+ * @param "EventTypes" (optional.Interface of []AuditEntryEventType) -
+ * @param "Result" (optional.Interface of AuditEntryResult) -
  * @param "PrincipalId" (optional.String) -
  * @param "IpAddress" (optional.String) -
  * @param "CorrelationId" (optional.String) -
  * @param "SubjectId" (optional.String) -
- * @param "SubjectType" (optional.String) -
+ * @param "SubjectType" (optional.Interface of AuditEntrySubjectType) -
 @return PageAuditEntry
 */
 func (a *AuditApiService) FindAuditLogs(ctx _context.Context, accountId string, localVarOptionals *FindAuditLogsOpts) (PageAuditEntry, *_nethttp.Response, error) {

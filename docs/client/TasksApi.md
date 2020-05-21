@@ -197,7 +197,7 @@ Name | Type | Description  | Notes
 
 ## GetTasks
 
-> []Task GetTasks(ctx, optional)
+> PageTask GetTasks(ctx, optional)
 
 List Tasks
 
@@ -216,11 +216,13 @@ Optional parameters are passed through a pointer to a GetTasksOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **state** | **optional.String**|  | 
+ **pageNumber** | **optional.Int32**|  | [default to 0]
+ **pageSize** | **optional.Int32**|  | [default to 100]
+ **state** | [**optional.Interface of TaskState**](.md)|  | 
 
 ### Return type
 
-[**[]Task**](Task.md)
+[**PageTask**](PageTask.md)
 
 ### Authorization
 

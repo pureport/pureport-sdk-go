@@ -10,9 +10,12 @@
 
 package client
 
-// SupportedConnectionGroup struct for SupportedConnectionGroup
+// SupportedConnectionGroup A named grouping of Supported Connections
 type SupportedConnectionGroup struct {
+	// The URI of the Pureport asset.
 	Href string `json:"href,omitempty"`
-	Id   string `json:"id,omitempty"`
+	// The id is a unique identifier representing the supported connection group.
+	Id string `json:"id,omitempty"`
+	// The name of this group.
 	Name string `json:"name"`
 }

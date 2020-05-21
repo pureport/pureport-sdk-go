@@ -14,9 +14,10 @@ import (
 	"time"
 )
 
-// AccountConsent struct for AccountConsent
+// AccountConsent Status of an account of consent to the Terms of Service and Acceptable Use Policy
 type AccountConsent struct {
 	ConsentAt time.Time `json:"consentAt,omitempty"`
 	Href      string    `json:"href,omitempty"`
-	UserId    string    `json:"userId,omitempty"`
+	// The id of the user who has read and accepted Pureport's legal documentation.
+	UserId string `json:"userId,omitempty"`
 }

@@ -10,15 +10,21 @@
 
 package client
 
-// AccountBilling struct for AccountBilling
+// AccountBilling Billing information for a Pureport account.
 type AccountBilling struct {
-	Account          Link            `json:"account"`
-	Address          PhysicalAddress `json:"address"`
-	CollectionMethod string          `json:"collectionMethod"`
-	Email            string          `json:"email"`
-	Href             string          `json:"href,omitempty"`
-	Name             string          `json:"name"`
-	StripeExpiry     string          `json:"stripeExpiry,omitempty"`
-	StripeLastFour   string          `json:"stripeLastFour,omitempty"`
-	StripeToken      string          `json:"stripeToken,omitempty"`
+	Account          Link                    `json:"account"`
+	Address          PhysicalAddress         `json:"address"`
+	CollectionMethod BillingCollectionMethod `json:"collectionMethod"`
+	// The email address invoices should be sent to.
+	Email string `json:"email"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The name of the credit card user.
+	Name string `json:"name"`
+	// The month and year of a credit card's expiration date.
+	StripeExpiry string `json:"stripeExpiry,omitempty"`
+	// The last four digits of a credit card.
+	StripeLastFour string `json:"stripeLastFour,omitempty"`
+	// A token provided by Stripe to represent a credit card.
+	StripeToken string `json:"stripeToken,omitempty"`
 }

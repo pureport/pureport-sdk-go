@@ -14,13 +14,19 @@ import (
 	"time"
 )
 
-// PublicPeeringPoolStats struct for PublicPeeringPoolStats
+// PublicPeeringPoolStats Statistics on the allocation of public peering IP addresses.
 type PublicPeeringPoolStats struct {
-	Time              time.Time `json:"time,omitempty"`
-	TotalAllocatedIps int32     `json:"totalAllocatedIps,omitempty"`
-	TotalBlocks       int32     `json:"totalBlocks,omitempty"`
-	TotalDeletedIps   int32     `json:"totalDeletedIps,omitempty"`
-	TotalFreeIps      int32     `json:"totalFreeIps,omitempty"`
-	TotalIps          int32     `json:"totalIps,omitempty"`
-	TotalSubnets      int32     `json:"totalSubnets,omitempty"`
+	Time time.Time `json:"time,omitempty"`
+	// The total number of IP addresses already allocated.
+	TotalAllocatedIps int32 `json:"totalAllocatedIps,omitempty"`
+	// The total number of blocks.
+	TotalBlocks int32 `json:"totalBlocks,omitempty"`
+	// The total number of IP addresses marked as deleted.
+	TotalDeletedIps int32 `json:"totalDeletedIps,omitempty"`
+	// The total number of IP addresses marked as free.
+	TotalFreeIps int32 `json:"totalFreeIps,omitempty"`
+	// The total number of IP addresses.
+	TotalIps int32 `json:"totalIps,omitempty"`
+	// The total number of subnets.
+	TotalSubnets int32 `json:"totalSubnets,omitempty"`
 }

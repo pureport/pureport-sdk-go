@@ -10,9 +10,9 @@
 
 package client
 
-// AccountInvoice struct for AccountInvoice
+// AccountInvoice Invoice for a Pureport account.
 type AccountInvoice struct {
 	Account Link `json:"account,omitempty"`
-	// The Stripe Invoice object (https://stripe.com/docs/api/invoices/object)
+	// The Stripe Invoice object.
 	Invoice map[string]interface{} `json:"invoice,omitempty"`
 }

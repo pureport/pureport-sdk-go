@@ -14,11 +14,14 @@ import (
 	"time"
 )
 
-// ProviderVlan struct for ProviderVlan
+// ProviderVlan A Virtual LAN
 type ProviderVlan struct {
+	// Whether the vlan has been allocated.
 	Allocated         bool      `json:"allocated"`
 	LastAllocatedAt   time.Time `json:"lastAllocatedAt,omitempty"`
 	LastDeallocatedAt time.Time `json:"lastDeallocatedAt,omitempty"`
-	Speed             int32     `json:"speed,omitempty"`
-	Vlan              int32     `json:"vlan"`
+	// The speed of the vlan in Mbps.
+	Speed int32 `json:"speed,omitempty"`
+	// The vlan number.
+	Vlan int32 `json:"vlan"`
 }

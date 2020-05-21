@@ -356,10 +356,7 @@ paths:
         name: sortDirection
         required: false
         schema:
-          enum:
-          - ASC
-          - DESC
-          type: string
+          $ref: '#/components/schemas/SortDirection'
         style: form
       - explode: true
         in: query
@@ -401,58 +398,7 @@ paths:
         required: false
         schema:
           items:
-            enum:
-            - USER_LOGIN
-            - USER_FORGOT_PASSWORD
-            - API_LOGIN
-            - ACCOUNT_CREATE
-            - ACCOUNT_UPDATE
-            - ACCOUNT_DELETE
-            - ACCOUNT_BILLING_CREATE
-            - ACCOUNT_BILLING_UPDATE
-            - ACCOUNT_BILLING_DELETE
-            - NETWORK_CREATE
-            - NETWORK_UPDATE
-            - NETWORK_DELETE
-            - CONNECTION_CREATE
-            - CONNECTION_UPDATE
-            - CONNECTION_DELETE
-            - GATEWAY_CREATE
-            - GATEWAY_UPDATE
-            - GATEWAY_DELETE
-            - API_KEY_CREATE
-            - API_KEY_UPDATE
-            - API_KEY_DELETE
-            - ROLE_CREATE
-            - ROLE_UPDATE
-            - ROLE_DELETE
-            - USER_CREATE
-            - USER_UPDATE
-            - USER_DELETE
-            - USER_DOMAIN_CREATE
-            - USER_DOMAIN_UPDATE
-            - USER_DOMAIN_DELETE
-            - PORT_CREATE
-            - PORT_UPDATE
-            - PORT_DELETE
-            - MEMBER_INVITE_CREATE
-            - MEMBER_INVITE_ACCEPT
-            - MEMBER_INVITE_UPDATE
-            - MEMBER_INVITE_DELETE
-            - ACCOUNT_MEMBER_CREATE
-            - ACCOUNT_MEMBER_UPDATE
-            - ACCOUNT_MEMBER_DELETE
-            - CONNECTION_STATE_CHANGE
-            - GATEWAY_STATE_CHANGE
-            - GATEWAY_BGP_STATUS_CHANGE
-            - GATEWAY_IPSEC_STATUS_CHANGE
-            - NOTIFICATION_CREATE
-            - NOTIFICATION_UPDATE
-            - NOTIFICATION_DELETE
-            - TASK_CREATE
-            - TASK_UPDATE
-            - TASK_DELETE
-            type: string
+            $ref: '#/components/schemas/AuditEntryEventType'
           type: array
         style: form
       - explode: true
@@ -460,10 +406,7 @@ paths:
         name: result
         required: false
         schema:
-          enum:
-          - SUCCESS
-          - FAILURE
-          type: string
+          $ref: '#/components/schemas/AuditEntryResult'
         style: form
       - explode: true
         in: query
@@ -498,22 +441,7 @@ paths:
         name: subjectType
         required: false
         schema:
-          enum:
-          - ACCOUNT
-          - CONNECTION
-          - NETWORK
-          - USER
-          - USER_DOMAIN
-          - ROLE
-          - API_KEY
-          - GATEWAY
-          - NOTIFICATION
-          - ACCOUNT_INVITE
-          - ACCOUNT_BILLING
-          - PORT
-          - ACCOUNT_MEMBER
-          - TASK
-          type: string
+          $ref: '#/components/schemas/AuditEntrySubjectType'
         style: form
       - explode: false
         in: path
@@ -1289,10 +1217,7 @@ paths:
         name: status
         required: false
         schema:
-          enum:
-          - READ
-          - UNREAD
-          type: string
+          $ref: '#/components/schemas/AccountNotificationStatus'
         style: form
       - explode: false
         in: path
@@ -1332,10 +1257,7 @@ paths:
           '*/*':
             schema:
               additionalProperties:
-                enum:
-                - READ
-                - UNREAD
-                type: string
+                $ref: '#/components/schemas/AccountNotificationStatus'
               type: object
       responses:
         default:
@@ -1351,9 +1273,8 @@ paths:
       - account notifications
   /accounts/{accountId}/permissions:
     get:
-      description: |-
-        Returns the effective set of permissions that the current subject has for the given account
-                    based on the roles they have been granted.
+      description: Returns the effective set of permissions that the current subject
+        has for the given account based on the roles they have been granted.
       operationId: getAccountPermissions
       parameters:
       - explode: false
@@ -2607,13 +2528,7 @@ paths:
         name: billingTerm
         required: false
         schema:
-          default: HOURLY
-          enum:
-          - HOURLY
-          - MONTHLY
-          - ONE_YEAR
-          - TWO_YEAR
-          type: string
+          $ref: '#/components/schemas/BillingTerm'
         style: form
       responses:
         default:
@@ -2790,26 +2705,35 @@ paths:
       parameters:
       - explode: true
         in: query
+        name: pageNumber
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 100
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
         name: state
         required: false
         schema:
-          enum:
-          - CREATED
-          - RUNNING
-          - COMPLETED
-          - FAILED
-          - DELETED
-          - AGGREGATE
-          type: string
+          $ref: '#/components/schemas/TaskState'
         style: form
       responses:
         default:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Task'
-                type: array
+                $ref: '#/components/schemas/PageTask'
           description: default response
       security:
       - OAuth2:
@@ -2968,26 +2892,24 @@ components:
       - type
       type: object
     AccessSwitch:
+      description: Access switch installed in a Pureport pod.
       properties:
         availabilityDomain:
-          enum:
-          - PRIMARY
-          - SECONDARY
-          type: string
+          $ref: '#/components/schemas/AvailabilityDomain'
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the access switch.
+          example: us-dal-1a-as1
           maxLength: 64
           minLength: 1
           type: string
         pod:
           $ref: '#/components/schemas/Link'
         status:
-          enum:
-          - AVAILABLE
-          - UNAVAILABLE
-          type: string
+          $ref: '#/components/schemas/AccessSwitchStatus'
       required:
       - availabilityDomain
       - id
@@ -2995,40 +2917,47 @@ components:
       - status
       type: object
     AccessSwitchPort:
+      description: A port provided on a Pureport Access Switch
       properties:
         accessSwitch:
           $ref: '#/components/schemas/Link'
         connectorType:
-          enum:
-          - SC
-          - LC
-          type: string
+          $ref: '#/components/schemas/AccessSwitchPortConnectorType'
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the access switch
+            port.
+          example: us-dal-1a-as1-swp39
           maxLength: 64
           minLength: 1
           type: string
         mediaType:
+          description: The media type.
+          example: SMF
           type: string
         name:
+          description: The name of the port.
+          example: spw39
           type: string
         patchPanelId:
+          description: The patch panel identifier.
+          example: DA2-02-002366-0113|PP:0113:1205890
           type: string
         patchPanelPortNumbers:
+          description: The list of port numbers on the patch panel.
+          example:
+          - 53
           items:
+            description: The list of port numbers on the patch panel.
             format: int32
             type: integer
           type: array
           uniqueItems: true
         speed:
-          enum:
-          - 1000
-          - 10000
-          - 40000
-          format: int32
-          type: integer
+          $ref: '#/components/schemas/PortSpeed'
       required:
       - accessSwitch
       - connectorType
@@ -3039,7 +2968,20 @@ components:
       - patchPanelPortNumbers
       - speed
       type: object
+    AccessSwitchPortConnectorType:
+      description: The connector type.
+      enum:
+      - SC
+      - LC
+      example: LC
+      type: string
+    AccessSwitchStatus:
+      enum:
+      - AVAILABLE
+      - UNAVAILABLE
+      type: string
     Account:
+      description: A Pureport Account
       example:
         parent:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
@@ -3050,77 +2992,96 @@ components:
         verified: true
         description: description
         technicalContactEmails:
-        - technicalContactEmails
-        - technicalContactEmails
-        - technicalContactEmails
-        - technicalContactEmails
-        - technicalContactEmails
+        - admin@email.com
         demo: true
         tags:
           key: tags
         name: name
         pricingHidden: true
         href: href
-        id: id
+        id: ac-9ntgDlC2sW6TISmceo-Xsg
         supportedConnectionGroups:
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
+        - href: /supportedConnections/groups/default
+          id: default
+        - href: /supportedConnections/groups/portConnections
+          id: portConnections
       properties:
         demo:
+          description: Whether this account is for demonstration purposes.
           type: boolean
         description:
+          description: The description.
           maxLength: 256
           minLength: 0
           type: string
         hasChildren:
+          description: Whether this account is a parent account for any other accounts.
           readOnly: true
           type: boolean
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the account.
+          example: ac-9ntgDlC2sW6TISmceo-Xsg
           maxLength: 64
           minLength: 1
           type: string
         name:
+          description: The name.
           maxLength: 64
           minLength: 1
           type: string
         parent:
           $ref: '#/components/schemas/Link'
         pricingHidden:
+          description: Whether pricing information is restricted on this account.
           readOnly: true
           type: boolean
         showChildAccountPricing:
+          description: Whether to show pricing information to child accounts of this
+            account.
           type: boolean
         supportedConnectionGroups:
+          description: A collection of asset links for which Supported Connection
+            Groups this account has access to.
+          example:
+          - href: /supportedConnections/groups/default
+            id: default
+          - href: /supportedConnections/groups/portConnections
+            id: portConnections
           items:
             $ref: '#/components/schemas/Link'
           type: array
           uniqueItems: true
         tags:
           additionalProperties:
+            description: Key-value pairs to associate with the Pureport asset.
             type: string
+          description: Key-value pairs to associate with the Pureport asset.
           type: object
         technicalContactEmails:
+          description: Email addresses of technical contacts for this account.
+          example:
+          - admin@email.com
           items:
+            description: Email addresses of technical contacts for this account.
+            example: '["admin@email.com"]'
             type: string
           maxItems: 10
           minItems: 0
           type: array
           uniqueItems: true
         verified:
+          description: Whether this account has been verified by Pureport operations.
           type: boolean
       required:
       - name
       type: object
     AccountBilling:
+      description: Billing information for a Pureport account.
       example:
-        collectionMethod: CREDIT_CARD
         address:
           country: country
           city: city
@@ -3132,41 +3093,51 @@ components:
             longitude: 6.027456183070403
           state: state
         stripeToken: stripeToken
-        name: name
+        name: John Doe
         href: href
-        stripeExpiry: stripeExpiry
-        stripeLastFour: stripeLastFour
+        stripeExpiry: 06/2026
+        stripeLastFour: "1234"
         account:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
-        email: email
+        email: john.doe@email.com
       properties:
         account:
           $ref: '#/components/schemas/Link'
         address:
           $ref: '#/components/schemas/PhysicalAddress'
         collectionMethod:
-          enum:
-          - CREDIT_CARD
-          - NET_30
-          type: string
+          $ref: '#/components/schemas/BillingCollectionMethod'
         email:
+          description: The email address invoices should be sent to.
+          example: john.doe@email.com
           type: string
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         name:
+          description: The name of the credit card user.
+          example: John Doe
           maxLength: 64
           minLength: 1
           type: string
         stripeExpiry:
+          description: The month and year of a credit card's expiration date.
+          example: 06/2026
           pattern: ^\d{2}\/\d{4}$
           type: string
         stripeLastFour:
+          description: The last four digits of a credit card.
+          example: "1234"
           pattern: ^\d{4}$
           type: string
         stripeToken:
+          description: A token provided by Stripe to represent a credit card.
+          externalDocs:
+            description: Stripe token
+            url: https://stripe.com/docs/api/tokens
           maxLength: 64
           minLength: 1
           type: string
@@ -3178,6 +3149,8 @@ components:
       - name
       type: object
     AccountConsent:
+      description: Status of an account of consent to the Terms of Service and Acceptable
+        Use Policy
       example:
         consentAt: 2000-01-23T04:56:07.000+00:00
         href: href
@@ -3190,23 +3163,29 @@ components:
         href:
           type: string
         userId:
+          description: The id of the user who has read and accepted Pureport's legal
+            documentation.
           readOnly: true
           type: string
       type: object
     AccountDetailedInvoice:
+      description: Detailed breakdown of line items for an invoice.
       properties:
         account:
           $ref: '#/components/schemas/Link'
         invoiceId:
+          description: The invoice id.
           readOnly: true
           type: string
         items:
+          description: The line items for this invoice.
           items:
             $ref: '#/components/schemas/DetailedInvoiceItem'
           readOnly: true
           type: array
       type: object
     AccountInvite:
+      description: An invitation for a user to join a Pureport account.
       example:
         expired: true
         invitedBy:
@@ -3214,32 +3193,35 @@ components:
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
         roles:
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
+        - href: /accounts/ac-9ntgDlC2sW6TISmceo-Xsg/roles/role-Hlzbibun6IqFpRs1nEALGA
+          id: role-Hlzbibun6IqFpRs1nEALGA
+          title: Admin
         href: href
-        id: id
+        id: invite-6amoEOCGszlKvXb2LYrbGw
         account:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
-        email: email
+        email: user@example.com
         invitedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         account:
           $ref: '#/components/schemas/Link'
         email:
+          description: The email address of the user being invited to the Pureport
+            account.
+          example: user@example.com
           type: string
         expired:
           readOnly: true
           type: boolean
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the invite.
+          example: invite-6amoEOCGszlKvXb2LYrbGw
           maxLength: 64
           minLength: 1
           type: string
@@ -3249,6 +3231,12 @@ components:
         invitedBy:
           $ref: '#/components/schemas/Link'
         roles:
+          description: The Pureport roles the invited user will have permissions for
+            on the account.
+          example:
+          - href: /accounts/ac-9ntgDlC2sW6TISmceo-Xsg/roles/role-Hlzbibun6IqFpRs1nEALGA
+            id: role-Hlzbibun6IqFpRs1nEALGA
+            title: Admin
           items:
             $ref: '#/components/schemas/Link'
           type: array
@@ -3258,23 +3246,25 @@ components:
       - roles
       type: object
     AccountInvoice:
+      description: Invoice for a Pureport account.
       properties:
         account:
           $ref: '#/components/schemas/Link'
         invoice:
-          description: The Stripe Invoice object (https://stripe.com/docs/api/invoices/object)
+          description: The Stripe Invoice object.
+          externalDocs:
+            description: Stripe Invoice
+            url: https://stripe.com/docs/api/invoices/object
           readOnly: true
           type: object
       type: object
     AccountMember:
+      description: Details of a user's membership to a particular account.
       example:
         roles:
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
+        - href: /accounts/ac-9ntgDlC2sW6TISmceo-Xsg/roles/role-Hlzbibun6IqFpRs1nEALGA
+          id: role-Hlzbibun6IqFpRs1nEALGA
+          title: Admin
         href: href
         user:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
@@ -3288,9 +3278,16 @@ components:
         account:
           $ref: '#/components/schemas/Link'
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         roles:
+          description: The asset links for the roles this user has permissions for
+            in this account.
+          example:
+          - href: /accounts/ac-9ntgDlC2sW6TISmceo-Xsg/roles/role-Hlzbibun6IqFpRs1nEALGA
+            id: role-Hlzbibun6IqFpRs1nEALGA
+            title: Admin
           items:
             $ref: '#/components/schemas/Link'
           type: array
@@ -3302,43 +3299,48 @@ components:
       - user
       type: object
     AccountNotification:
+      description: A notification for a particular account.
       example:
         notification:
-          availabilityDomain: PRIMARY
           impactedServices:
-          - PUREPORT_CONSOLE
-          - PUREPORT_CONSOLE
-          - PUREPORT_CONSOLE
-          - PUREPORT_CONSOLE
-          - PUREPORT_CONSOLE
+          - null
+          - null
+          - null
+          - null
+          - null
           start: 2000-01-23T04:56:07.000+00:00
-          description: description
-          type: INCIDENT
+          description: Updates to management plane components of the Pureport SDN
+            Platform.
           createdAt: 2000-01-23T04:56:07.000+00:00
           end: 2000-01-23T04:56:07.000+00:00
           locations:
-          - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-            id: network-IQ_fTVDErgXvaf6KeWzIVg
-            title: Raleigh Network
-          - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-            id: network-IQ_fTVDErgXvaf6KeWzIVg
-            title: Raleigh Network
+            href: /locations/us-chi
+            id: us-chi
+            title: Chicago, IL
           href: href
-          id: id
-          state: DRAFT
+          id: nx-is2ItiWXL3nAddF8wCEXhQ
           connectionTypes:
-          - AWS_DIRECT_CONNECT
-          - AWS_DIRECT_CONNECT
+          - null
+          - null
           updatedAt: 2000-01-23T04:56:07.000+00:00
         connections:
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
+        - href: /connections/conn-pYNNK3E4Yf-nW7yVuxO5mA
+          id: conn-pYNNK3E4Yf-nW7yVuxO5mA
+          title: 'Connection #1'
+        - href: /connections/conn-kPix31wMxAtHFuWjb3vQ7Q
+          id: conn-kPix31wMxAtHFuWjb3vQ7Q
+          title: 'Connection #2'
       properties:
         connections:
+          description: A list of asset links of connections this notification applies
+            to.
+          example:
+          - href: /connections/conn-pYNNK3E4Yf-nW7yVuxO5mA
+            id: conn-pYNNK3E4Yf-nW7yVuxO5mA
+            title: 'Connection #1'
+          - href: /connections/conn-kPix31wMxAtHFuWjb3vQ7Q
+            id: conn-kPix31wMxAtHFuWjb3vQ7Q
+            title: 'Connection #2'
           items:
             $ref: '#/components/schemas/Link'
           readOnly: true
@@ -3347,7 +3349,13 @@ components:
         notification:
           $ref: '#/components/schemas/Notification'
       type: object
+    AccountNotificationStatus:
+      enum:
+      - READ
+      - UNREAD
+      type: string
     ApiKey:
+      description: Key for authenticating with the Pureport API
       example:
         roles:
         - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
@@ -3368,30 +3376,36 @@ components:
         name: name
         description: description
         href: href
-        secret: secret
+        secret: BIKd3zv6zyf5UeYiv
         account:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
-        key: key
+        key: k7F6ga3FEt38b
       properties:
         account:
           $ref: '#/components/schemas/Link'
         description:
+          description: The description.
           maxLength: 1024
           minLength: 0
           type: string
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         key:
+          description: The public key for authenticating.
+          example: k7F6ga3FEt38b
           readOnly: true
           type: string
         name:
+          description: The name.
           maxLength: 255
           minLength: 1
           type: string
         roles:
+          description: The Pureport roles users of this API key have permissions for.
           items:
             $ref: '#/components/schemas/Link'
           maxItems: 100
@@ -3399,6 +3413,9 @@ components:
           type: array
           uniqueItems: true
         secret:
+          description: The private secret for authenticating. Note that this field
+            is only populated on creation.
+          example: BIKd3zv6zyf5UeYiv
           readOnly: true
           type: string
       required:
@@ -3406,6 +3423,7 @@ components:
       - roles
       type: object
     AuditEntry:
+      description: Entry in the Pureport audit log.
       example:
         request:
           method: method
@@ -3420,28 +3438,24 @@ components:
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
         changes:
-        - current: '{}'
-          previous: '{}'
-          property: property
-        - current: '{}'
-          previous: '{}'
-          property: property
+        - current: network-M_JqECDuEOWzQMhGnYyicg
+          property: id
+        - current: My Network
+          property: name
+        - current: PENDING_CONTROLLERS
+          property: state
         ipAddress: ipAddress
         userAgent: userAgent
-        eventType: USER_LOGIN
-        source: API
-        subjectType: ACCOUNT
         principal:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
-        result: SUCCESS
         response:
           executionTime: 0
           statusCodeFamily: INFORMATIONAL
           body: body
           statusCode: 6
-        correlationId: correlationId
+        correlationId: 081a1b58-4cff-43d5-b648-6b47bb70a31e
         account:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
@@ -3451,68 +3465,26 @@ components:
         account:
           $ref: '#/components/schemas/Link'
         changes:
+          description: The changes to the Pureport entity.
+          example:
+          - current: network-M_JqECDuEOWzQMhGnYyicg
+            property: id
+          - current: My Network
+            property: name
+          - current: PENDING_CONTROLLERS
+            property: state
           items:
             $ref: '#/components/schemas/ChangeObject'
           readOnly: true
           type: array
           uniqueItems: true
         correlationId:
+          description: An identifier to group multiple related audit entries.
+          example: 081a1b58-4cff-43d5-b648-6b47bb70a31e
           readOnly: true
           type: string
         eventType:
-          enum:
-          - USER_LOGIN
-          - USER_FORGOT_PASSWORD
-          - API_LOGIN
-          - ACCOUNT_CREATE
-          - ACCOUNT_UPDATE
-          - ACCOUNT_DELETE
-          - ACCOUNT_BILLING_CREATE
-          - ACCOUNT_BILLING_UPDATE
-          - ACCOUNT_BILLING_DELETE
-          - NETWORK_CREATE
-          - NETWORK_UPDATE
-          - NETWORK_DELETE
-          - CONNECTION_CREATE
-          - CONNECTION_UPDATE
-          - CONNECTION_DELETE
-          - GATEWAY_CREATE
-          - GATEWAY_UPDATE
-          - GATEWAY_DELETE
-          - API_KEY_CREATE
-          - API_KEY_UPDATE
-          - API_KEY_DELETE
-          - ROLE_CREATE
-          - ROLE_UPDATE
-          - ROLE_DELETE
-          - USER_CREATE
-          - USER_UPDATE
-          - USER_DELETE
-          - USER_DOMAIN_CREATE
-          - USER_DOMAIN_UPDATE
-          - USER_DOMAIN_DELETE
-          - PORT_CREATE
-          - PORT_UPDATE
-          - PORT_DELETE
-          - MEMBER_INVITE_CREATE
-          - MEMBER_INVITE_ACCEPT
-          - MEMBER_INVITE_UPDATE
-          - MEMBER_INVITE_DELETE
-          - ACCOUNT_MEMBER_CREATE
-          - ACCOUNT_MEMBER_UPDATE
-          - ACCOUNT_MEMBER_DELETE
-          - CONNECTION_STATE_CHANGE
-          - GATEWAY_STATE_CHANGE
-          - GATEWAY_BGP_STATUS_CHANGE
-          - GATEWAY_IPSEC_STATUS_CHANGE
-          - NOTIFICATION_CREATE
-          - NOTIFICATION_UPDATE
-          - NOTIFICATION_DELETE
-          - TASK_CREATE
-          - TASK_UPDATE
-          - TASK_DELETE
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/AuditEntryEventType'
         ipAddress:
           readOnly: true
           type: string
@@ -3523,47 +3495,77 @@ components:
         response:
           $ref: '#/components/schemas/AuditEntryResponse'
         result:
-          enum:
-          - SUCCESS
-          - FAILURE
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/AuditEntryResult'
         source:
-          enum:
-          - API
-          - CONSOLE
-          - SYSTEM
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/AuditEntrySource'
         subject:
           $ref: '#/components/schemas/Link'
         subjectType:
-          enum:
-          - ACCOUNT
-          - CONNECTION
-          - NETWORK
-          - USER
-          - USER_DOMAIN
-          - ROLE
-          - API_KEY
-          - GATEWAY
-          - NOTIFICATION
-          - ACCOUNT_INVITE
-          - ACCOUNT_BILLING
-          - PORT
-          - ACCOUNT_MEMBER
-          - TASK
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/AuditEntrySubjectType'
         timestamp:
           format: date-time
           readOnly: true
           type: string
         userAgent:
+          description: The User-Agent of the request that triggered this entry.
           readOnly: true
           type: string
       type: object
+    AuditEntryEventType:
+      enum:
+      - USER_LOGIN
+      - USER_FORGOT_PASSWORD
+      - API_LOGIN
+      - ACCOUNT_CREATE
+      - ACCOUNT_UPDATE
+      - ACCOUNT_DELETE
+      - ACCOUNT_BILLING_CREATE
+      - ACCOUNT_BILLING_UPDATE
+      - ACCOUNT_BILLING_DELETE
+      - NETWORK_CREATE
+      - NETWORK_UPDATE
+      - NETWORK_DELETE
+      - CONNECTION_CREATE
+      - CONNECTION_UPDATE
+      - CONNECTION_DELETE
+      - GATEWAY_CREATE
+      - GATEWAY_UPDATE
+      - GATEWAY_DELETE
+      - API_KEY_CREATE
+      - API_KEY_UPDATE
+      - API_KEY_DELETE
+      - ROLE_CREATE
+      - ROLE_UPDATE
+      - ROLE_DELETE
+      - USER_CREATE
+      - USER_UPDATE
+      - USER_DELETE
+      - USER_DOMAIN_CREATE
+      - USER_DOMAIN_UPDATE
+      - USER_DOMAIN_DELETE
+      - PORT_CREATE
+      - PORT_UPDATE
+      - PORT_DELETE
+      - MEMBER_INVITE_CREATE
+      - MEMBER_INVITE_ACCEPT
+      - MEMBER_INVITE_UPDATE
+      - MEMBER_INVITE_DELETE
+      - ACCOUNT_MEMBER_CREATE
+      - ACCOUNT_MEMBER_UPDATE
+      - ACCOUNT_MEMBER_DELETE
+      - CONNECTION_STATE_CHANGE
+      - GATEWAY_STATE_CHANGE
+      - GATEWAY_BGP_STATUS_CHANGE
+      - GATEWAY_IPSEC_STATUS_CHANGE
+      - NOTIFICATION_CREATE
+      - NOTIFICATION_UPDATE
+      - NOTIFICATION_DELETE
+      - TASK_CREATE
+      - TASK_UPDATE
+      - TASK_DELETE
+      type: string
     AuditEntryRequest:
+      description: The request that triggered this entry.
       example:
         method: method
         queryParameters:
@@ -3574,19 +3576,26 @@ components:
         url: url
       properties:
         body:
+          description: The body of the request.
           type: string
         method:
+          description: The HTTP method of the request.
           type: string
         queryParameters:
           additionalProperties:
+            description: The query parameters passed with the request.
             items:
+              description: The query parameters passed with the request.
               type: string
             type: array
+          description: The query parameters passed with the request.
           type: object
         url:
+          description: The url of the request.
           type: string
       type: object
     AuditEntryResponse:
+      description: The response to the request that triggered this entry.
       example:
         executionTime: 0
         statusCodeFamily: INFORMATIONAL
@@ -3594,15 +3603,18 @@ components:
         statusCode: 6
       properties:
         body:
+          description: The body of the response.
           type: string
         executionTime:
-          description: Execution time in milliseconds
+          description: Execution time in milliseconds.
           format: int64
           type: integer
         statusCode:
+          description: The HTTP status code of the response.
           format: int32
           type: integer
         statusCodeFamily:
+          description: The family of the HTTP status code.
           enum:
           - INFORMATIONAL
           - SUCCESSFUL
@@ -3612,6 +3624,41 @@ components:
           - OTHER
           type: string
       type: object
+    AuditEntryResult:
+      enum:
+      - SUCCESS
+      - FAILURE
+      type: string
+    AuditEntrySource:
+      description: The source of the request that triggered this entry.
+      enum:
+      - API
+      - CONSOLE
+      - SYSTEM
+      type: string
+    AuditEntrySubjectType:
+      enum:
+      - ACCOUNT
+      - CONNECTION
+      - NETWORK
+      - USER
+      - USER_DOMAIN
+      - ROLE
+      - API_KEY
+      - GATEWAY
+      - NOTIFICATION
+      - ACCOUNT_INVITE
+      - ACCOUNT_BILLING
+      - PORT
+      - ACCOUNT_MEMBER
+      - TASK
+      type: string
+    AvailabilityDomain:
+      description: The availability domain designated for this port.
+      enum:
+      - PRIMARY
+      - SECONDARY
+      type: string
     AzureExpressRouteConnection:
       allOf:
       - $ref: '#/components/schemas/Connection'
@@ -3627,17 +3674,19 @@ components:
       - type
       type: object
     BGPConfig:
+      description: BGP Configuration
       example:
         peeringSubnet: peeringSubnet
-        password: password
+        password: J9iODBEhm1b9TGRgxdAZ9
         customerIP: customerIP
         pureportIP: pureportIP
         publicNatIp: publicNatIp
-        state: UP
-        pureportASN: 5
-        customerASN: 1
+        pureportASN: 394351
+        customerASN: 60000
       properties:
         customerASN:
+          description: The ASN of the pureport side of the BGP peering.
+          example: 60000
           format: int64
           readOnly: true
           type: integer
@@ -3645,6 +3694,8 @@ components:
           readOnly: true
           type: string
         password:
+          description: The BGP password.
+          example: J9iODBEhm1b9TGRgxdAZ9
           readOnly: true
           type: string
         peeringSubnet:
@@ -3654,6 +3705,8 @@ components:
           readOnly: true
           type: string
         pureportASN:
+          description: The ASN of the Pureport side of the BGP peering.
+          example: 394351
           format: int64
           readOnly: true
           type: integer
@@ -3661,12 +3714,7 @@ components:
           readOnly: true
           type: string
         state:
-          enum:
-          - UP
-          - DOWN
-          - PENDING
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/BGPState'
       type: object
     BGPPasswordConfiguration:
       description: The set of configuration options for enabling & managing BGP passwords.
@@ -3681,6 +3729,7 @@ components:
           type: string
       type: object
     BGPRoute:
+      description: BGP Route information
       example:
         nextHop: nextHop
         nextHopGateway:
@@ -3689,36 +3738,41 @@ components:
           title: Raleigh Network
         internal: true
         locPref: 0
-        origin: origin
-        weight: 5
+        origin: incomplete
+        weight: 6
         best: true
         network: network
         valid: true
         path:
-        - 1
-        - 1
+        - 16550
         multiPath: true
-        metric: 6
+        metric: 100
         nextHopConnection:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
       properties:
         best:
+          description: Whether the route has been designated as the best route.
           readOnly: true
           type: boolean
         internal:
+          description: Whether the route path origin is internal.
           readOnly: true
           type: boolean
         locPref:
+          description: The local preference assigned to the route.
           format: int32
           readOnly: true
           type: integer
         metric:
+          description: The metric for the route.
+          example: 100
           format: int32
           readOnly: true
           type: integer
         multiPath:
+          description: Whether the route is a multipath route.
           readOnly: true
           type: boolean
         network:
@@ -3732,68 +3786,111 @@ components:
         nextHopGateway:
           $ref: '#/components/schemas/Link'
         origin:
+          description: The BGP origin code for the route.
+          example: incomplete
           readOnly: true
           type: string
         path:
+          description: List of AS paths for this route.
+          example:
+          - 16550
           items:
+            description: List of AS paths for this route.
             format: int32
             type: integer
           readOnly: true
           type: array
         valid:
+          description: Whether the route is valid.
           readOnly: true
           type: boolean
         weight:
+          description: The weight assigned to the route.
           format: int32
           readOnly: true
           type: integer
       type: object
+    BGPState:
+      description: The current BGP state.
+      enum:
+      - UP
+      - DOWN
+      - PENDING
+      type: string
+    BillingCollectionMethod:
+      description: The collection method.
+      enum:
+      - CREDIT_CARD
+      - NET_30
+      type: string
+    BillingInterval:
+      description: The interval on which recurring charges will be charged.
+      enum:
+      - ONCE
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
+      type: string
+    BillingLongHaul:
+      description: The long haul configuration for this billing plan.
+      enum:
+      - NOT_APPLICABLE
+      - METRO
+      - USAGE
+      - DEDICATED
+      type: string
     BillingPlan:
+      description: A billing plan for a Pureport asset
       example:
         amount: 0.8008281904610115
-        billingLongHaul: NOT_APPLICABLE
-        term: HOURLY
         id: id
-        billingInterval: ONCE
         setupAmount: 6.027456183070403
       properties:
         amount:
+          description: The recurring amount in cents that will be charged on the billing
+            interval.
           type: number
         billingInterval:
-          enum:
-          - ONCE
-          - DAY
-          - WEEK
-          - MONTH
-          - YEAR
-          type: string
+          $ref: '#/components/schemas/BillingInterval'
         billingLongHaul:
-          enum:
-          - NOT_APPLICABLE
-          - METRO
-          - USAGE
-          - DEDICATED
-          type: string
+          $ref: '#/components/schemas/BillingLongHaul'
         id:
+          description: The id is a unique identifier representing the billing plan.
           type: string
         setupAmount:
+          description: The nonrecurring amount in cents that will be charged on activation
+            of the Pureport asset.
           type: number
         term:
-          enum:
-          - HOURLY
-          - MONTHLY
-          - ONE_YEAR
-          - TWO_YEAR
-          type: string
+          $ref: '#/components/schemas/BillingTerm'
       required:
       - billingInterval
       - term
       type: object
+    BillingProvider:
+      description: The provider used for billing this connection.
+      enum:
+      - STRIPE
+      type: string
+    BillingTerm:
+      description: The minimum length of time a Pureport asset is licensed for at
+        the specified amount.
+      enum:
+      - HOURLY
+      - MONTHLY
+      - ONE_YEAR
+      - TWO_YEAR
+      type: string
     ChangeObject:
+      description: The changes to the Pureport entity.
       example:
-        current: '{}'
-        previous: '{}'
-        property: property
+      - current: network-M_JqECDuEOWzQMhGnYyicg
+        property: id
+      - current: My Network
+        property: name
+      - current: PENDING_CONTROLLERS
+        property: state
       properties:
         current:
           type: object
@@ -3803,6 +3900,7 @@ components:
           type: string
       type: object
     ClosedRangeInstant:
+      description: The time ranges billed for this Pureport entity.
       properties:
         empty:
           type: boolean
@@ -3813,37 +3911,47 @@ components:
           format: date-time
           type: string
       type: object
+    CloudProvider:
+      description: The provider of the cloud service.
+      enum:
+      - AWS
+      - AZURE
+      - GOOGLE_CLOUD
+      - ORACLE
+      - PACKET_FABRIC
+      type: string
     CloudRegion:
+      description: Cloud provided infrastructure region.
       example:
-        provider: AWS
-        displayName: displayName
+        displayName: US East (N. Virginia)
         geoCoordinates:
           latitude: 0.8008281904610115
           longitude: 6.027456183070403
         href: href
-        id: id
-        providerAssignedId: providerAssignedId
+        id: aws-us-east-1
+        providerAssignedId: us-east-1
       properties:
         displayName:
+          description: The name of this cloud region.
+          example: US East (N. Virginia)
           type: string
         geoCoordinates:
           $ref: '#/components/schemas/GeoCoordinates'
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the cloud region.
+          example: aws-us-east-1
           maxLength: 64
           minLength: 1
           type: string
         provider:
-          enum:
-          - AWS
-          - AZURE
-          - GOOGLE_CLOUD
-          - ORACLE
-          - PACKET_FABRIC
-          type: string
+          $ref: '#/components/schemas/CloudProvider'
         providerAssignedId:
+          description: The provider-assigned identifier of the region.
+          example: us-east-1
           type: string
       required:
       - displayName
@@ -3851,19 +3959,19 @@ components:
       - providerAssignedId
       type: object
     CloudService:
+      description: A cloud-provided service networking configuration
       example:
         ipv4PrefixCount: 0
-        provider: AWS
         ipv6PrefixCount: 6
-        service: service
+        service: S3
         cloudRegion:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
-        name: name
+        name: AWS S3 us-east-1
         deactivatedAt: 2000-01-23T04:56:07.000+00:00
         href: href
-        id: id
+        id: aws-s3-us-east-1
         ipPrefixes:
         - ipPrefixes
         - ipPrefixes
@@ -3872,6 +3980,7 @@ components:
         cloudRegion:
           $ref: '#/components/schemas/Link'
         deactivated:
+          description: Whether this cloud service configuration has been deactivated.
           readOnly: true
           type: boolean
         deactivatedAt:
@@ -3879,37 +3988,43 @@ components:
           readOnly: true
           type: string
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the cloud service.
+          example: aws-s3-us-east-1
           maxLength: 64
           minLength: 1
           type: string
         ipPrefixes:
+          description: The network CIDRs associated with this cloud service configuration.
           items:
             type: string
           readOnly: true
           type: array
           uniqueItems: true
         ipv4PrefixCount:
+          description: The count of IPv4 CIDRs associated with this cloud service
+            configuration.
           format: int32
           readOnly: true
           type: integer
         ipv6PrefixCount:
+          description: The count of IPv6 CIDRs associated with this cloud service
+            configuration.
           format: int32
           readOnly: true
           type: integer
         name:
+          description: The name of the cloud service configuration.
+          example: AWS S3 us-east-1
           type: string
         provider:
-          enum:
-          - AWS
-          - AZURE
-          - GOOGLE_CLOUD
-          - ORACLE
-          - PACKET_FABRIC
-          type: string
+          $ref: '#/components/schemas/CloudProvider'
         service:
+          description: The service name.
+          example: S3
           type: string
       required:
       - cloudRegion
@@ -3937,11 +4052,7 @@ components:
           ZAYO: '#/components/schemas/GenericConnection'
         propertyName: type
       example:
-        billingTerm: HOURLY
         description: 50Mbps VPN connection with High Availability enabled.
-        errorCode: BAD_REQUEST
-        type: AWS_DIRECT_CONNECT
-        speed: 5
         highAvailability: true
         network:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
@@ -3952,8 +4063,6 @@ components:
         advertiseInternalRoutes: true
         href: href
         id: conn-T8E8JE6I7anrhXtxrkXPlw
-        state: INITIALIZING
-        billingProvider: STRIPE
         customerASN: 65222
         nat:
           mappings:
@@ -3983,69 +4092,54 @@ components:
         - address: address
           name: Some network name
         primaryGateway:
-          availabilityDomain: PRIMARY
           bgpConfig:
             peeringSubnet: peeringSubnet
-            password: password
+            password: J9iODBEhm1b9TGRgxdAZ9
             customerIP: customerIP
             pureportIP: pureportIP
             publicNatIp: publicNatIp
-            state: UP
-            pureportASN: 5
-            customerASN: 1
+            pureportASN: 394351
+            customerASN: 60000
           pureportInternalGatewayIP: pureportInternalGatewayIP
           errorMessage: errorMessage
           description: description
-          errorCode: BAD_REQUEST
-          type: STANDARD
           version: version
           remoteId: remoteId
-          linkState: UP
           name: name
           connection:
             href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
             id: network-IQ_fTVDErgXvaf6KeWzIVg
             title: Raleigh Network
           href: href
-          id: id
-          state: WAITING_TO_PROVISION
+          id: cgw-9iaa6dllma5v1f7nl85af
         tags:
           key: tags
         deletedAt: 2000-01-23T04:56:07.000+00:00
         secondaryGateway:
-          availabilityDomain: PRIMARY
           bgpConfig:
             peeringSubnet: peeringSubnet
-            password: password
+            password: J9iODBEhm1b9TGRgxdAZ9
             customerIP: customerIP
             pureportIP: pureportIP
             publicNatIp: publicNatIp
-            state: UP
-            pureportASN: 5
-            customerASN: 1
+            pureportASN: 394351
+            customerASN: 60000
           pureportInternalGatewayIP: pureportInternalGatewayIP
           errorMessage: errorMessage
           description: description
-          errorCode: BAD_REQUEST
-          type: STANDARD
           version: version
           remoteId: remoteId
-          linkState: UP
           name: name
           connection:
             href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
             id: network-IQ_fTVDErgXvaf6KeWzIVg
             title: Raleigh Network
           href: href
-          id: id
-          state: WAITING_TO_PROVISION
+          id: cgw-9iaa6dllma5v1f7nl85af
         name: VPN - North Hills, NC - 50Mbps - HA
         billingPlan:
           amount: 0.8008281904610115
-          billingLongHaul: NOT_APPLICABLE
-          term: HOURLY
           id: id
-          billingInterval: ONCE
           setupAmount: 6.027456183070403
         location:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
@@ -4063,19 +4157,9 @@ components:
         billingPlan:
           $ref: '#/components/schemas/BillingPlan'
         billingProvider:
-          description: The provider used for billing this connection.
-          enum:
-          - STRIPE
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/BillingProvider'
         billingTerm:
-          description: The licensed billing term for the connection.
-          enum:
-          - HOURLY
-          - MONTHLY
-          - ONE_YEAR
-          - TWO_YEAR
-          type: string
+          $ref: '#/components/schemas/BillingTerm'
         createdAt:
           format: date-time
           readOnly: true
@@ -4103,137 +4187,7 @@ components:
           minLength: 0
           type: string
         errorCode:
-          description: Error Code assigned to the connection if it is an error state.
-          enum:
-          - BAD_REQUEST
-          - RESOURCE_LIMITATION_EXCEEDED
-          - JSON_PROCESSING_ERROR
-          - UNAUTHORIZED
-          - ACCESS_TOKEN_GENERAL
-          - ACCESS_TOKEN_MISSING
-          - ACCESS_TOKEN_EXPIRED
-          - ACCESS_TOKEN_ALGORITHM_MISMATCH
-          - ACCESS_TOKEN_INVALID_SIGNATURE
-          - ACCESS_TOKEN_DECODE_ERROR
-          - API_KEY_NOT_FOUND
-          - PAYMENT_REQUIRED
-          - FORBIDDEN
-          - NOT_FOUND
-          - METHOD_NOT_ALLOWED
-          - REQUEST_TIMEOUT
-          - CONFLICT
-          - AWS_CONNECTION_HAS_ACTIVE_VIFS
-          - EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE
-          - ORACLE_OCID_ALREADY_IN_USE
-          - ADMIN_ACCESS_MUST_EXIST
-          - CONNECTION_UPDATE_STATE_CONFLICT
-          - CONNECTION_RESPAWN_STATE_CONFLICT
-          - CONNECTION_DELETE_STATE_CONFLICT
-          - NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
-          - ACCOUNT_DELETE_NON_DELETED_PORT_STATE_CONFLICT
-          - NETWORK_RESPAWN_STATE_CONFLICT
-          - GATEWAY_RESPAWN_STATE_CONFLICT
-          - GATEWAY_STOP_STATE_CONFLICT
-          - GATEWAY_START_STATE_CONFLICT
-          - PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
-          - PORT_CHILD_ACCOUNT_FLAG_IN_USE
-          - CONSENT_REQUIRED
-          - ACCOUNT_ALREADY_CONSENTED
-          - ACCOUNT_MEMBER_ALREADY_EXISTS
-          - ACCOUNT_HAS_CHILD_ACCOUNTS
-          - PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED
-          - ACCESS_SWITCH_PORT_DELETE_STATE_CONFLICT
-          - REQUEST_ENTITY_TOO_LARGE
-          - REQUEST_URI_TOO_LONG
-          - UNSUPPORTED_MEDIA_TYPE
-          - UNPROCESSABLE_ENTITY
-          - VALIDATION_ERROR
-          - INVALID_LINK
-          - INVALID_SORT
-          - INVALID_AWS_REGION
-          - INVALID_EXPRESS_ROUTE_SERVICE_KEY
-          - INVALID_GOOGLE_PAIRING_KEY
-          - INVALID_ORACLE_OCID
-          - INVALID_WHITELIST_PREFIXES
-          - EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH
-          - ORACLE_OCID_BANDWIDTH_MISMATCH
-          - MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS
-          - NO_SUPPORTED_CONNECTION_FOR_CONNECTION
-          - SUPPORTED_CONNECTION_IS_PENDING
-          - NO_SUPPORTED_PORT_FOR_PORT
-          - UNSUPPORTED_RESOURCE_LIMIT
-          - NETWORK_NAME_UNIQUE
-          - BILLING_CONFIGURATION_NOT_PERMITTED
-          - ACCOUNT_VERIFICATION_REQUIRED
-          - MODIFICATION_NOT_ALLOWED
-          - AWS_CONNECTION_SPEED_IMMUTABLE
-          - INVALID_VLAN
-          - INVALID_VLAN_RANGE
-          - INVALID_VLAN_FOR_CONNECTION
-          - UNSUPPORTED_TASK_FOR_RESOURCE
-          - UNSUPPORTED_TASK_NAME
-          - VLAN_IN_USE
-          - PORT_CONNECTION_LOCATION_MISMATCH
-          - SECONDARY_PORT_NOT_IN_SAME_FACILITY_AS_PRIMARY_PORT
-          - CONNECTION_APPROVAL_NOT_REQUIRED
-          - INVALID_CUSTOMER_ASN
-          - INVALID_NAT_OVERLAPPING_NATIVE_CIDRS
-          - INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK
-          - CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS
-          - NOTIFICATION_STATE_IS_INVALID
-          - NOTIFICATION_STATE_CHANGE_IS_INVALID
-          - PEERING_TYPE_CHANGE_NOT_ALLOWED
-          - PORT_BILLING_TERM_CHANGE_NOT_ALLOWED
-          - PORT_SPEED_CHANGE_NOT_ALLOWED
-          - CONNECTION_BILLING_TERM_CHANGE_NOT_ALLOWED
-          - CONNECTION_SPEED_CHANGE_NOT_ALLOWED
-          - CONNECTION_SPEED_GREATER_THAN_PORT_SPEED
-          - MISSING_REQUIRED_QUERY_PARAMETER
-          - INVALID_REQUIRED_QUERY_PARAMETER
-          - INVALID_PEERING_STATE_FOR_OPERATION
-          - INVALID_PEERING_TYPE_FOR_OPERATION
-          - INVALID_PEERING_PNAT_CONFIGURATION
-          - INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS
-          - INVALID_NAT_CIDR_ALLOCATION
-          - INVALID_NAT_OVERLAPPING_NAT_CIDRS
-          - INVALID_BILLING_CONFIGURATION
-          - INTERNAL_SERVER_ERROR
-          - JSON_GENERATION_ERROR
-          - NETWORK_PROVISIONING_ERROR
-          - CONNECTION_PROVISIONING_ERROR
-          - CONNECTION_UPDATE_SPEED_ERROR
-          - CONNECTION_DELETING_ERROR
-          - CONNECTION_UPDATING_ERROR
-          - GATEWAY_PROVISIONING_ERROR
-          - GATEWAY_UPDATE_SPEED_ERROR
-          - GATEWAY_UPDATING_ERROR
-          - GATEWAY_STOP_ERROR
-          - GATEWAY_START_ERROR
-          - GATEWAY_DELETING_ERROR
-          - ECX_GATEWAY_PROVISIONING_ERROR
-          - ECX_GATEWAY_OPERATION_ERROR
-          - INVALID_LONG_HAUL_PUREPORT_CONFIGURATION
-          - INVALID_LONG_HAUL_PACKET_FABRIC_CONFIGURATION
-          - PORT_PROVISIONING_ERROR
-          - PORT_UPDATING_ERROR
-          - PORT_DELETING_ERROR
-          - NO_PORT_FOUND_FOR_CONNECTION
-          - AWS_CONNECTION_DELETE_ERROR
-          - GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR
-          - ECX_CONNECTION_DELETE_ERROR
-          - GOOGLE_OPERATION_TIMEOUT
-          - PACKET_FABRIC_VIRTUAL_CIRCUT_UPGRADE_ERROR
-          - MAXIMUM_VRRP_ROUTERS_ALLOCATED
-          - INVALID_TASK_CONFIGURATION
-          - CURRENTLY_UNSUPPORTED_TASK_TYPE
-          - NOT_IMPLEMENTED
-          - SERVICE_UNAVAILABLE
-          - EXPRESS_ROUTE_SERVICE_UNAVAILABLE
-          - ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE
-          - INSUFFICIENT_CAPACITY
-          - NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/ErrorCode'
         errorMessage:
           description: Error message assigned to the connection if it is an error
             state.
@@ -4243,6 +4197,7 @@ components:
           description: Whether this connection has redundant gateways for failover.
           type: boolean
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
@@ -4269,61 +4224,17 @@ components:
         secondaryGateway:
           $ref: '#/components/schemas/Gateway'
         speed:
-          description: The connection speed in Mbps.
-          enum:
-          - 50
-          - 100
-          - 200
-          - 300
-          - 400
-          - 500
-          - 1000
-          - 2000
-          - 3000
-          - 4000
-          - 5000
-          - 10000
-          format: int32
-          type: integer
+          $ref: '#/components/schemas/ConnectionSpeed'
         state:
-          description: The current state of the connection.
-          enum:
-          - INITIALIZING
-          - WAITING_TO_PROVISION
-          - PENDING_APPROVAL
-          - APPROVED
-          - PROVISIONING
-          - FAILED_TO_PROVISION
-          - ACTIVE
-          - DOWN
-          - UPDATING
-          - FAILED_TO_UPDATE
-          - DELETING
-          - FAILED_TO_DELETE
-          - DELETED
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/ConnectionState'
         tags:
           additionalProperties:
+            description: Key-value pairs to associate with the Pureport asset.
             type: string
+          description: Key-value pairs to associate with the Pureport asset.
           type: object
         type:
-          description: The connection type.
-          enum:
-          - AWS_DIRECT_CONNECT
-          - AZURE_EXPRESS_ROUTE
-          - EQUINIX_CLOUD_EXCHANGE
-          - GOOGLE_CLOUD_INTERCONNECT
-          - ORACLE_FAST_CONNECT
-          - SITE_IPSEC_VPN
-          - PORT
-          - PACKET_FABRIC
-          - COMCAST
-          - COX_COMMUNICATIONS
-          - ELEMENT_CRITICAL
-          - PACKET
-          - ZAYO
-          type: string
+          $ref: '#/components/schemas/ConnectionType'
       required:
       - billingTerm
       - highAvailability
@@ -4332,6 +4243,54 @@ components:
       - speed
       - type
       type: object
+    ConnectionProvider:
+      description: The provider of connections using this link.
+      enum:
+      - AWS
+      - GOOGLE_CLOUD
+      - EQUINIX_CLOUD_EXCHANGE
+      - PUREPORT
+      - PACKET_FABRIC
+      - COMCAST
+      - COX_COMMUNICATIONS
+      - ELEMENT_CRITICAL
+      - PACKET
+      - ZAYO
+      type: string
+    ConnectionSpeed:
+      description: The speed between locations in Mbps.
+      enum:
+      - 50
+      - 100
+      - 200
+      - 300
+      - 400
+      - 500
+      - 1000
+      - 2000
+      - 3000
+      - 4000
+      - 5000
+      - 10000
+      format: int32
+      type: integer
+    ConnectionState:
+      description: The current state of the connection.
+      enum:
+      - INITIALIZING
+      - WAITING_TO_PROVISION
+      - PENDING_APPROVAL
+      - APPROVED
+      - PROVISIONING
+      - FAILED_TO_PROVISION
+      - ACTIVE
+      - DOWN
+      - UPDATING
+      - FAILED_TO_UPDATE
+      - DELETING
+      - FAILED_TO_DELETE
+      - DELETED
+      type: string
     ConnectionTimeEgressIngress:
       example:
         ingress: 6
@@ -4354,6 +4313,23 @@ components:
           format: date-time
           type: string
       type: object
+    ConnectionType:
+      description: The connection type of this configuration.
+      enum:
+      - AWS_DIRECT_CONNECT
+      - AZURE_EXPRESS_ROUTE
+      - EQUINIX_CLOUD_EXCHANGE
+      - GOOGLE_CLOUD_INTERCONNECT
+      - ORACLE_FAST_CONNECT
+      - SITE_IPSEC_VPN
+      - PORT
+      - PACKET_FABRIC
+      - COMCAST
+      - COX_COMMUNICATIONS
+      - ELEMENT_CRITICAL
+      - PACKET
+      - ZAYO
+      type: string
     ConnectivityByGateway:
       example:
         average: 0.8008281904610115
@@ -4429,12 +4405,14 @@ components:
           type: string
       type: object
     DetailedInvoiceItem:
+      description: Line item for an account detailed invoice.
       properties:
         account:
           $ref: '#/components/schemas/Link'
         billableObject:
           $ref: '#/components/schemas/Link'
         billableObjectType:
+          description: The type of the Pureport entity billed for.
           enum:
           - PORT
           - NETWORK
@@ -4444,12 +4422,15 @@ components:
         billingPlan:
           $ref: '#/components/schemas/BillingPlan'
         description:
+          description: The description of this line item.
           readOnly: true
           type: string
         quantity:
+          description: The amount billed for.
           readOnly: true
           type: number
         timeRanges:
+          description: The time ranges billed for this Pureport entity.
           items:
             $ref: '#/components/schemas/ClosedRangeInstant'
           readOnly: true
@@ -4470,7 +4451,139 @@ components:
       - speed
       - type
       type: object
+    ErrorCode:
+      description: Error Code assigned to the connection if it is an error state.
+      enum:
+      - BAD_REQUEST
+      - RESOURCE_LIMITATION_EXCEEDED
+      - JSON_PROCESSING_ERROR
+      - UNAUTHORIZED
+      - ACCESS_TOKEN_GENERAL
+      - ACCESS_TOKEN_MISSING
+      - ACCESS_TOKEN_EXPIRED
+      - ACCESS_TOKEN_ALGORITHM_MISMATCH
+      - ACCESS_TOKEN_INVALID_SIGNATURE
+      - ACCESS_TOKEN_DECODE_ERROR
+      - API_KEY_NOT_FOUND
+      - PAYMENT_REQUIRED
+      - FORBIDDEN
+      - NOT_FOUND
+      - METHOD_NOT_ALLOWED
+      - REQUEST_TIMEOUT
+      - CONFLICT
+      - AWS_CONNECTION_HAS_ACTIVE_VIFS
+      - EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE
+      - ORACLE_OCID_ALREADY_IN_USE
+      - ADMIN_ACCESS_MUST_EXIST
+      - CONNECTION_UPDATE_STATE_CONFLICT
+      - CONNECTION_RESPAWN_STATE_CONFLICT
+      - CONNECTION_DELETE_STATE_CONFLICT
+      - NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
+      - ACCOUNT_DELETE_NON_DELETED_PORT_STATE_CONFLICT
+      - NETWORK_RESPAWN_STATE_CONFLICT
+      - GATEWAY_RESPAWN_STATE_CONFLICT
+      - GATEWAY_STOP_STATE_CONFLICT
+      - GATEWAY_START_STATE_CONFLICT
+      - PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
+      - PORT_CHILD_ACCOUNT_FLAG_IN_USE
+      - CONSENT_REQUIRED
+      - ACCOUNT_ALREADY_CONSENTED
+      - ACCOUNT_MEMBER_ALREADY_EXISTS
+      - ACCOUNT_HAS_CHILD_ACCOUNTS
+      - PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED
+      - ACCESS_SWITCH_PORT_DELETE_STATE_CONFLICT
+      - REQUEST_ENTITY_TOO_LARGE
+      - REQUEST_URI_TOO_LONG
+      - UNSUPPORTED_MEDIA_TYPE
+      - UNPROCESSABLE_ENTITY
+      - VALIDATION_ERROR
+      - INVALID_LINK
+      - INVALID_SORT
+      - INVALID_AWS_REGION
+      - INVALID_EXPRESS_ROUTE_SERVICE_KEY
+      - INVALID_GOOGLE_PAIRING_KEY
+      - INVALID_ORACLE_OCID
+      - INVALID_WHITELIST_PREFIXES
+      - EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH
+      - ORACLE_OCID_BANDWIDTH_MISMATCH
+      - MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS
+      - CONNECTION_CONFIGURATION_NOT_SUPPORTED
+      - SUPPORTED_CONNECTION_IS_PENDING
+      - NO_SUPPORTED_PORT_FOR_PORT
+      - UNSUPPORTED_RESOURCE_LIMIT
+      - NETWORK_NAME_UNIQUE
+      - BILLING_CONFIGURATION_NOT_PERMITTED
+      - ACCOUNT_VERIFICATION_REQUIRED
+      - MODIFICATION_NOT_ALLOWED
+      - AWS_CONNECTION_SPEED_IMMUTABLE
+      - INVALID_VLAN
+      - INVALID_VLAN_RANGE
+      - INVALID_VLAN_FOR_CONNECTION
+      - UNSUPPORTED_TASK_FOR_RESOURCE
+      - UNSUPPORTED_TASK_NAME
+      - VLAN_IN_USE
+      - PORT_CONNECTION_LOCATION_MISMATCH
+      - SECONDARY_PORT_NOT_IN_SAME_FACILITY_AS_PRIMARY_PORT
+      - CONNECTION_APPROVAL_NOT_REQUIRED
+      - INVALID_CUSTOMER_ASN
+      - INVALID_NAT_OVERLAPPING_NATIVE_CIDRS
+      - INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK
+      - CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS
+      - NOTIFICATION_STATE_IS_INVALID
+      - NOTIFICATION_STATE_CHANGE_IS_INVALID
+      - PEERING_TYPE_CHANGE_NOT_ALLOWED
+      - PORT_BILLING_TERM_CHANGE_NOT_ALLOWED
+      - PORT_SPEED_CHANGE_NOT_ALLOWED
+      - CONNECTION_BILLING_TERM_CHANGE_NOT_ALLOWED
+      - CONNECTION_SPEED_CHANGE_NOT_ALLOWED
+      - CONNECTION_SPEED_GREATER_THAN_PORT_SPEED
+      - MISSING_REQUIRED_QUERY_PARAMETER
+      - INVALID_REQUIRED_QUERY_PARAMETER
+      - INVALID_PEERING_STATE_FOR_OPERATION
+      - INVALID_PEERING_TYPE_FOR_OPERATION
+      - INVALID_PEERING_PNAT_CONFIGURATION
+      - INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS
+      - INVALID_NAT_CIDR_ALLOCATION
+      - INVALID_NAT_OVERLAPPING_NAT_CIDRS
+      - INVALID_BILLING_CONFIGURATION
+      - INTERNAL_SERVER_ERROR
+      - JSON_GENERATION_ERROR
+      - NETWORK_PROVISIONING_ERROR
+      - CONNECTION_PROVISIONING_ERROR
+      - CONNECTION_UPDATE_SPEED_ERROR
+      - CONNECTION_DELETING_ERROR
+      - CONNECTION_UPDATING_ERROR
+      - GATEWAY_PROVISIONING_ERROR
+      - GATEWAY_UPDATE_SPEED_ERROR
+      - GATEWAY_UPDATING_ERROR
+      - GATEWAY_STOP_ERROR
+      - GATEWAY_START_ERROR
+      - GATEWAY_DELETING_ERROR
+      - ECX_GATEWAY_PROVISIONING_ERROR
+      - ECX_GATEWAY_OPERATION_ERROR
+      - INVALID_LONG_HAUL_PUREPORT_CONFIGURATION
+      - INVALID_LONG_HAUL_PACKET_FABRIC_CONFIGURATION
+      - PORT_PROVISIONING_ERROR
+      - PORT_UPDATING_ERROR
+      - PORT_DELETING_ERROR
+      - NO_PORT_FOUND_FOR_CONNECTION
+      - AWS_CONNECTION_DELETE_ERROR
+      - GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR
+      - ECX_CONNECTION_DELETE_ERROR
+      - GOOGLE_OPERATION_TIMEOUT
+      - PACKET_FABRIC_VIRTUAL_CIRCUT_UPGRADE_ERROR
+      - MAXIMUM_VRRP_ROUTERS_ALLOCATED
+      - INVALID_TASK_CONFIGURATION
+      - CURRENTLY_UNSUPPORTED_TASK_TYPE
+      - NOT_IMPLEMENTED
+      - SERVICE_UNAVAILABLE
+      - EXPRESS_ROUTE_SERVICE_UNAVAILABLE
+      - ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE
+      - INSUFFICIENT_CAPACITY
+      - NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE
+      type: string
     Facility:
+      description: A data center facility.
       example:
         altIds:
           key: altIds
@@ -4484,36 +4597,40 @@ components:
             latitude: 0.8008281904610115
             longitude: 6.027456183070403
           state: state
-        vendor: vendor
-        name: name
+        vendor: Equinix
+        name: Equinix DC2
         href: href
-        id: id
-        state: ACTIVE
+        id: us-equinix-dc2
       properties:
         address:
           $ref: '#/components/schemas/PhysicalAddress'
         altIds:
           additionalProperties:
+            description: A mapping of alternate identifiers associated with the facility.
             type: string
+          description: A mapping of alternate identifiers associated with the facility.
           type: object
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the facility.
+          example: us-equinix-dc2
           maxLength: 64
           minLength: 1
           type: string
         name:
+          description: The name of the facility.
+          example: Equinix DC2
           maxLength: 64
           minLength: 1
           type: string
         state:
-          enum:
-          - ACTIVE
-          - UNAVAILABLE
-          - DELETED
-          type: string
+          $ref: '#/components/schemas/FacilityState'
         vendor:
+          description: The vendor of the facility.
+          example: Equinix
           type: string
       required:
       - address
@@ -4521,235 +4638,109 @@ components:
       - name
       - vendor
       type: object
+    FacilityState:
+      description: The current state of the facility.
+      enum:
+      - ACTIVE
+      - UNAVAILABLE
+      - DELETED
+      type: string
     Gateway:
-      description: The secondary gateway for the connection if this connection has
-        high availability enabled.
+      description: A network gateway.
       discriminator:
         mapping:
           STANDARD: '#/components/schemas/StandardGateway'
           VPN: '#/components/schemas/VPNGateway'
         propertyName: type
       example:
-        availabilityDomain: PRIMARY
         bgpConfig:
           peeringSubnet: peeringSubnet
-          password: password
+          password: J9iODBEhm1b9TGRgxdAZ9
           customerIP: customerIP
           pureportIP: pureportIP
           publicNatIp: publicNatIp
-          state: UP
-          pureportASN: 5
-          customerASN: 1
+          pureportASN: 394351
+          customerASN: 60000
         pureportInternalGatewayIP: pureportInternalGatewayIP
         errorMessage: errorMessage
         description: description
-        errorCode: BAD_REQUEST
-        type: STANDARD
         version: version
         remoteId: remoteId
-        linkState: UP
         name: name
         connection:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
         href: href
-        id: id
-        state: WAITING_TO_PROVISION
+        id: cgw-9iaa6dllma5v1f7nl85af
       properties:
         availabilityDomain:
-          enum:
-          - PRIMARY
-          - SECONDARY
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/AvailabilityDomain'
         bgpConfig:
           $ref: '#/components/schemas/BGPConfig'
         connection:
           $ref: '#/components/schemas/Link'
         description:
+          description: The description.
           readOnly: true
           type: string
         errorCode:
-          enum:
-          - BAD_REQUEST
-          - RESOURCE_LIMITATION_EXCEEDED
-          - JSON_PROCESSING_ERROR
-          - UNAUTHORIZED
-          - ACCESS_TOKEN_GENERAL
-          - ACCESS_TOKEN_MISSING
-          - ACCESS_TOKEN_EXPIRED
-          - ACCESS_TOKEN_ALGORITHM_MISMATCH
-          - ACCESS_TOKEN_INVALID_SIGNATURE
-          - ACCESS_TOKEN_DECODE_ERROR
-          - API_KEY_NOT_FOUND
-          - PAYMENT_REQUIRED
-          - FORBIDDEN
-          - NOT_FOUND
-          - METHOD_NOT_ALLOWED
-          - REQUEST_TIMEOUT
-          - CONFLICT
-          - AWS_CONNECTION_HAS_ACTIVE_VIFS
-          - EXPRESS_ROUTE_SERVICE_KEY_ALREADY_IN_USE
-          - ORACLE_OCID_ALREADY_IN_USE
-          - ADMIN_ACCESS_MUST_EXIST
-          - CONNECTION_UPDATE_STATE_CONFLICT
-          - CONNECTION_RESPAWN_STATE_CONFLICT
-          - CONNECTION_DELETE_STATE_CONFLICT
-          - NETWORK_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
-          - ACCOUNT_DELETE_NON_DELETED_PORT_STATE_CONFLICT
-          - NETWORK_RESPAWN_STATE_CONFLICT
-          - GATEWAY_RESPAWN_STATE_CONFLICT
-          - GATEWAY_STOP_STATE_CONFLICT
-          - GATEWAY_START_STATE_CONFLICT
-          - PORT_DELETE_NON_DELETED_CONNECTION_STATE_CONFLICT
-          - PORT_CHILD_ACCOUNT_FLAG_IN_USE
-          - CONSENT_REQUIRED
-          - ACCOUNT_ALREADY_CONSENTED
-          - ACCOUNT_MEMBER_ALREADY_EXISTS
-          - ACCOUNT_HAS_CHILD_ACCOUNTS
-          - PORT_BILLING_TERM_INTERVAL_NOT_ELAPSED
-          - ACCESS_SWITCH_PORT_DELETE_STATE_CONFLICT
-          - REQUEST_ENTITY_TOO_LARGE
-          - REQUEST_URI_TOO_LONG
-          - UNSUPPORTED_MEDIA_TYPE
-          - UNPROCESSABLE_ENTITY
-          - VALIDATION_ERROR
-          - INVALID_LINK
-          - INVALID_SORT
-          - INVALID_AWS_REGION
-          - INVALID_EXPRESS_ROUTE_SERVICE_KEY
-          - INVALID_GOOGLE_PAIRING_KEY
-          - INVALID_ORACLE_OCID
-          - INVALID_WHITELIST_PREFIXES
-          - EXPRESS_ROUTE_SERVICE_KEY_BANDWIDTH_MISMATCH
-          - ORACLE_OCID_BANDWIDTH_MISMATCH
-          - MISSING_GCI_CLOUD_ROUTER_IP_ADDRESS
-          - NO_SUPPORTED_CONNECTION_FOR_CONNECTION
-          - SUPPORTED_CONNECTION_IS_PENDING
-          - NO_SUPPORTED_PORT_FOR_PORT
-          - UNSUPPORTED_RESOURCE_LIMIT
-          - NETWORK_NAME_UNIQUE
-          - BILLING_CONFIGURATION_NOT_PERMITTED
-          - ACCOUNT_VERIFICATION_REQUIRED
-          - MODIFICATION_NOT_ALLOWED
-          - AWS_CONNECTION_SPEED_IMMUTABLE
-          - INVALID_VLAN
-          - INVALID_VLAN_RANGE
-          - INVALID_VLAN_FOR_CONNECTION
-          - UNSUPPORTED_TASK_FOR_RESOURCE
-          - UNSUPPORTED_TASK_NAME
-          - VLAN_IN_USE
-          - PORT_CONNECTION_LOCATION_MISMATCH
-          - SECONDARY_PORT_NOT_IN_SAME_FACILITY_AS_PRIMARY_PORT
-          - CONNECTION_APPROVAL_NOT_REQUIRED
-          - INVALID_CUSTOMER_ASN
-          - INVALID_NAT_OVERLAPPING_NATIVE_CIDRS
-          - INVALID_PUBLIC_PEERING_OVERLAPPING_BLOCK
-          - CANT_REMOVE_PUBLIC_PEERING_ALLOCATED_BLOCKS
-          - NOTIFICATION_STATE_IS_INVALID
-          - NOTIFICATION_STATE_CHANGE_IS_INVALID
-          - PEERING_TYPE_CHANGE_NOT_ALLOWED
-          - PORT_BILLING_TERM_CHANGE_NOT_ALLOWED
-          - PORT_SPEED_CHANGE_NOT_ALLOWED
-          - CONNECTION_BILLING_TERM_CHANGE_NOT_ALLOWED
-          - CONNECTION_SPEED_CHANGE_NOT_ALLOWED
-          - CONNECTION_SPEED_GREATER_THAN_PORT_SPEED
-          - MISSING_REQUIRED_QUERY_PARAMETER
-          - INVALID_REQUIRED_QUERY_PARAMETER
-          - INVALID_PEERING_STATE_FOR_OPERATION
-          - INVALID_PEERING_TYPE_FOR_OPERATION
-          - INVALID_PEERING_PNAT_CONFIGURATION
-          - INVALID_NAT_NO_MORE_AVAILABLE_BLOCKS
-          - INVALID_NAT_CIDR_ALLOCATION
-          - INVALID_NAT_OVERLAPPING_NAT_CIDRS
-          - INVALID_BILLING_CONFIGURATION
-          - INTERNAL_SERVER_ERROR
-          - JSON_GENERATION_ERROR
-          - NETWORK_PROVISIONING_ERROR
-          - CONNECTION_PROVISIONING_ERROR
-          - CONNECTION_UPDATE_SPEED_ERROR
-          - CONNECTION_DELETING_ERROR
-          - CONNECTION_UPDATING_ERROR
-          - GATEWAY_PROVISIONING_ERROR
-          - GATEWAY_UPDATE_SPEED_ERROR
-          - GATEWAY_UPDATING_ERROR
-          - GATEWAY_STOP_ERROR
-          - GATEWAY_START_ERROR
-          - GATEWAY_DELETING_ERROR
-          - ECX_GATEWAY_PROVISIONING_ERROR
-          - ECX_GATEWAY_OPERATION_ERROR
-          - INVALID_LONG_HAUL_PUREPORT_CONFIGURATION
-          - INVALID_LONG_HAUL_PACKET_FABRIC_CONFIGURATION
-          - PORT_PROVISIONING_ERROR
-          - PORT_UPDATING_ERROR
-          - PORT_DELETING_ERROR
-          - NO_PORT_FOUND_FOR_CONNECTION
-          - AWS_CONNECTION_DELETE_ERROR
-          - GOOGLE_INTERCONNECT_ATTACHMENT_DELETE_ERROR
-          - ECX_CONNECTION_DELETE_ERROR
-          - GOOGLE_OPERATION_TIMEOUT
-          - PACKET_FABRIC_VIRTUAL_CIRCUT_UPGRADE_ERROR
-          - MAXIMUM_VRRP_ROUTERS_ALLOCATED
-          - INVALID_TASK_CONFIGURATION
-          - CURRENTLY_UNSUPPORTED_TASK_TYPE
-          - NOT_IMPLEMENTED
-          - SERVICE_UNAVAILABLE
-          - EXPRESS_ROUTE_SERVICE_UNAVAILABLE
-          - ORACLE_FAST_CONNECT_SERVICE_UNAVAILABLE
-          - INSUFFICIENT_CAPACITY
-          - NO_MORE_PUBLIC_PEERING_SUBNETS_AVAILABLE
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/ErrorCode'
         errorMessage:
+          description: The error message if the gateway is in an error state.
           readOnly: true
           type: string
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the gateway.
+          example: cgw-9iaa6dllma5v1f7nl85af
           readOnly: true
           type: string
         linkState:
-          enum:
-          - UP
-          - DOWN
-          - PENDING
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LinkState'
         name:
+          description: The name.
           readOnly: true
           type: string
         pureportInternalGatewayIP:
           readOnly: true
           type: string
         remoteId:
+          description: The ID of any resources attached to the gateway.
           readOnly: true
           type: string
         state:
-          enum:
-          - WAITING_TO_PROVISION
-          - PROVISIONING
-          - FAILED_TO_PROVISION
-          - ACTIVE
-          - DOWN
-          - UPDATING
-          - FAILED_TO_UPDATE
-          - DELETING
-          - FAILED_TO_DELETE
-          - DELETED
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/GatewayState'
         type:
-          enum:
-          - STANDARD
-          - VPN
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/GatewayType'
         version:
+          description: The version of the gateway container.
           readOnly: true
           type: string
       type: object
+    GatewayState:
+      description: The current state of the gateway.
+      enum:
+      - WAITING_TO_PROVISION
+      - PROVISIONING
+      - FAILED_TO_PROVISION
+      - ACTIVE
+      - DOWN
+      - UPDATING
+      - FAILED_TO_UPDATE
+      - DELETING
+      - FAILED_TO_DELETE
+      - DELETED
+      type: string
+    GatewayType:
+      description: The type.
+      enum:
+      - STANDARD
+      - VPN
+      type: string
     GenericConnection:
       allOf:
       - $ref: '#/components/schemas/Connection'
@@ -4791,6 +4782,18 @@ components:
       - speed
       - type
       type: object
+    IKEState:
+      enum:
+      - CREATED
+      - CONNECTING
+      - ESTABLISHED
+      - PASSIVE
+      - REKEYING
+      - REKEYED
+      - DELETING
+      - DESTROYING
+      - DOWN
+      type: string
     IKEV1Config:
       description: IKE Version 1 configuration
       properties:
@@ -4802,61 +4805,32 @@ components:
       - esp
       - ike
       type: object
+    IKEV1DiffieHellmanGroup:
+      description: The Diffie-Hellman Group.
+      enum:
+      - MODP_1024
+      - MODP_1536
+      - MODP_2048
+      - MODP_3072
+      - MODP_4096
+      - MODP_6144
+      - MODP_8192
+      - ECP_192
+      - ECP_224
+      - ECP_256
+      - ECP_384
+      - ECP_521
+      example: MODP_2048
+      type: string
     IKEV1ESPConfig:
       description: IKE Version 1 Encapsulating Security Payload configuration.
       properties:
         dhGroup:
-          description: The Diffie-Hellman Group.
-          enum:
-          - MODP_1024
-          - MODP_1536
-          - MODP_2048
-          - MODP_3072
-          - MODP_4096
-          - MODP_6144
-          - MODP_8192
-          - ECP_192
-          - ECP_224
-          - ECP_256
-          - ECP_384
-          - ECP_521
-          example: MODP_2048
-          type: string
+          $ref: '#/components/schemas/IKEV1DiffieHellmanGroup'
         encryption:
-          description: The encryption algorithm.
-          enum:
-          - NULL
-          - AES_128
-          - AES_192
-          - AES_256
-          - AES_128_CTR
-          - AES_192_CTR
-          - AES_256_CTR
-          - AES_128_GCM_64
-          - AES_192_GCM_64
-          - AES_256_GCM_64
-          - AES_128_GCM_96
-          - AES_192_GCM_96
-          - AES_256_GCM_96
-          - AES_128_GCM_128
-          - AES_192_GCM_128
-          - AES_256_GCM_128
-          - AES_128_GMAC
-          - AES_192_GMAC
-          - AES_256_GMAC
-          example: AES_128
-          type: string
+          $ref: '#/components/schemas/IKEV1ESPEncryptionAlgorithm'
         integrity:
-          description: The integrity algorithm.
-          enum:
-          - MD5_HMAC
-          - SHA1_HMAC
-          - SHA256_HMAC
-          - SHA384_HMAC
-          - SHA512_HMAC
-          - AES_XCBC
-          example: SHA256_HMAC
-          type: string
+          $ref: '#/components/schemas/IKEV1ESPIntegrityAlgorithm'
         lifetime:
           description: The lifetime of the Security Association (SA).
           example: 3600
@@ -4868,26 +4842,46 @@ components:
       - dhGroup
       - encryption
       type: object
+    IKEV1ESPEncryptionAlgorithm:
+      description: The encryption algorithm.
+      enum:
+      - NULL
+      - AES_128
+      - AES_192
+      - AES_256
+      - AES_128_CTR
+      - AES_192_CTR
+      - AES_256_CTR
+      - AES_128_GCM_64
+      - AES_192_GCM_64
+      - AES_256_GCM_64
+      - AES_128_GCM_96
+      - AES_192_GCM_96
+      - AES_256_GCM_96
+      - AES_128_GCM_128
+      - AES_192_GCM_128
+      - AES_256_GCM_128
+      - AES_128_GMAC
+      - AES_192_GMAC
+      - AES_256_GMAC
+      example: AES_128
+      type: string
+    IKEV1ESPIntegrityAlgorithm:
+      description: The integrity algorithm.
+      enum:
+      - MD5_HMAC
+      - SHA1_HMAC
+      - SHA256_HMAC
+      - SHA384_HMAC
+      - SHA512_HMAC
+      - AES_XCBC
+      example: SHA256_HMAC
+      type: string
     IKEV1IKEConfig:
       description: IKE Version 1 Internet Key Exchange configuration.
       properties:
         dhGroup:
-          description: The Diffie-Hellman Group.
-          enum:
-          - MODP_1024
-          - MODP_1536
-          - MODP_2048
-          - MODP_3072
-          - MODP_4096
-          - MODP_6144
-          - MODP_8192
-          - ECP_192
-          - ECP_224
-          - ECP_256
-          - ECP_384
-          - ECP_521
-          example: MODP_2048
-          type: string
+          $ref: '#/components/schemas/IKEV1DiffieHellmanGroup'
         dpdDelay:
           description: The Dead Peering Detection (DPD) retry interval.
           example: 30
@@ -4903,23 +4897,9 @@ components:
           minimum: 0
           type: integer
         encryption:
-          description: The encryption algorithm.
-          enum:
-          - AES_128
-          - AES_192
-          - AES_256
-          example: AES_128
-          type: string
+          $ref: '#/components/schemas/IKEV1IKEEncryptionAlgorithm'
         integrity:
-          description: The integrity algorithm.
-          enum:
-          - MD5_HMAC
-          - SHA1_HMAC
-          - SHA256_HMAC
-          - SHA384_HMAC
-          - SHA512_HMAC
-          example: SHA256_HMAC
-          type: string
+          $ref: '#/components/schemas/IKEV1IKEIntegrityAlgorithm'
         lifetime:
           description: The lifetime of the SA.
           example: 10800
@@ -4932,6 +4912,24 @@ components:
       - encryption
       - integrity
       type: object
+    IKEV1IKEEncryptionAlgorithm:
+      description: The encryption algorithm.
+      enum:
+      - AES_128
+      - AES_192
+      - AES_256
+      example: AES_128
+      type: string
+    IKEV1IKEIntegrityAlgorithm:
+      description: The integrity algorithm.
+      enum:
+      - MD5_HMAC
+      - SHA1_HMAC
+      - SHA256_HMAC
+      - SHA384_HMAC
+      - SHA512_HMAC
+      example: SHA256_HMAC
+      type: string
     IKEV2Config:
       description: IKE Version 2 configuration
       properties:
@@ -4943,61 +4941,32 @@ components:
       - esp
       - ike
       type: object
+    IKEV2DiffieHellmanGroup:
+      description: The Diffie-Hellman Group.
+      enum:
+      - MODP_1024
+      - MODP_1536
+      - MODP_2048
+      - MODP_3072
+      - MODP_4096
+      - MODP_6144
+      - MODP_8192
+      - ECP_192
+      - ECP_224
+      - ECP_256
+      - ECP_384
+      - ECP_521
+      example: MODP_2048
+      type: string
     IKEV2ESPConfig:
       description: IKE Version 2 Encapsulating Security Payload configuration.
       properties:
         dhGroup:
-          description: The Diffie-Hellman Group.
-          enum:
-          - MODP_1024
-          - MODP_1536
-          - MODP_2048
-          - MODP_3072
-          - MODP_4096
-          - MODP_6144
-          - MODP_8192
-          - ECP_192
-          - ECP_224
-          - ECP_256
-          - ECP_384
-          - ECP_521
-          example: MODP_2048
-          type: string
+          $ref: '#/components/schemas/IKEV2DiffieHellmanGroup'
         encryption:
-          description: The encryption algorithm.
-          enum:
-          - NULL
-          - AES_128
-          - AES_192
-          - AES_256
-          - AES_128_CTR
-          - AES_192_CTR
-          - AES_256_CTR
-          - AES_128_GCM_64
-          - AES_192_GCM_64
-          - AES_256_GCM_64
-          - AES_128_GCM_96
-          - AES_192_GCM_96
-          - AES_256_GCM_96
-          - AES_128_GCM_128
-          - AES_192_GCM_128
-          - AES_256_GCM_128
-          - AES_128_GMAC
-          - AES_192_GMAC
-          - AES_256_GMAC
-          example: AES_128
-          type: string
+          $ref: '#/components/schemas/IKEV2ESPEncryptionAlgorithm'
         integrity:
-          description: The integrity algorithm.
-          enum:
-          - MD5_HMAC
-          - SHA1_HMAC
-          - SHA256_HMAC
-          - SHA384_HMAC
-          - SHA512_HMAC
-          - AES_XCBC
-          example: SHA256_HMAC
-          type: string
+          $ref: '#/components/schemas/IKEV2ESPIntegrityAlgorithm'
         lifetime:
           description: The lifetime of the Security Association (SA).
           example: 3600
@@ -5009,25 +4978,46 @@ components:
       - dhGroup
       - encryption
       type: object
+    IKEV2ESPEncryptionAlgorithm:
+      description: The encryption algorithm.
+      enum:
+      - NULL
+      - AES_128
+      - AES_192
+      - AES_256
+      - AES_128_CTR
+      - AES_192_CTR
+      - AES_256_CTR
+      - AES_128_GCM_64
+      - AES_192_GCM_64
+      - AES_256_GCM_64
+      - AES_128_GCM_96
+      - AES_192_GCM_96
+      - AES_256_GCM_96
+      - AES_128_GCM_128
+      - AES_192_GCM_128
+      - AES_256_GCM_128
+      - AES_128_GMAC
+      - AES_192_GMAC
+      - AES_256_GMAC
+      example: AES_128
+      type: string
+    IKEV2ESPIntegrityAlgorithm:
+      description: The integrity algorithm.
+      enum:
+      - MD5_HMAC
+      - SHA1_HMAC
+      - SHA256_HMAC
+      - SHA384_HMAC
+      - SHA512_HMAC
+      - AES_XCBC
+      example: SHA256_HMAC
+      type: string
     IKEV2IKEConfig:
       description: IKE Version 2 Internet Key Exchange configuration.
       properties:
         dhGroup:
-          description: The Diffie-Hellman Group.
-          enum:
-          - MODP_1024
-          - MODP_1536
-          - MODP_2048
-          - MODP_3072
-          - MODP_4096
-          - MODP_6144
-          - MODP_8192
-          - ECP_192
-          - ECP_224
-          - ECP_256
-          - ECP_384
-          - ECP_521
-          type: string
+          $ref: '#/components/schemas/IKEV2DiffieHellmanGroup'
         dpdDelay:
           description: The Dead Peering Detection (DPD) retry interval.
           example: 30
@@ -5043,37 +5033,9 @@ components:
           minimum: 0
           type: integer
         encryption:
-          description: The encryption algorithm.
-          enum:
-          - NULL
-          - AES_128
-          - AES_192
-          - AES_256
-          - AES_128_CTR
-          - AES_192_CTR
-          - AES_256_CTR
-          - AES_128_GCM_64
-          - AES_192_GCM_64
-          - AES_256_GCM_64
-          - AES_128_GCM_96
-          - AES_192_GCM_96
-          - AES_256_GCM_96
-          - AES_128_GCM_128
-          - AES_192_GCM_128
-          - AES_256_GCM_128
-          example: AES_128
-          type: string
+          $ref: '#/components/schemas/IKEV2IKEEncryptionAlgorithm'
         integrity:
-          description: The integrity algorithm.
-          enum:
-          - MD5_HMAC
-          - SHA1_HMAC
-          - SHA256_HMAC
-          - SHA384_HMAC
-          - SHA512_HMAC
-          - AES_XCBC
-          example: SHA256_HMAC
-          type: string
+          $ref: '#/components/schemas/IKEV2IKEIntegrityAlgorithm'
         lifetime:
           description: The lifetime of the SA.
           example: 10800
@@ -5082,30 +5044,71 @@ components:
           minimum: 3600
           type: integer
         prf:
-          enum:
-          - MD5
-          - SHA_1
-          - AES_XCBC
-          - SHA_256
-          - SHA_384
-          - SHA_512
-          type: string
+          $ref: '#/components/schemas/IKEV2PseudoRandomFunction'
       required:
       - dhGroup
       - encryption
       type: object
+    IKEV2IKEEncryptionAlgorithm:
+      description: The encryption algorithm.
+      enum:
+      - NULL
+      - AES_128
+      - AES_192
+      - AES_256
+      - AES_128_CTR
+      - AES_192_CTR
+      - AES_256_CTR
+      - AES_128_GCM_64
+      - AES_192_GCM_64
+      - AES_256_GCM_64
+      - AES_128_GCM_96
+      - AES_192_GCM_96
+      - AES_256_GCM_96
+      - AES_128_GCM_128
+      - AES_192_GCM_128
+      - AES_256_GCM_128
+      example: AES_128
+      type: string
+    IKEV2IKEIntegrityAlgorithm:
+      description: The integrity algorithm.
+      enum:
+      - MD5_HMAC
+      - SHA1_HMAC
+      - SHA256_HMAC
+      - SHA384_HMAC
+      - SHA512_HMAC
+      - AES_XCBC
+      example: SHA256_HMAC
+      type: string
+    IKEV2PseudoRandomFunction:
+      enum:
+      - MD5
+      - SHA_1
+      - AES_XCBC
+      - SHA_256
+      - SHA_384
+      - SHA_512
+      type: string
+    IKEVersion:
+      description: The IKE version.
+      enum:
+      - V1
+      - V2
+      type: string
     IPRoute:
+      description: IP Route information
       example:
         nextHop: nextHop
         nextHopGateway:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
-        protocol: protocol
-        distance: 0
-        metric: 6
+        protocol: bgp
+        distance: 200
+        metric: 100
         prefix: prefix
-        interfaceName: interfaceName
+        interfaceName: eth0
         nextHopConnection:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
@@ -5113,22 +5116,30 @@ components:
         fib: true
         selected: true
         directlyConnected: true
-        uptime: uptime
+        uptime: 22:30:20
       properties:
         directlyConnected:
+          description: Whether this route is directly connected.
           readOnly: true
           type: boolean
         distance:
+          description: The route distance.
+          example: 200
           format: int64
           readOnly: true
           type: integer
         fib:
+          description: Whether this route is a part of the FIB (Forwarding) table.
           readOnly: true
           type: boolean
         interfaceName:
+          description: The interface name.
+          example: eth0
           readOnly: true
           type: string
         metric:
+          description: The metric for the route.
+          example: 100
           format: int64
           readOnly: true
           type: integer
@@ -5143,15 +5154,25 @@ components:
           readOnly: true
           type: string
         protocol:
+          description: The protocol for the route.
+          example: bgp
           readOnly: true
           type: string
         selected:
+          description: Whether this route is marked as selected.
           readOnly: true
           type: boolean
         uptime:
+          description: The uptime for this route in hours:minutes:seconds.
+          example: 22:30:20
           readOnly: true
           type: string
       type: object
+    IPSecAuthenticationType:
+      description: The authentication type.
+      enum:
+      - PSK
+      type: string
     InstantRange:
       example:
         start: 2000-01-23T04:56:07.000+00:00
@@ -5175,50 +5196,66 @@ components:
         title: Raleigh Network
       properties:
         href:
+          description: The URI for the Pureport asset.
           type: string
         id:
+          description: The id is a unique identifier representing the Pureport asset.
           maxLength: 64
           minLength: 1
           type: string
         title:
+          description: The title for the Pureport asset.
           type: string
       required:
       - href
       type: object
+    LinkState:
+      description: The link state.
+      enum:
+      - UP
+      - DOWN
+      - PENDING
+      type: string
     Location:
+      description: A geographic location.
       example:
-        name: name
+        name: Washington, DC
         geoCoordinates:
           latitude: 0.8008281904610115
           longitude: 6.027456183070403
         href: href
-        id: id
+        id: us-wdc
         locationLinks:
         - location:
             href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
             id: network-IQ_fTVDErgXvaf6KeWzIVg
             title: Raleigh Network
-          speed: 0
         - location:
             href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
             id: network-IQ_fTVDErgXvaf6KeWzIVg
             title: Raleigh Network
-          speed: 0
       properties:
         geoCoordinates:
           $ref: '#/components/schemas/GeoCoordinates'
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the location.
+          example: us-wdc
           maxLength: 64
           minLength: 1
           type: string
         locationLinks:
+          description: Other locations linked across the Pureport backbone to this
+            location.
           items:
             $ref: '#/components/schemas/LocationLinkConnection'
           type: array
         name:
+          description: The name of the location.
+          example: Washington, DC
           maxLength: 64
           minLength: 1
           type: string
@@ -5228,63 +5265,68 @@ components:
       - name
       type: object
     LocationLinkConnection:
+      description: Link between Pureport Locations across the Pureport backbone.
       example:
         location:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
-        speed: 0
       properties:
         location:
           $ref: '#/components/schemas/Link'
         speed:
-          enum:
-          - 50
-          - 100
-          - 200
-          - 300
-          - 400
-          - 500
-          - 1000
-          - 2000
-          - 3000
-          - 4000
-          - 5000
-          - 10000
-          format: int32
-          type: integer
+          $ref: '#/components/schemas/ConnectionSpeed'
       required:
       - location
       - speed
       type: object
     LoginRequest:
+      description: Authenticate to the Pureport API
       example:
-        secret: secret
-        key: key
+        secret: zI7dmQsEspXPEKiS6
+        key: PiLFAWoQPHI9n
       properties:
         key:
+          description: The key to authenticate with.
+          example: PiLFAWoQPHI9n
           type: string
         secret:
+          description: The secret for the key to authenticate with.
+          example: zI7dmQsEspXPEKiS6
           type: string
       required:
       - key
       - secret
       type: object
     LoginResponse:
+      description: Response for an authentication request.
       example:
-        access_token: access_token
-        refresh_token: refresh_token
-        token_type: token_type
-        expires_in: 0
+        access_token: eyJraWQiOiJHcjI1SFdqa1RyMEJpYjYxNDEwSDhkV1NuWDE2Q2VHZjdwaExyWkZ3SitVPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI2ZjZiYzA0Zi0wMzJiLTQ2YmItYTc3YS0zYjY4MjI2Y2UyODEiLCJldmVudF9pZCI6IjBkMjMyYWI0LTA0NmQtNDg0OC05ZTNkLWU5MjNiYTllY2I3ZiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE1ODkyMDc4NjYsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX085YVE0VFZFRCIsImV4cCI6MTU4OTIxMTQ2NiwiaWF0IjoxNTg5MjA3ODY2LCJqdGkiOiIyMTM2ZmNhMS0xMGEwLTRlYWItYTI4OC1mMmYzNGJkMGUxZjkiLCJjbGllbnRfaWQiOiI0Yjk4NzRhZmpndmEyb243bHFzczF0ODc2OSIsInVzZXJuYW1lIjoiUGlMRkFXb1FQSEk5biJ9.m3TEhWNTNqpW7aNIs2R48SIR7WDlfDEwRSPMPfVojH9euRptVHBRoRiSjdUI00QTQEsN_8ZxGOXmsyx4eCCNlI21esJ-Qer7Je1jzMAuKLLdpH3sHKvsejoT5YexkUUHuItWtKFsU3JsbsidN0qUOVd9C9eolJ7_Kr0OK8PizzJSw5sbDFOFEktSlRN0tkC_SwWNB__AFGY2UwF13mj3l8Kwdt9FCwe-ibFdqadB-EwfYEahGL_J8UpOe69F0pAFdeHQzvjb-zoOC2e_vfHC7GY-8EQDE758XyG7yJfyIyu71m7D4erq63icSZK8YL4MXWp2DhIRBPChm6WZUGpcMw
+        refresh_token: eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.HSfD-giY_4RUk8h5KCP8e_9jCbU5qsbzCY8t01ALFSYFWhaWGfHJkkgHhGX9YHS-PB6lFAPsPNAv9ga8hqUToBEtnL5o-xrHhtyJmlguic7YQ_6Et8wrpb4StujjIJVJfprjjTjW7Gq6FKy6K-y36rhdzYql-9beIsrJTqI8WPA1YZvOFnJrr0xMHr9odb8TzCvrKGc1VHD_tdTauVTUp9jl-4VFTH3AWCrRO_FeuUAoS3ZSDT0YNtLt3JW3j0F9fl4LSVHotU_1Z1rl_uQ6W_ORPBK8AtyXMb2cnxZzuyIorItzUk-aFjxTytScywyz4vZagIuNbDrrv6LwsJwxzw.hkLinb-EnpyDnTsH.GWLR_sh8t0JrZRWplzAMhYxs84z1O3cECRH9ysGCmEZWyIm4stQykjtLQkP6GK3Efm4gjpRLkSbhgk1S2N0vJ_rdtc9ZCRyFEQJ5qakQ71mbI76GkpqW7Mp_U8U8bRO7Z56Obwt5IHmIIhvCtJu2KYPlXH_k0LMOPrWtIMGmPR3sNnpDGocu8oU0zuYksc7xvKIu98T4ofU3pF5qgsfDif67AF__YJMxTB63zYCNG_AZLz11otmk3oUP1KidhO1HNuQmXthavuBm0_LYZliX9Lfi9As8CwPHdGhcqnr0bl3uYP6c1tw9W2nUi_hhqGKi10k65cHku5SzTugs7bt-ZkRB4Kv-c3CTl0UzhLZoJ43BIRtqJlflQOjTGrcQVUmLL7C6U17MY26bolUGebZjetmmQIwzuPFB5a4clYUS5PdIUpf3V4Olp_-G5uqvEHuSqIah1d-h979oSaq10hDrq_DiRu2jLuD-xoD1yngvkeB1N9q5blF1T0KimP3ScNRg5sb0q2Hp3qHIixr8R2l0H1KWOtkBXmvcpwuirxex6YJBQ0Q30UzENtUvzoS14ZMDnHNs7VsllwQR2wBZdpLg4rdR4mQpHIlC5zBSuiyjAu16VhuqJGo0VRkKxttbrSOXoUVvWG2wZreUuX_f6eoABLH9Z_21xoWera7eX-j7iFSMBDeUxrqq3gYyCGTJvR1-IUib5v7PB8184YxCLlt18xPRgq7CFIedxSs5b-aqq1MEUhsER9pJQBixXUqeT696XtUaXR6eHk0P74A49T_u7E0pmG6_S7_OE7hpz8CcVcL-nelpJksa56MYDxvyc-51UBjMdEsEbtgumWaADfY6MA3hUUchQAGCVBRW4P5ihMZo64xXJIvvilVxEyMSXPDtV01I9LK7ih9M7e0FpmZA8DDmea6wQpkUWPwe8jDhU-hakXRviSObZMP4gMiIHe8w-PQF0CmAtYawQxexV_WhaWG7_u75qJrnpMMJ1O0T34vumdy17X35C3FGVLjebRtBlLv-JZuHV3Bxnopqu0z_dCEcth6Rhm0_Ys66q5Ykyn8h4geEIHWqSZWrDwfCPazRC_Fw_aBlh18WpHYr_5ibuL9ehhyZbDNjBtFft1fINAgoB_M7gQlIlRty8vVV5b3Y0a2OOKdPPvVvYYXijM5M9-lkHfL5g8sTVJ7vwbm-BTE7JXUUVVsOnKXI-jGl1LD07EXPlqBBjzs3E_Na-b2RcxOb1gDy-nJnqBbnQlc_JENevlo10xEsgqxu_8LNeLOD60RtmgnVlravero_4Q.6QAepLSiPzCdOmqTrBq1Sw
+        token_type: bearer
+        expires_in: 3600
       properties:
         access_token:
+          description: A token to use for requests to the Pureport API.
+          example: eyJraWQiOiJHcjI1SFdqa1RyMEJpYjYxNDEwSDhkV1NuWDE2Q2VHZjdwaExyWkZ3SitVPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI2ZjZiYzA0Zi0wMzJiLTQ2YmItYTc3YS0zYjY4MjI2Y2UyODEiLCJldmVudF9pZCI6IjBkMjMyYWI0LTA0NmQtNDg0OC05ZTNkLWU5MjNiYTllY2I3ZiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE1ODkyMDc4NjYsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX085YVE0VFZFRCIsImV4cCI6MTU4OTIxMTQ2NiwiaWF0IjoxNTg5MjA3ODY2LCJqdGkiOiIyMTM2ZmNhMS0xMGEwLTRlYWItYTI4OC1mMmYzNGJkMGUxZjkiLCJjbGllbnRfaWQiOiI0Yjk4NzRhZmpndmEyb243bHFzczF0ODc2OSIsInVzZXJuYW1lIjoiUGlMRkFXb1FQSEk5biJ9.m3TEhWNTNqpW7aNIs2R48SIR7WDlfDEwRSPMPfVojH9euRptVHBRoRiSjdUI00QTQEsN_8ZxGOXmsyx4eCCNlI21esJ-Qer7Je1jzMAuKLLdpH3sHKvsejoT5YexkUUHuItWtKFsU3JsbsidN0qUOVd9C9eolJ7_Kr0OK8PizzJSw5sbDFOFEktSlRN0tkC_SwWNB__AFGY2UwF13mj3l8Kwdt9FCwe-ibFdqadB-EwfYEahGL_J8UpOe69F0pAFdeHQzvjb-zoOC2e_vfHC7GY-8EQDE758XyG7yJfyIyu71m7D4erq63icSZK8YL4MXWp2DhIRBPChm6WZUGpcMw
+          externalDocs:
+            url: https://tools.ietf.org/html/rfc6749#section-1.4
           type: string
         expires_in:
+          description: Length of time in seconds before token expiration.
+          example: 3600
           format: int32
           type: integer
         refresh_token:
+          description: A token to use for refresh the authentication to the Pureport
+            API.
+          example: eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.HSfD-giY_4RUk8h5KCP8e_9jCbU5qsbzCY8t01ALFSYFWhaWGfHJkkgHhGX9YHS-PB6lFAPsPNAv9ga8hqUToBEtnL5o-xrHhtyJmlguic7YQ_6Et8wrpb4StujjIJVJfprjjTjW7Gq6FKy6K-y36rhdzYql-9beIsrJTqI8WPA1YZvOFnJrr0xMHr9odb8TzCvrKGc1VHD_tdTauVTUp9jl-4VFTH3AWCrRO_FeuUAoS3ZSDT0YNtLt3JW3j0F9fl4LSVHotU_1Z1rl_uQ6W_ORPBK8AtyXMb2cnxZzuyIorItzUk-aFjxTytScywyz4vZagIuNbDrrv6LwsJwxzw.hkLinb-EnpyDnTsH.GWLR_sh8t0JrZRWplzAMhYxs84z1O3cECRH9ysGCmEZWyIm4stQykjtLQkP6GK3Efm4gjpRLkSbhgk1S2N0vJ_rdtc9ZCRyFEQJ5qakQ71mbI76GkpqW7Mp_U8U8bRO7Z56Obwt5IHmIIhvCtJu2KYPlXH_k0LMOPrWtIMGmPR3sNnpDGocu8oU0zuYksc7xvKIu98T4ofU3pF5qgsfDif67AF__YJMxTB63zYCNG_AZLz11otmk3oUP1KidhO1HNuQmXthavuBm0_LYZliX9Lfi9As8CwPHdGhcqnr0bl3uYP6c1tw9W2nUi_hhqGKi10k65cHku5SzTugs7bt-ZkRB4Kv-c3CTl0UzhLZoJ43BIRtqJlflQOjTGrcQVUmLL7C6U17MY26bolUGebZjetmmQIwzuPFB5a4clYUS5PdIUpf3V4Olp_-G5uqvEHuSqIah1d-h979oSaq10hDrq_DiRu2jLuD-xoD1yngvkeB1N9q5blF1T0KimP3ScNRg5sb0q2Hp3qHIixr8R2l0H1KWOtkBXmvcpwuirxex6YJBQ0Q30UzENtUvzoS14ZMDnHNs7VsllwQR2wBZdpLg4rdR4mQpHIlC5zBSuiyjAu16VhuqJGo0VRkKxttbrSOXoUVvWG2wZreUuX_f6eoABLH9Z_21xoWera7eX-j7iFSMBDeUxrqq3gYyCGTJvR1-IUib5v7PB8184YxCLlt18xPRgq7CFIedxSs5b-aqq1MEUhsER9pJQBixXUqeT696XtUaXR6eHk0P74A49T_u7E0pmG6_S7_OE7hpz8CcVcL-nelpJksa56MYDxvyc-51UBjMdEsEbtgumWaADfY6MA3hUUchQAGCVBRW4P5ihMZo64xXJIvvilVxEyMSXPDtV01I9LK7ih9M7e0FpmZA8DDmea6wQpkUWPwe8jDhU-hakXRviSObZMP4gMiIHe8w-PQF0CmAtYawQxexV_WhaWG7_u75qJrnpMMJ1O0T34vumdy17X35C3FGVLjebRtBlLv-JZuHV3Bxnopqu0z_dCEcth6Rhm0_Ys66q5Ykyn8h4geEIHWqSZWrDwfCPazRC_Fw_aBlh18WpHYr_5ibuL9ehhyZbDNjBtFft1fINAgoB_M7gQlIlRty8vVV5b3Y0a2OOKdPPvVvYYXijM5M9-lkHfL5g8sTVJ7vwbm-BTE7JXUUVVsOnKXI-jGl1LD07EXPlqBBjzs3E_Na-b2RcxOb1gDy-nJnqBbnQlc_JENevlo10xEsgqxu_8LNeLOD60RtmgnVlravero_4Q.6QAepLSiPzCdOmqTrBq1Sw
+          externalDocs:
+            url: https://tools.ietf.org/html/rfc6749#section-1.5
           type: string
         token_type:
+          description: The type of accessToken returned.
+          example: bearer
           type: string
       required:
       - access_token
@@ -5292,10 +5334,15 @@ components:
       - token_type
       type: object
     LoginWithRefreshTokenRequest:
+      description: Authenticate using a refresh token.
       example:
-        refreshToken: refreshToken
+        refreshToken: eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.HSfD-giY_4RUk8h5KCP8e_9jCbU5qsbzCY8t01ALFSYFWhaWGfHJkkgHhGX9YHS-PB6lFAPsPNAv9ga8hqUToBEtnL5o-xrHhtyJmlguic7YQ_6Et8wrpb4StujjIJVJfprjjTjW7Gq6FKy6K-y36rhdzYql-9beIsrJTqI8WPA1YZvOFnJrr0xMHr9odb8TzCvrKGc1VHD_tdTauVTUp9jl-4VFTH3AWCrRO_FeuUAoS3ZSDT0YNtLt3JW3j0F9fl4LSVHotU_1Z1rl_uQ6W_ORPBK8AtyXMb2cnxZzuyIorItzUk-aFjxTytScywyz4vZagIuNbDrrv6LwsJwxzw.hkLinb-EnpyDnTsH.GWLR_sh8t0JrZRWplzAMhYxs84z1O3cECRH9ysGCmEZWyIm4stQykjtLQkP6GK3Efm4gjpRLkSbhgk1S2N0vJ_rdtc9ZCRyFEQJ5qakQ71mbI76GkpqW7Mp_U8U8bRO7Z56Obwt5IHmIIhvCtJu2KYPlXH_k0LMOPrWtIMGmPR3sNnpDGocu8oU0zuYksc7xvKIu98T4ofU3pF5qgsfDif67AF__YJMxTB63zYCNG_AZLz11otmk3oUP1KidhO1HNuQmXthavuBm0_LYZliX9Lfi9As8CwPHdGhcqnr0bl3uYP6c1tw9W2nUi_hhqGKi10k65cHku5SzTugs7bt-ZkRB4Kv-c3CTl0UzhLZoJ43BIRtqJlflQOjTGrcQVUmLL7C6U17MY26bolUGebZjetmmQIwzuPFB5a4clYUS5PdIUpf3V4Olp_-G5uqvEHuSqIah1d-h979oSaq10hDrq_DiRu2jLuD-xoD1yngvkeB1N9q5blF1T0KimP3ScNRg5sb0q2Hp3qHIixr8R2l0H1KWOtkBXmvcpwuirxex6YJBQ0Q30UzENtUvzoS14ZMDnHNs7VsllwQR2wBZdpLg4rdR4mQpHIlC5zBSuiyjAu16VhuqJGo0VRkKxttbrSOXoUVvWG2wZreUuX_f6eoABLH9Z_21xoWera7eX-j7iFSMBDeUxrqq3gYyCGTJvR1-IUib5v7PB8184YxCLlt18xPRgq7CFIedxSs5b-aqq1MEUhsER9pJQBixXUqeT696XtUaXR6eHk0P74A49T_u7E0pmG6_S7_OE7hpz8CcVcL-nelpJksa56MYDxvyc-51UBjMdEsEbtgumWaADfY6MA3hUUchQAGCVBRW4P5ihMZo64xXJIvvilVxEyMSXPDtV01I9LK7ih9M7e0FpmZA8DDmea6wQpkUWPwe8jDhU-hakXRviSObZMP4gMiIHe8w-PQF0CmAtYawQxexV_WhaWG7_u75qJrnpMMJ1O0T34vumdy17X35C3FGVLjebRtBlLv-JZuHV3Bxnopqu0z_dCEcth6Rhm0_Ys66q5Ykyn8h4geEIHWqSZWrDwfCPazRC_Fw_aBlh18WpHYr_5ibuL9ehhyZbDNjBtFft1fINAgoB_M7gQlIlRty8vVV5b3Y0a2OOKdPPvVvYYXijM5M9-lkHfL5g8sTVJ7vwbm-BTE7JXUUVVsOnKXI-jGl1LD07EXPlqBBjzs3E_Na-b2RcxOb1gDy-nJnqBbnQlc_JENevlo10xEsgqxu_8LNeLOD60RtmgnVlravero_4Q.6QAepLSiPzCdOmqTrBq1Sw
       properties:
         refreshToken:
+          description: The refresh token to authenticate with.
+          example: eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.HSfD-giY_4RUk8h5KCP8e_9jCbU5qsbzCY8t01ALFSYFWhaWGfHJkkgHhGX9YHS-PB6lFAPsPNAv9ga8hqUToBEtnL5o-xrHhtyJmlguic7YQ_6Et8wrpb4StujjIJVJfprjjTjW7Gq6FKy6K-y36rhdzYql-9beIsrJTqI8WPA1YZvOFnJrr0xMHr9odb8TzCvrKGc1VHD_tdTauVTUp9jl-4VFTH3AWCrRO_FeuUAoS3ZSDT0YNtLt3JW3j0F9fl4LSVHotU_1Z1rl_uQ6W_ORPBK8AtyXMb2cnxZzuyIorItzUk-aFjxTytScywyz4vZagIuNbDrrv6LwsJwxzw.hkLinb-EnpyDnTsH.GWLR_sh8t0JrZRWplzAMhYxs84z1O3cECRH9ysGCmEZWyIm4stQykjtLQkP6GK3Efm4gjpRLkSbhgk1S2N0vJ_rdtc9ZCRyFEQJ5qakQ71mbI76GkpqW7Mp_U8U8bRO7Z56Obwt5IHmIIhvCtJu2KYPlXH_k0LMOPrWtIMGmPR3sNnpDGocu8oU0zuYksc7xvKIu98T4ofU3pF5qgsfDif67AF__YJMxTB63zYCNG_AZLz11otmk3oUP1KidhO1HNuQmXthavuBm0_LYZliX9Lfi9As8CwPHdGhcqnr0bl3uYP6c1tw9W2nUi_hhqGKi10k65cHku5SzTugs7bt-ZkRB4Kv-c3CTl0UzhLZoJ43BIRtqJlflQOjTGrcQVUmLL7C6U17MY26bolUGebZjetmmQIwzuPFB5a4clYUS5PdIUpf3V4Olp_-G5uqvEHuSqIah1d-h979oSaq10hDrq_DiRu2jLuD-xoD1yngvkeB1N9q5blF1T0KimP3ScNRg5sb0q2Hp3qHIixr8R2l0H1KWOtkBXmvcpwuirxex6YJBQ0Q30UzENtUvzoS14ZMDnHNs7VsllwQR2wBZdpLg4rdR4mQpHIlC5zBSuiyjAu16VhuqJGo0VRkKxttbrSOXoUVvWG2wZreUuX_f6eoABLH9Z_21xoWera7eX-j7iFSMBDeUxrqq3gYyCGTJvR1-IUib5v7PB8184YxCLlt18xPRgq7CFIedxSs5b-aqq1MEUhsER9pJQBixXUqeT696XtUaXR6eHk0P74A49T_u7E0pmG6_S7_OE7hpz8CcVcL-nelpJksa56MYDxvyc-51UBjMdEsEbtgumWaADfY6MA3hUUchQAGCVBRW4P5ihMZo64xXJIvvilVxEyMSXPDtV01I9LK7ih9M7e0FpmZA8DDmea6wQpkUWPwe8jDhU-hakXRviSObZMP4gMiIHe8w-PQF0CmAtYawQxexV_WhaWG7_u75qJrnpMMJ1O0T34vumdy17X35C3FGVLjebRtBlLv-JZuHV3Bxnopqu0z_dCEcth6Rhm0_Ys66q5Ykyn8h4geEIHWqSZWrDwfCPazRC_Fw_aBlh18WpHYr_5ibuL9ehhyZbDNjBtFft1fINAgoB_M7gQlIlRty8vVV5b3Y0a2OOKdPPvVvYYXijM5M9-lkHfL5g8sTVJ7vwbm-BTE7JXUUVVsOnKXI-jGl1LD07EXPlqBBjzs3E_Na-b2RcxOb1gDy-nJnqBbnQlc_JENevlo10xEsgqxu_8LNeLOD60RtmgnVlravero_4Q.6QAepLSiPzCdOmqTrBq1Sw
+          externalDocs:
+            url: https://tools.ietf.org/html/rfc6749#section-1.5
           type: string
       required:
       - refreshToken
@@ -5364,12 +5411,12 @@ components:
       - nativeCidr
       type: object
     Network:
+      description: Pureport mesh network
       example:
         name: name
         description: description
         href: href
-        id: id
-        state: PENDING
+        id: network-IQ_fTVDErgXvaf6KeWzIVg
         account:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
@@ -5380,36 +5427,32 @@ components:
         account:
           $ref: '#/components/schemas/Link'
         description:
+          description: The description.
           maxLength: 1024
           minLength: 0
           type: string
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the network.
+          example: network-IQ_fTVDErgXvaf6KeWzIVg
           maxLength: 64
           minLength: 1
           type: string
         name:
+          description: The name.
           maxLength: 64
           minLength: 1
           type: string
         state:
-          enum:
-          - PENDING
-          - PROVISIONING
-          - PENDING_CONTROLLERS
-          - DELETING_CONTROLLERS
-          - PROVISIONING_CONTROLLERS
-          - ACTIVE
-          - DELETING
-          - DELETED
-          - ERROR
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/NetworkState'
         tags:
           additionalProperties:
+            description: Key-value pairs to associate with the Pureport asset.
             type: string
+          description: Key-value pairs to associate with the Pureport asset.
           type: object
       required:
       - name
@@ -5444,6 +5487,19 @@ components:
         network:
           $ref: '#/components/schemas/Link'
       type: object
+    NetworkState:
+      description: The current state.
+      enum:
+      - PENDING
+      - PROVISIONING
+      - PENDING_CONTROLLERS
+      - DELETING_CONTROLLERS
+      - PROVISIONING_CONTROLLERS
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - ERROR
+      type: string
     NetworkTimeUsage:
       example:
         usage: 0
@@ -5469,56 +5525,35 @@ components:
           type: integer
       type: object
     Notification:
+      description: An informational message for Pureport users.
       example:
-        availabilityDomain: PRIMARY
         impactedServices:
-        - PUREPORT_CONSOLE
-        - PUREPORT_CONSOLE
-        - PUREPORT_CONSOLE
-        - PUREPORT_CONSOLE
-        - PUREPORT_CONSOLE
+        - null
+        - null
+        - null
+        - null
+        - null
         start: 2000-01-23T04:56:07.000+00:00
-        description: description
-        type: INCIDENT
+        description: Updates to management plane components of the Pureport SDN Platform.
         createdAt: 2000-01-23T04:56:07.000+00:00
         end: 2000-01-23T04:56:07.000+00:00
         locations:
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
+          href: /locations/us-chi
+          id: us-chi
+          title: Chicago, IL
         href: href
-        id: id
-        state: DRAFT
+        id: nx-is2ItiWXL3nAddF8wCEXhQ
         connectionTypes:
-        - AWS_DIRECT_CONNECT
-        - AWS_DIRECT_CONNECT
+        - null
+        - null
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         availabilityDomain:
-          enum:
-          - PRIMARY
-          - SECONDARY
-          type: string
+          $ref: '#/components/schemas/AvailabilityDomain'
         connectionTypes:
+          description: A list of connection types to be affected.
           items:
-            enum:
-            - AWS_DIRECT_CONNECT
-            - AZURE_EXPRESS_ROUTE
-            - EQUINIX_CLOUD_EXCHANGE
-            - GOOGLE_CLOUD_INTERCONNECT
-            - ORACLE_FAST_CONNECT
-            - SITE_IPSEC_VPN
-            - PORT
-            - PACKET_FABRIC
-            - COMCAST
-            - COX_COMMUNICATIONS
-            - ELEMENT_CRITICAL
-            - PACKET
-            - ZAYO
-            type: string
+            $ref: '#/components/schemas/ConnectionType'
           type: array
           uniqueItems: true
         createdAt:
@@ -5526,31 +5561,36 @@ components:
           readOnly: true
           type: string
         description:
+          description: The description.
+          example: Updates to management plane components of the Pureport SDN Platform.
           type: string
         end:
           format: date-time
           type: string
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the notification.
+          example: nx-is2ItiWXL3nAddF8wCEXhQ
           maxLength: 255
           minLength: 1
           type: string
         impactedServices:
+          description: The list of Pureport services to be affected.
           items:
-            enum:
-            - PUREPORT_CONSOLE
-            - PUREPORT_API
-            - PUREPORT_CONNECTIONS
-            - THIRD_PARTY_API
-            - THIRD_PARTY_CONNECTIONS
-            type: string
+            $ref: '#/components/schemas/NotificationImpactedService'
           maxItems: 2147483647
           minItems: 1
           type: array
           uniqueItems: true
         locations:
+          description: A list of asset links of Pureport locations to be affected.
+          example:
+            href: /locations/us-chi
+            id: us-chi
+            title: Chicago, IL
           items:
             $ref: '#/components/schemas/Link'
           type: array
@@ -5559,17 +5599,9 @@ components:
           format: date-time
           type: string
         state:
-          enum:
-          - DRAFT
-          - PUBLISHED
-          - CANCELED
-          - DELETED
-          type: string
+          $ref: '#/components/schemas/NotificationState'
         type:
-          enum:
-          - INCIDENT
-          - MAINTENANCE_WINDOW
-          type: string
+          $ref: '#/components/schemas/NotificationType'
         updatedAt:
           format: date-time
           readOnly: true
@@ -5580,21 +5612,51 @@ components:
       - start
       - type
       type: object
+    NotificationImpactedService:
+      description: The list of Pureport services to be affected.
+      enum:
+      - PUREPORT_CONSOLE
+      - PUREPORT_API
+      - PUREPORT_CONNECTIONS
+      - THIRD_PARTY_API
+      - THIRD_PARTY_CONNECTIONS
+      type: string
+    NotificationState:
+      description: The current state.
+      enum:
+      - DRAFT
+      - PUBLISHED
+      - CANCELED
+      - DELETED
+      type: string
+    NotificationType:
+      description: The type.
+      enum:
+      - INCIDENT
+      - MAINTENANCE_WINDOW
+      type: string
     Option:
+      description: IPsec security association configurations
       properties:
         aead:
+          description: Whether AEAD (Authenticated Encryption with Associated Data)
+            is supported.
           readOnly: true
           type: boolean
         default:
+          description: Whether the option is a default configuration.
           readOnly: true
           type: boolean
         description:
+          description: The description.
           readOnly: true
           type: string
         unsafe:
+          description: Whether the option is considered unsafe.
           readOnly: true
           type: boolean
         value:
+          description: The name.
           readOnly: true
           type: string
       type: object
@@ -5619,6 +5681,7 @@ components:
       allOf:
       - $ref: '#/components/schemas/VPNAuthConfig'
       - $ref: '#/components/schemas/PSKAuthConfig_allOf'
+      description: PSK authentication configuration
       type: object
     PacketFabricConnection:
       allOf:
@@ -5656,7 +5719,6 @@ components:
         pageSize: 5
         sort:
           property: property
-          direction: ASC
         content:
         - request:
             method: method
@@ -5671,28 +5733,24 @@ components:
             id: network-IQ_fTVDErgXvaf6KeWzIVg
             title: Raleigh Network
           changes:
-          - current: '{}'
-            previous: '{}'
-            property: property
-          - current: '{}'
-            previous: '{}'
-            property: property
+          - current: network-M_JqECDuEOWzQMhGnYyicg
+            property: id
+          - current: My Network
+            property: name
+          - current: PENDING_CONTROLLERS
+            property: state
           ipAddress: ipAddress
           userAgent: userAgent
-          eventType: USER_LOGIN
-          source: API
-          subjectType: ACCOUNT
           principal:
             href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
             id: network-IQ_fTVDErgXvaf6KeWzIVg
             title: Raleigh Network
-          result: SUCCESS
           response:
             executionTime: 0
             statusCodeFamily: INFORMATIONAL
             body: body
             statusCode: 6
-          correlationId: correlationId
+          correlationId: 081a1b58-4cff-43d5-b648-6b47bb70a31e
           account:
             href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
             id: network-IQ_fTVDErgXvaf6KeWzIVg
@@ -5711,28 +5769,24 @@ components:
             id: network-IQ_fTVDErgXvaf6KeWzIVg
             title: Raleigh Network
           changes:
-          - current: '{}'
-            previous: '{}'
-            property: property
-          - current: '{}'
-            previous: '{}'
-            property: property
+          - current: network-M_JqECDuEOWzQMhGnYyicg
+            property: id
+          - current: My Network
+            property: name
+          - current: PENDING_CONTROLLERS
+            property: state
           ipAddress: ipAddress
           userAgent: userAgent
-          eventType: USER_LOGIN
-          source: API
-          subjectType: ACCOUNT
           principal:
             href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
             id: network-IQ_fTVDErgXvaf6KeWzIVg
             title: Raleigh Network
-          result: SUCCESS
           response:
             executionTime: 0
             statusCodeFamily: INFORMATIONAL
             body: body
             statusCode: 6
-          correlationId: correlationId
+          correlationId: 081a1b58-4cff-43d5-b648-6b47bb70a31e
           account:
             href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
             id: network-IQ_fTVDErgXvaf6KeWzIVg
@@ -5756,7 +5810,103 @@ components:
           format: int32
           type: integer
       type: object
+    PageTask:
+      example:
+        pageNumber: 0
+        pageSize: 6
+        sort:
+          property: property
+        content:
+        - parent:
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          completedAt: 2000-01-23T04:56:07.000+00:00
+          description: description
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          network:
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          result: result
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          children:
+          - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          connection:
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          href: href
+          id: task-etjeQX6ktpylOUfTs2Hliw
+          account:
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          gateway:
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - parent:
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          completedAt: 2000-01-23T04:56:07.000+00:00
+          description: description
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          network:
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          result: result
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          children:
+          - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          connection:
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          href: href
+          id: task-etjeQX6ktpylOUfTs2Hliw
+          account:
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          gateway:
+            href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
+            id: network-IQ_fTVDErgXvaf6KeWzIVg
+            title: Raleigh Network
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        totalElements: 1
+      properties:
+        content:
+          items:
+            $ref: '#/components/schemas/Task'
+          type: array
+        pageNumber:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        sort:
+          $ref: '#/components/schemas/Sort'
+        totalElements:
+          format: int32
+          type: integer
+      type: object
     PeeringConfiguration:
+      description: Peering configuration.
       properties:
         primaryPureportBgpIP:
           type: string
@@ -5767,14 +5917,17 @@ components:
         secondaryRemoteBgpIP:
           type: string
         type:
-          enum:
-          - PUBLIC
-          - PRIVATE
-          - TRANSIT
-          type: string
+          $ref: '#/components/schemas/PeeringType'
       required:
       - type
       type: object
+    PeeringType:
+      description: The peering type of this configuration.
+      enum:
+      - PUBLIC
+      - PRIVATE
+      - TRANSIT
+      type: string
     PhysicalAddress:
       description: The street address and geolocation
       example:
@@ -5810,54 +5963,67 @@ components:
           type: string
       type: object
     Pod:
+      description: A Pureport installation of networking infrastructure.
+      example:
+        facility:
+          href: /facilities/us-equinix-dc2
+          id: us-equinix-dc2
+          title: Equinix DC2
+        href: /pods/us-wdc-2a
+        id: us-wdc-2a
+        location:
+          href: /locations/us-wdc
+          id: us-wdc
+          title: Washington, DC
+        status: AVAILABLE
       properties:
         facility:
           $ref: '#/components/schemas/Link'
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the pod.
+          example: us-wdc-2a
           maxLength: 64
           minLength: 1
           type: string
         location:
           $ref: '#/components/schemas/Link'
         status:
-          enum:
-          - AVAILABLE
-          - UNAVAILABLE
-          type: string
+          $ref: '#/components/schemas/PodStatus'
       required:
       - id
       - location
       - status
       type: object
+    PodStatus:
+      description: The current status of the pod.
+      enum:
+      - AVAILABLE
+      - UNAVAILABLE
+      type: string
     Port:
+      description: Networking port
       example:
         availableToChildAccounts: true
-        availabilityDomain: PRIMARY
-        billingTerm: HOURLY
         description: description
-        mediaType: mediaType
-        deviceId: deviceId
-        speed: 6
+        mediaType: SMF
+        deviceId: us-sea-3a-ras1
+        speed: 10000
         tags:
           key: tags
         loaCustomerName: loaCustomerName
-        provider: PUREPORT
         name: name
-        patchPanelId: patchPanelId
+        patchPanelId: SE2-12-013080-0109|PP:0109:9943226
         billingPlan:
           amount: 0.8008281904610115
-          billingLongHaul: NOT_APPLICABLE
-          term: HOURLY
           id: id
-          billingInterval: ONCE
           setupAmount: 6.027456183070403
         href: href
-        id: id
-        interfaceId: interfaceId
-        state: REQUESTED
+        id: port-ULMofP0XZUsKlrgaomM79Q
+        interfaceId: us-sea-3a-ras1-swp4
         facility:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
@@ -5867,88 +6033,89 @@ components:
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
         patchPanelPortNumbers:
-        - 0
-        - 0
+        - 7
+        - 8
       properties:
         account:
           $ref: '#/components/schemas/Link'
         availabilityDomain:
-          enum:
-          - PRIMARY
-          - SECONDARY
-          type: string
+          $ref: '#/components/schemas/AvailabilityDomain'
         availableToChildAccounts:
+          description: Whether this port is available for use in child accounts.
           type: boolean
         billingPlan:
           $ref: '#/components/schemas/BillingPlan'
         billingTerm:
-          enum:
-          - HOURLY
-          - MONTHLY
-          - ONE_YEAR
-          - TWO_YEAR
-          type: string
+          $ref: '#/components/schemas/BillingTerm'
         description:
+          description: The description.
           maxLength: 1024
           minLength: 0
           type: string
         deviceId:
+          description: The id of the device hosting this port.
+          example: us-sea-3a-ras1
           readOnly: true
           type: string
         facility:
           $ref: '#/components/schemas/Link'
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the port.
+          example: port-ULMofP0XZUsKlrgaomM79Q
           maxLength: 64
           minLength: 1
           type: string
         interfaceId:
+          description: The id of the interface the port is using.
+          example: us-sea-3a-ras1-swp4
           readOnly: true
           type: string
         loaCustomerName:
+          description: The customer name to appear on a Letter of Authorization.
           maxLength: 128
           minLength: 0
           type: string
         mediaType:
+          description: The media type for this port.
+          example: SMF
           type: string
         name:
+          description: The name.
           maxLength: 64
           minLength: 1
           type: string
         patchPanelId:
+          description: The id of the patch panel the port is using.
+          example: SE2-12-013080-0109|PP:0109:9943226
           readOnly: true
           type: string
         patchPanelPortNumbers:
+          description: The ports on the patch panel the port is using.
+          example:
+          - 7
+          - 8
           items:
+            description: The ports on the patch panel the port is using.
             format: int32
             type: integer
           readOnly: true
           type: array
           uniqueItems: true
         provider:
-          enum:
-          - PUREPORT
-          - PACKET_FABRIC
-          type: string
+          $ref: '#/components/schemas/PortProvider'
         speed:
-          enum:
-          - 1000
-          - 10000
-          - 40000
-          format: int32
-          type: integer
+          $ref: '#/components/schemas/PortSpeed'
         state:
-          enum:
-          - REQUESTED
-          - ACTIVE
-          - DELETED
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/PortState'
         tags:
           additionalProperties:
+            description: Key-value pairs to associate with the Pureport asset.
             type: string
+          description: Key-value pairs to associate with the Pureport asset.
           type: object
       required:
       - account
@@ -5975,72 +6142,96 @@ components:
       - speed
       - type
       type: object
+    PortProvider:
+      description: The provider for this port.
+      enum:
+      - PUREPORT
+      - PACKET_FABRIC
+      type: string
+    PortSpeed:
+      description: The speed for this port in Mbps.
+      enum:
+      - 1000
+      - 10000
+      - 40000
+      example: 10000
+      format: int32
+      type: integer
+    PortState:
+      description: The current state of the port.
+      enum:
+      - REQUESTED
+      - ACTIVE
+      - DELETED
+      type: string
     ProviderLink:
+      description: Link between Pureport infrastructure and an external connection
+        provider.
+      example:
+        availabilityDomain: PRIMARY
+        href: /providerLinks/us-wdc-aws3
+        id: us-wdc-aws3
+        maxAvailableBandwidth: 10000
+        pod:
+          href: /pods/us-wdc-2a
+          id: us-wdc-2a
+          title: us-wdc-2a
+        provider: AWS
+        providerId: dxcon-fgfy0cdo
+        providerRegion: us-east-1
+        speed: 10000
+        status: AVAILABLE
+        supportedConnectionTypes:
+        - AWS_DIRECT_CONNECT
+        vlans: 100-149
       properties:
         availabilityDomain:
-          enum:
-          - PRIMARY
-          - SECONDARY
-          type: string
+          $ref: '#/components/schemas/AvailabilityDomain'
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the provider link.
+          example: us-wdc-aws3
           maxLength: 64
           minLength: 1
           type: string
         maxAvailableBandwidth:
+          description: The maximum available bandwidth of the link in Mbps.
           format: int32
           type: integer
         pod:
           $ref: '#/components/schemas/Link'
         provider:
-          enum:
-          - AWS
-          - GOOGLE_CLOUD
-          - EQUINIX_CLOUD_EXCHANGE
-          - PUREPORT
-          - PACKET_FABRIC
-          - COMCAST
-          - COX_COMMUNICATIONS
-          - ELEMENT_CRITICAL
-          - PACKET
-          - ZAYO
-          type: string
+          $ref: '#/components/schemas/ConnectionProvider'
         providerId:
+          description: The id of the provider side resource.
+          example: dxcon-fgfy0cdo
           type: string
         providerRegion:
+          description: The region of the provider side resource.
+          example: us-east-1
           type: string
         speed:
+          description: The speed of the link in Mbps.
           format: int32
           type: integer
         status:
-          enum:
-          - AVAILABLE
-          - UNAVAILABLE
-          type: string
+          $ref: '#/components/schemas/ProviderLinkStatus'
         supportedConnectionTypes:
+          description: The types of connection this provider link will be used for.
+          example:
+          - AWS_DIRECT_CONNECT
           items:
-            enum:
-            - AWS_DIRECT_CONNECT
-            - AZURE_EXPRESS_ROUTE
-            - EQUINIX_CLOUD_EXCHANGE
-            - GOOGLE_CLOUD_INTERCONNECT
-            - ORACLE_FAST_CONNECT
-            - SITE_IPSEC_VPN
-            - PORT
-            - PACKET_FABRIC
-            - COMCAST
-            - COX_COMMUNICATIONS
-            - ELEMENT_CRITICAL
-            - PACKET
-            - ZAYO
-            type: string
+            $ref: '#/components/schemas/ConnectionType'
           maxItems: 2147483647
           minItems: 1
           type: array
           uniqueItems: true
         vlans:
+          description: A range of vlans available on this link.
+          example: 100-149
           pattern: \d{1,4}(-\d{1,4})?(,\d{1,4}(-\d{1,4})?)*
           type: string
       required:
@@ -6055,9 +6246,17 @@ components:
       - supportedConnectionTypes
       - vlans
       type: object
+    ProviderLinkStatus:
+      description: The current status of this link.
+      enum:
+      - AVAILABLE
+      - UNAVAILABLE
+      type: string
     ProviderVlan:
+      description: A Virtual LAN
       properties:
         allocated:
+          description: Whether the vlan has been allocated.
           type: boolean
         lastAllocatedAt:
           format: date-time
@@ -6066,9 +6265,11 @@ components:
           format: date-time
           type: string
         speed:
+          description: The speed of the vlan in Mbps.
           format: int32
           type: integer
         vlan:
+          description: The vlan number.
           format: int32
           type: integer
       required:
@@ -6076,6 +6277,7 @@ components:
       - vlan
       type: object
     PublicPeeringBlock:
+      description: CIDR blocks for Public Peering.
       properties:
         cidrBlock:
           type: string
@@ -6084,9 +6286,13 @@ components:
           readOnly: true
           type: string
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the public peering
+            block.
+          example: pubpeer-Iv41wb5_NbqF6oef2zjxmw
           maxLength: 64
           minLength: 1
           type: string
@@ -6098,80 +6304,152 @@ components:
       - cidrBlock
       type: object
     PublicPeeringPoolStats:
+      description: Statistics on the allocation of public peering IP addresses.
       properties:
         time:
           format: date-time
           readOnly: true
           type: string
         totalAllocatedIps:
+          description: The total number of IP addresses already allocated.
+          example: 16
           format: int32
           readOnly: true
           type: integer
         totalBlocks:
+          description: The total number of blocks.
+          example: 1
           format: int32
           readOnly: true
           type: integer
         totalDeletedIps:
+          description: The total number of IP addresses marked as deleted.
+          example: 0
           format: int32
           readOnly: true
           type: integer
         totalFreeIps:
+          description: The total number of IP addresses marked as free.
+          example: 240
           format: int32
           readOnly: true
           type: integer
         totalIps:
+          description: The total number of IP addresses.
+          example: 256
           format: int32
           readOnly: true
           type: integer
         totalSubnets:
+          description: The total number of subnets.
+          example: 64
           format: int32
           readOnly: true
           type: integer
       type: object
     ResourceLimit:
+      description: A representation of limitations between two Pureport resources.
+      example:
+        childResourceType: NETWORK
+        href: /accounts/ac-9ntgDlC2sW6TISmceo-Xsg/limits/NETWORK
+        limit: 20
+        parentResourceId: ac-9ntgDlC2sW6TISmceo-Xsg
+        parentResourceType: ACCOUNT
       properties:
         childResourceType:
-          enum:
-          - MEMBER
-          - ROLE
-          - CONNECTION
-          - NETWORK
-          - ACCOUNT
-          - CLOUD_SERVICE_ROUTE
-          type: string
+          $ref: '#/components/schemas/ResourceType'
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         limit:
+          description: The number of child resources to limit to for the specified
+            parent.
           format: int32
           minimum: 0
           type: integer
         parentResourceId:
+          description: The unique identifier of the parent resource.
           maxLength: 64
           minLength: 1
           type: string
         parentResourceType:
-          enum:
-          - MEMBER
-          - ROLE
-          - CONNECTION
-          - NETWORK
-          - ACCOUNT
-          - CLOUD_SERVICE_ROUTE
-          type: string
+          $ref: '#/components/schemas/ResourceType'
       required:
       - childResourceType
       - limit
       type: object
+    ResourceType:
+      enum:
+      - MEMBER
+      - ROLE
+      - CONNECTION
+      - NETWORK
+      - ACCOUNT
+      - CLOUD_SERVICE_ROUTE
+      type: string
     Role:
+      description: A named set of permissions for an account.
       example:
         permissions:
-          key:
-            key: true
-        name: name
-        description: description
+          accounts:
+            all: false
+            create: false
+            delete: false
+            read: false
+            update: false
+          all:
+            all: false
+            create: false
+            delete: false
+            read: true
+            update: false
+          apikeys:
+            all: false
+            create: false
+            delete: false
+            read: false
+            update: false
+          audit:
+            all: false
+            create: false
+            delete: false
+            read: false
+            update: false
+          billing:
+            all: false
+            create: false
+            delete: false
+            read: false
+            update: false
+          members:
+            all: false
+            create: false
+            delete: false
+            read: false
+            update: false
+          networks:
+            all: false
+            create: false
+            delete: false
+            read: false
+            update: false
+          ports:
+            all: false
+            create: false
+            delete: false
+            read: false
+            update: false
+          roles:
+            all: false
+            create: false
+            delete: false
+            read: false
+            update: false
+        name: Read Only
+        description: Read Only users
         href: href
-        id: id
+        id: role-Hlzbibun6IqFpRs1nEALGA
         account:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
@@ -6180,28 +6458,155 @@ components:
         account:
           $ref: '#/components/schemas/Link'
         description:
+          description: The description of the role.
+          example: Read Only users
           maxLength: 256
           minLength: 0
           type: string
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the role.
+          example: role-Hlzbibun6IqFpRs1nEALGA
           maxLength: 64
           minLength: 1
           type: string
         name:
+          description: The name of the role.
+          example: Read Only
           type: string
         permissions:
           additionalProperties:
             additionalProperties:
+              description: The permission set for users with this role.
+              example: false
               type: boolean
+            description: The permission set for users with this role.
+            example:
+              accounts:
+                all: false
+                create: false
+                delete: false
+                read: false
+                update: false
+              all:
+                all: false
+                create: false
+                delete: false
+                read: true
+                update: false
+              apikeys:
+                all: false
+                create: false
+                delete: false
+                read: false
+                update: false
+              audit:
+                all: false
+                create: false
+                delete: false
+                read: false
+                update: false
+              billing:
+                all: false
+                create: false
+                delete: false
+                read: false
+                update: false
+              members:
+                all: false
+                create: false
+                delete: false
+                read: false
+                update: false
+              networks:
+                all: false
+                create: false
+                delete: false
+                read: false
+                update: false
+              ports:
+                all: false
+                create: false
+                delete: false
+                read: false
+                update: false
+              roles:
+                all: false
+                create: false
+                delete: false
+                read: false
+                update: false
             type: object
+          description: The permission set for users with this role.
+          example:
+            accounts:
+              all: false
+              create: false
+              delete: false
+              read: false
+              update: false
+            all:
+              all: false
+              create: false
+              delete: false
+              read: true
+              update: false
+            apikeys:
+              all: false
+              create: false
+              delete: false
+              read: false
+              update: false
+            audit:
+              all: false
+              create: false
+              delete: false
+              read: false
+              update: false
+            billing:
+              all: false
+              create: false
+              delete: false
+              read: false
+              update: false
+            members:
+              all: false
+              create: false
+              delete: false
+              read: false
+              update: false
+            networks:
+              all: false
+              create: false
+              delete: false
+              read: false
+              update: false
+            ports:
+              all: false
+              create: false
+              delete: false
+              read: false
+              update: false
+            roles:
+              all: false
+              create: false
+              delete: false
+              read: false
+              update: false
           type: object
       required:
       - account
       - name
       type: object
+    RoutingType:
+      description: The method to use for determining network routes.
+      enum:
+      - STATIC
+      - BGP
+      type: string
     SiteIPSecVPNConnection:
       allOf:
       - $ref: '#/components/schemas/Connection'
@@ -6222,33 +6627,30 @@ components:
     Sort:
       example:
         property: property
-        direction: ASC
       properties:
         direction:
-          enum:
-          - ASC
-          - DESC
-          type: string
+          $ref: '#/components/schemas/SortDirection'
         property:
           type: string
       type: object
+    SortDirection:
+      enum:
+      - ASC
+      - DESC
+      type: string
     StandardGateway:
       allOf:
       - $ref: '#/components/schemas/Gateway'
       - $ref: '#/components/schemas/StandardGateway_allOf'
+      description: Pureport network gateway.
       type: object
     StaticRoute:
       description: The IKE Phase configuration.
-      example: |-
-        {
-           {
-               "network": "192.168.24.0/24",
-               "nextHop": "10.0.0.4"
-           },{
-               "network": "192.168.25.0/24",
-               "nextHop": "10.0.0.5"
-           }
-        }
+      example:
+      - network: 192.168.24.0/24
+        nextHop: 10.0.0.4
+      - network: 192.168.25.0/24
+        nextHop: 10.0.0.5
       properties:
         network:
           type: string
@@ -6259,121 +6661,98 @@ components:
       - nextHop
       type: object
     SupportedConnection:
+      description: Connection configuration currently supported by Pureport
       example:
         billingPlans:
         - amount: 0.8008281904610115
-          billingLongHaul: NOT_APPLICABLE
-          term: HOURLY
           id: id
-          billingInterval: ONCE
           setupAmount: 6.027456183070403
         - amount: 0.8008281904610115
-          billingLongHaul: NOT_APPLICABLE
-          term: HOURLY
           id: id
-          billingInterval: ONCE
           setupAmount: 6.027456183070403
         billingProductIds:
           key: billingProductIds
         pending: true
         requiresApproval: true
         groups:
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
+        - href: /supportedConnections/groups/default
+          id: default
         reachableCloudRegions:
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
-        - href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
-          id: network-IQ_fTVDErgXvaf6KeWzIVg
-          title: Raleigh Network
-        type: AWS_DIRECT_CONNECT
-        speed: 0
+        - href: /cloudRegions/aws-us-east-1
+          id: aws-us-east-1
+          title: US East (N. Virginia)
         highAvailability: true
         location:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
         href: href
-        id: id
-        peeringType: PUBLIC
+        id: us-wdc-awsdx-private-50-ha
       properties:
         billingPlans:
+          description: Billing plans available for this configuration.
           items:
             $ref: '#/components/schemas/BillingPlan'
           readOnly: true
           type: array
         billingProductIds:
           additionalProperties:
+            description: Association between billing providers and the product to
+              bill under for this configuration.
             type: string
+          description: Association between billing providers and the product to bill
+            under for this configuration.
           type: object
         groups:
+          description: The groups this connection configuration belongs to.
+          example:
+          - href: /supportedConnections/groups/default
+            id: default
           items:
             $ref: '#/components/schemas/Link'
           type: array
           uniqueItems: true
         highAvailability:
+          description: Whether connections using this configuration have redundant
+            gateways for failover.
           type: boolean
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the supported connection
+            configuration.
+          example: us-wdc-awsdx-private-50-ha
           maxLength: 64
           minLength: 1
           type: string
         location:
           $ref: '#/components/schemas/Link'
         peeringType:
-          enum:
-          - PUBLIC
-          - PRIVATE
-          - TRANSIT
-          type: string
+          $ref: '#/components/schemas/PeeringType'
         pending:
+          description: Whether this configuration is currently available or requires
+            additional steps from Pureport.
           type: boolean
         reachableCloudRegions:
+          description: The cloud regions this configuration allows.
+          example:
+          - href: /cloudRegions/aws-us-east-1
+            id: aws-us-east-1
+            title: US East (N. Virginia)
           items:
             $ref: '#/components/schemas/Link'
           type: array
           uniqueItems: true
         requiresApproval:
+          description: Whether connections using this configuration require approval
+            from Pureport to provision.
           type: boolean
         speed:
-          enum:
-          - 50
-          - 100
-          - 200
-          - 300
-          - 400
-          - 500
-          - 1000
-          - 2000
-          - 3000
-          - 4000
-          - 5000
-          - 10000
-          format: int32
-          type: integer
+          $ref: '#/components/schemas/ConnectionSpeed'
         type:
-          enum:
-          - AWS_DIRECT_CONNECT
-          - AZURE_EXPRESS_ROUTE
-          - EQUINIX_CLOUD_EXCHANGE
-          - GOOGLE_CLOUD_INTERCONNECT
-          - ORACLE_FAST_CONNECT
-          - SITE_IPSEC_VPN
-          - PORT
-          - PACKET_FABRIC
-          - COMCAST
-          - COX_COMMUNICATIONS
-          - ELEMENT_CRITICAL
-          - PACKET
-          - ZAYO
-          type: string
+          $ref: '#/components/schemas/ConnectionType'
       required:
       - billingProductIds
       - highAvailability
@@ -6385,56 +6764,58 @@ components:
       - type
       type: object
     SupportedConnectionGroup:
+      description: A named grouping of Supported Connections
       properties:
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the supported connection
+            group.
+          example: default
           maxLength: 64
           minLength: 1
           type: string
         name:
+          description: The name of this group.
           type: string
       required:
       - name
       type: object
     SupportedPort:
+      description: Port configuration currently supported by Pureport
       example:
         billingPlans:
         - amount: 0.8008281904610115
-          billingLongHaul: NOT_APPLICABLE
-          term: HOURLY
           id: id
-          billingInterval: ONCE
           setupAmount: 6.027456183070403
         - amount: 0.8008281904610115
-          billingLongHaul: NOT_APPLICABLE
-          term: HOURLY
           id: id
-          billingInterval: ONCE
           setupAmount: 6.027456183070403
         mediaTypes:
-        - mediaTypes
-        - mediaTypes
-        provider: PUREPORT
+        - SMF
+        - LX
         availabilityDomains:
         - PRIMARY
-        - PRIMARY
+        - SECONDARY
         facility:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
-        speed: 0
+        speed: 10000
       properties:
         availabilityDomains:
+          description: The availability domains supported by this configuration.
+          example:
+          - PRIMARY
+          - SECONDARY
           items:
-            enum:
-            - PRIMARY
-            - SECONDARY
-            type: string
+            $ref: '#/components/schemas/AvailabilityDomain'
           readOnly: true
           type: array
         billingPlans:
+          description: The billing plans supported by this configuration.
           items:
             $ref: '#/components/schemas/BillingPlan'
           readOnly: true
@@ -6442,26 +6823,23 @@ components:
         facility:
           $ref: '#/components/schemas/Link'
         mediaTypes:
+          description: The media types supported by this configuration.
+          example:
+          - SMF
+          - LX
           items:
+            description: The media types supported by this configuration.
+            example: '["SMF","LX"]'
             type: string
           readOnly: true
           type: array
         provider:
-          enum:
-          - PUREPORT
-          - PACKET_FABRIC
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/PortProvider'
         speed:
-          enum:
-          - 1000
-          - 10000
-          - 40000
-          format: int32
-          readOnly: true
-          type: integer
+          $ref: '#/components/schemas/PortSpeed'
       type: object
     Task:
+      description: An asynchronous Pureport operation.
       example:
         parent:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
@@ -6470,7 +6848,6 @@ components:
         completedAt: 2000-01-23T04:56:07.000+00:00
         description: description
         startedAt: 2000-01-23T04:56:07.000+00:00
-        type: IPSEC_RESTART
         network:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
@@ -6489,8 +6866,7 @@ components:
           id: network-IQ_fTVDErgXvaf6KeWzIVg
           title: Raleigh Network
         href: href
-        id: id
-        state: CREATED
+        id: task-etjeQX6ktpylOUfTs2Hliw
         account:
           href: /networks/network-IQ_fTVDErgXvaf6KeWzIVg
           id: network-IQ_fTVDErgXvaf6KeWzIVg
@@ -6504,6 +6880,7 @@ components:
         account:
           $ref: '#/components/schemas/Link'
         children:
+          description: A list of asset links of child tasks.
           items:
             $ref: '#/components/schemas/Link'
           readOnly: true
@@ -6519,14 +6896,18 @@ components:
           readOnly: true
           type: string
         description:
+          description: The description.
           readOnly: true
           type: string
         gateway:
           $ref: '#/components/schemas/Link'
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the task.
+          example: task-etjeQX6ktpylOUfTs2Hliw
           maxLength: 64
           minLength: 1
           type: string
@@ -6535,6 +6916,7 @@ components:
         parent:
           $ref: '#/components/schemas/Link'
         result:
+          description: The result of the task.
           readOnly: true
           type: string
         startedAt:
@@ -6542,29 +6924,9 @@ components:
           readOnly: true
           type: string
         state:
-          enum:
-          - CREATED
-          - RUNNING
-          - COMPLETED
-          - FAILED
-          - DELETED
-          - AGGREGATE
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/TaskState'
         type:
-          enum:
-          - IPSEC_RESTART
-          - PING
-          - CHANGE_CONNECTION_SPEED
-          - CREATE_OR_UPDATE_CONNECTION
-          - DELETE_CONNECTION
-          - STOP_GATEWAY
-          - START_GATEWAY
-          - DELETE_GATEWAY
-          - RESPAWN_GATEWAYS
-          - RESPAWN_NETWORK
-          - RESPAWN_WITH_CLOUD_SERVICES
-          type: string
+          $ref: '#/components/schemas/TaskType'
         updatedAt:
           format: date-time
           readOnly: true
@@ -6572,6 +6934,35 @@ components:
       required:
       - type
       type: object
+    TaskState:
+      enum:
+      - CREATED
+      - RUNNING
+      - COMPLETED
+      - FAILED
+      - DELETED
+      - AGGREGATE
+      type: string
+    TaskType:
+      description: The type.
+      enum:
+      - IPSEC_RESTART
+      - PING
+      - CHANGE_CONNECTION_SPEED
+      - CREATE_OR_UPDATE_CONNECTION
+      - DELETE_CONNECTION
+      - STOP_GATEWAY
+      - START_GATEWAY
+      - DELETE_GATEWAY
+      - RESPAWN_GATEWAYS
+      - RESPAWN_NETWORK
+      - RESPAWN_WITH_CLOUD_SERVICES
+      type: string
+    TimeUnit:
+      enum:
+      - HOURS
+      - DAYS
+      type: string
     TrafficSelectorMapping:
       description: A pair of local and remote addresses for use in VPN Traffic Selectors.
       example:
@@ -6590,6 +6981,11 @@ components:
       - customerSide
       - pureportSide
       type: object
+    TrafficType:
+      enum:
+      - ALL
+      - BACKBONE
+      type: string
     UsageByConnectionAndTimeOptions:
       example:
         date:
@@ -6600,8 +6996,6 @@ components:
         connectionIds:
         - connectionIds
         - connectionIds
-        trafficType: ALL
-        timeUnit: HOURS
       properties:
         connectionIds:
           items:
@@ -6610,15 +7004,9 @@ components:
         date:
           $ref: '#/components/schemas/DateFilter'
         timeUnit:
-          enum:
-          - HOURS
-          - DAYS
-          type: string
+          $ref: '#/components/schemas/TimeUnit'
         trafficType:
-          enum:
-          - ALL
-          - BACKBONE
-          type: string
+          $ref: '#/components/schemas/TrafficType'
       required:
       - connectionIds
       type: object
@@ -6630,23 +7018,15 @@ components:
           lte: 2000-01-23T04:56:07.000+00:00
           gt: 2000-01-23T04:56:07.000+00:00
         includeChildAccounts: true
-        trafficType: ALL
-        timeUnit: HOURS
       properties:
         date:
           $ref: '#/components/schemas/DateFilter'
         includeChildAccounts:
           type: boolean
         timeUnit:
-          enum:
-          - HOURS
-          - DAYS
-          type: string
+          $ref: '#/components/schemas/TimeUnit'
         trafficType:
-          enum:
-          - ALL
-          - BACKBONE
-          type: string
+          $ref: '#/components/schemas/TrafficType'
       type: object
     UsageByNetworkAndTimeOptions:
       example:
@@ -6656,61 +7036,69 @@ components:
           lte: 2000-01-23T04:56:07.000+00:00
           gt: 2000-01-23T04:56:07.000+00:00
         includeChildAccounts: true
-        trafficType: ALL
-        timeUnit: HOURS
       properties:
         date:
           $ref: '#/components/schemas/DateFilter'
         includeChildAccounts:
           type: boolean
         timeUnit:
-          enum:
-          - HOURS
-          - DAYS
-          type: string
+          $ref: '#/components/schemas/TimeUnit'
         trafficType:
-          enum:
-          - ALL
-          - BACKBONE
-          type: string
+          $ref: '#/components/schemas/TrafficType'
       type: object
     User:
+      description: A User of the Pureport console.
       example:
-        firstName: firstName
-        lastName: lastName
-        phoneNumber: phoneNumber
-        company: company
+        firstName: John
+        lastName: Doe
+        phoneNumber: 919-867-5309
+        company: Pureport, Inc
         href: href
-        id: id
-        email: email
-        username: username
+        id: user-8N-Yo3rD-rEuA5lK4yE-WA
+        email: johndoe@email.com
+        username: Google_113964653136786632074
       properties:
         company:
+          description: The company name.
+          example: Pureport, Inc
           maxLength: 128
           minLength: 0
           type: string
         email:
+          description: The email address.
+          example: johndoe@email.com
           type: string
         firstName:
+          description: The first name.
+          example: John
           maxLength: 128
           minLength: 1
           type: string
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the user.
+          example: user-8N-Yo3rD-rEuA5lK4yE-WA
           maxLength: 64
           minLength: 1
           type: string
         lastName:
+          description: The last name.
+          example: Doe
           maxLength: 128
           minLength: 1
           type: string
         phoneNumber:
+          description: The phone number.
+          example: 919-867-5309
           maxLength: 32
           minLength: 0
           type: string
         username:
+          description: The assigned username.
+          example: Google_113964653136786632074
           maxLength: 128
           minLength: 1
           type: string
@@ -6721,42 +7109,59 @@ components:
       - username
       type: object
     UserDomain:
+      description: Configuration for SAML provider email domains
       properties:
         emailDomains:
+          description: The email domains associated with the provider.
+          example:
+          - samltest.id
           items:
+            description: The email domains associated with the provider.
+            example: '["samltest.id"]'
             type: string
           maxItems: 2147483647
           minItems: 1
           type: array
           uniqueItems: true
         href:
+          description: The URI of the Pureport asset.
           readOnly: true
           type: string
         id:
+          description: The id is a unique identifier representing the configuration.
+          example: ud-KtuuYyEOW3FlmebRaw52DA
           type: string
         provider:
+          description: The name of the SAML provider.
+          example: SAMLtest
           type: string
       required:
       - emailDomains
       - provider
       type: object
     VPNAuthConfig:
+      description: VPN authentication configuration.
       discriminator:
         mapping:
           PSK: '#/components/schemas/PSKAuthConfig'
         propertyName: type
       properties:
         type:
-          enum:
-          - PSK
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/IPSecAuthenticationType'
       type: object
     VPNGateway:
       allOf:
       - $ref: '#/components/schemas/Gateway'
       - $ref: '#/components/schemas/VPNGateway_allOf'
+      description: Pureport network gateway for VPN connections.
       type: object
+    VPNRoutingType:
+      description: The VPN Routing Type.
+      enum:
+      - POLICY_BASED
+      - ROUTE_BASED_STATIC
+      - ROUTE_BASED_BGP
+      type: string
     AWSDirectConnectConnection_allOf:
       properties:
         awsAccountId:
@@ -6861,11 +7266,7 @@ components:
           format: int32
           type: integer
         routingType:
-          description: The method to use for determining network routes.
-          enum:
-          - STATIC
-          - BGP
-          type: string
+          $ref: '#/components/schemas/RoutingType'
         secondaryGatewayIP:
           type: string
         secondaryVlan:
@@ -6875,16 +7276,11 @@ components:
           type: integer
         staticRoutes:
           description: The user configured static routes.
-          example: |-
-            {
-               {
-                   "network": "192.168.24.0/24",
-                   "nextHop": "10.0.0.4"
-               },{
-                   "network": "192.168.25.0/24",
-                   "nextHop": "10.0.0.5"
-               }
-            }
+          example:
+          - network: 192.168.24.0/24
+            nextHop: 10.0.0.4
+          - network: 192.168.25.0/24
+            nextHop: 10.0.0.5
           items:
             $ref: '#/components/schemas/StaticRoute'
           type: array
@@ -6934,6 +7330,8 @@ components:
     PSKAuthConfig_allOf:
       properties:
         key:
+          description: The Pre-Shared Key.
+          example: zflgqfgjt1Tu53bep6klg2fdF5Y6KLtZ5
           readOnly: true
           type: string
     PacketFabricConnection_allOf:
@@ -6971,17 +7369,7 @@ components:
         bgpPasswordConfiguration:
           $ref: '#/components/schemas/BGPPasswordConfiguration'
         billingLongHaul:
-          description: The long haul billing configuration for this connection.
-          enum:
-          - NOT_APPLICABLE
-          - METRO
-          - USAGE
-          - DEDICATED
-          externalDocs:
-            description: Long Haul Billing
-            url: TBD
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/BillingLongHaul'
         gatewayCidr:
           type: string
         primaryCustomerVlan:
@@ -6996,11 +7384,7 @@ components:
         primaryPort:
           $ref: '#/components/schemas/Link'
         routingType:
-          description: The method to use for determining network routes.
-          enum:
-          - STATIC
-          - BGP
-          type: string
+          $ref: '#/components/schemas/RoutingType'
         secondaryCustomerVlan:
           description: The VLAN ID of the secondary gateway if this is an HA connection.
           example: 840
@@ -7014,16 +7398,11 @@ components:
           $ref: '#/components/schemas/Link'
         staticRoutes:
           description: The user configured static routes.
-          example: |-
-            {
-               {
-                   "network": "192.168.24.0/24",
-                   "nextHop": "10.0.0.4"
-               },{
-                   "network": "192.168.25.0/24",
-                   "nextHop": "10.0.0.5"
-               }
-            }
+          example:
+          - network: 192.168.24.0/24
+            nextHop: 10.0.0.4
+          - network: 192.168.25.0/24
+            nextHop: 10.0.0.5
           items:
             $ref: '#/components/schemas/StaticRoute'
           type: array
@@ -7033,10 +7412,7 @@ components:
     SiteIPSecVPNConnection_allOf:
       properties:
         authType:
-          description: The authentication type.
-          enum:
-          - PSK
-          type: string
+          $ref: '#/components/schemas/IPSecAuthenticationType'
         bgpPasswordConfiguration:
           $ref: '#/components/schemas/BGPPasswordConfiguration'
         enableBGPPassword:
@@ -7047,30 +7423,21 @@ components:
         ikeV2:
           $ref: '#/components/schemas/IKEV2Config'
         ikeVersion:
-          description: The IKE version.
-          enum:
-          - V1
-          - V2
-          type: string
+          $ref: '#/components/schemas/IKEVersion'
         physicalAddress:
           $ref: '#/components/schemas/PhysicalAddress'
         primaryCustomerRouterIP:
           type: string
         primaryKey:
-          description: IPsec pre-shared key (PSK) override for the primary gateway
+          description: IPsec pre-shared key (PSK) override for the primary gateway.
           example: hEwHpLc3yFHWkTzDUiipEP7LMGtgn7aTA
           type: string
         routingType:
-          description: The VPN Routing Type.
-          enum:
-          - POLICY_BASED
-          - ROUTE_BASED_STATIC
-          - ROUTE_BASED_BGP
-          type: string
+          $ref: '#/components/schemas/VPNRoutingType'
         secondaryCustomerRouterIP:
           type: string
         secondaryKey:
-          description: IPsec pre-shared key (PSK) override for the secondary gateway
+          description: IPsec pre-shared key (PSK) override for the secondary gateway.
           example: zi15cDfVLVEgxLN0q3w17ydAvPzaQNriB
           type: string
         trafficSelectors:
@@ -7091,6 +7458,7 @@ components:
     StandardGateway_allOf:
       properties:
         vlan:
+          description: The vlan number.
           format: int32
           readOnly: true
           type: integer
@@ -7104,9 +7472,8 @@ components:
         customerVtiIP:
           readOnly: true
           type: string
-        osNetworkId:
-          readOnly: true
-          type: string
+        ipsecStatus:
+          $ref: '#/components/schemas/IKEState'
         pureportGatewayIP:
           readOnly: true
           type: string
