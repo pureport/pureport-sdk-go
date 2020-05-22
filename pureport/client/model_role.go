@@ -10,12 +10,17 @@
 
 package client
 
-// Role struct for Role
+// Role A named set of permissions for an account.
 type Role struct {
-	Account     Link                       `json:"account"`
-	Description string                     `json:"description,omitempty"`
-	Href        string                     `json:"href,omitempty"`
-	Id          string                     `json:"id,omitempty"`
-	Name        string                     `json:"name"`
+	Account Link `json:"account"`
+	// The description of the role.
+	Description string `json:"description,omitempty"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the role.
+	Id string `json:"id,omitempty"`
+	// The name of the role.
+	Name string `json:"name"`
+	// The permission set for users with this role.
 	Permissions map[string]map[string]bool `json:"permissions,omitempty"`
 }

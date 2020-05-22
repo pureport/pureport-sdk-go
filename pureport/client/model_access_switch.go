@@ -10,11 +10,13 @@
 
 package client
 
-// AccessSwitch struct for AccessSwitch
+// AccessSwitch Access switch installed in a Pureport pod.
 type AccessSwitch struct {
-	AvailabilityDomain string `json:"availabilityDomain"`
-	Href               string `json:"href,omitempty"`
-	Id                 string `json:"id"`
-	Pod                Link   `json:"pod"`
-	Status             string `json:"status"`
+	AvailabilityDomain AvailabilityDomain `json:"availabilityDomain"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the access switch.
+	Id     string             `json:"id"`
+	Pod    Link               `json:"pod"`
+	Status AccessSwitchStatus `json:"status"`
 }

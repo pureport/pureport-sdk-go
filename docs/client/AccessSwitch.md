@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AvailabilityDomain** | **string** |  | 
-**Href** | **string** |  | [optional] [readonly] 
-**Id** | **string** |  | 
+**AvailabilityDomain** | [**AvailabilityDomain**](AvailabilityDomain.md) |  | 
+**Href** | **string** | The URI of the Pureport asset. | [optional] [readonly] 
+**Id** | **string** | The id is a unique identifier representing the access switch. | 
 **Pod** | [**Link**](Link.md) |  | 
-**Status** | **string** |  | 
+**Status** | [**AccessSwitchStatus**](AccessSwitchStatus.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

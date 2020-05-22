@@ -132,7 +132,7 @@ type IsBackboneOpts struct {
 	PortId      optional.String
 	LocationId  optional.String
 	Speed       optional.Int32
-	BillingTerm optional.String
+	BillingTerm optional.Interface
 }
 
 /*
@@ -142,7 +142,7 @@ IsBackbone Get whether this configuration will have longHaul related charges.
  * @param "PortId" (optional.String) -
  * @param "LocationId" (optional.String) -
  * @param "Speed" (optional.Int32) -
- * @param "BillingTerm" (optional.String) -
+ * @param "BillingTerm" (optional.Interface of BillingTerm) -
 @return map[string]bool
 */
 func (a *OptionsApiService) IsBackbone(ctx _context.Context, localVarOptionals *IsBackboneOpts) (map[string]bool, *_nethttp.Response, error) {

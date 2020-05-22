@@ -14,22 +14,27 @@ import (
 	"time"
 )
 
-// Task struct for Task
+// Task An asynchronous Pureport operation.
 type Task struct {
-	Account     Link      `json:"account,omitempty"`
+	Account Link `json:"account,omitempty"`
+	// A list of asset links of child tasks.
 	Children    []Link    `json:"children,omitempty"`
 	CompletedAt time.Time `json:"completedAt,omitempty"`
 	Connection  Link      `json:"connection,omitempty"`
 	CreatedAt   time.Time `json:"createdAt,omitempty"`
-	Description string    `json:"description,omitempty"`
-	Gateway     Link      `json:"gateway,omitempty"`
-	Href        string    `json:"href,omitempty"`
-	Id          string    `json:"id,omitempty"`
-	Network     Link      `json:"network,omitempty"`
-	Parent      Link      `json:"parent,omitempty"`
-	Result      string    `json:"result,omitempty"`
-	StartedAt   time.Time `json:"startedAt,omitempty"`
-	State       string    `json:"state,omitempty"`
-	Type        string    `json:"type"`
-	UpdatedAt   time.Time `json:"updatedAt,omitempty"`
+	// The description.
+	Description string `json:"description,omitempty"`
+	Gateway     Link   `json:"gateway,omitempty"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the task.
+	Id      string `json:"id,omitempty"`
+	Network Link   `json:"network,omitempty"`
+	Parent  Link   `json:"parent,omitempty"`
+	// The result of the task.
+	Result    string    `json:"result,omitempty"`
+	StartedAt time.Time `json:"startedAt,omitempty"`
+	State     TaskState `json:"state,omitempty"`
+	Type      TaskType  `json:"type"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 }

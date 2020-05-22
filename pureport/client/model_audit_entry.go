@@ -14,20 +14,23 @@ import (
 	"time"
 )
 
-// AuditEntry struct for AuditEntry
+// AuditEntry Entry in the Pureport audit log.
 type AuditEntry struct {
-	Account       Link               `json:"account,omitempty"`
-	Changes       []ChangeObject     `json:"changes,omitempty"`
-	CorrelationId string             `json:"correlationId,omitempty"`
-	EventType     string             `json:"eventType,omitempty"`
-	IpAddress     string             `json:"ipAddress,omitempty"`
-	Principal     Link               `json:"principal,omitempty"`
-	Request       AuditEntryRequest  `json:"request,omitempty"`
-	Response      AuditEntryResponse `json:"response,omitempty"`
-	Result        string             `json:"result,omitempty"`
-	Source        string             `json:"source,omitempty"`
-	Subject       Link               `json:"subject,omitempty"`
-	SubjectType   string             `json:"subjectType,omitempty"`
-	Timestamp     time.Time          `json:"timestamp,omitempty"`
-	UserAgent     string             `json:"userAgent,omitempty"`
+	Account Link `json:"account,omitempty"`
+	// The changes to the Pureport entity.
+	Changes []ChangeObject `json:"changes,omitempty"`
+	// An identifier to group multiple related audit entries.
+	CorrelationId string                `json:"correlationId,omitempty"`
+	EventType     AuditEntryEventType   `json:"eventType,omitempty"`
+	IpAddress     string                `json:"ipAddress,omitempty"`
+	Principal     Link                  `json:"principal,omitempty"`
+	Request       AuditEntryRequest     `json:"request,omitempty"`
+	Response      AuditEntryResponse    `json:"response,omitempty"`
+	Result        AuditEntryResult      `json:"result,omitempty"`
+	Source        AuditEntrySource      `json:"source,omitempty"`
+	Subject       Link                  `json:"subject,omitempty"`
+	SubjectType   AuditEntrySubjectType `json:"subjectType,omitempty"`
+	Timestamp     time.Time             `json:"timestamp,omitempty"`
+	// The User-Agent of the request that triggered this entry.
+	UserAgent string `json:"userAgent,omitempty"`
 }

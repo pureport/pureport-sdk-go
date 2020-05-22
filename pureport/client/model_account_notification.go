@@ -10,8 +10,9 @@
 
 package client
 
-// AccountNotification struct for AccountNotification
+// AccountNotification A notification for a particular account.
 type AccountNotification struct {
+	// A list of asset links of connections this notification applies to.
 	Connections  []Link       `json:"connections,omitempty"`
 	Notification Notification `json:"notification,omitempty"`
 }

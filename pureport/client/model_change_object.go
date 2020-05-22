@@ -10,7 +10,7 @@
 
 package client
 
-// ChangeObject struct for ChangeObject
+// ChangeObject The changes to the Pureport entity.
 type ChangeObject struct {
 	Current  map[string]interface{} `json:"current,omitempty"`
 	Previous map[string]interface{} `json:"previous,omitempty"`

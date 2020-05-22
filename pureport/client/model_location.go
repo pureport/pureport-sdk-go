@@ -10,11 +10,15 @@
 
 package client
 
-// Location struct for Location
+// Location A geographic location.
 type Location struct {
-	GeoCoordinates GeoCoordinates           `json:"geoCoordinates"`
-	Href           string                   `json:"href,omitempty"`
-	Id             string                   `json:"id"`
-	LocationLinks  []LocationLinkConnection `json:"locationLinks,omitempty"`
-	Name           string                   `json:"name"`
+	GeoCoordinates GeoCoordinates `json:"geoCoordinates"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the location.
+	Id string `json:"id"`
+	// Other locations linked across the Pureport backbone to this location.
+	LocationLinks []LocationLinkConnection `json:"locationLinks,omitempty"`
+	// The name of the location.
+	Name string `json:"name"`
 }

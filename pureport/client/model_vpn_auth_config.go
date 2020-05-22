@@ -10,7 +10,7 @@
 
 package client
 
-// VpnAuthConfig struct for VpnAuthConfig
+// VpnAuthConfig VPN authentication configuration.
 type VpnAuthConfig struct {
-	Type string `json:"type,omitempty"`
+	Type IpSecAuthenticationType `json:"type,omitempty"`
 }

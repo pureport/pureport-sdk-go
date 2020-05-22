@@ -14,14 +14,18 @@ import (
 	"time"
 )
 
-// AccountInvite struct for AccountInvite
+// AccountInvite An invitation for a user to join a Pureport account.
 type AccountInvite struct {
-	Account   Link      `json:"account"`
-	Email     string    `json:"email"`
-	Expired   bool      `json:"expired,omitempty"`
-	Href      string    `json:"href,omitempty"`
+	Account Link `json:"account"`
+	// The email address of the user being invited to the Pureport account.
+	Email   string `json:"email"`
+	Expired bool   `json:"expired,omitempty"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the invite.
 	Id        string    `json:"id,omitempty"`
 	InvitedAt time.Time `json:"invitedAt,omitempty"`
 	InvitedBy Link      `json:"invitedBy,omitempty"`
-	Roles     []Link    `json:"roles"`
+	// The Pureport roles the invited user will have permissions for on the account.
+	Roles []Link `json:"roles"`
 }

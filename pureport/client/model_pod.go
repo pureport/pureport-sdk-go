@@ -10,11 +10,13 @@
 
 package client
 
-// Pod struct for Pod
+// Pod A Pureport installation of networking infrastructure.
 type Pod struct {
-	Facility Link   `json:"facility,omitempty"`
-	Href     string `json:"href,omitempty"`
-	Id       string `json:"id"`
-	Location Link   `json:"location"`
-	Status   string `json:"status"`
+	Facility Link `json:"facility,omitempty"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the pod.
+	Id       string    `json:"id"`
+	Location Link      `json:"location"`
+	Status   PodStatus `json:"status"`
 }

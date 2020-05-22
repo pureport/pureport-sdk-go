@@ -12,17 +12,14 @@ package client
 
 // Ikev2IkeConfig IKE Version 2 Internet Key Exchange configuration.
 type Ikev2IkeConfig struct {
-	// The Diffie-Hellman Group.
-	DhGroup string `json:"dhGroup"`
+	DhGroup Ikev2DiffieHellmanGroup `json:"dhGroup"`
 	// The Dead Peering Detection (DPD) retry interval.
 	DpdDelay int32 `json:"dpdDelay,omitempty"`
 	// The Dead Peering Detection (DPD) interval.
-	DpdTimeout int32 `json:"dpdTimeout,omitempty"`
-	// The encryption algorithm.
-	Encryption string `json:"encryption"`
-	// The integrity algorithm.
-	Integrity string `json:"integrity,omitempty"`
+	DpdTimeout int32                       `json:"dpdTimeout,omitempty"`
+	Encryption Ikev2IkeEncryptionAlgorithm `json:"encryption"`
+	Integrity  Ikev2IkeIntegrityAlgorithm  `json:"integrity,omitempty"`
 	// The lifetime of the SA.
-	Lifetime int32  `json:"lifetime,omitempty"`
-	Prf      string `json:"prf,omitempty"`
+	Lifetime int32                     `json:"lifetime,omitempty"`
+	Prf      Ikev2PseudoRandomFunction `json:"prf,omitempty"`
 }

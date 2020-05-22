@@ -10,19 +10,31 @@
 
 package client
 
-// Account struct for Account
+// Account A Pureport Account
 type Account struct {
-	Demo                      bool              `json:"demo,omitempty"`
-	Description               string            `json:"description,omitempty"`
-	HasChildren               bool              `json:"hasChildren,omitempty"`
-	Href                      string            `json:"href,omitempty"`
-	Id                        string            `json:"id,omitempty"`
-	Name                      string            `json:"name"`
-	Parent                    Link              `json:"parent,omitempty"`
-	PricingHidden             bool              `json:"pricingHidden,omitempty"`
-	ShowChildAccountPricing   bool              `json:"showChildAccountPricing,omitempty"`
-	SupportedConnectionGroups []Link            `json:"supportedConnectionGroups,omitempty"`
-	Tags                      map[string]string `json:"tags,omitempty"`
-	TechnicalContactEmails    []string          `json:"technicalContactEmails,omitempty"`
-	Verified                  bool              `json:"verified,omitempty"`
+	// Whether this account is for demonstration purposes.
+	Demo bool `json:"demo,omitempty"`
+	// The description.
+	Description string `json:"description,omitempty"`
+	// Whether this account is a parent account for any other accounts.
+	HasChildren bool `json:"hasChildren,omitempty"`
+	// The URI of the Pureport asset.
+	Href string `json:"href,omitempty"`
+	// The id is a unique identifier representing the account.
+	Id string `json:"id,omitempty"`
+	// The name.
+	Name   string `json:"name"`
+	Parent Link   `json:"parent,omitempty"`
+	// Whether pricing information is restricted on this account.
+	PricingHidden bool `json:"pricingHidden,omitempty"`
+	// Whether to show pricing information to child accounts of this account.
+	ShowChildAccountPricing bool `json:"showChildAccountPricing,omitempty"`
+	// A collection of asset links for which Supported Connection Groups this account has access to.
+	SupportedConnectionGroups []Link `json:"supportedConnectionGroups,omitempty"`
+	// Key-value pairs to associate with the Pureport asset.
+	Tags map[string]string `json:"tags,omitempty"`
+	// Email addresses of technical contacts for this account.
+	TechnicalContactEmails []string `json:"technicalContactEmails,omitempty"`
+	// Whether this account has been verified by Pureport operations.
+	Verified bool `json:"verified,omitempty"`
 }

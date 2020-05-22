@@ -32,7 +32,7 @@ type AccountNotificationsApiService service
 type FindAccountNotificationsOpts struct {
 	StartTime optional.Time
 	EndTime   optional.Time
-	Status    optional.String
+	Status    optional.Interface
 }
 
 /*
@@ -42,7 +42,7 @@ FindAccountNotifications Retrieve all notifications for this account
  * @param optional nil or *FindAccountNotificationsOpts - Optional Parameters:
  * @param "StartTime" (optional.Time) -
  * @param "EndTime" (optional.Time) -
- * @param "Status" (optional.String) -
+ * @param "Status" (optional.Interface of AccountNotificationStatus) -
 @return []AccountNotification
 */
 func (a *AccountNotificationsApiService) FindAccountNotifications(ctx _context.Context, accountId string, localVarOptionals *FindAccountNotificationsOpts) ([]AccountNotification, *_nethttp.Response, error) {
@@ -142,7 +142,7 @@ UpdateAccountNotificationsStatus Update an authenticated user's read status for 
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accountId
  * @param optional nil or *UpdateAccountNotificationsStatusOpts - Optional Parameters:
- * @param "RequestBody" (optional.Interface of map[string]string) -
+ * @param "RequestBody" (optional.Interface of map[string]AccountNotificationStatus) -
 */
 func (a *AccountNotificationsApiService) UpdateAccountNotificationsStatus(ctx _context.Context, accountId string, localVarOptionals *UpdateAccountNotificationsStatusOpts) (*_nethttp.Response, error) {
 	var (
@@ -180,9 +180,9 @@ func (a *AccountNotificationsApiService) UpdateAccountNotificationsStatus(ctx _c
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.RequestBody.IsSet() {
-		localVarOptionalRequestBody, localVarOptionalRequestBodyok := localVarOptionals.RequestBody.Value().(map[string]string)
+		localVarOptionalRequestBody, localVarOptionalRequestBodyok := localVarOptionals.RequestBody.Value().(map[string]AccountNotificationStatus)
 		if !localVarOptionalRequestBodyok {
-			return nil, reportError("requestBody should be map[string]string")
+			return nil, reportError("requestBody should be map[string]AccountNotificationStatus")
 		}
 		localVarPostBody = &localVarOptionalRequestBody
 	}

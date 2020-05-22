@@ -10,14 +10,17 @@
 
 package client
 
-// BgpConfig struct for BgpConfig
+// BgpConfig BGP Configuration
 type BgpConfig struct {
-	CustomerASN   int64  `json:"customerASN,omitempty"`
-	CustomerIP    string `json:"customerIP,omitempty"`
+	// The ASN of the pureport side of the BGP peering.
+	CustomerASN int64  `json:"customerASN,omitempty"`
+	CustomerIP  string `json:"customerIP,omitempty"`
+	// The BGP password.
 	Password      string `json:"password,omitempty"`
 	PeeringSubnet string `json:"peeringSubnet,omitempty"`
 	PublicNatIp   string `json:"publicNatIp,omitempty"`
-	PureportASN   int64  `json:"pureportASN,omitempty"`
-	PureportIP    string `json:"pureportIP,omitempty"`
-	State         string `json:"state,omitempty"`
+	// The ASN of the Pureport side of the BGP peering.
+	PureportASN int64    `json:"pureportASN,omitempty"`
+	PureportIP  string   `json:"pureportIP,omitempty"`
+	State       BgpState `json:"state,omitempty"`
 }

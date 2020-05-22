@@ -10,11 +10,14 @@
 
 package client
 
-// AuditEntryResponse struct for AuditEntryResponse
+// AuditEntryResponse The response to the request that triggered this entry.
 type AuditEntryResponse struct {
+	// The body of the response.
 	Body string `json:"body,omitempty"`
-	// Execution time in milliseconds
-	ExecutionTime    int64  `json:"executionTime,omitempty"`
-	StatusCode       int32  `json:"statusCode,omitempty"`
+	// Execution time in milliseconds.
+	ExecutionTime int64 `json:"executionTime,omitempty"`
+	// The HTTP status code of the response.
+	StatusCode int32 `json:"statusCode,omitempty"`
+	// The family of the HTTP status code.
 	StatusCodeFamily string `json:"statusCodeFamily,omitempty"`
 }
